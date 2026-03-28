@@ -16,6 +16,7 @@ Os Ativadores são representados pelas caixas **marrons**. Eles monitoram o quar
 | **Habbo entra no Quarto** | Dispara assim que um usuário entra ou sai do quarto. |
 | **Variável Mudou** | Ativa quando uma variável específica é atribuída, excluída ou tem seu valor alterado. |
 
+
 ## 2. Efeitos: O "O Que"
 Os Efeitos são as caixas **cinzas ou prateadas**. Algumas possuem a cor **preta** para representar que sua função é <u>negativa</u> ("oposta"). Eles executam a ação física ou lógica resultante da ativação.
 
@@ -56,7 +57,7 @@ Algumas Condições possuem a cor **preta** para representar que sua função é
 | **NÃO há Mobis em cima** | Valida se o mobi selecionado **NÃO** possui mobis em cima |
 
 ## 4. Seletores: O "Quem ou Qual"
-Os seletores usam a cor **azul-escuro** e são considerávelmente mais altos do que as demais caixas Wired. Eles permitem definir alvos dinâmicos em massa, superando o limite tradicional de 20 mobis por caixa. Veja a demonstração feita pela equipe durante o lançamento desse tipo de Wired: https://www.youtube.com/watch?v=yAP6NjiT_XU.
+Os Seletores usam a cor **azul-escuro** e são considerávelmente mais altos do que as demais caixas Wired. Eles permitem definir alvos dinâmicos em massa, superando o limite tradicional de 20 mobis por caixa. Veja a demonstração feita pela equipe durante o lançamento desse tipo de Wired: https://www.youtube.com/watch?v=yAP6NjiT_XU.
 
 | Seletor | Função |
 | :--- | :--- |
@@ -65,18 +66,75 @@ Os seletores usam a cor **azul-escuro** e são considerávelmente mais altos do 
 | **Habbos no Grupo** | Seleciona todos os Habbos que forem membros do grupo. |
 | **Mobis na Vizinhança** | Seleciona todos os mobis que estiverem na vizinhança de um determinado ponto de referência. |
 
-Utilizar múltiplos seletores na mesma pilha fará com que a seleção deles sejam mescladas, e em cada um você conseguirá configurar se quer inverter a seleção (selecionar tudo exceto o que foi configurado) ou então se quer filtrar (intersecção) as demais seleções que estiverem na mesma pilha.
+Utilizar múltiplos Seletores na mesma pilha fará com que a seleção deles sejam mescladas, e em cada um você conseguirá configurar se quer inverter a seleção (selecionar tudo exceto o que foi configurado) ou então se quer filtrar (intersecção) as demais seleções que estiverem na mesma pilha.
+
+## Filtros: O "Quanto"
+Os Filtros usam a cor **branca** e também são considerávelmente mais altos, como os Selectores. Eles complementam os Seletores pois fazem um papel muito útil filtrando pela **quantidade de itens**.
+
+| Filtro | Função |
+| :--- | :--- |
+| **Filtrar Habbos** | Filtra a seleção atual de Habbos para um valor X. |
+| **Filtrar Mobis** | Filtra a seleção atual de mobis para um valor X. |
+| **Usuários com Maior/Menor Variável** | Filtra a seleção atual de Habbos baseado em alguma de suas variáveis e uma ordenação específica. |
+| **Mobis com Maior/Menor Variável** | Filtra a seleção atual de mobis baseado em alguma de suas variáveis e uma ordenação específica. |
 
 ## 5. Extras: O "Como"
-Estes componentes modificam o comportamento padrão da pilha ou adicionam funcionalidades avançadas.
+Os Extras usam cores variadas, como uma tentativa de fazer com que as que tenham propósitos similares com uma parência similar. Estes componentes modificam o comportamento padrão da pilha ou adicionam funcionalidades avançadas.
 
-| Extra | Função |
-| :--- | :--- |
-| **Efeito Aleatório** | A cada execução da pilha, escolhe aleatoriamente um dos efeitos da pilha para executar. |
-| **Efeito Inédito** | A cada execução da pilha, escolhe um efeito da pilha que ainda não foi executado até que todos sejam. |
-| **Física do Movimento** | Altera como os mobis se comportam ao colidir ou atravessar outros objetos. |
-| **Pelo menos uma condição é verdadeira** | Capaz de alterar como as Condições são avaliadas e até mesmo fazer com que Condições de outras pilhas também sejam avaliadas. |
-| **Campo Nome de Usuário** | Cria um campo dinâmico para ser adicionado aos Efeitos que criam mensagens para ser substituído pelo nome de um usuário. |
+| Extra | Cor | Função |
+| :--- | :--- | :--- |
+| **Efeito Aleatório** | Cinza | A cada execução da pilha, escolhe aleatoriamente um dos efeitos da pilha para executar. |
+| **Efeito Inédito** | Cinza | A cada execução da pilha, escolhe um efeito da pilha que ainda não foi executado até que todos sejam. |
+| **Física do Movimento** | Azul | Altera como os mobis se comportam ao colidir ou atravessar outros objetos. |
+| **Pelo menos uma condição é verdadeira** | Branco | Capaz de alterar como as Condições são avaliadas e até mesmo fazer com que Condições de outras pilhas também sejam avaliadas. |
+| **Campo Nome de Usuário** | Amarelo | Cria um campo dinâmico para ser adicionado aos Efeitos que criam mensagens para ser substituído pelo nome de um usuário. |
+
+## 6. Variáveis: O "Dado"
+As Variáveis possuem um visual totalmente diferente, representando uma caixa predominantemente cinza que contém um painel lateral de cor **específica para cada tipo**. Cada um desses tipos são para diferentes formas de se criar uma variável, ou seja, uma forma de armazenar informações, de forma temporária enquanto o quarto está ativo ou de forma prolongada até que você decida remover a variável.
+
+| Variável | Cor | Função |
+| :--- | :--- | :--- |
+| **Usuário Variável** | Verde | Permite atribuir uma variável a um Usuário específico. |
+| **Mobi Variável** | Amarelo | Permite atribuir uma variável a um Mobi específico. |
+| **Variável Global** | Azul | Define uma variável de escopo global para o quarto todo. |
+| **Contexto Variável** | Laranja | Permite atribuir uma variável a um contexto de execução específico. |
+| **De outro quarto** | Rosa | Importa uma variável criada em outro quarto. |
+| **Eco** | Branco | Ecoa/Espelha uma variável interna para poder aplicar componentes extras a ela. |
+
+A utilização de Variáveis não se faz através de posicioná-las na mesma pilha das demais caixas wired, portanto elas podem ficar aglomeradas ou espalhadas sem causar nenhum tipo de conflito com as demais pilhas. Entretanto, os Extras para Variáveis precisam sim estar na mesma pilha da variável que se quer modificar o comportamento.
+
+De modo geral, existem apenas 4 tipos de variáveis:
+- Variável de usuário
+- Variável de mobi
+- Variável de contexto
+- Variável global
+
+Para cada uma dessas, existem:
+- Variáveis criadas por você: são as caixas que você coloca no quarto
+- Variáveis inteligentes: são criadas em situações específicas, principalmente para mobis específicos como a capacidade máxima de um baú de moedas. O nome delas é prefixado com "~".
+- Variáveis internas: são as variáveis "fixas" de cada tipo de variável como o ID de um usuário. O nome delas é prefixado com "@".
+- Subvariáveis: de forma geral, é usado para agrupar variáveis de forma semântica como a posição X e Y de um usuário. O nome delas é utilizado junto com o nome da variável mãe com um "." como separador.
+
+### Extras para Variáveis
+Os Extras para Variáveis também possuem um visual totalmente diferente, se mantendo similares às caixas de Variáveis mas com uma altura reduzida e cores diferentes de acordo com seus tipos. Como mencionado anteriormente, elas precisam ser posicionadas junto das caixas de Variável que se quer modificar o comportamento.
+
+| Extra para Variável | Cor | Função |
+| :--- | :--- | :--- |
+| **Conector de Texto** | Amarelo | Permite mapear valores de variável com um texto para gerar uma mensagem. |
+| **Sistema de Aumento de Nível** | Verde | Cria subvariáveis com valor calculado automaticamente para progressão de nível com base no valor da variável que estiver modificando. |
+| **Utilitários de Tempo** | Azul | Cria subvariáveis com valor calculado automaticamente para converção de tempo com base no valor da variável que estiver modificando. |
+
+## 7. Contratos: O "Acordo"
+Os Contratos possuem um visual totalmente diferente, e de certa forma pode nem ser considerado um "Wired". Definitivamente não é uma "caixa", sendo apenas representado por uma pilha pequena de folhas de papel, inclusive possuindo uma interface de configuração com layout diferente das demais caixas Wired.
+
+| Contrato | Cor | Função |
+| :--- | :--- | :--- |
+| **Contrato de Pagamento** | Verde | Define como o usuário deverá "pagar". |
+| **Contrato de Negociação** | Azul | Define como o usuário deverá "pagar" e o que ele irá "receber". |
+| **Contrato de Recompensa** | Amarelo | Define o que o usuário deverá "receber". |
+
+### Contrato Personalizado
+O Contrato Personalizado retoma a relação com caixas wired, com uma base pequena **azul** e uma folha de papel em cima. A interface de configuração também retorna ao layout das demais caixas wired, permitindo que atue como qualquer um dos outros contratos de forma dinâmica, permitindo interação com variáveis, seletores e muito mais.
 
 ---
 
@@ -86,3 +144,4 @@ Existem mobis auxiliares que não são "caixas" de programação, mas são funda
 - **Conector de Quarto:** Teleporte capaz de teletransportar um usuário de um quarto para outro sem que o usuário precise interagir com o mobi.
 - **Cronômetros:** Cronômetros especializados para serem utilizados com Wired, elevando as capacidades dos cronômetros originais feitos para Battle Banzai e Freeze.
 - **Tabela de classificação:** Embora possuem a mesma aparência das demais caixas Wired, não possuem nenhum tipo de configuração pois possuem um comportamento próprio, registrando o resultado de partidas Battle Banzai e Freeze automaticamente.
+- **Baús Wired:** Capazes de armazenas mobis ou moedas para permitir atrasações através de Wired.
