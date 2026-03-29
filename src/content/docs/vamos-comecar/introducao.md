@@ -1,8 +1,15 @@
-# Introdução
+---
+title: Introdução
+description: Aprenda o que são os Wireds no Habbo Hotel, como funcionam e conheça os tipos disponíveis para criar sistemas interativos em quartos.
+sidebar:
+  label: Introdução
+  order: 0
+  badge:
+    text: Novo
+    variant: tip
+---
 
-{% hint style="info" %}
-Esta documentação ainda está incompleta mas em constante atualização. Estamos focando em desenvolver conteúdo sobre os lançamentos e sobre as principais dores da comunidade.
-{% endhint %}
+> Esta documentação ainda está incompleta mas em constante atualização. Estamos focando em desenvolver conteúdo sobre os lançamentos e sobre as principais dores da comunidade.
 
 ### O que são os Wireds?
 

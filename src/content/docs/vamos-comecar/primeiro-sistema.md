@@ -1,4 +1,10 @@
-# Primeiro Sistema
+---
+title: Primeiro Sistema
+description: a
+sidebar:
+  label: Primeiro Sistema
+  order: 4
+---
 
 A seguir será criado o primeiro sistema **Wired**. Trata-se de um sistema simples que utiliza o ativador **“Habbo anda no mobi”** para detectar quando um personagem pisa no **“Piso Preto”** e, a partir desse evento, exibir uma mensagem previamente configurada.
 

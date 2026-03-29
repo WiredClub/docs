@@ -1,4 +1,13 @@
-# Configurando Wireds
+---
+title: Configurando Wireds
+description: Aprenda a configurar Wireds no Habbo Hotel, incluindo seleção de mobis, campos de texto e outras opções essenciais para automações.
+sidebar:
+  label: Configurando Wireds
+  order: 3
+  badge:
+    text: Novo
+    variant: tip
+---
 
 A janela de configuração dos Wireds segue uma estrutura padronizada entre quase todos os tipos (Ativadores, Efeitos, Condições, etc.), embora cada um possua campos específicos de acordo com sua função (exceto por alguns que não possuem campos).
 

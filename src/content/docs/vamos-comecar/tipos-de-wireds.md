@@ -1,4 +1,13 @@
-# Tipos de Wireds
+---
+title: Tipos de Wireds
+description: Explore os tipos de Wireds no Habbo Hotel, incluindo Ativadores, Efeitos, Condições e mais, com descrições e exemplos para criar sistemas interativos.
+sidebar:
+  label: Tipos de Wireds
+  order: 2
+  badge:
+    text: Novo
+    variant: tip
+---
 
 O sistema Wired é dividido em categorias distintas, cada uma identificada por uma cor e um formato para facilitar a assimilação de sua função lógica dentro da pilha. Compreender essas divisões é o primeiro passo para criar automações eficientes.
 

@@ -1,4 +1,13 @@
-# Como os Wireds Funcionam?
+---
+title: Como os Wireds Funcionam
+description: Entenda a lógica de empilhamento, o fluxo de execução e os conceitos fundamentais dos Wireds no Habbo Hotel para criar automações visuais.
+sidebar:
+  label: Como os Wireds Funcionam
+  order: 1
+  badge:
+    text: Novo
+    variant: tip
+---
 
 A automação no Habbo Hotel baseia-se em um princípio lógico de causa e efeito. O sistema Wired permite que você programe comportamentos no seu quarto sem a necessidade de escrever linhas de código tradicionais, utilizando uma interface visual baseada em "caixas" de mobis que interagem entre si.
 

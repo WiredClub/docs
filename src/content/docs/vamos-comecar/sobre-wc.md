@@ -1,4 +1,10 @@
-# Sobre o Wired Club
+---
+title: Sobre o Wired Club
+description: a
+sidebar:
+  label: Sobre o Wired Club
+  order: 5
+---
 
 <figure><img src="https://2032763373-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2Fto8buwU77BOLvqbI9scn%2Fuploads%2Fatuintoxmct5AZw0He3p%2FF%C3%A3%20site%20100%25%20focado%20em%20Wired%20(960%20x%20540%20px)%20(2).png?alt=media&#x26;token=8c467a07-20e1-4993-b86f-a8daf1337b86" alt=""><figcaption></figcaption></figure>
 

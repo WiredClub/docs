@@ -16,15 +16,23 @@ export default defineConfig({
 			],
 			sidebar: [
 				{
-					label: 'Guides',
-					items: [
-						// Each item here is one entry in the navigation menu.
-						{ label: 'Example Guide', slug: 'guides/example' },
-					],
+					label: 'Vamos Começar',
+					autogenerate: { directory: 'vamos-comecar' },
+					// items: [
+					// 	{ label: 'Introdução', slug: 'vamos-comecar/introducao' },
+					// 	{ label: 'Como Funcionam', slug: 'vamos-comecar/como-funciona' },
+					// 	{ label: 'Tipos de Wired', slug: 'vamos-comecar/tipos-de-wired' },
+					// ],
 				},
 				{
-					label: 'Reference',
-					autogenerate: { directory: 'reference' },
+					label: 'Referência',
+					items: [
+						{
+							label: 'Ativadores',
+							autogenerate: { directory: 'referencia/ativadores' },
+							collapsed: true,
+						},
+					],
 				},
 			],
 		}),
