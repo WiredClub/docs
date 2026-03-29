@@ -1,0 +1,8 @@
+{
+  "content": "src/content",
+  "media": "src/assets",
+  "public": "public",
+  "configs": [],
+  "custom-commit": false,
+  "arrangement": []
+}
