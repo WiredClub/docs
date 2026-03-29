@@ -1,19 +1,20 @@
 ---
-title: Welcome to Starlight
-description: Get started building your docs site with Starlight.
+title: Bem-vindo ao Wired Club Docs
+description: A documentação oficial da maior comunidade Wired do Brasil!
 template: splash # Remove or comment out this line to display the site sidebar on this page.
 hero:
-  tagline: Congrats on setting up a new Starlight project!
+  tagline: Em busca de ser o maior portal Wired! Aprenda, explore e domine os Wireds no Habbo.
   image:
     file: ../../assets/houston.webp
   actions:
-    - text: Example Guide
-      link: /guides/example/
+    - text: Começar a Aprender
+      link: /guides/o-que-e-wired/
       icon: right-arrow
-    - text: Read the Starlight docs
-      link: https://starlight.astro.build
+      variant: primary
+    - text: Ver no GitHub
+      link: https://github.com/wiredclub/docs
       icon: external
-      variant: minimal
+      variant: secondary
 ---
 
 import { Card, CardGrid } from '@astrojs/starlight/components';
@@ -21,20 +22,16 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 ## Next steps
 
 <CardGrid stagger>
-	<Card title="Update content" icon="pencil">
-		Edit `src/content/docs/index.mdx` to see this page change.
+	<Card title="Aprenda Wired" icon="open-book">
+		Guias passo a passo para iniciantes e avançados. Do básico ao contrato customizável.
 	</Card>
-	<Card title="Change page layout" icon="document">
-		Delete `template: splash` in `src/content/docs/index.mdx` to display a
-		sidebar on this page.
+	<Card title="Competições" icon="trophy">
+		Esteja preparado para as competições com tudo o que você precisa saber sobre o funcionamento dos Wireds.
 	</Card>
-	<Card title="Add new content" icon="add-document">
-		Add Markdown or MDX files to `src/content/docs` to create new pages.
+	<Card title="Referência Completa" icon="setting">
+		Glossário, FAQ e toda a documentação técnica sobre os tipos de Wired disponíveis.
 	</Card>
-	<Card title="Configure your site" icon="setting">
-		Edit your `sidebar` and other config in `astro.config.mjs`.
-	</Card>
-	<Card title="Read the docs" icon="open-book">
-		Learn more in [the Starlight Docs](https://starlight.astro.build/).
+	<Card title="Comunidade" icon="discord">
+		[Conecte-se](https://discord.gg/wiredclub) com outros Wiredistas no Discord e YouTube do Wired Club.
 	</Card>
 </CardGrid>
