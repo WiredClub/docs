@@ -13,13 +13,13 @@ import { Steps } from '@astrojs/starlight/components';
 
 A automação no Habbo Hotel baseia-se em um princípio lógico de causa e efeito. O sistema Wired permite que você programe comportamentos no seu quarto sem a necessidade de escrever linhas de código tradicionais, utilizando uma interface visual baseada em "caixas" de mobis que interagem entre si.
 
-### A Lógica de Empilhamento
+## A Lógica de Empilhamento
 
 Para que qualquer automação funcione, os mobis Wired devem ser colocados uns sobre os outros, formando o que a comunidade chama de **Pilha**.
 
 A pilha é a unidade funcional básica: quando os mobis estão na mesma coordenada (um em cima do outro), eles compartilham o mesmo contexto. Se você colocar um ativador em um canto do quarto e um efeito no outro, o sistema não reconhecerá a conexão entre eles; a sobreposição física é o que estabelece o vínculo lógico. A ordem ou altitude dos Wireds na pilha não afeta o comportamento padrão do sistema.
 
-### O Fluxo de Execução
+## O Fluxo de Execução
 
 O funcionamento de uma pilha Wired segue uma sequência linear de processamento:
 
@@ -35,7 +35,7 @@ O funcionamento de uma pilha Wired segue uma sequência linear de processamento:
 
 </Steps>
 
-### Configuração e Parâmetros
+## Configuração e Parâmetros
 
 Cada caixa Wired possui sua própria interface de configuração, acessada por meio de um clique duplo. Ao abrir o mobi, você define os parâmetros específicos:
 
@@ -47,11 +47,11 @@ Nos casos em que há seleção de mobis como parâmetro, o limite é de até 20 
 
 ---
 
-# Conceitos Fundamentais
+## Conceitos Fundamentais
 
 Para dominar a engenharia de quartos, é essencial compreender os termos técnicos que regem a mecânica do sistema.
 
-### Categorias de Mobis Wired
+### Tipos de Wired Essenciais
 
 A taxonomia oficial divide os componentes em cinco categorias principais, cada uma com uma cor e função distintas:
 
@@ -61,12 +61,8 @@ A taxonomia oficial divide os componentes em cinco categorias principais, cada u
 | **Efeitos** | O "O que" | Cinza / Prata | Define a ação que será executada (Ex: teletransporte).|
 | **Condições** | O "Se" | Branco | Filtros que validam se a ação pode prosseguir.|
 | **Seletores** | O "Quem/Qual" | Cinza Escuro | Define alvos dinâmicos para os ativadores, os efeitos e os extras.|
-| **Extras (Complementos)** | O "Como" | Varia | Modificam o comportamento padrão (Ex: execução aleatória entre múltiplos efeitos). |
 
 ### Termos Essenciais
 
 * **Pilha:** O conjunto de mobis Wired empilhados em um único quadrado que trabalham juntos para realizar uma função.
 * **Fonte de Gatilho (Acionador):** Refere-se à entidade que causou a ativação. Pode ser um Habbo, um Bot ou um Pet. Nem todos os efeitos funcionam com todas as fontes; por exemplo, "Entrar em Equipe" exige obrigatoriamente um usuário Habbo como acionador.
-* **Wired 2.0:** A maior evolução do sistema Wired, iniciada em 2022, marcada por uma reestruturação interna que trouxe mais desempenho e consistência. Essa atualização introduziu novos conceitos como Seletores e Add-ons mais avançados, ampliou as possibilidades lógicas (incluindo combinações além do padrão "E") e adicionou sistemas mais sofisticados, como contadores, mecanismos de execução mais precisos, variáveis, baús, e muito mais!
-* **Propagação de Sinal:** O método pelo qual uma pilha pode ativar outra remotamente, utilizando mobis como "Executar Pilhas Wired" ou antenas de sinal, permitindo criar redes de automação complexas sem que os mobis estejam fisicamente próximos.
-* **Campos Dinâmicos (Variáveis de Texto):** Códigos especiais usados em efeitos de mensagem, como `$(nome)`, que são automaticamente substituídos em tempo real por valores do contexto, como o nome do usuário que ativou o sistema.

@@ -35,6 +35,7 @@ export default defineConfig({
 				}, {
 					label: 'Referência',
 					items: [
+						{ label: 'Glossário de Termos', slug: 'referencia/glossario' },
 						{ label: 'Tipos de Wired', slug: 'referencia/tipos-de-wireds' },
 						{ label: 'Configurando Wireds', slug: 'referencia/configurando-wireds' },
 						{
