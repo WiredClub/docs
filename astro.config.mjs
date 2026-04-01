@@ -2,6 +2,7 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import starlightLlmsTxt from 'starlight-llms-txt'
+import starlightScrollToTop from 'starlight-scroll-to-top'
 
 // https://astro.build/config
 export default defineConfig({
@@ -84,7 +85,14 @@ export default defineConfig({
 				baseUrl: 'https://github.com/wiredclub/docs/edit/main/',
 			},
       		lastUpdated: true,
-      		plugins: [starlightLlmsTxt()],
+			plugins: [starlightLlmsTxt(), starlightScrollToTop({
+				tooltipText: 'Voltar ao topo',
+				showTooltip: true,
+				threshold: 10,
+				borderRadius: '50',
+				showProgressRing: true,
+				progressRingColor: 'white',
+			})],
 		}),
 	],
 });
