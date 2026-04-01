@@ -10,45 +10,8 @@
       "name": "Alynva",
       "avatar_url": "https://github.com/alynva.png",
       "profile": "https://github.com/alynva",
-      "contributions": ["doc", "translation", "content", "infra", "maintenance", "review"]
+      "contributions": ["review", "doc", "code", "maintenance"]
     }
   ],
-  "linkToUsage": true,
-  "types": [
-    {
-      "type": "doc",
-      "section": "Documentation",
-      "description": "Documentação"
-    },
-    {
-      "type": "translation",
-      "section": "Translations",
-      "description": "Traduções"
-    },
-    {
-      "type": "content",
-      "section": "Content",
-      "description": "Criação de conteúdo"
-    },
-    {
-      "type": "design",
-      "section": "Design",
-      "description": "Design de páginas e UI"
-    },
-    {
-      "type": "infra",
-      "section": "Infra",
-      "description": "Infraestrutura, CI/CD, deploy"
-    },
-    {
-      "type": "maintenance",
-      "section": "Maintenance",
-      "description": "Manutenção geral"
-    },
-    {
-      "type": "review",
-      "section": "Review",
-      "description": "Revisão de conteúdo"
-    }
-  ]
+  "linkToUsage": false
 }
