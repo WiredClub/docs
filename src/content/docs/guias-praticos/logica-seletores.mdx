@@ -9,7 +9,7 @@ sidebar:
     variant: tip
 ---
 
-import { Aside, Steps } from '@astrojs/starlight/components';
+import { Aside, Steps, Tabs, TabItem } from '@astrojs/starlight/components';
 
 Os **Seletores** representam um salto significativo na complexidade dos seus sistemas Wired. Eles permitem que você deixe a seleção estática de mobis para trás e comece a trabalhar com **seleções dinâmicas** definidas em tempo real.
 
@@ -27,8 +27,8 @@ Imagine que você precisa de um **Efeito "Teleportar"** que funcione para todos 
 
 Você quer criar um sistema onde **todos os usuários em uma zona específica** são teleportados para uma área de prêmios:
 
-### Configuração:
-
+<Tabs>
+  <TabItem label="Configuração">
 <Steps>
 
 1. **Ativador: Habbo Diz Algo**. Para você poder disparar via comando no chat.
@@ -44,6 +44,23 @@ Você quer criar um sistema onde **todos os usuários em uma zona específica** 
    1. Altere a opção "Selecionar usuários fonte" para "Usar usuários do seletor"
 
 </Steps>
+  </TabItem>
+  <TabItem label="PseudoWired">
+```yaml
+ALVOS
+  - Habbos na Área: Área de Detecção
+
+QUANDO
+  - Habbo Diz Algo: ":teleportar"
+    Combinação exata
+    Somente o proprietário da sala pode acionar
+
+ENTÃO
+  - Teleportar para Mobi: Área de Prêmios
+    Usar usuários do seletor
+```
+</TabItem>
+</Tabs>
 
 ### Resultado:
 Quando o dono do quarto digitar ":teleportar", o sistema irá selecionar **todos os usuários que estão na área definida** e teleportá-los para o mobi de destino, mesmo que eles não tenham sido os responsáveis por disparar o comando.

@@ -1,0 +1,73 @@
+---
+title: O Formato PseudoWired
+description: Padrão textual de documentação criado pelo Wired Club
+sidebar:
+  badge:
+    text: Novo
+    variant: tip
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+O **PseudoWired** é um padrão textual de documentação inspirado em linguagens como YAML e pseudocódigos. Ele foi desenvolvido pelo WiredClub para traduzir a lógica visual das pilhas de automação em um formato legível, intuitivo e livre de jargões excessivos para quem está lendo a documentação.
+
+## Estrutura Hierárquica
+
+O fluxo de leitura do PseudoWired segue a ordem cronológica exata de processamento das pilhas do sistema, garantindo que o escopo e as regras venham antes da execução da ação:
+
+<Steps>
+1. **ALVOS**
+<p>Define quem ou o que será afetado de forma dinâmica (Seletores e Filtros).</p>
+
+2. **QUANDO**
+<p>O evento disparador que inicia a execução da pilha (Ativadores).</p>
+
+3. **SE**
+<p>Os critérios e filtros lógicos que validam se o sinal pode continuar (Condições).</p>
+
+4. **COMO**
+<p>As regras que modificam ou alteram o comportamento padrão da pilha (Extras).</p>
+
+5. **ENTÃO**
+<p>As ações físicas ou lógicas resultantes da execução bem-sucedida (Efeitos Positivos).</p>
+
+6. **SENÃO**
+<p>As ações executadas caso as condições do bloco SE falhem (Efeitos Negativos).</p>
+
+</Steps>
+
+## Regras de Sintaxe e Estilo
+
+* **Blocos em Caixa Alta:** As palavras estruturais (`ALVOS`, `QUANDO`, `SE`, `COMO`, `ENTÃO`, `SENÃO`) devem ficar sempre sozinhas na linha, sem recuo e em maiúsculas.
+* **Listagem (`- `):** Um hífen seguido de espaço indica o uso de uma caixa Wired dentro de cada bloco, utilizando a nomenclatura presente no jogo.
+* **Parâmetros (`:`):** Os dois-pontos separam o nome do Wired do seu parâmetro principal, como qual a área a ser selecionada, mobis, grupos, ou mensagens a ser exibida.
+* **Recuo (Indentação):** Use um recuo de dois espaços abaixo do item principal para detalhar opções que devem ser configuradas fora dos valores padrão.
+* **Uso de Aspas `""`:** Devem ser utilizadas exclusivamente para textos ou números literais que o usuário deve digitar durante a configuração do Wired.
+
+## Exemplo de Aplicação Completa
+
+```yaml
+ALVOS
+  - Habbos na Área: Zona do Jogo
+
+QUANDO
+  - Habbo diz algo: ":sorteio"
+    Combinação exata
+
+SE
+  - Membro do Grupo: Organizadores do Jogo
+  - Membro do Grupo: Parceiros do Jogo
+
+COMO
+  - Pelo menos uma condição é verdadeira: Selecione as duas condições acima
+
+ENTÃO
+  - Teleportar para Mobi: Cadeira de Prêmios
+    Usar usuários do seletor
+
+SENÃO
+  - Faz pilhas: Pilha secundária
+    Mostrar a mensagem "Apenas membros VIP podem usar este comando."
+```
+
+Dessa forma, qualquer pessoa que visite o portal conseguirá compreender o fluxo exato de uma pilha apenas lendo o bloco de texto, além de possibilitar o fácil compartilhamento das instruções.

@@ -9,7 +9,7 @@ sidebar:
     variant: tip
 ---
 
-import { Aside, Steps } from '@astrojs/starlight/components';
+import { Aside, Steps, Tabs, TabItem } from '@astrojs/starlight/components';
 
 Agora que você domina a estrutura básica de um **Ativador + Efeito**, é hora de adicionar **inteligência** aos seus sistemas. As Condições permitem que você valide requisitos antes de executar um Efeito, criando comportamentos condicionais ao invés de respostas automáticas.
 
@@ -49,9 +49,9 @@ Se a Condição retornar "não", o fluxo é interrompido imediatamente.
 
 Você quer criar um **sala VIP** acessível apenas para membros de um grupo específico:
 
-### Configuração:
-
-<Steps>
+<Tabs>
+  <TabItem label="Configuração">
+    <Steps>
 1. **Ativador:** Habbo anda no Mobi
     1. Selecione o piso de entrada
 2. **Condição:** Membro do Grupo.
@@ -59,6 +59,20 @@ Você quer criar um **sala VIP** acessível apenas para membros de um grupo espe
 3. **Efeito:** Teleportar para Mobi.
     1. Selecione o destino da área VIP
 </Steps>
+  </TabItem>
+  <TabItem label="PseudoWired">
+```yaml
+QUANDO
+  Habbo anda no mobi: Piso Escuro
+
+SE
+  Membro do Grupo: "VIP"
+
+ENTÃO
+  Teleportar para Mobi: Área VIP
+```
+</TabItem>
+</Tabs>
 
 ### O que acontece:
 - Um usuário **membro do grupo** pisa no piso → passa pela Condição → é teleportado
