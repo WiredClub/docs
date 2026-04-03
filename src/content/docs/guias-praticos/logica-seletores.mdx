@@ -9,19 +9,9 @@ sidebar:
     variant: tip
 ---
 
-import { Aside, Steps, Tabs, TabItem } from '@astrojs/starlight/components';
+import { Steps, Tabs, TabItem } from '@astrojs/starlight/components';
 
 Os **Seletores** representam um salto significativo na complexidade dos seus sistemas Wired. Eles permitem que você deixe a seleção estática de mobis para trás e comece a trabalhar com **seleções dinâmicas** definidas em tempo real.
-
-## O Problema que Seletores Resolvem
-
-Imagine que você precisa de um **Efeito "Teleportar"** que funcione para todos os usuários em uma **área específica** do quarto. Tradicionalmente, você teria que utilizar o _Efeito Perseguir_ juntamente com o _Ativador Batida_ (geralmente com pisos Freeze/Banzai por baixo da área) para tentar fazer com que o Ativador seja acionado para cada usuário na área.
-
-**Seletores resolvem isso** selecionando dinamicamente:
-- Todos os usuários em uma **área**
-- Todos os mobis de um **tipo específico**
-- Todos os usuários de um **grupo**
-- Todos os mobis em uma **vizinhança**
 
 ## Exemplo Prático: Teleporte em Área
 
@@ -65,51 +55,8 @@ ENTÃO
 ### Resultado:
 Quando o dono do quarto digitar ":teleportar", o sistema irá selecionar **todos os usuários que estão na área definida** e teleportá-los para o mobi de destino, mesmo que eles não tenham sido os responsáveis por disparar o comando.
 
-## Combinando Múltiplos Seletores 
-
-Você pode **combinar múltiplos Seletores** na mesma pilha:
-
-- **Seletor 1:** Todos os mobis de tipo X
-- **Seletor 2:** Todos os mobis na vizinhança de Y
-
-Por padrão, cada seletor adiciona seus resultados à seleção final, formando uma **união** (ou seja, tudo que for encontrado por qualquer seletor será incluído).
-
-### Modo Intersecção (Filtro)
-
-Ao ativar a opção **"Filtrar seleção existente"**, o seletor deixa de adicionar novos itens e passa a atuar como um filtro, mantendo apenas os itens que também correspondem a ele.
-
-Na prática, isso permite criar uma **intersecção** entre seletores.
-
-### Inversão (Negação)
-
-A opção **"Inverter"** modifica o resultado do próprio seletor, selecionando **tudo que NÃO corresponde** aos critérios definidos.
-
-Isso pode ser usado tanto com um único seletor quanto em combinações. Por exemplo:
-
-- Selecionar todos os mobis **exceto** um tipo específico
-- Selecionar todos os usuários **fora** de uma área
-
-<Aside type="tip">
-Use Inversão com cuidado. Seleções como "todos exceto X" podem abranger uma quantidade muito maior de itens do que o esperado.
-</Aside>
-
-## Filtros Complementares
-
-Além dos Seletores, existem **Filtros** que refinam a seleção:
-
-| Filtro | Função |
-| --- | --- |
-| **Filtrar Habbos** | Reduz a seleção para um número X de usuários |
-| **Filtrar Mobis** | Reduz a seleção para um número X de mobis |
-| **Usuários com Maior/Menor Variável** | Ordena e seleciona baseado em valores de variáveis |
-
-Por exemplo, usar **"Filtrar Habbos" para 5** combinado com **"Habbos na Área"** selecionaria apenas 5 usuários aleatórios encontrados na área.
-
 ## Próximos Passos
 
-Agora que você entende **Condições** e **Seletores**, você está apto a construir sistemas intermediários. O próximo nível envolve:
+Agora que você entende **Condições** e **Seletores**, você está apto a construir sistemas intermediários. O próximo nível envolve **Extras**, que são modificadores capazes de alterar a lógica de execução da pilha, e **Sinais**, que permitem comunicação entre pilhas distintas.
 
-- **Extras:** Modificadores que alteram a lógica de execução da pilha
-- **Sinais:** Comunicação entre pilhas distintas
-
-Esses conceitos formam a base para sistemas avançados de projeto de jogos e automação complexa no Wired.
+Se precisar de uma explicação mais detalhada sobre os Seletores, acesse a seção de referência: [Visão Geral dos Seletores](../../referencia/seletores/visao-geral).
