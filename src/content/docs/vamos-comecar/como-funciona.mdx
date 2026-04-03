@@ -36,7 +36,6 @@ O funcionamento de uma pilha Wired segue uma sequência linear de processamento:
 </Steps>
 
 <Aside type="tip" title="Dica">
- {/* A ordem ou altitude dos Wireds na pilha não afeta o comportamento padrão do sistema. */}
 A ordem dos mobis na pilha não altera a lógica de execução, mas pode ser usada para organizar visualmente o sistema. Por exemplo, é comum colocar o Ativador na base da pilha, seguido pelas Condições e Efeitos empilhados acima. Ao ser acionado, o sistema processará os componentes com base em sua função (Ativadores primeiro, depois Condições, Seletores e finalmente Efeitos), independentemente da posição física.
 
 Você consegue forçar que os Efeitos sejam processados em ordem do mais baixo para o mais alto usando o Extra "Executa na Ordem", mas isso só é necessário em casos mais avançados.
@@ -50,7 +49,11 @@ Cada caixa Wired possui sua própria interface de configuração, acessada por m
 * **Nos Efeitos:** Para onde o usuário deve ser levado ou qual mensagem deve ser exibida.
 * **Nas Condições:** Qual grupo o usuário deve pertencer ou qual o estado atual do mobi.
 
-Nos casos em que há seleção de mobis como parâmetro, o limite é de até 20 itens simultâneos. Originalmente, esse limite era de apenas 5 - pode parecer pouco, e era mesmo. No entanto, a utilização de Seletores não possui esse tipo de limitação e ainda permite combinar múltiplos seletores em conjunto.
+Nos casos em que há seleção de mobis como parâmetro, o limite é de até 20 itens simultâneos.
+
+<Aside type="tip" title="Curiosidade">
+Nos primórdios dos Wireds, a seleção de mobis era limitada a apenas 5 itens, o que era um grande obstáculo para sistemas mais complexos. Posteriormente foi expandido para 15 e então para 20 mobis por Wired, uma melhoria significativa, mas ainda assim pode ser insuficiente em casos avançados. Nesses cenários, os Seletores se tornam essenciais, pois permitem direcionar grupos maiores de mobis sem a necessidade de selecioná-los individualmente.
+</Aside>
 
 ---
 

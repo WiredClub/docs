@@ -9,8 +9,29 @@ sidebar:
     variant: tip
 ---
 
+import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
+
 A seguir, criaremos o seu primeiro sistema **Wired**. Trata-se de um sistema simples que utiliza o ativador **“Habbo anda no mobi”** para detectar quando um personagem pisa no **“Piso Preto”** e, a partir desse evento, exibir uma mensagem previamente configurada.
 
 Sistemas compostos por **um ativador e um efeito** representam a estrutura mínima capaz de gerar um evento dentro de um quarto. Em outras palavras, para que uma pilha de Wireds seja considerada um **sistema funcional**, é necessário que ela contenha **ao menos um ativador e um efeito**.
 
-<figure><img src="https://2032763373-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2Fto8buwU77BOLvqbI9scn%2Fuploads%2FkfZA5HMpFzHrsJxC1JzP%2FAtivadores.gif?alt=media&#x26;token=186cd676-d4c2-4afe-ad7a-e8594adc9a1d" alt=""><figcaption></figcaption></figure>
+<figure><img src="https://2032763373-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2Fto8buwU77BOLvqbI9scn%2Fuploads%2FkfZA5HMpFzHrsJxC1JzP%2FAtivadores.gif?alt=media&#x26;token=186cd676-d4c2-4afe-ad7a-e8594adc9a1d" alt=""/><figcaption></figcaption></figure>
+
+<Tabs>
+  <TabItem label="Configuração">
+    <Steps>
+1. **Ativador:** Habbo anda no Mobi
+    1. Selecione o Piso Escuro
+2. **Efeito:** Mostrar mensagem.
+    1. Defina o texto "Pisou!"
+</Steps>
+  </TabItem>
+  <TabItem label="Textual">
+```
+QUANDO
+  Habbo anda no mobi: Piso Escuro
+ENTÃO
+  Mostrar mensagem: "Pisou!"
+```
+</TabItem>
+</Tabs>
