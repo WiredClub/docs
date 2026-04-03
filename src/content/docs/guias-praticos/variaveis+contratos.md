@@ -1,8 +1,8 @@
 ---
-title: -Sinais-
+title: -Variáveis + Contratos-
 description: a
 sidebar:
-  label: -Sinais-
+  label: -Variáveis + Contratos-
   order: 4
   badge:
     text: RASCUNHO

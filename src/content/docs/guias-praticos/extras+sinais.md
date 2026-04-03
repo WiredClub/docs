@@ -1,9 +1,9 @@
 ---
-title: -Contratos-
+title: -Extras + Sinais-
 description: a
 sidebar:
-  label: -Contratos-
-  order: 5
+  label: -Extras + Sinais-
+  order: 3
   badge:
     text: RASCUNHO
     variant: note
