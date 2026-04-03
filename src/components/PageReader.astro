@@ -6,17 +6,17 @@
 
 <div id="page-reader" aria-label="Leitor de página">
 	<button id="pr-toggle" aria-label="Não disponível" title="Não disponível" disabled>
-		<!-- <svg  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
+		<!-- <svg inert  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
 			<path d="M8 5v14l11-7z"/>
 		</svg> -->
-		<svg id="pr-icon-play" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+		<svg inert id="pr-icon-play" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 			<path d="M12.7452 6.41155C14.0183 7.1039 14.0183 8.8961 12.7452 9.58844L5.05796 13.7687C3.8206 14.4416 2.29999 13.5658 2.29999 12.1803V3.81974C2.29999 2.43421 3.8206 1.55841 5.05796 2.23129L12.7452 6.41155Z" fill="white"/>
 		</svg>
 
-		<!-- <svg id="pr-icon-pause" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="16" height="16" style="display:none">
+		<!-- <svg inert id="pr-icon-pause" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="16" height="16" style="display:none">
 			<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
 		</svg> -->
-		<svg id="pr-icon-pause" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="display:none">
+		<svg inert id="pr-icon-pause" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="display:none">
 			<path d="M2 4.4C2 3.26863 2 2.70294 2.35147 2.35147C2.70294 2 3.26863 2 4.4 2C5.53137 2 6.09706 2 6.44853 2.35147C6.8 2.70294 6.8 3.26863 6.8 4.4V11.6C6.8 12.7314 6.8 13.297 6.44853 13.6485C6.09706 14 5.53137 14 4.4 14C3.26863 14 2.70294 14 2.35147 13.6485C2 13.297 2 12.7314 2 11.6V4.4Z" fill="white"/>
 			<path d="M9.2 4.4C9.2 3.26863 9.2 2.70294 9.55148 2.35147C9.90296 2 10.4686 2 11.6 2C12.7314 2 13.297 2 13.6485 2.35147C14 2.70294 14 3.26863 14 4.4V11.6C14 12.7314 14 13.297 13.6485 13.6485C13.297 14 12.7314 14 11.6 14C10.4686 14 9.90296 14 9.55148 13.6485C9.2 13.297 9.2 12.7314 9.2 11.6V4.4Z" fill="white"/>
 		</svg>
@@ -26,10 +26,10 @@
 
 	<div id="pr-controls" aria-hidden="true">
 		<button id="pr-stop" title="Parar" aria-label="Parar leitura">
-			<!-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="14" height="14">
+			<!-- <svg inert xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="14" height="14">
 				<path d="M6 6h12v12H6z"/>
 			</svg> -->
-			<svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+			<svg inert width="16" height="16" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 				<path d="M2 8C2 5.17157 2 3.75736 2.87868 2.87868C3.75736 2 5.17157 2 8 2C10.8284 2 12.2427 2 13.1213 2.87868C14 3.75736 14 5.17157 14 8C14 10.8284 14 12.2427 13.1213 13.1213C12.2427 14 10.8284 14 8 14C5.17157 14 3.75736 14 2.87868 13.1213C2 12.2427 2 10.8284 2 8Z" fill="white"/>
 			</svg>
 
@@ -38,15 +38,22 @@
 		<div class="pr-divider"></div>
 
 		<label class="pr-field" title="Velocidade">
-			<!-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="13" height="13">
+			<!-- <svg inert xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="13" height="13">
 				<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/>
 			</svg> -->
-			<svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-				<path d="M6.66466 2.14923C7.09447 2.05151 7.54149 2 8 2C11.3137 2 14 4.68629 14 8C14 11.3137 11.3137 14 8 14C7.54149 14 7.09447 13.9485 6.66466 13.8508C6.43922 13.7995 6.29802 13.5752 6.34927 13.3498C6.40052 13.1243 6.62482 12.9831 6.85026 13.0344C7.21961 13.1184 7.60434 13.1628 8 13.1628C10.8513 13.1628 13.1628 10.8513 13.1628 8C13.1628 5.14867 10.8513 2.83721 8 2.83721C7.60434 2.83721 7.21961 2.88164 6.85026 2.9656C6.62482 3.01686 6.40052 2.87565 6.34927 2.65022C6.29802 2.42478 6.43922 2.20048 6.66466 2.14923Z" fill="white"/>
-				<path d="M5.3844 3.05041C5.50759 3.24605 5.44885 3.5045 5.25322 3.62769C4.5973 4.04069 4.04069 4.5973 3.62769 5.25322C3.5045 5.44885 3.24605 5.50759 3.05041 5.3844C2.85477 5.26122 2.79604 5.00276 2.91922 4.80713C3.39895 4.04522 4.04522 3.39895 4.80712 2.91922C5.00276 2.79604 5.26122 2.85477 5.3844 3.05041Z" fill="white"/>
-				<path d="M2.9656 6.85026C3.01686 6.62482 2.87565 6.40052 2.65022 6.34927C2.42478 6.29802 2.20048 6.43922 2.14923 6.66466C2.05151 7.09447 2 7.54149 2 8C2 8.45851 2.05151 8.90553 2.14923 9.33535C2.20048 9.56078 2.42478 9.70199 2.65022 9.65075C2.87565 9.59946 3.01686 9.3752 2.9656 9.14977C2.88164 8.78039 2.83721 8.39567 2.83721 8C2.83721 7.60434 2.88164 7.21961 2.9656 6.85026Z" fill="white"/>
-				<path d="M3.05041 10.6156C3.24605 10.4924 3.5045 10.5511 3.62769 10.7468C4.04069 11.4027 4.5973 11.9593 5.25322 12.3723C5.44885 12.4955 5.50759 12.754 5.3844 12.9496C5.26122 13.1452 5.00276 13.204 4.80713 13.0808C4.04522 12.601 3.39895 11.9548 2.91922 11.1929C2.79604 10.9972 2.85477 10.7388 3.05041 10.6156Z" fill="white"/>
-				<path d="M9.90532 7.40893C10.3416 7.66657 10.3416 8.33343 9.90532 8.59107L7.27079 10.1465C6.84672 10.3969 6.32558 10.071 6.32558 9.55542V6.44455C6.32558 5.92901 6.84672 5.60313 7.27079 5.8535L9.90532 7.40893Z" fill="white"/>
+			<svg inert width="16" height="16" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+				<g clip-path="url(#clip0_1_15)">
+					<path d="M6.21954 0.198973C6.79263 0.0686809 7.38865 0 8 0C12.4183 0 16 3.58172 16 8C16 12.4183 12.4183 16 8 16C7.38865 16 6.79263 15.9313 6.21954 15.801C5.91896 15.7327 5.73069 15.4336 5.79903 15.133C5.86736 14.8324 6.16643 14.6442 6.46701 14.7126C6.95948 14.8245 7.47245 14.8837 8 14.8837C11.8017 14.8837 14.8837 11.8017 14.8837 8C14.8837 4.19823 11.8017 1.11628 8 1.11628C7.47245 1.11628 6.95948 1.17552 6.46701 1.28747C6.16643 1.35581 5.86736 1.16754 5.79903 0.866954C5.73069 0.56637 5.91896 0.267304 6.21954 0.198973Z" fill="white"/>
+					<path d="M4.51254 1.40054C4.67679 1.6614 4.59847 2.00601 4.33762 2.17025C3.46306 2.72092 2.72092 3.46306 2.17025 4.33762C2.006 4.59847 1.6614 4.67679 1.40054 4.51254C1.13969 4.34829 1.06138 4.00368 1.22562 3.74284C1.86527 2.72697 2.72697 1.86527 3.74283 1.22562C4.00368 1.06138 4.34829 1.13969 4.51254 1.40054Z" fill="white"/>
+					<path d="M1.28747 6.46701C1.35581 6.16643 1.16754 5.86736 0.866954 5.79903C0.56637 5.73069 0.267304 5.91896 0.198973 6.21954C0.0686809 6.79263 0 7.38865 0 8C0 8.61135 0.0686809 9.20737 0.198973 9.78047C0.267304 10.081 0.56637 10.2693 0.866954 10.201C1.16754 10.1326 1.35581 9.8336 1.28747 9.53302C1.17552 9.04052 1.11628 8.52755 1.11628 8C1.11628 7.47245 1.17552 6.95948 1.28747 6.46701Z" fill="white"/>
+					<path d="M1.40054 11.4875C1.6614 11.3232 2.00601 11.4015 2.17025 11.6624C2.72092 12.5369 3.46306 13.2791 4.33762 13.8297C4.59847 13.994 4.67679 14.3386 4.51254 14.5994C4.34829 14.8603 4.00368 14.9386 3.74284 14.7744C2.72697 14.1347 1.86527 13.273 1.22562 12.2572C1.06138 11.9963 1.13969 11.6517 1.40054 11.4875Z" fill="white"/>
+					<path d="M10.5404 7.21191C11.1222 7.55542 11.1222 8.44458 10.5404 8.78809L7.02772 10.862C6.4623 11.1958 5.76744 10.7613 5.76744 10.0739V5.92607C5.76744 5.23867 6.4623 4.80417 7.02772 5.138L10.5404 7.21191Z" fill="white"/>
+				</g>
+				<defs>
+					<clipPath id="clip0_1_15">
+						<rect width="16" height="16" fill="white"/>
+					</clipPath>
+				</defs>
 			</svg>
 
 			<input id="pr-rate" type="range" min="0.5" max="2" step="0.1" value="1" aria-label="Velocidade" title="Velocidade" />
@@ -56,23 +63,51 @@
 		<div class="pr-divider"></div>
 
 		<label class="pr-field" title="Tom">
-			<!-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="13" height="13">
+			<!-- <svg inert xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="13" height="13">
 				<path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/>
 			</svg> -->
-			<svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+			<svg inert width="16" height="16" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 				<g clip-path="url(#clip0_2_34)">
-					<path d="M9.33301 13.5V2.5C9.33301 2.22397 9.55701 2.00018 9.83301 2C10.1092 2 10.333 2.22386 10.333 2.5V13.5C10.333 13.7761 10.1092 14 9.83301 14C9.55701 13.9998 9.33301 13.776 9.33301 13.5ZM13 12V4C13 3.72386 13.2239 3.5 13.5 3.5C13.7761 3.5 14 3.72386 14 4V12C14 12.2761 13.7761 12.5 13.5 12.5C13.2239 12.5 13 12.2761 13 12ZM5.66699 11V5C5.66699 4.72386 5.89085 4.5 6.16699 4.5C6.44298 4.50018 6.66699 4.72397 6.66699 5V11C6.66699 11.276 6.44298 11.4998 6.16699 11.5C5.89085 11.5 5.66699 11.2761 5.66699 11ZM11.167 10.5V5.5C11.167 5.22386 11.3909 5 11.667 5C11.943 5.00018 12.167 5.22397 12.167 5.5V10.5C12.167 10.776 11.943 10.9998 11.667 11C11.3909 11 11.167 10.7761 11.167 10.5ZM3.83301 10V6C3.83301 5.72397 4.05702 5.50018 4.33301 5.5C4.60915 5.5 4.83301 5.72386 4.83301 6V10C4.83301 10.2761 4.60915 10.5 4.33301 10.5C4.05702 10.4998 3.83301 10.276 3.83301 10ZM7.5 10V6C7.5 5.72386 7.72386 5.5 8 5.5C8.27614 5.5 8.5 5.72386 8.5 6V10C8.5 10.2761 8.27614 10.5 8 10.5C7.72386 10.5 7.5 10.2761 7.5 10ZM2 9V7C2 6.72386 2.22386 6.5 2.5 6.5C2.77614 6.5 3 6.72386 3 7V9C3 9.27614 2.77614 9.5 2.5 9.5C2.22386 9.5 2 9.27614 2 9Z" fill="white"/>
+					<g clip-path="url(#clip1_2_34)">
+						<path d="M9.77734 15.3333V0.666667C9.77734 0.298622 10.076 0.00023457 10.444 0C10.8122 0 11.1107 0.298477 11.1107 0.666667V15.3333C11.1107 15.7015 10.8122 16 10.444 16C10.076 15.9998 9.77734 15.7014 9.77734 15.3333ZM14.6667 13.3333V2.66667C14.6667 2.29848 14.9651 2 15.3333 2C15.7015 2 16 2.29848 16 2.66667V13.3333C16 13.7015 15.7015 14 15.3333 14C14.9651 14 14.6667 13.7015 14.6667 13.3333ZM4.88932 12V4C4.88932 3.63181 5.1878 3.33333 5.55599 3.33333C5.92398 3.33357 6.22266 3.63195 6.22266 4V12C6.22266 12.368 5.92398 12.6664 5.55599 12.6667C5.1878 12.6667 4.88932 12.3682 4.88932 12ZM12.2227 11.3333V4.66667C12.2227 4.29848 12.5211 4 12.8893 4C13.2573 4.00023 13.556 4.29862 13.556 4.66667V11.3333C13.556 11.7014 13.2573 11.9998 12.8893 12C12.5211 12 12.2227 11.7015 12.2227 11.3333ZM2.44401 10.6667V5.33333C2.44401 4.96529 2.74269 4.6669 3.11068 4.66667C3.47887 4.66667 3.77734 4.96514 3.77734 5.33333V10.6667C3.77734 11.0349 3.47887 11.3333 3.11068 11.3333C2.74269 11.3331 2.44401 11.0347 2.44401 10.6667ZM7.33333 10.6667V5.33333C7.33333 4.96514 7.63181 4.66667 8 4.66667C8.36819 4.66667 8.66667 4.96514 8.66667 5.33333V10.6667C8.66667 11.0349 8.36819 11.3333 8 11.3333C7.63181 11.3333 7.33333 11.0349 7.33333 10.6667ZM0 9.33333V6.66667C0 6.29848 0.298477 6 0.666667 6C1.03486 6 1.33333 6.29848 1.33333 6.66667V9.33333C1.33333 9.70152 1.03486 10 0.666667 10C0.298477 10 0 9.70152 0 9.33333Z" fill="white"/>
+					</g>
 				</g>
 				<defs>
 					<clipPath id="clip0_2_34">
-						<rect width="12" height="12" fill="white" transform="translate(2 2)"/>
+						<rect width="16" height="16" fill="white"/>
+					</clipPath>
+					<clipPath id="clip1_2_34">
+						<rect width="16" height="16" fill="white"/>
 					</clipPath>
 				</defs>
 			</svg>
 
+
 			<input id="pr-pitch" type="range" min="0.5" max="2" step="0.1" value="1" aria-label="Tom" title="Tom" />
 			<span id="pr-pitch-val">1×</span>
 		</label>
+
+		<div class="pr-divider"></div>
+
+		<button id="pr-switch-voice" title="Trocar voz" aria-label="Trocar voz">
+			<svg inert width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<g clip-path="url(#clip0_4_72)">
+					<g clip-path="url(#clip1_4_72)">
+						<path d="M0.666669 1.33333C0.298479 1.33333 2.86102e-06 1.03486 2.86102e-06 0.666667C2.86102e-06 0.298477 0.298479 -1.78814e-07 0.666669 -1.78814e-07V0.666667V1.33333ZM8 6.66667L7.40372 6.96481L7.33334 6.82405V6.66667H8ZM9.33334 9.33333L9.92962 9.03519L10.2278 9.63148L9.63148 9.92962L9.33334 9.33333ZM8 10H7.33334V9.58798L7.70186 9.40372L8 10ZM2.66667 13.3333H2V12.6667H2.66667V13.3333ZM3.33334 15.3333C3.33334 15.7015 3.03486 16 2.66667 16C2.29848 16 2 15.7015 2 15.3333H2.66667H3.33334ZM6 5.33333C6.36819 5.33333 6.66667 5.63181 6.66667 6C6.66667 6.36819 6.36819 6.66667 6 6.66667V6V5.33333ZM4.66667 6.66667C4.29848 6.66667 4 6.36819 4 6C4 5.63181 4.29848 5.33333 4.66667 5.33333V6V6.66667ZM0.666669 0.666667V-1.78814e-07H3.33333V0.666667V1.33333H0.666669V0.666667ZM3.33333 0.666667V-1.78814e-07C6.36819 -1.78814e-07 8.66667 2.29848 8.66667 5.33333H8H7.33334C7.33334 3.03486 5.63181 1.33333 3.33333 1.33333V0.666667ZM8 5.33333H8.66667V6.66667H8H7.33334V5.33333H8ZM8 6.66667L8.59629 6.36852L9.92962 9.03519L9.33334 9.33333L8.73705 9.63148L7.40372 6.96481L8 6.66667ZM9.33334 9.33333L9.63148 9.92962L8.29814 10.5963L8 10L7.70186 9.40372L9.03519 8.73705L9.33334 9.33333ZM8 10H8.66667V11.3333H8H7.33334V10H8ZM8 11.3333H8.66667C8.66667 12.1028 8.47386 12.8023 7.97141 13.3047C7.46895 13.8072 6.76943 14 6 14V13.3333V12.6667C6.56391 12.6667 6.86438 12.5261 7.0286 12.3619C7.19281 12.1977 7.33334 11.8972 7.33334 11.3333H8ZM6 13.3333V14H2.66667V13.3333V12.6667H6V13.3333ZM2.66667 13.3333H3.33334V15.3333H2.66667H2V13.3333H2.66667ZM6 6V6.66667H4.66667V6V5.33333H6V6Z" fill="white"/>
+						<path d="M12.6619 5.00717C14.2726 6.08308 15.3333 7.91766 15.3333 10C15.3333 12.0823 14.2726 13.9169 12.6619 14.9928" stroke="white" stroke-width="1.33333" stroke-linecap="round"/>
+						<path d="M11.1825 12.7738C12.0773 12.1761 12.6667 11.1569 12.6667 10C12.6667 8.84314 12.0773 7.82393 11.1825 7.2262" stroke="white" stroke-width="1.33333" stroke-linecap="round"/>
+					</g>
+				</g>
+				<defs>
+					<clipPath id="clip0_4_72">
+						<rect width="16" height="16" fill="white" transform="matrix(-1 0 0 1 16 0)"/>
+					</clipPath>
+					<clipPath id="clip1_4_72">
+						<rect width="16" height="16" fill="white" transform="matrix(-1 0 0 1 16 0)"/>
+					</clipPath>
+				</defs>
+			</svg>
+		</button>
 	</div>
 </div>
 
@@ -136,7 +171,7 @@
 		display: flex;
 	}
 
-	#pr-stop {
+	#pr-stop, #pr-switch-voice {
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
@@ -149,7 +184,7 @@
 		transition: background 0.12s;
 	}
 
-	#pr-stop:hover {
+	#pr-stop:hover, #pr-switch-voice:hover {
 		background: rgba(243, 139, 168, 0.12);
 	}
 
@@ -249,12 +284,18 @@
 		const pitchInput = document.getElementById('pr-pitch') as HTMLInputElement | null;
 		const rateVal = document.getElementById('pr-rate-val');
 		const pitchVal = document.getElementById('pr-pitch-val');
+		const switchVoiceBtn = document.getElementById('pr-switch-voice');
 
-	if (toggle) {
-		toggle.disabled = false;
-		toggle.setAttribute('aria-label', 'Iniciar leitura');
-		toggle.setAttribute('title', 'Iniciar leitura');
-	}
+		const voices = [] as SpeechSynthesisVoice[]
+		const VOICE_LANG = document.documentElement.lang || 'pt-BR'
+		const PREFERED_VOICE = 'Google português do Brasil'
+		let currentVoiceIndex = 0
+
+		if (toggle) {
+			toggle.disabled = false;
+			toggle.setAttribute('aria-label', 'Iniciar leitura');
+			toggle.setAttribute('title', 'Iniciar leitura');
+		}
 
 		// Selectors for readable blocks (Starlight article content)
 		const BLOCK_SELECTORS = 'h1, h2, h3, h4, h5, h6, p, li';
@@ -264,6 +305,27 @@
 		let currentIndex = 0;
 		let isPlaying = false;
 		let isPaused = false;
+
+		function populateVoiceList() {
+			const vcs = synth.getVoices();
+
+			voices.length = 0
+			for (const voice of vcs) {
+				if (voice.lang === VOICE_LANG)
+					voices.push(voice)
+			}
+
+			const savedVoice = sessionStorage.getItem('voice')
+			if (savedVoice !== null)
+				currentVoiceIndex = parseInt(savedVoice)
+			else
+				currentVoiceIndex = voices.findIndex(v => v.name === PREFERED_VOICE)
+			currentVoiceIndex = currentVoiceIndex >= 0 ? currentVoiceIndex : 0
+		}
+		populateVoiceList();
+		if (synth.onvoiceschanged !== undefined) {
+			synth.onvoiceschanged = populateVoiceList;
+		}
 
 		function getArticle() {
 			return document.querySelector(ARTICLE_SELECTOR) || document.querySelector('main');
@@ -308,7 +370,8 @@
 			const utt = new SpeechSynthesisUtterance(text);
 			utt.rate = parseFloat(rateInput?.value || '1');
 			utt.pitch = parseFloat(pitchInput?.value || '1');
-			utt.lang = document.documentElement.lang || 'pt-BR';
+			utt.voice = voices[currentVoiceIndex] || null;
+			utt.lang = VOICE_LANG;
 
 			utt.onend = () => {
 				if (isPlaying && !isPaused) {
@@ -420,6 +483,21 @@
 			pitchInput.value = savedPitch
 			handlePitchChange()
 		}
+
+		switchVoiceBtn?.addEventListener('click', () => {
+			if (voices.length === 0) return;
+
+			currentVoiceIndex = (currentVoiceIndex + 1) % voices.length;
+			const currentVoice = voices[currentVoiceIndex];
+			sessionStorage.setItem('voice', currentVoiceIndex + '')
+
+			if (isPlaying || isPaused) {
+				synth.cancel();
+				speakBlock(currentIndex);
+			}
+
+			alert(`Voz atual (${currentVoiceIndex + 1}/${voices.length}): ${currentVoice.name}`);
+		})
 
 		// Stop if user navigates away (SPA)
 		document.addEventListener('astro:before-swap', stop);
