@@ -419,10 +419,14 @@
 		}
 
 		function resume() {
-			// TODO: Não está funcionando no Android, pelo visto desde 2019
-			// https://github.com/mdn/browser-compat-data/issues/4500
 			isPaused = false;
-			synth.resume();
+			if (/Android/i.test(navigator.userAgent)) {
+				// Obs: desde 2014 o `pause` funciona como o `cancel` no Android
+				// https://github.com/mdn/browser-compat-data/issues/4500
+				speakBlock(currentIndex);
+			} else {
+				synth.resume();
+			}
 			setPlayingUI(true);
 		}
 
