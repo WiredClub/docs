@@ -125,6 +125,9 @@
 	#page-reader * {
 	margin: 0;
 	}
+	svg {
+		min-width: 16px;
+	}
 
 	#pr-toggle {
 		display: inline-flex;
@@ -217,7 +220,8 @@
 	.pr-field input[type="range"] {
 		-webkit-appearance: none;
 		appearance: none;
-		width: 60px;
+		max-width: 60px;
+		width: 100%;
 		height: 3px;
 		border-radius: 2px;
 		background: var(--sl-color-gray-5, rgba(255,255,255,0.15));
@@ -322,9 +326,10 @@
 
 			voices.length = 0
 			for (const voice of vcs) {
-				if (voice.lang === VOICE_LANG)
-					voices.push(voice)
+				if (voice.lang.toLowerCase().replace(/[^a-z]/g, '') === VOICE_LANG.toLowerCase().replace(/[^a-z]/g, ''))
+				voices.push(voice)
 			}
+			// alert(`Vozes encontradas: ${vcs.map(v => `${v.name} (${v.lang})`).join(', ')}`)
 
 			const savedVoice = sessionStorage.getItem('voice')
 			if (savedVoice !== null)
@@ -414,6 +419,7 @@
 		}
 
 		function resume() {
+			// TODO: Não está funcionando no Android
 			isPaused = false;
 			synth.resume();
 			setPlayingUI(true);
@@ -496,7 +502,13 @@
 		}
 
 		switchVoiceBtn?.addEventListener('click', () => {
-			if (voices.length === 0) return;
+			if (voices.length === 0) {
+				alert("Vozes não reconhecidas.")
+				return
+			} else if (voices.length === 1) {
+				alert(`Apenas uma voz disponível: ${voices[0].name}`);
+				return
+			}
 
 			currentVoiceIndex = (currentVoiceIndex + 1) % voices.length;
 			const currentVoice = voices[currentVoiceIndex];
