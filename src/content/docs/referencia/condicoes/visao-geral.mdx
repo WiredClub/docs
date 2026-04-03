@@ -1,0 +1,66 @@
+---
+title: Visão Geral das Condições
+description: a
+sidebar:
+  label: Visão Geral
+  order: 0
+  badge:
+    text: Novo
+    variant: tip
+---
+
+import { Aside, Steps } from '@astrojs/starlight/components';
+
+## O que é uma Condição?
+
+As Condições permitem que você valide requisitos antes de executar um Efeito, criando comportamentos condicionais ao invés de respostas automáticas.
+
+<Aside type="tip" title="Dica de Ouro">
+Em um sistema com múltiplas Condições, **TODAS** elas precisam ser verdadeiras por padrão (lógica "E"). Se qualquer uma for falsa, toda pilha não é executada. Mais à frente você aprenderá como usar Extras para criar lógica "OU".
+</Aside>
+
+## Por que usar Condições?
+
+Imagine um sistema de **teleporte exclusivo para membros de um grupo**. Sem uma Condição, qualquer pessoa que pisasse no ativador seria teletransportada. Com uma Condição, apenas membros do grupo teriam acesso.
+
+Casos de uso comuns:
+- **Controle de acesso** (grupo, equipe, permissões)
+- **Validações de estado** (mobis em posições específicas)
+- **Filtros de tempo** (dia/noite, horários)
+- **Proteção de sistemas** (evitar execuções indevidas)
+
+## Estrutura: Ativador + Condição + Efeito
+
+<Steps>
+1. **ATIVADOR:** Detecta o evento (ex: usuário pisa em um mobi)
+2. **CONDIÇÃO:** Valida se o usuário atende ao requisito (ex: "É membro do grupo X?")
+3. **EFEITO:** Executa apenas se a resposta for "sim" (ex: teleporta para o prêmio)
+</Steps>
+
+Se a Condição retornar "não", o fluxo é interrompido imediatamente.
+
+## Combinando múltiplas Condições
+
+Às vezes você precisa de **mais de uma validação**. Por exemplo:
+- Usuário deve estar em uma **equipe específica** E
+- Estar em um **grupo específico** E
+- Ter uma **pontuação mínima**
+
+Neste caso, adicione todas as 3 Condições à mesma pilha. Se qualquer uma falhar, a execução é abortada.
+
+<Aside type="caution" title="Atenção">
+Se você quer usar lógica "OU" (Condição A **OU** Condição B), você precisa de um **Extra** especial. Siga para a próxima sessão para aprender sobre Seletores e Extras.
+</Aside>
+
+## Condições Negativas
+
+Algumas Condições possuem versões **negativas** (com cor preta), que realizam a verificação inversa:
+
+- **"Membro do Grupo"**
+- **"NÃO é Membro do Grupo"**
+
+Use-as quando precisar rejeitar algo ao invés de aceitar.
+
+## Lista Completa
+
+
