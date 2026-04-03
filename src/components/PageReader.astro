@@ -152,9 +152,20 @@
 		/* color: var(--sl-color-accent, #7c3aed); */
 	}
 
+	/* :global(header) {
+		anchor-name: --header;
+	} */
 	#page-reader:has(#pr-toggle.reading) {
 		position: sticky;
-		top: 80px;
+		top: 120px;
+		/* position: fixed;
+		position-anchor: --header;
+		top: calc(anchor(bottom) + 10px); */
+		/*
+		Não funcionou por que precisa ser "position: absolute" (não segue o header)
+		ou "position: fixed" (desocupa o espaço no DOM). Precisava que continuasse
+		sendo "position: sticky".
+		*/
 	}
 
 	#pr-controls {
