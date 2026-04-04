@@ -1,0 +1,528 @@
+---
+import { Fragment } from "astro/jsx-runtime";
+import type {
+	WiredInfobox,
+	TriggerInfobox,
+	WiredInfoboxType,
+} from "../content.config";
+
+import {
+	getFurniImage,
+	getFurniAnimatedImage,
+	getFurniIcon,
+} from "../utils/furniImages";
+
+const { infobox } = Astro.locals.starlightRoute.entry.data;
+
+// Respeita o flag `hide`
+if (!infobox || infobox.hide) return;
+
+// Discrimina se é um Wired (tem o campo `type`) ou um básico
+const isWired = "type" in infobox;
+const wired = isWired ? (infobox as WiredInfobox) : null;
+
+// Utilitários de display
+const boolRow = (val: boolean | undefined, yes = "Sim", no = "Não") =>
+	val === true ? yes : val === false ? no : null;
+
+const formatDate = (d: Date | undefined) => {
+	if (!d) return null;
+	return d.toLocaleDateString("pt-BR", { month: "long", year: "numeric" });
+};
+/**--accent: #2b3238;
+    --ib-bg: #e7ebf7;
+    --ib-border: #8f939b;
+ */
+const palette: Record<
+	WiredInfoboxType,
+	{ accent: string; bg: string; border: string; label: string }
+> = {
+	Ativador: {
+		accent: "#b88260",
+		bg: "#452917",
+		border: "#71482e",
+		label: "Ativador",
+	},
+	Efeito: {
+		accent: "#f1f1f1",
+		bg: "#333333",
+		border: "#737373",
+		label: "Efeito",
+	},
+	Condição: {
+		accent: "#2b3238",
+		bg: "#e7ebf7",
+		border: "#8f939b",
+		label: "Condição",
+	},
+	Extra: {
+		accent: "#f5b846",
+		bg: "#1e1608",
+		border: "#6b4d12",
+		label: "Extra",
+	},
+};
+
+const p = wired
+	? (palette[wired.type as WiredInfoboxType] ?? palette["Extra"])
+	: null;
+
+// Campos booleanos de requisitos (compartilhados entre Effect/Condition/Addon/Trigger)
+const reqFields: Array<{ key: keyof WiredInfobox; label: string }> = [
+	{ key: "requires_bot", label: "Requer bot" },
+	{ key: "requires_furni", label: "Requer mobi" },
+	{ key: "requires_antena", label: "Requer antena" },
+	{ key: "requires_contract", label: "Requer contrato" },
+	{ key: "requires_chest", label: "Requer baú" },
+];
+
+// Gatilhadores adicionais (apenas Ativador)
+const isTrigger = wired?.type === "Ativador";
+const trigger = isTrigger ? (wired as TriggerInfobox) : null;
+
+let credits = null;
+if (wired && "classname" in wired && wired.classname) {
+	if (!infobox.image) {
+		infobox.image = [
+			getFurniImage(wired.classname, wired.revision, infobox.image_direction),
+			getFurniAnimatedImage(wired.classname, wired.revision, infobox.image_direction, infobox.image_animated_state),
+		];
+		credits = "Imagens de mobis por HabCat";
+	}
+	infobox.icon = getFurniIcon(wired.classname, wired.revision);
+}
+---
+
+<aside
+	class="infobox"
+	class:list={[{ "infobox--wired": isWired }]}
+	style={p
+		? `--accent:${p.accent};--ib-bg:${p.bg};--ib-border:${p.border};`
+		: ""}
+	aria-label={`Infobox: ${infobox.title}`}
+>
+	<!-- ══ CABEÇALHO ══════════════════════════════════════════════════════════ -->
+	<header class="ib-header">
+		{p && <span class="ib-type-badge">{p.label}</span>}
+		<h2 class="ib-title">{infobox.title}</h2>
+
+		{
+			wired &&
+				"product_name" in wired &&
+				wired.product_name &&
+				wired.product_name !== infobox.title && (
+					<p class="ib-product-name">{wired.product_name}</p>
+				)
+		}
+	</header>
+
+	<!-- ══ IMAGEM ═════════════════════════════════════════════════════════════ -->
+	{
+		infobox.icon && (
+			<div class="ib-image-wrap">
+				{infobox.icon && (
+					<img
+						src={infobox.icon}
+						alt={infobox.title}
+						class="ib-icon"
+						loading="lazy"
+					/>
+				)}
+			</div>
+		)
+	}
+	{
+		infobox.image && (
+			<div class="ib-image-wrap" data-credits={credits}>
+				{infobox.image &&
+					(Array.isArray(infobox.image) ? (
+						infobox.image.map((img, i) => (
+							<img
+								src={img}
+								alt={infobox.title}
+								class="ib-image"
+								loading="lazy"
+							/>
+						))
+					) : (
+						<img
+							src={infobox.image}
+							alt={infobox.title}
+							class="ib-image"
+							loading="lazy"
+						/>
+					))}
+			</div>
+		)
+	}
+	{
+		wired && "has_negative_version" in wired && wired.has_negative_version && wired.negative_classname && wired.negative_revision && (
+			<>
+				<hr/>
+				<div class="ib-image-wrap">
+					<img
+						src={getFurniIcon(wired.negative_classname, wired.negative_revision)}
+						alt={`${infobox.title} (versão negativa)`}
+						class="ib-icon"
+						loading="lazy"
+					/>
+				</div>
+				<div class="ib-image-wrap" data-credits={credits}>
+					<img
+						src={getFurniImage(wired.negative_classname, wired.negative_revision, infobox.image_direction)}
+						alt={`${infobox.title} (versão negativa)`}
+						class="ib-image"
+						loading="lazy"
+					/>
+					<img
+						src={getFurniAnimatedImage(wired.negative_classname, wired.negative_revision, infobox.image_direction, infobox.image_animated_state)}
+						alt={`${infobox.title} (versão negativa)`}
+						class="ib-image"
+						loading="lazy"
+					/>
+				</div>
+			</>
+		)
+	}
+
+	<!-- ══ DESCRIÇÃO ══════════════════════════════════════════════════════════ -->
+	{
+		wired && "description" in wired && wired.description && (
+			<p class="ib-description">{wired.description}</p>
+		)
+	}
+
+	<!-- ══ DADOS GERAIS ═══════════════════════════════════════════════════════ -->
+	{
+		wired && (
+			<section class="ib-section">
+				<h3 class="ib-section-title">Dados gerais</h3>
+				<dl class="ib-dl">
+					{"classname" in wired && wired.classname && (
+						<div class="ib-row">
+							<dt>Codenome</dt>
+							<dd>
+								<code class="ib-code">{wired.classname}</code>
+							</dd>
+						</div>
+					)}
+
+					{"availability" in wired && wired.availability && (
+						<div class="ib-row">
+							<dt>Disponibilidade</dt>
+							<dd>{wired.availability}</dd>
+						</div>
+					)}
+
+					{"release_date" in wired && wired.release_date && (
+						<div class="ib-row">
+							<dt>Lançamento</dt>
+							<dd>{formatDate(wired.release_date)}</dd>
+						</div>
+					)}
+				</dl>
+			</section>
+		)
+	}
+
+	<!-- ══ REQUISITOS (Effect / Condition / Addon / Trigger) ═════════════════ -->
+	{
+		wired && reqFields.some(({ key }) => wired[key] !== undefined) && (
+			<section class="ib-section">
+				<h3 class="ib-section-title">Requisitos</h3>
+				<dl class="ib-dl">
+					{reqFields.map(({ key, label }) => {
+						const raw = wired[key];
+						if (raw === undefined) return null;
+						const val = raw as boolean;
+						return (
+							<div class="ib-row">
+								<dt>{label}</dt>
+								<dd class:list={[val ? "ib-yes" : "ib-no"]}>
+									<span
+										class="ib-bool-icon"
+										aria-hidden="true"
+									>
+										{val ? "✔" : "✘"}
+									</span>
+									{val ? "Sim" : "Não"}
+								</dd>
+							</div>
+						);
+					})}
+				</dl>
+			</section>
+		)
+	}
+
+	<!-- ══ FONTES ADICIONAIS (apenas Ativador) ═════════════════════════ -->
+	{
+		trigger &&
+			trigger.additional_sources &&
+			trigger.additional_sources.length > 0 && (
+				<section class="ib-section">
+					<h3 class="ib-section-title">Fontes adicionais</h3>
+					<ul class="ib-tag-list">
+						{trigger.additional_sources.map((t) => (
+							<li class="ib-tag">{t}</li>
+						))}
+					</ul>
+				</section>
+			)
+	}
+</aside>
+
+<style is:global>
+	.sl-markdown-content::after {
+		content: "";
+		display: table;
+		clear: both;
+	}
+</style>
+<style>
+	/* ── Tokens ────────────────────────────────────────────────────────────── */
+	.infobox {
+		--accent: #8a8a8a;
+		--ib-bg: #141414;
+		--ib-border: #2e2e2e;
+		--radius: 8px;
+		--mono: "JetBrains Mono", "Cascadia Code", ui-monospace, monospace;
+		--sans: "Sora", "DM Sans", system-ui, sans-serif;
+
+		font-family: var(--sans);
+		font-size: 0.85rem;
+		line-height: 1.55;
+		color: #ccc8c0;
+		background: var(--ib-bg);
+		border: 1.5px solid var(--ib-border);
+		border-radius: var(--radius);
+		overflow: hidden;
+
+		/* Sidebar clássica de wiki */
+		width: 280px;
+		float: right;
+		margin: 0 0 1.5rem 1.75rem;
+		clear: right;
+
+		/* Entrada suave */
+		animation: ib-in 0.22s ease both;
+	}
+
+	.infobox * {
+		margin-top: 0;
+	}
+
+	@keyframes ib-in {
+		from {
+			opacity: 0;
+			transform: translateY(6px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	@media (max-width: 640px) {
+		.infobox {
+			float: none;
+			width: 100%;
+			margin: 0 0 1.5rem;
+		}
+	}
+
+	/* ── Cabeçalho ─────────────────────────────────────────────────────────── */
+	.ib-header {
+		background: color-mix(in srgb, var(--ib-bg) 60%, #000 40%);
+		border-bottom: 1.5px solid var(--ib-border);
+		padding: 0.8rem 1rem 0.7rem;
+		display: flex;
+		flex-direction: column;
+		gap: 0.25rem;
+	}
+
+	.ib-type-badge {
+		display: inline-block;
+		font-family: var(--mono);
+		font-size: 0.62rem;
+		font-weight: 700;
+		letter-spacing: 0.16em;
+		text-transform: uppercase;
+		color: var(--accent);
+		border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+		background: color-mix(in srgb, var(--accent) 10%, transparent);
+		border-radius: 4px;
+		padding: 0.1rem 0.45rem;
+		width: fit-content;
+		margin: 0 auto;
+	}
+
+	.ib-title {
+		font-size: 0.95rem;
+		font-weight: 700;
+		color: #f0ece4;
+		margin: 0;
+		letter-spacing: -0.01em;
+		text-align: center;
+	}
+
+	.ib-product-name {
+		font-size: 0.75rem;
+		color: #6e6a64;
+		margin: 0;
+		font-style: italic;
+	}
+
+	/* ── Imagem ────────────────────────────────────────────────────────────── */
+	.ib-image-wrap {
+		display: flex;
+		gap: 20px;
+		align-items: center;
+		justify-content: center;
+		padding: 1rem;
+		background: #0c0c0c;
+		border-bottom: 1px solid var(--ib-border);
+		min-height: 72px;
+	}
+
+	.ib-image-wrap:has(+ .ib-image-wrap) {
+		border-bottom: none;
+		padding-bottom: 0;
+	}
+	.ib-image-wrap + .ib-image-wrap {
+		padding-top: 0;
+	}
+
+	.ib-image-wrap[data-credits] {
+		position: relative;
+	}
+	.ib-image-wrap[data-credits]::after {
+		position: absolute;
+		bottom: 4px;
+		content: attr(data-credits);
+		font-size: 0.6rem;
+		color: #827e76;
+		margin-top: 0.3rem;
+	}
+
+	.ib-image {
+		max-width: 100%;
+		object-fit: contain;
+		image-rendering: pixelated; /* preserva pixel art do Habbo */
+	}
+	.ib-icon {
+		width: 30px;
+		height: 30px;
+		image-rendering: pixelated;
+	}
+
+	/* ── Descrição ─────────────────────────────────────────────────────────── */
+	.ib-description {
+		padding: 0.6rem 1rem;
+		margin: 0;
+		font-size: 0.78rem;
+		color: #827e76;
+		font-style: italic;
+		border-bottom: 1px solid var(--ib-border);
+	}
+
+	/* ── Seções ────────────────────────────────────────────────────────────── */
+	.ib-section {
+		padding: 0.55rem 1rem 0.6rem;
+		border-bottom: 1px solid var(--ib-border);
+	}
+
+	.ib-section:last-child {
+		border-bottom: none;
+	}
+
+	.ib-section-title {
+		font-family: var(--mono);
+		font-size: 0.6rem;
+		font-weight: 700;
+		letter-spacing: 0.18em;
+		text-transform: uppercase;
+		color: var(--accent);
+		opacity: 0.7;
+		margin: 0 0 0.45rem;
+	}
+
+	/* ── Definition list ───────────────────────────────────────────────────── */
+	.ib-dl {
+		margin: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 0;
+	}
+
+	.ib-row {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 0.25rem;
+		padding: 0.28rem 0;
+		align-items: baseline;
+	}
+
+	.ib-row dt {
+		font-size: 0.76rem;
+		color: #827e76;
+	}
+
+	.ib-row dd {
+		font-size: 0.8rem;
+		font-weight: 500;
+		color: #989690;
+		margin: 0;
+		text-align: right;
+	}
+
+	/* ── Booleanos ─────────────────────────────────────────────────────────── */
+	.ib-yes {
+		color: #74c56f !important;
+	}
+	.ib-no {
+		color: #c56f6f !important;
+	}
+
+	.ib-bool-icon {
+		margin-right: 0.2rem;
+		font-size: 0.7rem;
+	}
+
+	/* ── Code ──────────────────────────────────────────────────────────────── */
+	.ib-code {
+		font-family: var(--mono);
+		font-size: 0.72rem;
+		color: var(--accent);
+		background: color-mix(in srgb, var(--accent) 8%, transparent);
+		border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
+		border-radius: 3px;
+		padding: 0.05rem 0.3rem;
+	}
+
+	/* ── Tags (gatilhadores adicionais) ────────────────────────────────────── */
+	.ib-tag-list {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.3rem;
+	}
+
+	.ib-tag {
+		font-size: 0.7rem;
+		font-family: var(--mono);
+		color: var(--accent);
+		border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+		background: color-mix(in srgb, var(--accent) 8%, transparent);
+		border-radius: 4px;
+		padding: 0.15rem 0.45rem;
+		line-height: 1.4;
+	}
+
+	/* ── Capitalização ─────────────────────────────────────────────────────── */
+	.ib-capitalize {
+		text-transform: capitalize;
+	}
+</style>
