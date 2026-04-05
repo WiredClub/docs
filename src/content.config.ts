@@ -57,6 +57,14 @@ const WiredInfoboxBaseSchema = FurniInfoboxBaseSchema.extend({
 		.boolean()
 		.default(false)
 		.describe("O Wired precisa de um baú selecionado para ser configurado"),
+	execution_limit: z
+		.number()
+		.default(100)
+		.describe("Limite de execuções que o Wired pode ser executado por tick (0.5 segundos)"),
+	execution_limit_per_user: z
+		.number()
+		.default(100)
+		.describe("Limite de execuções que o Wired pode ser executado por usuário por tick (0.5 segundos)"),
 });
 
 const TriggerInfoboxBaseSchema = WiredInfoboxBaseSchema.extend({
