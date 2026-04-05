@@ -84,22 +84,22 @@ const TriggerInfoboxBaseSchema = WiredInfoboxBaseSchema.extend({
 
 const EffectInfoboxBaseSchema = WiredInfoboxBaseSchema.extend({
 	type: z.literal("Efeito").describe("Tipo do Wired: Efeito"),
-	has_negative_version: z
-		.boolean()
-		.default(false)
-		.describe("Se o efeito uma versão negativa para ser acionada caso as condições não sejam atendidas"),
-	negative_revision: z.int().optional().describe("Revisão da versão negativa do efeito, se aplicável"),
-	negative_classname: z.string().optional().describe("Classname da versão negativa do efeito, se aplicável"),
+	negative_version: z.object({
+		name: z.string().describe("Nome da condição negativa, para exibição"),
+		description: z.string().optional().describe("Descrição da condição negativa, para exibição"),
+		revision: z.int().describe("Revisão da condição negativa, para diferenciação técnica"),
+		classname: z.string().describe("Classname da condição negativa, para diferenciação técnica"),
+	}).optional().describe("Informações adicionais para a versão negativa da condição, se aplicável"),
 });
 
 const ConditionInfoboxBaseSchema = WiredInfoboxBaseSchema.extend({
 	type: z.literal("Condição").describe("Tipo do Wired: Condição"),
-	has_negative_version: z
-		.boolean()
-		.default(false)
-		.describe("Se a condição uma versão negativa para representar a lógica inversa"),
-	negative_revision: z.int().optional().describe("Revisão da versão negativa da condição, se aplicável"),
-	negative_classname: z.string().optional().describe("Classname da versão negativa da condição, se aplicável"),
+	negative_version: z.object({
+		name: z.string().describe("Nome da condição negativa, para exibição"),
+		description: z.string().optional().describe("Descrição da condição negativa, para exibição"),
+		revision: z.int().describe("Revisão da condição negativa, para diferenciação técnica"),
+		classname: z.string().describe("Classname da condição negativa, para diferenciação técnica"),
+	}).optional().describe("Informações adicionais para a versão negativa da condição, se aplicável"),
 });
 
 const AddOnInfoboxBaseSchema = WiredInfoboxBaseSchema.extend({

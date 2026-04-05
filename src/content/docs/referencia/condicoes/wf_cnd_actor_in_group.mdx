@@ -35,9 +35,11 @@ infobox:
   # execution_limit_per_user: 100 # valor padrão
 
   # == Dados da Condição ==
-  has_negative_version: true
-  negative_revision: 50950
-  negative_classname: wf_cnd_not_in_group
+  negative_version:
+    revision: 50950
+    classname: wf_cnd_not_in_group
+    name: NÃO é membro de grupo
+    description: Condição ocorre quando é um quarto de grupo e o usuário NÃO é um membro do grupo.
 ---
 
 import Infobox from "../../../../components/Infobox.astro"

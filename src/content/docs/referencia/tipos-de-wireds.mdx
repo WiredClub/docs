@@ -3,73 +3,82 @@ title: Tipos de Wireds
 description: Explore os tipos de Wireds no Habbo Hotel, incluindo Ativadores, Efeitos, Condições, Seletores, Tabelas de Classificação, Extras e Variáveis.
 ---
 
+import WiredGrid from '../../../components/WiredGrid.astro';
+
 O sistema Wired é dividido em categorias distintas, cada uma identificada por uma cor e um formato para facilitar a assimilação de sua função lógica dentro da pilha. Compreender essas divisões é o primeiro passo para criar automações eficientes.
 
 ## 1. Ativadores: O "Quando"
 Os Ativadores são representados pelas caixas **marrons**. Eles monitoram o quarto e "disparam" a execução para o resto da pilha quando um evento específico ocorre.
 
-| Ícone | Ativador | Descrição |
-| :--- | :--- | :--- |
-| ![](https://images.habbo.com/dcr/hof_furni/50950/wf_trg_walks_on_furni_icon.png) | **Habbo anda no Mobi** | Ativado quando um usuário, bot ou pet pisa no mobi selecionado. |
-| ![](https://images.habbo.com/dcr/hof_furni/50950/wf_trg_says_something_icon.png) | **Habbo diz algo** | Disparado quando um usuário digita uma palavra ou frase específica no chat. |
-| ![](https://images.habbo.com/dcr/hof_furni/69021/wf_trg_user_performs_action_icon.png) | **Habbo faz ação** | Ativa quando um usuário realiza ações como acenar, sentar, dançar ou ficar ausente. |
-| ![](https://images.habbo.com/dcr/hof_furni/50950/wf_trg_collision_icon.png) | **Batida** | Detecta quando um mobi em movimento colide com um usuário. |
-| ![](https://images.habbo.com/dcr/hof_furni/50950/wf_trg_periodically_icon.png) | **Repetir Efeito** | Executa a pilha em intervalos regulares (de 0,5 a 60 segundos). |
-| ![](https://images.habbo.com/dcr/hof_furni/69540/wf_trg_stuff_state_icon.png) | **Estado do Mobi é modificado** | Ativado quando o estado de um mobi é alterado (ex: girar uma alavanca ou abrir uma porta). |
-| ![](https://images.habbo.com/dcr/hof_furni/56667/wf_trg_enter_room_icon.png) | **Habbo entra no Quarto** | Dispara assim que um usuário entra no quarto. |
-| ![](https://images.habbo.com/dcr/hof_furni/71472/wf_trg_var_changed_icon.png) | **Variável Mudou** | Ativa quando uma variável específica é atribuída, excluída ou tem seu valor alterado. |
+<WiredGrid classname_list={[
+  "wf_trg_walks_on_furni",
+  "wf_trg_says_something",
+  "wf_trg_user_performs_action",
+  "wf_trg_collision",
+  "wf_trg_periodically",
+  "wf_trg_stuff_state",
+  "wf_trg_enter_room",
+  "wf_trg_var_changed"
+]} />
 
 Veja a lista completa [aqui](/docs/referencia/ativadores/visao-geral/#lista-completa).
 
 ## 2. Efeitos: O "O Que"
 Os Efeitos são as caixas **cinzas ou prateadas**. Algumas possuem a cor **preta** para representar que serão executadas somente quando as condições não forem validadas. Eles executam a ação física ou lógica resultante da ativação.
 
-| Ícone | Efeito | Descrição |
-| :--- | :--- | :--- |
-| ![](https://images.habbo.com/dcr/hof_furni/50950/wf_act_teleport_to_icon.png) | **Teleportar para Mobi** | Teleporta um Habbo para um mobi selecionado. |
-| ![](https://images.habbo.com/dcr/hof_furni/56667/wf_act_move_rotate_icon.png) | **Mover e Rotacionar Mobi** | Altera a posição e/ou a direção em que um mobi está posicionado. |
-| ![](https://images.habbo.com/dcr/hof_furni/69540/wf_act_set_altitude_icon.png) | **Configurar a Altura do Mobi** | Incrementa, decrementa ou define a posição vertical do mobi selecionado. |
-| ![](https://images.habbo.com/dcr/hof_furni/50950/wf_act_show_message_icon.png) | **Mostrar mensagem** | Cria uma mensagem de texto no chat do quarto de forma privada ao usuário ou de forma geral para todos os usuários. |
-| ![](https://images.habbo.com/dcr/hof_furni/50950/wf_act_join_team_icon.png) | **Entrar na Equipe** | Faz com que o Habbo entre em uma das equipes selecionadas. |
-| ![](https://images.habbo.com/dcr/hof_furni/50950/wf_act_call_stacks_icon.png) | **Faz pilhas de wireds** | Aciona a execução de outra pilha, ignorando quaisquer condições presentes na pilha alvo. |
+<WiredGrid classname_list={[
+  "wf_act_teleport_to",
+  "wf_act_move_rotate",
+  "wf_act_set_altitude",
+  "wf_act_show_message",
+  "wf_act_join_team",
+  "wf_act_call_stacks",
+]} />
 
 Veja a lista completa [aqui](/docs/referencia/efeitos/visao-geral/#lista-completa).
 
 ### Efeitos Negativos
 Alguns Efeitos possuem a cor **preta** para representar que sua execução é **invertida**. Em outras palavras, esses Efeitos são executados caso as Condições não permitam a execução natural da pilha. Em linguagens de programação gerais, essa lógica é encontrada nos blocos lógicos "SENÃO": `SE <condições> ENTÃO <efeitos> SENÃO <efeitos negativos> FIM`.
 
-| Ícone | Efeito Negativo | Descrição |
-| :--- | :--- | :--- |
-| ![](https://images.habbo.com/dcr/hof_furni/73909/wf_act_neg_log_icon.png) | **Escrever nos logs** | Cria uma mensagem de registro para fins de auditoria. |
-| ![](https://images.habbo.com/dcr/hof_furni/70536/wf_act_neg_call_stacks_icon.png) | **Faz pilhas** | Aciona a execução de outra pilha, ignorando quaisquer condições presentes na pilha alvo. |
-| ![](https://images.habbo.com/dcr/hof_furni/70536/wf_act_neg_send_signal_icon.png) | **Envia sinal** | Emite um sinal através de uma antena, para que outra pilha possa captar esse sinal e iniciar uma nova execução, além de ser capaz de transmitir itens selecionados. |
+<WiredGrid classname_list={[
+  "wf_act_neg_log",
+  "wf_act_neg_call_stacks",
+  "wf_act_neg_send_signal"
+]} />
 
 Veja a lista completa [aqui](/docs/referencia/efeitos/visao-geral/#lista-completa).
 
 ## 3. Condições: O "Se"
 As Condições são as caixas **brancas**. Elas servem como filtros de segurança para garantir que o efeito só ocorra sob circunstâncias específicas.
 
-| Ícone | Condição | Descrição |
-| :--- | :--- | :--- |
-| ![](https://images.habbo.com/dcr/hof_furni/50950/wf_cnd_actor_in_team_icon.png) | **Membro da Equipe** | Valida se o usuário é membro da equipe pré-definida. |
-| ![](https://images.habbo.com/dcr/hof_furni/50950/wf_cnd_match_snapshot_icon.png) | **Estado e Posição do Mobi combinam** | Valida se o mobi selecionado está no estado e/ou posição que foi memorizada. |
-| ![](https://images.habbo.com/dcr/hof_furni/50950/wf_cnd_trggrer_on_frn_icon.png) | **Habbo Ativador está no Mobi** | Valida se o usuário está em cima do mobi selecionado. |
+<WiredGrid classname_list={[
+  "wf_cnd_actor_in_team",
+  "wf_cnd_match_snapshot",
+  "wf_cnd_trggrer_on_frn"
+]} />
 
 Veja a lista completa [aqui](/docs/referencia/condicoes/visao-geral/#lista-completa).
 
 ### Condições Negativas
 Algumas Condições possuem a cor **preta** para representar que sua função é **oposta** da sua versão original. Em linguagens de programação gerais, esse comportamento pode ser compreendido como a **negação** da condição em sua versão original.
 
-| Ícone | Condição Negativa | Descrição |
-| :--- | :--- | :--- |
-| ![](https://images.habbo.com/dcr/hof_furni/50950/wf_cnd_not_trggrer_on_icon.png) | **Ativador NÃO está no Mobi** | Valida se o usuário **NÃO** está em cima do mobi selecionado. |
-| ![](https://images.habbo.com/dcr/hof_furni/50950/wf_cnd_not_in_group_icon.png) | **NÃO é membro de grupo** | Valida se o usuário **NÃO** está no grupo. |
-| ![](https://images.habbo.com/dcr/hof_furni/50950/wf_cnd_not_furni_on_icon.png) | **NÃO há Mobis em cima** | Valida se o mobi selecionado **NÃO** possui mobis em cima |
+<WiredGrid classname_list={[
+  "wf_cnd_not_trggrer_on",
+  "wf_cnd_not_in_group",
+  "wf_cnd_not_furni_on"
+]} />
 
 Veja a lista completa [aqui](/docs/referencia/condicoes/visao-geral/#lista-completa).
 
 ## 4. Seletores: O "Quem/Qual"
 Os Seletores usam a cor **azul-escuro** e são consideravelmente mais altos do que as demais caixas Wired. Eles permitem definir alvos dinâmicos em massa, superando o limite tradicional de 20 mobis por caixa. Veja a demonstração feita pela equipe durante o lançamento desse tipo de Wired: https://www.youtube.com/watch?v=yAP6NjiT_XU.
+
+<WiredGrid classname_list={[
+  "wf_slc_users_area",
+  "wf_slc_furni_bytype",
+  "wf_slc_users_group",
+  "wf_slc_furni_neighborhood"
+]} />
 
 | Ícone | Seletor | Função |
 | :--- | :--- | :--- |
@@ -85,6 +94,13 @@ Veja a lista completa [aqui](/docs/referencia/seletores/visao-geral/#lista-compl
 ### Filtros: O "Quanto"
 Os Filtros usam a cor **branca** e também são consideravelmente mais altos, como os Seletores. Eles complementam os Seletores pois fazem um papel muito útil filtrando pela **quantidade de itens**.
 
+<WiredGrid classname_list={[
+  "wf_xtra_filter_users_icon",
+  "wf_xtra_filter_furni_icon",
+  "wf_xtra_filter_users_by_var_icon",
+  "wf_xtra_filter_furni_by_var_icon"
+]} />
+
 | Ícone | Filtro | Função |
 | :--- | :--- | :--- |
 | ![](https://images.habbo.com/dcr/hof_furni/69982/wf_xtra_filter_users_icon.png) | **Filtrar Habbos** | Filtra a seleção atual de Habbos para um valor X. |
@@ -96,6 +112,14 @@ Veja a lista completa [aqui](/docs/referencia/seletores/visao-geral/#lista-compl
 
 ## 5. Extras: O "Como"
 Os Extras usam cores variadas, como uma tentativa de fazer com que as que tenham propósitos similares com uma aparência similar. Estes componentes modificam o comportamento padrão da pilha ou adicionam funcionalidades avançadas. Podem ser subdivididos em "gerais", "texto" e "scanner" (escaneador).
+
+<WiredGrid classname_list={[
+  "wf_xtra_random_icon",
+  "wf_xtra_unseen_icon",
+  "wf_xtra_mov_physics_icon",
+  "wf_xtra_or_eval_icon",
+  "wf_xtra_text_output_username_icon"
+]} />
 
 | Ícone | Extra | Cor | Função |
 | :--- | :--- | :--- | :--- |
@@ -109,6 +133,15 @@ Veja a lista completa [aqui](/docs/referencia/extras/visao-geral/#lista-completa
 
 ## 6. Variáveis: O "Dado"
 As Variáveis possuem um visual totalmente diferente, representando uma caixa predominantemente cinza que contém um painel lateral de cor **específica para cada tipo**. Cada um desses tipos é para diferentes formas de se criar uma variável, ou seja, uma forma de armazenar informações, de forma temporária enquanto o quarto está ativo ou de forma prolongada até que você decida remover a variável.
+
+<WiredGrid classname_list={[
+  "wf_var_user_icon",
+  "wf_var_furni_icon",
+  "wf_var_room_icon",
+  "wf_var_context_icon",
+  "wf_var_reference_icon",
+  "wf_var_echo_icon"
+]} />
 
 | Ícone | Variável | Cor | Função |
 | :--- | :--- | :--- | :--- |
@@ -138,6 +171,12 @@ Veja a lista completa [aqui](/docs/referencia/variaveis/visao-geral/#lista-compl
 ### Extras para Variáveis
 Os Extras para Variáveis também possuem um visual totalmente diferente, se mantendo similares às caixas de Variáveis mas com uma altura reduzida e cores diferentes de acordo com seus tipos. Como mencionado anteriormente, elas precisam ser posicionadas junto das caixas de Variável que se quer modificar o comportamento.
 
+<WiredGrid classname_list={[
+  "wf_xtra_var_text_connector_icon",
+  "wf_xtra_var_lvlup_system_icon",
+  "wf_xtra_var_time_util_icon"
+]} />
+
 | Ícone | Extra para Variável | Cor | Função |
 | :--- | :--- | :--- | :--- |
 | ![](https://images.habbo.com/dcr/hof_furni/72921/wf_xtra_var_text_connector_icon.png) | **Conector de Texto** | Amarelo | Permite mapear valores de variável com um texto para gerar uma mensagem. |
@@ -148,6 +187,12 @@ Veja a lista completa [aqui](/docs/referencia/variaveis/visao-geral/#lista-compl
 
 ## 7. Contratos: O "Acordo"
 Os Contratos possuem um visual totalmente diferente, e de certa forma podem nem ser considerados um "Wired". Definitivamente não é uma caixa, sendo apenas representado por uma pilha pequena de folhas de papel, inclusive possuindo uma interface de configuração com estilo diferente das demais caixas Wired.
+
+<WiredGrid classname_list={[
+  "wf_contract_payment_icon",
+  "wf_contract_trade_icon",
+  "wf_contract_reward_icon"
+]} />
 
 | Ícone | Contrato | Cor | Função |
 | :--- | :--- | :--- | :--- |

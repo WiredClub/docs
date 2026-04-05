@@ -17,9 +17,13 @@ infobox:
   availability: No catálogo e CA
   requires_furni: false
   additional_sources: []
-  has_negative_version: true
-  negative_revision: 50950
-  negative_classname: wf_cnd_not_furni_on
+
+  # == Dados da Condição ==
+  negative_version:
+    revision: 50950
+    classname: wf_cnd_not_furni_on
+    name: NÃO há Mobis em cima
+    description: Ativador é permitido se um dos Mobis escolhidos NÃO tiver outro Mobi em cima.
 ---
 
 import Infobox from "../../../../components/Infobox.astro"

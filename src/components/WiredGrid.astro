@@ -1,28 +1,53 @@
 ---
 import { CardGrid } from '@astrojs/starlight/components';
-import loadDataByInfoboxType from '../utils/loadData';
-import type { WiredInfoboxType } from '../content.config';
+import { loadDataByInfoboxType, loadDataByAnyType } from '../utils/loadData';
+import type { WiredInfobox, WiredInfoboxType } from '../content.config';
 import { getFurniIcon } from '../utils/furniImages';
 
-interface Props {
+type Props = {
   type: WiredInfoboxType;
+} | {
+  classname_list: string[];
 }
 
-const { type } = Astro.props;
+let list: WiredInfobox[] = [];
+if ("type" in Astro.props) {
+  const { type } = Astro.props;
 
-const result = await loadDataByInfoboxType(type);
+  list = await loadDataByInfoboxType(type);
+} else if ("classname_list" in Astro.props) {
+  const { classname_list } = Astro.props;
+
+  const allData = await loadDataByAnyType();
+if (classname_list.includes("wf_act_neg_log")) console.log(classname_list)
+  const negativeClassnames: typeof list = []
+  list = allData.filter(infobox => {
+    if ("negative_version" in infobox && infobox.negative_version && classname_list.includes(infobox.negative_version.classname)) {
+      negativeClassnames.push({
+        ...infobox,
+        revision: infobox.negative_version.revision,
+        classname: infobox.negative_version.classname,
+        name: infobox.negative_version.name,
+        description: infobox.negative_version.description,
+      })
+    }
+    return classname_list.includes(infobox.classname)
+  });
+  list.push(...negativeClassnames);
+}
+
 
 // gerar o plural da rota correta
-const typePlural = {
+const typePlural = (type: string) => ({
   "ativador": "ativadores",
   "efeito": "efeitos",
   "condição": "condicoes",
   "condicao": "condicoes",
-}[type.toLowerCase()]
+}[type.toLowerCase()]);
 ---
 
 <CardGrid>
-  {result.map(infobox => {
+  {list.map(infobox => {
     const classname = infobox.classname;
     const name = infobox.name;
     const description = infobox.description;
@@ -30,7 +55,7 @@ const typePlural = {
     const iconUrl = getFurniIcon(classname, revision);
 
     return (
-      <a href={`/docs/referencia/${typePlural}/${classname}`} class="wired-link-card">
+      <a href={`/docs/referencia/${typePlural(infobox.type)}/${classname}`} class="wired-link-card">
         <div class="card-content">
 		  <img src={iconUrl} alt={name} />
 		  <div class="text-content">

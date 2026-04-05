@@ -92,13 +92,13 @@ let credits = null;
 if (wired && "classname" in wired && wired.classname) {
 	if (!infobox.image) {
 		infobox.image = [
-			getFurniImage(wired.classname, wired.revision, infobox.image_direction),
+			getFurniImage(wired.classname, wired.revision, wired.image_direction),
 			setinha.src,
-			getFurniAnimatedImage(wired.classname, wired.revision, infobox.image_direction, infobox.image_animated_state),
+			getFurniAnimatedImage(wired.classname, wired.revision, wired.image_direction, wired.image_animated_state),
 		];
 		credits = "Imagens de mobis por HabCat";
 	}
-	infobox.icon = getFurniIcon(wired.classname, wired.revision);
+	wired.icon = getFurniIcon(wired.classname, wired.revision);
 }
 ---
 
@@ -127,11 +127,11 @@ if (wired && "classname" in wired && wired.classname) {
 
 	<!-- ══ IMAGEM ═════════════════════════════════════════════════════════════ -->
 	{
-		infobox.icon && (
+		wired && wired.icon && (
 			<div class="ib-image-wrap">
-				{infobox.icon && (
+				{wired.icon && (
 					<img
-						src={infobox.icon}
+						src={wired.icon}
 						alt={infobox.title}
 						class="ib-icon"
 						loading="lazy"
@@ -165,12 +165,12 @@ if (wired && "classname" in wired && wired.classname) {
 		)
 	}
 	{
-		wired && "has_negative_version" in wired && wired.has_negative_version && wired.negative_classname && wired.negative_revision && (
+		wired && "negative_version" in wired && wired.negative_version && (
 			<>
 				<hr/>
 				<div class="ib-image-wrap">
 					<img
-						src={getFurniIcon(wired.negative_classname, wired.negative_revision)}
+						src={getFurniIcon(wired.negative_version.classname, wired.negative_version.revision)}
 						alt={`${infobox.title} (versão negativa)`}
 						class="ib-icon"
 						loading="lazy"
@@ -178,7 +178,7 @@ if (wired && "classname" in wired && wired.classname) {
 				</div>
 				<div class="ib-image-wrap" data-credits={credits}>
 					<img
-						src={getFurniImage(wired.negative_classname, wired.negative_revision, infobox.image_direction)}
+						src={getFurniImage(wired.negative_version.classname, wired.negative_version.revision, wired.image_direction)}
 						alt={`${infobox.title} (versão negativa)`}
 						class="ib-image"
 						loading="lazy"
@@ -188,7 +188,7 @@ if (wired && "classname" in wired && wired.classname) {
 						loading="lazy"
 					/>
 					<img
-						src={getFurniAnimatedImage(wired.negative_classname, wired.negative_revision, infobox.image_direction, infobox.image_animated_state)}
+						src={getFurniAnimatedImage(wired.negative_version.classname, wired.negative_version.revision, wired.image_direction, wired.image_animated_state)}
 						alt={`${infobox.title} (versão negativa)`}
 						class="ib-image"
 						loading="lazy"

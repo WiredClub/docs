@@ -17,9 +17,13 @@ infobox:
   availability: No catálogo e CA
   requires_furni: false
   additional_sources: []
-  has_negative_version: true
-  negative_revision: 50950
-  negative_classname: wf_cnd_not_match_snap
+
+  # == Dados da Condição ==
+  negative_version:
+    revision: 50950
+    classname: wf_cnd_not_match_snap
+    name: O estado do Mobi NÃO coincide
+    description: Ativador não é permitido se o estado dos Mobis escolhidos NÃO coincidir.
 ---
 
 import Infobox from "../../../../components/Infobox.astro"
