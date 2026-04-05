@@ -4,24 +4,53 @@ description: Ativador funcionará se todos os Mobis selecionados tiverem Habbos 
 sidebar:
   label: Mobis com Habbos
   badge:
-    text: RASCUNHO
-    variant: note
+    text: Novo
+    variant: tip
 infobox:
-  type: Condição
+  # == Infobox ==
   title: Mobis com Habbos
+
+  # == Dados do Mobi ==
   revision: 50950
   classname: wf_cnd_furnis_hv_avtrs
-  image_direction: 2
   name: Mobis com Habbos
   description: Ativador funcionará se todos os Mobis selecionados tiverem Habbos em cima.
+  image_direction: 2
   availability: No catálogo e CA
-  requires_furni: false
-  additional_sources: []
+  price: 5
+  release_date: 2010-10-01
+
+  # == Dados do Wired ==
+  type: Condição
+  requires_furni: true
+
+  # == Dados da Condição ==
   has_negative_version: true
   negative_revision: 50950
   negative_classname: wf_cnd_not_hv_avtrs
 ---
 
 import Infobox from "../../../../components/Infobox.astro"
+import { ShowcaseYouTube } from 'starlight-showcases'
+
+Esta condição do sistema Wired verifica se **todos os mobis selecionados possuem pelo menos um usuário sobre eles** no momento da execução. Seu funcionamento consiste na seleção de um ou mais itens que serão monitorados: quando o ativador associado for disparado, por padrão a condição apenas permitirá a execução dos efeitos caso cada um desses mobis esteja ocupado por um avatar. Nessa configuração, caso qualquer um dos itens esteja vazio, a condição falha e interrompe a execução do restante da pilha.
 
 <Infobox />
+
+## Exemplos de uso
+- **Portas que exigem presença**: Conectando esta condição a um efeito que abre uma porta, é possível criar entradas que só se abrem quando todos os pontos de ativação estão ocupados, ideal para jogos de equipe ou desafios de cooperação.
+- **Jogos de coordenação**: Em jogos onde os usuários precisam se posicionar em pontos específicos para avançar, a condição pode ser usada para validar que todos os participantes estão nos locais corretos antes de permitir a progressão, incentivando a comunicação e o trabalho em equipe.
+
+## Versão negativa
+A versão negativa desta condição, chamada "Mobis NÃO têm usuários em cima", inverte a lógica, por padrão permitindo a execução dos efeitos apenas quando **nenhum dos mobis selecionados tiver um usuário sobre eles**. Essa variação é útil para criar desafios onde a ausência de presença é o requisito, como para criar armadilhas que se ativam quando os usuários deixam um local específico.
+
+## Vídeos relacionados
+
+<ShowcaseYouTube
+  entries={[
+    {
+      href: 'https://www.youtube.com/watch?v=YwmijlF_Yf4',
+      title: 'Como é | WIRED Condição negativa: Mobis NÃO têm usuários em cima',
+    },
+  ]}
+/>
