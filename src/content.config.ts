@@ -10,26 +10,26 @@ const BasicInfoboxSchema = z.object({
 		z.string(),
 		z.array(z.string()),
 	]).optional().describe("URL ou caminho da imagem a ser exibida na infobox, se aplicável"),
-	image_direction: z.union([0, 1, 2, 3, 4, 5, 6, 7].map(x => z.literal(x))).default(0).describe("Direção da imagem, se aplicável (0-7)"),
-	image_animated_state: z.int().default(100).describe("Estado do mobi quando animado, se aplicável (geralmente 0 para estático e 100 para animado)"),
-	icon: z.string().optional().describe("URL ou caminho do ícone a ser exibido na infobox, se aplicável"),
 })
 
 const FurniInfoboxBaseSchema = BasicInfoboxSchema.extend({
 	revision: z.int(),
 	classname: z.string(),
 	name: z.string().describe("Nome oficial do mobi"),
-	product_name: z.string().optional().describe("Nome oficial do mobi no catálogo"),
-	price: z.number().optional().describe("Preço em créditos no catálogo"),
-	// Se houver a necessidade de incluir outros tipos de moedas como diamantes ou duckets, podemos adicionar campos adicionais aqui ou criar um campo mais genérico para múltiplas moedas.
 	description: z
 		.string()
 		.optional()
 		.describe("Descrição conforme o furnidata"),
+	product_name: z.string().optional().describe("Nome oficial do mobi no catálogo"),
+	image_direction: z.union([0, 1, 2, 3, 4, 5, 6, 7].map(x => z.literal(x))).default(0).describe("Direção da imagem, se aplicável (0-7)"),
+	image_animated_state: z.int().default(100).describe("Estado do mobi quando animado, se aplicável (geralmente 0 para estático e 100 para animado)"),
+	icon: z.string().optional().describe("URL ou caminho do ícone a ser exibido na infobox, se aplicável"),
 	availability: z
 		.enum(["No catálogo", "No Clube do Arquiteto", "No catálogo e CA", "Eventos oficiais", "Apenas staff"])
 		.optional()
 		.describe("Onde o mobi pode ser obtido"),
+	price: z.number().optional().describe("Preço em créditos no catálogo"),
+	// Se houver a necessidade de incluir outros tipos de moedas como diamantes ou duckets, podemos adicionar campos adicionais aqui ou criar um campo mais genérico para múltiplas moedas.
 	release_date: z
 		.date()
 		.optional()

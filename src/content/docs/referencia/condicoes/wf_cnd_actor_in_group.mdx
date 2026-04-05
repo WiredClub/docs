@@ -7,16 +7,34 @@ sidebar:
     text: RASCUNHO
     variant: note
 infobox:
-  type: Condição
+  # == Infobox ==
+  # hide: false # valor padrão
   title: Membro do Grupo
+  # image: # url preenchida automaticamente
+
+  # == Dados do Mobi ==
   revision: 50950
   classname: wf_cnd_actor_in_group
-  image_direction: 2
   name: Membro do Grupo
   description: A condição ocorre quando esta é a central de um quarto de grupo ou o usuário é membro daquele grupo.
-  release_date: 2010-10-01
-  availability: No catálogo e CA
+  # product_name: # caso o nome na loja seja diferente do nome do Mobi
+  image_direction: 2
+  # image_animated_state: 100 # valor padrão
+  # icon: # url preenchida automaticamente
+  availability: No catálogo e CA # "No catálogo" ou "No Clube do Arquiteto" ou "No catálogo e CA" ou "Eventos oficiais" ou "Apenas staff"
   price: 5
+  release_date: 2010-10-01
+
+  # == Dados do Wired ==
+  type: Condição
+  # requires_furni: false # valor padrão
+  # requires_antena: false # valor padrão
+  # requires_contract: false # valor padrão
+  # requires_chest: false # valor padrão
+  # execution_limit: 100 # valor padrão
+  # execution_limit_per_user: 100 # valor padrão
+
+  # == Dados da Condição ==
   has_negative_version: true
   negative_revision: 50950
   negative_classname: wf_cnd_not_in_group
