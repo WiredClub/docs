@@ -72,12 +72,12 @@ const TriggerInfoboxBaseSchema = WiredInfoboxBaseSchema.extend({
 	additional_sources: z
 		.array(
 			z.enum([
-				"Os Bots especificados pelo nome",
-				"O Habbo especificado pelo nome",
-				"O usuário alcançado",
-				"O usuário clicado",
-				"O Usuário acionador",
-				"O item de ativação",
+				"Bots especificados pelo nome",
+				"Habbo especificado pelo nome",
+				"Usuário alcançado",
+				"Usuário clicado",
+				"Usuário acionador",
+				"Item de ativação",
 			])
 		).optional().describe("Fontes adicionais que podem ser usados por Efeitos ao acionar este Wired"),
 });
