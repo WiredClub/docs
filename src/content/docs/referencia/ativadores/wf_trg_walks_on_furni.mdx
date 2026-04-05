@@ -4,8 +4,8 @@ description: Efeitos são ativados quando alguém pisa ou senta no Mobi.
 sidebar:
   label: Habbo anda no Mobi
   badge:
-    text: RASCUNHO
-    variant: note
+    text: Novo
+    variant: tip
 infobox:
   # == Infobox ==
   # hide: false # valor padrão
@@ -47,4 +47,19 @@ infobox:
 
 import Infobox from "../../../../components/Infobox.astro"
 
+Este ativador é responsável por detectar quando um usuário interage diretamente com uma mobília ao pisar ou sentar sobre ela. Seu funcionamento consiste na seleção prévia de um ou mais mobis, que passam a atuar como pontos de ativação: sempre que alguém ocupa a mesma posição desses itens, os efeitos conectados ao Wired são disparados. Para que a ativação ocorra corretamente, o mobi precisa estar diretamente abaixo do usuário, sem bloqueios causados por empilhamento de outros itens. Essa característica torna o ativador fundamental para qualquer lógica baseada em movimentação dentro do quarto, permitindo transformar áreas específicas em gatilhos de execução automática.
+
 <Infobox />
+
+## Exemplos de uso
+
+- **Portas automáticas**: Conectando o ativador a um efeito que abre uma porta, é possível criar entradas que se abrem automaticamente quando alguém se aproxima.
+- **Jogos de obstáculos**: Em jogos onde os usuários precisam atravessar um percurso, o ativador pode ser usado para marcar pontos de controle, disparando efeitos que indicam progresso ou penalidades.
+- **Decorações interativas**: Conectando o ativador a efeitos visuais ou sonoros, é possível criar ambientes mais imersivos, onde a presença dos usuários ativa reações no quarto.
+- **Sistemas de pontuação**: Em competições ou jogos, o ativador pode ser usado para contabilizar pontos quando os usuários pisam em áreas específicas, como parte de um desafio ou quiz.
+- **Ativação de mecanismos**: Em quartos com mecanismos complexos, o ativador pode ser usado para acionar uma série de eventos encadeados, como a abertura de passagens secretas ou a ativação de armadilhas.
+
+## Dicas de uso
+
+- Certifique-se de que o mobi selecionado para o ativador esteja posicionado corretamente no topo, sem bloqueios que possam impedir a detecção do usuário.
+- Evite combinar com seletores como fonte de seleção, pois exigirá que o seletor seja processado sempre que qualquer usuário pisar em qualquer mobi, o que pode causar lentidão no quarto.
