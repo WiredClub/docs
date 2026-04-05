@@ -10,8 +10,7 @@ sidebar:
 ---
 
 import { Aside, Steps } from '@astrojs/starlight/components';
-import loadDataByInfoboxType from "../../../../utils/loadData.ts";
-import { getFurniIcon } from '../../../../utils/furniImages.ts';
+import WiredGrid from "../../../../components/WiredGrid.astro";
 
 ## O que é uma Condição?
 
@@ -65,15 +64,4 @@ Use-as quando precisar rejeitar algo ao invés de aceitar.
 
 ## Lista Completa
 
-{await loadDataByInfoboxType("Condição").then(result => (
-  <ul>
-    {result.map(entry => (
-      <li key={entry.data.infobox.classname}>
-        <img src={getFurniIcon(entry.data.infobox.classname, entry.data.infobox.revision)} alt={entry.data.infobox.name} />
-        <a href={`/docs/referencia/condicoes/${entry.data.infobox.classname}`}>
-          {entry.data.infobox.name}
-        </a>
-      </li>
-    ))}
-  </ul>
-))}
+<WiredGrid type="Condição" />

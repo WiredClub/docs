@@ -1,0 +1,91 @@
+---
+import { CardGrid } from '@astrojs/starlight/components';
+import loadDataByInfoboxType from '../utils/loadData';
+import type { WiredInfoboxType } from '../content.config';
+import { getFurniIcon } from '../utils/furniImages';
+
+interface Props {
+  type: WiredInfoboxType;
+}
+
+const { type } = Astro.props;
+
+const result = await loadDataByInfoboxType(type);
+
+// gerar o plural da rota correta
+const typePlural = {
+  "ativador": "ativadores",
+  "efeito": "efeitos",
+  "condição": "condicoes",
+  "condicao": "condicoes",
+}[type.toLowerCase()]
+---
+
+<CardGrid>
+  {result.map(infobox => {
+    const classname = infobox.classname;
+    const name = infobox.name;
+    const description = infobox.description;
+    const revision = infobox.revision;
+    const iconUrl = getFurniIcon(classname, revision);
+
+    return (
+      <a href={`/docs/referencia/${typePlural}/${classname}`} class="wired-link-card">
+        <div class="card-content">
+		  <img src={iconUrl} alt={name} />
+		  <div class="text-content">
+			<span class="card-title">{name}</span>
+			<p class="card-description">{description}</p>
+		  </div>
+        </div>
+      </a>
+    );
+  })}
+</CardGrid>
+
+<style>
+ .wired-link-card {
+    display: flex;
+    text-decoration: none;
+    background-color: var(--sl-color-bg-nav);
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+    color: var(--sl-color-text);
+  }
+
+ .wired-link-card:hover {
+    border-color: var(--sl-color-accent);
+    background-color: var(--sl-color-bg-accent);
+    color: var(--sl-color-text-invert);
+  }
+
+ .card-content {
+    display: flex;
+	align-items: flex-start;
+    gap: 1rem;
+    width: 100%;
+  }
+
+  img {
+	width: 30px;
+	height: 30px;
+	object-fit: contain;
+  }
+
+  .text-content {
+	display: flex;
+	flex-direction: column;
+	gap: 0.25rem;
+	margin: 0;
+  }
+ .card-title {
+    font-size: var(--sl-text-base);
+    font-weight: 600;
+  }
+ .card-description {
+	font-size: var(--sl-text-sm);
+	color: var(--sl-color-text-secondary);
+  }
+</style>

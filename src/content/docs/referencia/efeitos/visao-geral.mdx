@@ -9,8 +9,7 @@ sidebar:
     variant: tip
 ---
 
-import { getFurniIcon } from "../../../../utils/furniImages.ts";
-import loadDataByInfoboxType from "../../../../utils/loadData.ts";
+import WiredGrid from "../../../../components/WiredGrid.astro";
 
 ## O que é um Efeito?
 
@@ -49,15 +48,4 @@ Alguns Efeitos possuem versões negativas (com cor preta), que realizam a ação
 
 ## Lista Completa
 
-{await loadDataByInfoboxType("Efeito").then(result => (
-  <ul>
-    {result.map(entry => (
-      <li key={entry.data.infobox.classname}>
-        <img src={getFurniIcon(entry.data.infobox.classname, entry.data.infobox.revision)} alt={entry.data.infobox.name} />
-        <a href={`/docs/referencia/efeitos/${entry.data.infobox.classname}`}>
-          {entry.data.infobox.name}
-        </a>
-      </li>
-    ))}
-  </ul>
-))}
+<WiredGrid type="Efeito" />
