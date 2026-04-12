@@ -1,0 +1,27 @@
+---
+import StarlightPage from "@astrojs/starlight/components/StarlightPage.astro";
+import { getPageHistoryPaths } from "../libs/getPageHistoryPaths";
+import { getRecentChanges } from "../libs/getRecentChanges";
+import RecentChangesList from "../components/RecentChangesList.astro";
+import { getRepoBaseUrl } from "../libs/repo";
+
+export async function getStaticPaths() {
+	const paths = await getPageHistoryPaths();
+	return paths;
+}
+
+const { entry } = Astro.props;
+
+const entries = await getRecentChanges(entry.filePath);
+
+const repoBaseUrl = getRepoBaseUrl();
+---
+
+<StarlightPage
+	frontmatter={{ title: `Histórico de "${entry.data.title}"` }}
+>
+	<a href={repoBaseUrl + "/commits/main/" + entry.filePath} target="_blank" rel="noopener noreferrer">
+		Ver todas as mudanças no GitHub
+	</a>
+	<RecentChangesList entries={entries} />
+</StarlightPage>

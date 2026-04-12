@@ -1,0 +1,11 @@
+---
+import { getEntry } from "astro:content"
+
+const validEntry = !!(await getEntry({
+	collection: Astro.locals.starlightRoute.entry.collection,
+	id: Astro.locals.starlightRoute.entry.id,
+}))
+---
+{validEntry && (
+	<p><a href={'/docs/mudancas-recentes/'+Astro.locals.starlightRoute.entry.id}>{Astro.locals.t('starlight-recent-changes.view')}</a></p>
+)}

@@ -3,6 +3,7 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import starlightLlmsTxt from 'starlight-llms-txt'
 import starlightScrollToTop from 'starlight-scroll-to-top'
+import starlightRecentChanges from 'starlight-recent-changes';
 
 // https://astro.build/config
 export default defineConfig({
@@ -113,7 +114,24 @@ export default defineConfig({
 					],
 				}, {
 					label: 'Sobre Nós',
-					autogenerate: { directory: 'sobre-nos' },
+					items: [
+						{
+							label: 'Wired Club',
+							slug: 'sobre-nos/wired-club',
+						}, 
+						{
+							label: 'Contribuidores',
+							slug: 'sobre-nos/contribuidores',
+						}, 
+						{
+							label: 'Mudanças Recentes',
+							link: '/mudancas-recentes',
+							badge: {
+								text: "Novo",
+								variant: "tip"
+							}
+						}
+					],
 				}
 			],
 			customCss: ['./src/styles/global-style.css'],
@@ -127,6 +145,8 @@ export default defineConfig({
 				borderRadius: '50',
 				showProgressRing: true,
 				progressRingColor: 'white',
+			}), starlightRecentChanges({
+				routeSlug: 'mudancas-recentes',
 			})],
 		}),
 	],

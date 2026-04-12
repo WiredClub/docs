@@ -1,0 +1,226 @@
+---
+import type { ChangeEntry } from "../common/types";
+
+const { entry, maxVisiblePages = 3 } = Astro.props as {
+	entry: ChangeEntry;
+	maxVisiblePages?: number;
+};
+
+function initials(name: string) {
+	return name
+		.split(" ")
+		.map((word) => word[0])
+		.join("")
+		.slice(0, 2)
+		.toUpperCase();
+}
+
+function kindBadgeClass(kind = "") {
+	return kind === "add"
+		? "badge-add"
+		: kind === "edit"
+			? "badge-edit"
+			: "badge-delete";
+}
+
+function kindText(kind = "") {
+	return kind === "add" ? "novo" : kind === "edit" ? "edição" : "removido";
+}
+
+const visiblePages = entry.pages.slice(0, maxVisiblePages);
+const hiddenPages = entry.pages.slice(maxVisiblePages);
+---
+
+<div class="change-row">
+	<span class={`kind-badge ${kindBadgeClass(entry.kind)}`}>
+		{kindText(entry.kind)}
+	</span>
+	<div class="change-body">
+		<div class="change-meta">
+			<span class="change-author">
+				<span class="avatar">{initials(entry.author)}</span>
+				{entry.author}
+			</span>
+			•
+			<span class="change-date">{new Date(entry.date).toLocaleString()}</span>
+		</div>
+		<div class="change-msg">{entry.message}</div>
+		<div class="pages-list">
+			{
+				visiblePages.map((page) => (
+					<span class="page-chip"><a href={'/docs/' + page.slug}>{page.title}</a></span>
+				))
+			}
+			{
+				hiddenPages.length ? (
+					<details class="more-toggle-wrapper">
+						<summary class="more-toggle">
+							+{hiddenPages.length} outros
+						</summary>
+						<div class="more-chips">
+							{hiddenPages.map((page) => (
+								<span class="page-chip"><a href={'/docs/' + page.slug}>{page.title}</a></span>
+							))}
+						</div>
+					</details>
+				) : null
+			}
+		</div>
+	</div>
+	<a
+		href={entry.commitUrl}
+		class="git-link"
+		target="_blank"
+		rel="noopener noreferrer"
+		title="Ver commit"
+	>
+		<svg
+			width="16"
+			height="16"
+			viewBox="0 0 24 24"
+			fill="currentColor"
+			xmlns="http://www.w3.org/2000/svg"
+		>
+			<path
+				d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"
+			></path>
+		</svg>
+	</a>
+</div>
+
+<style>
+	.change-row {
+		display: flex;
+		align-items: flex-start;
+		gap: 12px;
+		padding: 0.75rem 0;
+		border-bottom: 1px solid var(--sl-color-hairline);
+		margin-top: 0;
+	}
+
+	.change-row:last-child {
+		border-bottom: none;
+	}
+
+	.kind-badge {
+		flex-shrink: 0;
+		font-size: 11px;
+		font-weight: 500;
+		border-radius: 12px;
+		padding: 2px 8px;
+	}
+
+	.badge-add {
+		background: #eaf3de;
+		color: #3b6d11;
+	}
+
+	.badge-edit {
+		background: #e6f1fb;
+		color: #185fa5;
+	}
+
+	.badge-delete {
+		background: #fcebeb;
+		color: #a32d2d;
+	}
+
+	.change-body {
+		flex: 1;
+		min-width: 0;
+	}
+
+	.change-msg {
+		/* font-size: 14px; */
+		margin-bottom: 6px;
+		line-height: 1.4;
+	}
+
+	.change-meta {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		flex-wrap: wrap;
+		font-size: 12px;
+		color: #6b7280;
+	}
+
+	.change-author {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+	}
+
+	.avatar {
+		width: 24px;
+		height: 24px;
+		border-radius: 50%;
+		background: #e6f1fb;
+		color: #185fa5;
+		font-size: 9px;
+		font-weight: 500;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-shrink: 0;
+	}
+
+	.pages-list {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 5px;
+	}
+
+	.page-chip {
+		font-size: 12px;
+		color: #6ea6df;
+		background: #162133;
+		border: 1px solid var(--sl-color-hairline);
+		border-radius: 12px;
+		padding: 2px 8px;
+		cursor: pointer;
+		white-space: nowrap;
+	}
+
+	.page-chip:hover {
+		border-color: #a1a6b3;
+	}
+
+	.more-toggle-wrapper summary {
+		font-size: 12px;
+		color: #6b7280;
+		background: none;
+		border: none;
+		cursor: pointer;
+		padding: 2px 4px;
+		display: inline-flex;
+		align-items: center;
+		gap: 3px;
+		margin-bottom: 0;
+	}
+
+	.more-toggle-wrapper summary:hover {
+	}
+
+	.more-chips {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 5px;
+		margin-top: 5px;
+	}
+
+	.git-link {
+		display: inline-flex;
+		align-items: center;
+		margin-left: auto;
+		flex-shrink: 0;
+		opacity: 0.5;
+		cursor: pointer;
+		color: #6b7280;
+	}
+
+	.git-link:hover {
+		opacity: 1;
+	}
+</style>

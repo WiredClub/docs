@@ -1,0 +1,102 @@
+---
+import type { ChangeEntry } from "../common/types";
+import RecentChangeItem from "./RecentChangeItem.astro";
+
+const { entries } = Astro.props as { entries: ChangeEntry[] };
+if (!entries) return null
+
+const GROUP_BY: "day" | "month" | "year" = "month";
+const MAX_VISIBLE_PAGES = 3;
+const MAX_ENTRIES = 1000;
+
+function formatGroupKey(date: string | Date) {
+	const value = typeof date === "string" ? new Date(date) : date;
+	if (Number.isNaN(value.getTime())) {
+		return String(date);
+	}
+
+	if (GROUP_BY === "month") {
+		return value.toLocaleDateString("pt-BR", {
+			month: "long",
+			year: "numeric",
+		});
+	}
+
+	if (GROUP_BY === "year") {
+		return value.toLocaleDateString("pt-BR", { year: "numeric" });
+	}
+
+	return value.toLocaleDateString("pt-BR", {
+		day: "2-digit",
+		month: "long",
+		year: "numeric",
+	});
+}
+
+const groupedEntries = entries.slice(0, MAX_ENTRIES).reduce(
+	(groups, entry) => {
+		const key = formatGroupKey(entry.date);
+		if (!groups[key]) {
+			groups[key] = [];
+		}
+		groups[key].push(entry);
+		return groups;
+	},
+	{} as Record<string, ChangeEntry[]>,
+);
+---
+<div class="recent-changes-list">
+	{
+		Object.entries(groupedEntries).length === 0 ? (
+			<p style="color:var(--color-text-tertiary);font-size:14px">
+				Nenhuma mudança encontrada.
+			</p>
+		) : (
+			Object.entries(groupedEntries).map(([groupLabel, group]) => (
+				<section class="group-section">
+					<h2 class="group-header">
+						{groupLabel}
+						<span class="group-count">{group.length}</span>
+					</h2>
+					{group.map((entry) => (
+						<RecentChangeItem
+							entry={entry}
+							maxVisiblePages={MAX_VISIBLE_PAGES}
+						/>
+					))}
+				</section>
+			))
+		)
+	}
+</div>
+{entries.length > MAX_ENTRIES && (
+	<p>{Astro.locals.t("starlight-recent-changes.limit-warning", { count: entries.length, limit: MAX_ENTRIES })}</p>
+)}
+<style>
+	.recent-changes-list {
+		display: flex;
+		flex-direction: column;
+		gap: 1.25rem;
+	}
+
+	.group-section {
+		margin-bottom: 2rem;
+	}
+
+	.group-header {
+		font-weight: 500;
+		padding: 0.4rem 0;
+		margin-bottom: 1rem;
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+	}
+
+	.group-count {
+		font-size: 12px;
+		font-weight: 400;
+		border: 1px solid var(--sl-color-hairline);
+		border-radius: 20px;
+		padding: 1px 8px;
+	}
+</style>

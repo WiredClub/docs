@@ -1,0 +1,5 @@
+{
+  "starlight-recent-changes.view": "Ver histórico →",
+  "starlight-recent-changes.title": "Mudanças Recentes",
+  "starlight-recent-changes.limit-warning": "Aviso: {{count}} mudanças recentes encontradas. Apenas as primeiras {{limit}} são exibidas."
+}

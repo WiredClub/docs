@@ -17,6 +17,7 @@
     "sharp": "^0.34.2",
     "starlight-llms-txt": "^0.8.0",
     "starlight-scroll-to-top": "^1.0.1",
-    "starlight-showcases": "^0.3.2"
+    "starlight-showcases": "^0.3.2",
+    "starlight-recent-changes": "file:./plugins/starlight-recent-changes"
   }
 }
