@@ -1,49 +1,17 @@
 ---
+import GithubSlugger from 'github-slugger'
 import type { ChangeEntry } from "../common/types";
+import { buildGroupedEntries } from "../libs/groupEntries";
 import RecentChangeItem from "./RecentChangeItem.astro";
 
-const { entries } = Astro.props as { entries: ChangeEntry[] };
+const { entries, groupedEntries: groupedEntriesProp } = Astro.props as { entries: ChangeEntry[], groupedEntries?: Record<string, ChangeEntry[]> };
 if (!entries) return null
 
-const GROUP_BY: "day" | "month" | "year" = "month";
 const MAX_VISIBLE_PAGES = 3;
 const MAX_ENTRIES = 1000;
 
-function formatGroupKey(date: string | Date) {
-	const value = typeof date === "string" ? new Date(date) : date;
-	if (Number.isNaN(value.getTime())) {
-		return String(date);
-	}
-
-	if (GROUP_BY === "month") {
-		return value.toLocaleDateString("pt-BR", {
-			month: "long",
-			year: "numeric",
-		});
-	}
-
-	if (GROUP_BY === "year") {
-		return value.toLocaleDateString("pt-BR", { year: "numeric" });
-	}
-
-	return value.toLocaleDateString("pt-BR", {
-		day: "2-digit",
-		month: "long",
-		year: "numeric",
-	});
-}
-
-const groupedEntries = entries.slice(0, MAX_ENTRIES).reduce(
-	(groups, entry) => {
-		const key = formatGroupKey(entry.date);
-		if (!groups[key]) {
-			groups[key] = [];
-		}
-		groups[key].push(entry);
-		return groups;
-	},
-	{} as Record<string, ChangeEntry[]>,
-);
+const groupedEntries = groupedEntriesProp || buildGroupedEntries(entries)
+const slugger = new GithubSlugger()
 ---
 <div class="recent-changes-list">
 	{
@@ -54,7 +22,7 @@ const groupedEntries = entries.slice(0, MAX_ENTRIES).reduce(
 		) : (
 			Object.entries(groupedEntries).map(([groupLabel, group]) => (
 				<section class="group-section">
-					<h2 class="group-header">
+					<h2 class="group-header" id={slugger.slug(groupLabel)}>
 						{groupLabel}
 						<span class="group-count">{group.length}</span>
 					</h2>

@@ -3,16 +3,21 @@ import StarlightPage from "@astrojs/starlight/components/StarlightPage.astro";
 import RecentChangesList from "../components/RecentChangesList.astro";
 import { getRecentChanges } from "../libs/getRecentChanges.ts";
 import { getRepoBaseUrl } from "../libs/repo";
+import { buildGroupedEntries, toHeadings } from "../libs/groupEntries";
 
 const entries = await getRecentChanges();
 const repoBaseUrl = getRepoBaseUrl();
+
+const groupedEntries = buildGroupedEntries(entries);
+const headings = toHeadings(groupedEntries);
 ---
 
 <StarlightPage
-	frontmatter={{ title: Astro.locals.t("starlight-recent-changes.title") }}
+  frontmatter={{ title: Astro.locals.t("starlight-recent-changes.title") }}
+  headings={headings}
 >
-	<a href={repoBaseUrl + "/commits/main"} target="_blank" rel="noopener noreferrer">
-		Ver todas as mudanças no GitHub
-	</a>
-	<RecentChangesList entries={entries} />
+  <a href={repoBaseUrl + "/commits/main"} target="_blank" rel="noopener noreferrer">
+    Ver todas as mudanças no GitHub
+  </a>
+  <RecentChangesList groupedEntries={groupedEntries} entries={entries} />
 </StarlightPage>

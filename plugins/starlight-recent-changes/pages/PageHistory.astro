@@ -4,6 +4,7 @@ import { getPageHistoryPaths } from "../libs/getPageHistoryPaths";
 import { getRecentChanges } from "../libs/getRecentChanges";
 import RecentChangesList from "../components/RecentChangesList.astro";
 import { getRepoBaseUrl } from "../libs/repo";
+import { buildGroupedEntries, toHeadings } from "../libs/groupEntries";
 
 export async function getStaticPaths() {
 	const paths = await getPageHistoryPaths();
@@ -13,15 +14,18 @@ export async function getStaticPaths() {
 const { entry } = Astro.props;
 
 const entries = await getRecentChanges(entry.filePath);
-
 const repoBaseUrl = getRepoBaseUrl();
+
+const groupedEntries = buildGroupedEntries(entries);
+const headings = toHeadings(groupedEntries);
 ---
 
 <StarlightPage
 	frontmatter={{ title: `Histórico de "${entry.data.title}"` }}
+	headings={headings}
 >
 	<a href={repoBaseUrl + "/commits/main/" + entry.filePath} target="_blank" rel="noopener noreferrer">
 		Ver todas as mudanças no GitHub
 	</a>
-	<RecentChangesList entries={entries} />
+	<RecentChangesList entries={entries} groupedEntries={groupedEntries} />
 </StarlightPage>
