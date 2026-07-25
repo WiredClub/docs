@@ -7,16 +7,42 @@ sidebar:
     text: RASCUNHO
     variant: note
 infobox:
-  type: Ativador
+  # == Infobox ==
+  # hide: false # valor padrão
   title: Batida
+  # image: # url preenchida automaticamente
+
+  # == Dados do Mobi ==
   revision: 50950
   classname: wf_trg_collision
-  image_direction: 0
   name: Batida
   description: Disparado ao mover um Mobi (usando o Wired perseguir ou Fugir) e bater em um avatar - o usuário que dispara é o avatar que bate.
+  # product_name: # caso o nome na loja seja diferente do nome do Mobi
+  # image_direction: 0 # valor padrão
+  # image_animated_state: 100 # valor padrão
+  # icon: # url preenchida automaticamente
   availability: No catálogo e CA
-  requires_furni: false
+  # price: # preço em créditos no catálogo
+  # release_date: # data de lançamento
+
+  # == Dados do Wired ==
+  type: Ativador
+  # requires_bot: false # valor padrão
+  # requires_furni: false # valor padrão
+  # requires_antena: false # valor padrão
+  # requires_contract: false # valor padrão
+  # requires_chest: false # valor padrão
+  # execution_limit: 100 # valor padrão
+  # execution_limit_per_user: 100 # valor padrão
+
+  # == Dados do Ativador ==
   additional_sources: []
+  # - Bots especificados pelo nome
+  # - Habbo especificado pelo nome
+  # - Usuário alcançado
+  # - Usuário clicado
+  # - Usuário acionador
+  # - Item de ativação
 ---
 
 import Infobox from "../../../../components/Infobox.astro"

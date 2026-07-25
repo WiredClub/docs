@@ -1,0 +1,272 @@
+---
+title: Como contribuir
+description: Aprenda a corrigir, criar e testar conteúdos do Wired Club Docs pelo GitHub ou em seu computador.
+sidebar:
+  order: 2
+  badge:
+    text: Novo
+    variant: tip
+---
+
+import { Aside, Steps } from '@astrojs/starlight/components';
+
+O Wired Club Docs é construído pela comunidade. Você pode contribuir corrigindo uma palavra, melhorando uma explicação, documentando um Wired ou criando um guia completo.
+
+<Aside type="tip" title="Não sabe por onde começar?">
+Para uma correção pequena, use o link **Editar página** no final da página que deseja alterar. Para mudanças em vários arquivos, trabalhe localmente.
+</Aside>
+
+## Escolha uma forma de contribuir
+
+| | Pelo GitHub Web | Em seu computador |
+| --- | --- | --- |
+| **Indicado para** | Textos, links e correções pontuais | Novas páginas, componentes e mudanças maiores |
+| **Instalação** | Nenhuma | Git e Node.js |
+| **Visualização** | Prévia do arquivo no GitHub Web | Site completo em `localhost:4321` |
+
+## Pelo GitHub Web
+
+<Steps>
+
+1. **Abra o arquivo**
+
+   Na página que deseja alterar, selecione **Editar página** no rodapé. Você será levado ao arquivo correspondente no repositório.
+
+2. **Faça a alteração**
+
+   Entre em sua conta do GitHub e selecione a opção de editar o arquivo. Caso você não tenha acesso direto ao repositório, o GitHub criará um *fork* automaticamente.
+
+3. **Proponha a mudança**
+
+   Descreva brevemente o que foi alterado e confirme a proposta. Revise as diferenças exibidas pelo GitHub antes de continuar.
+
+4. **Abra o pull request**
+
+   Crie o *pull request* para a branch `main` do repositório `WiredClub/docs`. A equipe poderá aprovar a contribuição ou pedir ajustes.
+
+</Steps>
+
+Você pode acompanhar a revisão na aba **Pull requests**. Depois que a mudança for aprovada e publicada, ela pode levar alguns minutos para aparecer no site.
+
+## Em seu computador
+
+<Steps>
+
+1. **Prepare o repositório**
+
+   Faça um *fork* de `WiredClub/docs` e clone a sua cópia:
+
+   ```bash
+   git clone https://github.com/SEU-USUARIO/docs.git
+   cd docs
+   npm install
+   ```
+
+2. **Crie uma branch**
+
+   Use um nome curto que descreva a mudança:
+
+   ```bash
+   git checkout -b docs/nome-da-alteracao
+   ```
+
+3. **Edite e visualize**
+
+   As páginas ficam em `src/content/docs/`. Inicie o ambiente local e abra `http://localhost:4321/`:
+
+   ```bash
+   npm run dev
+   ```
+
+4. **Valide a documentação**
+
+   Antes de enviar, gere a versão de produção. O comando verifica o frontmatter, os imports de MDX e a geração das páginas:
+
+   ```bash
+   npm run build
+   ```
+
+5. **Envie a contribuição**
+
+   ```bash
+   git add src/content/docs
+   git commit -m "docs: descreve a alteração"
+   git push origin docs/nome-da-alteracao
+   ```
+
+   Depois, abra um *pull request* para a branch `main` de `WiredClub/docs`.
+
+</Steps>
+
+## Escrevendo uma página
+
+Use arquivos `.mdx` em `src/content/docs/`. O nome das pastas define a URL; por exemplo, `guias-praticos/primeiro-sistema.mdx` gera `/guias-praticos/primeiro-sistema/`.
+
+Toda página começa com um bloco de metadados chamado *frontmatter* na linguagem YAML:
+
+```yaml
+---
+title: Título da página
+description: Resumo objetivo do conteúdo da página.
+sidebar:
+  label: Título curto no menu
+  order: 1
+---
+```
+
+Dentro do frontmatter, o caractere `#` inicia um **comentário**. Tudo o que estiver depois dele, naquela linha, é ignorado pelo YAML e não altera a página. Isso permite explicar um campo, separar grupos de informações ou "desativar" temporariamente uma linha sem apagá-la.
+
+```yaml
+infobox:
+  # == Dados do Mobi ==
+  title: Habbo anda no Mobi
+  # image: # preenchida automaticamente
+  image_direction: 2
+  # image_animated_state: 100 # valor padrão
+```
+
+No exemplo acima, `title` e `image_direction` estão ativos. As linhas de `image` e `image_animated_state` estão comentadas, portanto o projeto usa os valores automáticos ou padrões desses campos. Um comentário também pode aparecer depois de um valor ativo, como em `availability: No catálogo e CA # opções aceitas`.
+
+Esse recurso é usado em `src/content/docs/referencia/ativadores/wf_trg_walks_on_furni.mdx` para documentar valores padrão e manter campos opcionais visíveis como referência. Ao reativar uma linha, remova o `#` e mantenha a indentação correta.
+
+<Aside type="caution" title="Somente dentro do frontmatter">
+Fora do bloco entre `---`, o `#` faz parte da sintaxe Markdown para títulos e não funciona como comentário. Em conteúdo MDX, use `{/* comentário */}` quando precisar deixar uma observação invisível na página.
+{/* E FUNCIONA MESMO! */}
+</Aside>
+
+Neste projeto, as páginas das seções **Vamos Começar** e **Guias práticos** entram automaticamente no menu. A seção **Referência** combina itens definidos manualmente com grupos automáticos. A seção **Sobre Nós** é manual. Ao criar ou mover uma página, confira a configuração `sidebar` em `astro.config.mjs`.
+
+### Campos de frontmatter
+
+Os campos mais relevantes para as páginas deste projeto são:
+
+| Campo | Uso |
+| --- | --- |
+| `title` | Título da página. É obrigatório. |
+| `description` | Resumo usado nos metadados e resultados de busca. |
+| `sidebar.label` | Nome alternativo no menu lateral. |
+| `sidebar.order` | Ordem dentro de um grupo gerado automaticamente. |
+| `sidebar.badge` | Selo no menu, com `text` e `variant`. Use somente quando ele comunicar um estado real, como `RASCUNHO`. |
+| `template` | Layout da página. A página inicial usa `splash`; páginas comuns não precisam deste campo. |
+| `banner` e `hero` | Conteúdo de destaque da página inicial. Não use em páginas comuns. |
+| `tableOfContents` | Personaliza ou oculta o sumário da página. |
+| `prev` e `next` | Personalizam ou desativam a navegação anterior/seguinte. |
+| `infobox` | Dados da infobox personalizada do Wired Club Docs. Use em páginas de referência de mobis e Wireds. |
+
+### Infobox de Wired
+
+As páginas individuais de Wired usam `infobox` no frontmatter e renderizam o componente `<Infobox />` no início do conteúdo:
+
+```mdx
+---
+title: "ATIVADOR WIRED: Habbo Clica no Mobi"
+description: Ativa a pilha quando um usuário clica no mobi selecionado.
+sidebar:
+  label: Habbo Clica no Mobi
+infobox:
+  type: Ativador
+  title: Habbo Clica no Mobi
+  revision: 69540
+  classname: wf_trg_click_furni
+  name: Habbo Clica no Mobi
+  availability: No catálogo e CA
+  requires_furni: false
+---
+
+import Infobox from '../../../../components/Infobox.astro';
+
+<Infobox />
+```
+
+Os campos são validados por `src/content.config.ts`:
+
+| Campo | Regra |
+| --- | --- |
+| `type` | `Ativador`, `Efeito`, `Condição` ou `Extra`. Define os demais campos aceitos. |
+| `title`, `revision`, `classname`, `name` | Obrigatórios em uma infobox de Wired. |
+| `description`, `product_name`, `image`, `availability`, `price`, `release_date` | Informações opcionais de identificação, imagem e disponibilidade. |
+| `image_direction` | Direção de `0` a `7`; o padrão é `0`. |
+| `image_animated_state` | Estado usado na imagem animada; o padrão é `100`. |
+| `requires_bot`, `requires_furni`, `requires_antena`, `requires_contract`, `requires_chest` | Requisitos booleanos; o padrão é `false`. |
+| `execution_limit`, `execution_limit_per_user` | Limites por *tick*; o padrão é `100`. |
+| `additional_sources` | Somente para ativadores; lista as fontes adicionais aceitas pelo schema. |
+| `negative_version` | Somente para efeitos e condições; informa `name`, `revision`, `classname` e, opcionalmente, `description`. |
+
+Também existe uma infobox básica, com `title`, `image` opcional e `hide` opcional. Não copie valores de outra página sem conferir o mobi no jogo e a fonte dos dados.
+
+## Formatação básica em Markdown
+
+Como ainda não temos um editor visual, o conteúdo é escrito em Markdown, uma forma simples de formatar texto usando símbolos:
+
+| O que eu quero | Como eu escrevo |
+|---|---|
+| Um título de seção | `## Nome da seção` |
+| Um subtítulo | `### Nome do subtítulo` |
+| Texto em **negrito** | `**texto**` |
+| Texto em *itálico* | `*texto*` |
+| Um link | `[texto do link](https://exemplo.com)` |
+| Lista com marcadores | `- primeiro item` |
+| Lista numerada | `1. primeiro item` |
+| Uma citação | `> texto citado` |
+| Uma imagem | `![descrição da imagem](/caminho/imagem.png)` |
+
+Para trechos de código, use crases:
+
+````md
+Um trecho de `código` no meio da frase, ou um bloco maior:
+
+```js
+console.log("assim fica um bloco de código");
+```
+````
+
+Se tiver dúvida sobre como algo vai ficar, use a aba **"Preview"** no editor do GitHub Web, ela mostra uma prévia simplificada antes de você enviar.
+
+## Componentes disponíveis
+
+Arquivos `.mdx` aceitam componentes. Importe apenas o que a página realmente utiliza.
+
+| Componente | Origem | Quando usar |
+| --- | --- | --- |
+| `Aside` | `@astrojs/starlight/components` | Observações, dicas, cuidados e avisos importantes. |
+| `Steps` | `@astrojs/starlight/components` | Procedimentos em sequência. |
+| `Tabs` e `TabItem` | `@astrojs/starlight/components` | Duas ou mais formas equivalentes de apresentar uma configuração. |
+| `Card` e `CardGrid` | `@astrojs/starlight/components` | Conjuntos curtos de links ou opções; são usados na página inicial. |
+| `Infobox` | `src/components/Infobox.astro` | Exibir os dados do campo `infobox` em páginas de referência. |
+| `WiredGrid` | `src/components/WiredGrid.astro` | Listar Wireds por `type` ou por uma lista de `classname`. |
+| `PageReader` | `src/components/PageReader.astro` | Oferecer leitura em voz alta; informe `title` e `description`. |
+| `ShowcaseYouTube` | pacote `starlight-showcases` | Incorporar um vídeo do YouTube quando ele acrescentar uma demonstração útil. |
+
+Exemplo de aviso:
+
+```mdx
+import { Aside } from '@astrojs/starlight/components';
+
+<Aside type="caution" title="Atenção">
+Explique aqui o cuidado necessário.
+</Aside>
+```
+
+## Imagens, links e estilo
+
+- Coloque imagens mantidas pelo projeto em `src/assets/` e importe-as com caminho relativo quando quiser que o Astro faça a otimização.
+- Escreva um texto alternativo que descreva o conteúdo relevante da imagem.
+- Para páginas internas, prefira links a partir da raiz publicada, como `/referencia/glossario/`.
+- Use português do Brasil, frases diretas e os termos adotados nas páginas existentes, como **Wired**, **mobi**, **Ativador**, **Efeito**, **Condição** e **Habbo**.
+- Explique siglas e conceitos antes de aprofundá-los. Evite copiar descrições provisórias ou em outro idioma.
+- Preserve o foco da página. Quando um assunto exigir uma explicação longa, crie uma página própria e adicione os links necessários.
+
+## Antes de abrir o pull request
+
+- Confira se o título, a descrição e o menu representam corretamente o conteúdo.
+- Remova textos provisórios, placeholders e imports que não são usados.
+- Teste exemplos e confirme informações técnicas no Habbo ou em uma fonte confiável.
+- Verifique imagens, links internos e a visualização em telas menores.
+- Execute `npm run build` e descreva no pull request o que mudou e como você validou.
+- Não inclua arquivos gerados, dependências ou materiais de trabalho, como `dist/`, `node_modules/`, PDFs e arquivos compactados.
+
+## Onde pedir ajuda
+
+Se tiver uma ideia, dúvida ou encontrar um problema, abra uma [issue no GitHub](https://github.com/WiredClub/docs/issues). Para conversar com a comunidade, entre no [Discord do Wired Club](https://discord.gg/wiredclub).
+
+Toda contribuição, pequena ou grande, ajuda a tornar o conhecimento sobre Wired mais acessível.

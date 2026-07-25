@@ -1,0 +1,7 @@
+{
+  "name": "starlight-page-reader",
+  "version": "1.0.0",
+  "type": "module",
+  "exports": { ".": "./index.ts", "./overrides/PageSidebar.astro": "./overrides/PageSidebar.astro", "./components/PageReader.astro": "./components/PageReader.astro" },
+  "peerDependencies": { "@astrojs/starlight": ">=0.38.0" }
+}

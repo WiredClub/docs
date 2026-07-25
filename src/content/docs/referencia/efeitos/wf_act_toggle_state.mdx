@@ -7,16 +7,40 @@ sidebar:
     text: RASCUNHO
     variant: note
 infobox:
-  type: Efeito
+  # == Infobox ==
+  # hide: false # valor padrão
   title: Mudar estado do Mobi
+  # image: # url preenchida automaticamente
+
+  # == Dados do Mobi ==
   revision: 50950
   classname: wf_act_toggle_state
   name: Mudar estado do Mobi
   description: Este Efeito muda o estado do Mobi escolhido como se alguém tivesse clicando duas vezes nele.
-  release_date: 2010-10-01
+  # product_name: # caso o nome na loja seja diferente do nome do Mobi
+  # image_direction: 0 # valor padrão
+  # image_animated_state: 100 # valor padrão
+  # icon: # url preenchida automaticamente
   availability: No catálogo e CA
   price: 4
+  release_date: 2010-10-01
+
+  # == Dados do Wired ==
+  type: Efeito
+  # requires_bot: false # valor padrão
   requires_furni: true
+  # requires_antena: false # valor padrão
+  # requires_contract: false # valor padrão
+  # requires_chest: false # valor padrão
+  # execution_limit: 100 # valor padrão
+  # execution_limit_per_user: 100 # valor padrão
+
+  # == Dados do Efeito ==
+  # negative_version: # se aplicável
+  #   name: # nome para exibição
+  #   description: # descrição para exibição
+  #   revision: # revisão técnica
+  #   classname: # classname técnico
 ---
 
 import Infobox from "../../../../components/Infobox.astro"

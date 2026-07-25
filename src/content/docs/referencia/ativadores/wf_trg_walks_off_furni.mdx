@@ -7,17 +7,42 @@ sidebar:
     text: RASCUNHO
     variant: note
 infobox:
-  type: Ativador
+  # == Infobox ==
+  # hide: false # valor padrão
   title: Habbo sai do Mobi
+  # image: # url preenchida automaticamente
+
+  # == Dados do Mobi ==
   revision: 50950
   classname: wf_trg_walks_off_furni
-  image_direction: 2
   name: Habbo sai do Mobi
   description: Efeitos são ativados quando o Habbo sai de cima do Mobi.
-  release_date: 2024-06-01
+  # product_name: # caso o nome na loja seja diferente do nome do Mobi
+  image_direction: 2
+  # image_animated_state: 100 # valor padrão
+  # icon: # url preenchida automaticamente
   availability: No catálogo e CA
-  requires_furni: false
+  # price: # preço em créditos no catálogo
+  release_date: 2024-06-01
+
+  # == Dados do Wired ==
+  type: Ativador
+  # requires_bot: false # valor padrão
+  # requires_furni: false # valor padrão
+  # requires_antena: false # valor padrão
+  # requires_contract: false # valor padrão
+  # requires_chest: false # valor padrão
+  # execution_limit: 100 # valor padrão
+  # execution_limit_per_user: 100 # valor padrão
+
+  # == Dados do Ativador ==
   additional_sources: []
+  # - Bots especificados pelo nome
+  # - Habbo especificado pelo nome
+  # - Usuário alcançado
+  # - Usuário clicado
+  # - Usuário acionador
+  # - Item de ativação
 ---
 
 import Infobox from "../../../../components/Infobox.astro"

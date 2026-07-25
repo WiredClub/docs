@@ -48,7 +48,7 @@ const hiddenPages = entry.pages.slice(maxVisiblePages);
 		<div class="pages-list">
 			{
 				visiblePages.map((page) => (
-					<span class="page-chip"><a href={'/docs/' + page.slug}>{page.title}</a></span>
+					<span class="page-chip"><a href={'/' + page.slug}>{page.title}</a></span>
 				))
 			}
 			{
@@ -59,7 +59,7 @@ const hiddenPages = entry.pages.slice(maxVisiblePages);
 						</summary>
 						<div class="more-chips">
 							{hiddenPages.map((page) => (
-								<span class="page-chip"><a href={'/docs/' + page.slug}>{page.title}</a></span>
+								<span class="page-chip"><a href={'/' + page.slug}>{page.title}</a></span>
 							))}
 						</div>
 					</details>

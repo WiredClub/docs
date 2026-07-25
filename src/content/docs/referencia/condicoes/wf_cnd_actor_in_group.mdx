@@ -27,6 +27,7 @@ infobox:
 
   # == Dados do Wired ==
   type: Condição
+  # requires_bot: false # valor padrão
   # requires_furni: false # valor padrão
   # requires_antena: false # valor padrão
   # requires_contract: false # valor padrão
@@ -36,10 +37,10 @@ infobox:
 
   # == Dados da Condição ==
   negative_version:
-    revision: 50950
-    classname: wf_cnd_not_in_group
     name: NÃO é membro de grupo
     description: Condição ocorre quando é um quarto de grupo e o usuário NÃO é um membro do grupo.
+    revision: 50950
+    classname: wf_cnd_not_in_group
 ---
 
 import Infobox from "../../../../components/Infobox.astro"

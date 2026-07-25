@@ -55,7 +55,7 @@ const typePlural = (type: string) => ({
     const iconUrl = getFurniIcon(classname, revision);
 
     return (
-      <a href={`/docs/referencia/${typePlural(infobox.type)}/${classname}`} class="wired-link-card">
+      <a href={`/referencia/${typePlural(infobox.type)}/${classname}`} class="wired-link-card">
         <div class="card-content">
 		  <img src={iconUrl} alt={name} />
 		  <div class="text-content">

@@ -7,23 +7,40 @@ sidebar:
     text: RASCUNHO
     variant: note
 infobox:
-  type: Condição
+  # == Infobox ==
+  # hide: false # valor padrão
   title: Habbo Ativador está no Mobi
+  # image: # url preenchida automaticamente
+
+  # == Dados do Mobi ==
   revision: 50950
   classname: wf_cnd_trggrer_on_frn
-  image_direction: 2
   name: Habbo Ativador está no Mobi
   description: Ativação é permitida se o Habbo Ativador estiver no Mobi selecionado
+  # product_name: # caso o nome na loja seja diferente do nome do Mobi
+  image_direction: 2
+  # image_animated_state: 100 # valor padrão
+  # icon: # url preenchida automaticamente
   availability: No catálogo e CA
-  requires_furni: false
-  additional_sources: []
+  # price: # preço em créditos no catálogo
+  # release_date: # data de lançamento
+
+  # == Dados do Wired ==
+  type: Condição
+  # requires_bot: false # valor padrão
+  # requires_furni: false # valor padrão
+  # requires_antena: false # valor padrão
+  # requires_contract: false # valor padrão
+  # requires_chest: false # valor padrão
+  # execution_limit: 100 # valor padrão
+  # execution_limit_per_user: 100 # valor padrão
 
   # == Dados da Condição ==
   negative_version:
-    revision: 50950
-    classname: wf_cnd_not_trggrer_on
     name: Ativador NÃO está no Mobi
     description: Ativador é permitido se quem o ativa NÃO está em cima de um dos Mobis escolhidos.
+    revision: 50950
+    classname: wf_cnd_not_trggrer_on
 ---
 
 import Infobox from "../../../../components/Infobox.astro"
