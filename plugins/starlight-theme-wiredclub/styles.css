@@ -311,6 +311,11 @@
 		text-transform: uppercase;
 	}
 
+	.sl-markdown-content :is(th, td):not(:where(.not-content *)) {
+		text-align: center;
+		vertical-align: middle;
+	}
+
 	.sl-markdown-content :is(th:first-child, td:first-child):not(:where(.not-content *)) {
 		padding-inline-start: 1.3rem;
 	}
