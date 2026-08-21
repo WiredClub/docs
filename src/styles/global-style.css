@@ -1,0 +1,8 @@
+::view-transition-group(site-logo) {
+  z-index:1;
+}
+::view-transition-old(site-logo),
+::view-transition-new(site-logo) {
+  width:100%;
+  height:auto;
+}

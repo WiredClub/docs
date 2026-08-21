@@ -1,14 +1,15 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
+import { satteri } from '@astrojs/markdown-satteri';
 import starlight from '@astrojs/starlight';
-import starlightLlmsTxt from 'starlight-llms-txt'
-import starlightScrollToTop from 'starlight-scroll-to-top'
+import starlightLlmsTxt from 'starlight-llms-txt';
+import starlightScrollToTop from 'starlight-scroll-to-top';
 import starlightRecentChanges from 'starlight-recent-changes';
 import starlightPageReader from 'starlight-page-reader';
 import starlightSeo from 'starlight-seo';
 import starlightThemeWiredClub from 'starlight-theme-wiredclub';
+import { viewTransitions, hastMarkEndOfMarkdown } from "astro-vtbot/starlight-view-transitions";
 import AstroPWA from '@vite-pwa/astro';
-import manifest from './webmanifest.json';
 
 // https://astro.build/config
 export default defineConfig({
@@ -201,12 +202,22 @@ export default defineConfig({
 			}), starlightRecentChanges({
 				routeSlug: 'mudancas-recentes',
 				dateFormat: 'pt-BR',
-			})],
+			}),
+			viewTransitions({
+				declarativeNames:
+					":root:not(:has(.hero)) .site-title img, :root:has(.hero) .hero img = site-logo",
+			})
+			],
 		}),
 		AstroPWA({
 			// Temporariamente desativando cache do Service Worker
 			selfDestroying: true,
-			manifest: manifest,
+			manifestFilename: "webmanifest.json",
 		}),
 	],
+	markdown: {
+		processor: satteri({
+			hastPlugins: [hastMarkEndOfMarkdown],
+		}),
+	},
 });
