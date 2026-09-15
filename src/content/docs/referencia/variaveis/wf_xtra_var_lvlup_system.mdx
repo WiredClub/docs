@@ -4,7 +4,7 @@ description: Este extra de variável adiciona lógica de níveis e progressão b
 sidebar:
   label: Sistema de Aumento de Nível
   badge:
-    text: RASCUNHO
+    text: NOVO
     variant: note
 infobox:
   # == Infobox ==
@@ -40,6 +40,403 @@ infobox:
   additional_sources: []
 ---
 
+import { Tabs, TabItem, Steps } from '@astrojs/starlight/components';
+import PseudoWiredCodeBlock from "@components/PseudoWiredCodeBlock.astro";
 import Infobox from "@components/Infobox.astro"
+import { Aside } from '@astrojs/starlight/components';
+import Requisitos from "@assets/wf_xtra_var_lvlup_system/01-requisitos.mp4"
+import RequisitosDescricao from "@assets/wf_xtra_var_lvlup_system/01-requisitos-descricao.vtt"
+import CriarSubvariaveis from "@assets/wf_xtra_var_lvlup_system/03-criar-subvariaveis.mp4"
+import ExemploPratico from "@assets/wf_xtra_var_lvlup_system/04-exemplo-pratico.mp4"
+
+O **Extra Variável: Sistema de Aumento de Nível** auxilia na criação de sistemas de progressão baseados em experiência (XP), permitindo calcular automaticamente o nível correspondente ao valor de uma variável.
+
+Esse Extra de Variável é ideal para sistemas inspirados em jogos de RPG, nos quais um usuário, mobi ou qualquer outro tipo de variável evolui conforme acumula pontos de experiência.
 
 <Infobox />
+
+## Requisitos
+
+Antes de utilizar este Extra de Variável, é necessário adicioná-lo acima de um dos seguintes Wireds de variável:
+
+* **WIRED Variável: Usuário Variável**
+* **WIRED Variável: Mobi Variável**
+* **WIRED Variável: Variável Global**
+* **WIRED Variável: Contexto Variável**
+* **WIRED Variável: De outro quarto**
+* **WIRED Variável: Eco**
+
+Além disso, a variável escolhida já deve possuir um valor atribuído, pois será esse valor que representará a quantidade de experiência utilizada nos cálculos de progressão.
+
+O vídeo abaixo ilustra como seria esse processo:
+
+<figure>
+  <video
+    muted
+    controls
+    preload="metadata"
+    aria-label="Demonstração da configuração de uma variável para usar com o Sistema de Aumento de Nível"
+    title="Demonstração da configuração de uma variável para usar com o Sistema de Aumento de Nível"
+    style={{ width: "100%" }}
+  >
+    <track kind="descriptions" src={RequisitosDescricao} srclang="pt" label="Descrições em Português do Brasil" default />
+    <source src={Requisitos} type="video/mp4" />
+    Seu navegador nao suporta videos HTML5.
+  </video>
+  <figcaption></figcaption>
+</figure>
+
+## Como esse Wired funciona?
+
+Ao abrir a janela de configuração do **Extra Variável: Sistema de Aumento de Nível**, serão exibidas algumas opções de configuração.
+
+### Modo de progressão
+
+Nesta seção é possível escolher como a quantidade de experiência será convertida em níveis.
+
+Existem três modos de progressão disponíveis.
+
+#### Linear
+
+No modo **Linear**, cada nível exige sempre a mesma quantidade de experiência para ser alcançado.
+
+Esse modo possui dois campos de configuração:
+
+* **Tamanho da etapa:** define quantos pontos de experiência são necessários para avançar um nível. Esse campo aceita valores entre **1** e **100000**.
+* **Nível máximo:** define o maior nível que poderá ser atingido. Esse campo aceita valores entre **2** e **100000**.
+
+Por exemplo, com **Tamanho da etapa** igual a **100** e **Nível máximo** igual a **5**, a progressão será:
+
+```text
+Nível 1 - XP: 0
+Nível 2 - XP: 100
+Nível 3 - XP: 200
+Nível 5 - XP: 400
+```
+
+Nesse caso, cada avanço de nível exige mais **100 pontos de experiência**.
+
+#### Exponencial
+
+No modo **Exponencial**, o total de experiência necessário para cada nível é calculado a partir de uma progressão geométrica.
+
+Esse modo possui três campos de configuração:
+
+* **XP base:** define a experiência necessária para alcançar o nível 2. Esse campo aceita valores entre **1** e **100000**.
+* **Fator de aumento em porcentagem:** define a taxa de crescimento da experiência necessária a cada nível. Esse campo aceita valores entre **1** e **100000**.
+* **Nível máximo:** define o maior nível que poderá ser atingido. Esse campo aceita valores entre **2** e **100000**.
+
+A lógica usada pelo Wired é:
+
+1. O nível 1 começa com 0 XP.
+2. O XP base define o custo para chegar ao nível 2.
+3. A cada novo nível, esse custo aumenta conforme o fator escolhido.
+4. O XP de um nível é a soma dos custos de todos os avanços anteriores.
+
+Por exemplo, com **XP base** igual a **25**, **Fator de aumento em porcentagem** igual a **200%** e **Nível máximo** igual a **20**, a progressão será:
+
+```text
+Nível 1 - XP: 0
+Nível 2 - XP: 25
+Nível 3 - XP: 100
+Nível 5 - XP: 1.000
+Nível 10 - XP: 246.025
+Nível 20 - XP: 1.643.366.437
+```
+
+Nesse caso, a experiência exigida em cada avanço cresce de forma exponencial, por isso os níveis mais altos exigem valores consideravelmente maiores. Em valores muito altos, utilize a **[Visualização de nível/experiência](/referencia/variaveis/wf_xtra_var_lvlup_system/#visualização-de-nívelexperiência)** do próprio Wired para conferir o resultado exibido.
+
+<Aside type="tip" title="Curiosidade">
+  O Habbo em sua versão Flash (Clássica) consegue exibir números de até **2.147.483.647**. Quando o resultado ultrapassa esse limite, o valor sofre um retorno dentro do intervalo de números inteiros de 32 bits. Por isso, neste exemplo, embora o cálculo matemático do nível 20 resulte em **14.528.268.325 XP**, o Wired mostra **1.643.366.437 XP** na progressão.
+</Aside>
+
+#### Entrada manual
+
+O modo **Entrada manual** permite definir manualmente a quantidade de experiência necessária para atingir cada nível.
+
+Essa configuração é feita utilizando um campo de texto com múltiplas linhas.
+
+Cada linha representa uma relação entre um nível e sua experiência necessária.
+
+Por exemplo:
+
+```text
+5=100
+```
+
+Nesse caso, será necessário possuir **100 pontos de experiência** para atingir o **nível 5**.
+
+Não é necessário informar todos os níveis. Quando um nível anterior não é especificado, o Wired preenche os níveis intermediários automaticamente, distribuindo os valores entre os pontos informados.
+
+Por exemplo, com a seguinte configuração:
+
+```text
+5=200
+10=500
+20=4000
+```
+
+A progressão também exibirá os níveis não informados antes do nível 5:
+
+```text
+Nível 1 - XP: 0
+Nível 2 - XP: 50
+Nível 3 - XP: 100
+```
+
+É possível adicionar quantas relações forem necessárias para personalizar completamente a curva de progressão.
+
+### Visualização de nível/experiência
+
+Esta seção exibe uma prévia da relação entre experiência e nível de acordo com o modo de progressão configurado.
+
+Por exemplo, suponha que o modo **Linear** esteja selecionado, com **Tamanho da etapa** igual a **1** e **Nível máximo** igual a **10**.
+
+A visualização será a seguinte:
+
+![Janela do Extra Variável Sistema de Aumento de Nível no modo Linear, mostrando a Visualização de nível e experiência para níveis de 1 a 20](@assets/wf_xtra_var_lvlup_system/02-visualizacao-de-nivel-experiencia.png "Janela do Extra Variável Sistema de Aumento de Nível no modo Linear, mostrando a Visualização de nível e experiência para níveis de 1 a 20")
+
+Essa visualização é atualizada automaticamente conforme as configurações são alteradas, facilitando a validação da progressão antes da utilização no quarto.
+
+### Criar subvariáveis
+
+Esta seção permite criar automaticamente novas variáveis derivadas do sistema de progressão.
+
+Cada opção possui um checkbox, inicialmente desmarcado, e um campo de texto onde é possível definir o nome da subvariável que será criada.
+
+Quando um checkbox é marcado, uma nova variável passa a ser criada como subvariável da variável configurada no Wired de Variável utilizado no tópico [Requisitos](/referencia/variaveis/wf_xtra_var_lvlup_system/#requisitos) e podemos vê-la utilizando o comando `:wired`, como visto no vídeo a seguir:
+
+<figure>
+  <video
+    muted
+    controls
+    preload="metadata"
+    aria-label="Demonstração da criação de subvariáveis do Sistema de Aumento de Nível e da consulta delas pelo comando :wired"
+    title="Demonstração da criação de subvariáveis do Sistema de Aumento de Nível"
+    style={{ width: "100%" }}
+  >
+    <source src={CriarSubvariaveis} type="video/mp4" />
+    Seu navegador nao suporta videos HTML5.
+  </video>
+  <figcaption></figcaption>
+</figure>
+
+Caso o nome não seja alterado, será utilizado o valor padrão indicado pelo próprio Wired.
+
+As opções disponíveis são:
+
+#### Nível atual
+
+Armazena o nível correspondente à quantidade atual de experiência.
+
+Nome padrão da subvariável: `current_level`
+
+#### XP atual
+
+Armazena a quantidade atual de experiência.
+
+Nome padrão da subvariável: `current_xp`
+
+#### Progresso de nível
+
+Armazena o progresso atual dentro do nível.
+
+Nome padrão da subvariável: `progress`
+
+#### Progresso de nível em porcentagem
+
+Armazena o progresso do nível em porcentagem.
+
+Nome padrão da subvariável: `progress_percentage`
+
+#### Total de XP necessário
+
+Armazena a quantidade total de experiência necessária para alcançar o próximo nível.
+
+Nome padrão da subvariável: `xp_required`
+
+#### XP restante
+
+Armazena a quantidade de experiência restante para alcançar o próximo nível.
+
+Nome padrão da subvariável: `xp_remaining`
+
+#### Está no máximo
+
+Indica se o nível máximo configurado já foi atingido.
+
+Nome padrão da subvariável: `is_maxed`
+
+<Aside type="note" title="Lembre-se">
+Essa subvariável recebe valores verdadeiro ou falso, sendo assim, ela só fica vinculada ao componente específico quando seu valor é verdadeiro. Quando o valor é falso, ela não fica vinculada.
+</Aside>
+
+#### Nível máximo
+
+Armazena o nível máximo configurado para o sistema de progressão.
+
+Nome padrão da subvariável: `max_level`
+
+## Exemplo prático
+
+Este exemplo demonstra uma forma simples de utilizar o **Extra Variável: Sistema de Aumento de Nível** com uma variável de usuário. O jogador visita diferentes estações do Centro de Inteligência e acumula pontos de experiência ao interagir com cada uma delas.
+
+O objetivo é mostrar que todas as interações podem alterar uma única variável e que o Extra calcula automaticamente o nível, o progresso e a experiência restante. Assim, não é necessário criar manualmente a lógica de progressão para cada ação do quarto.
+
+<figure>
+  <video
+    muted
+    controls
+    preload="metadata"
+    aria-label="Exemplo prático do Centro de Inteligência do Wired Club, com interações que adicionam experiência à variável inteligencia"
+    title="Exemplo prático do Sistema de Aumento de Nível no Centro de Inteligência"
+    style={{ width: "100%" }}
+  >
+    <source src={ExemploPratico} type="video/mp4" />
+    Seu navegador nao suporta videos HTML5.
+  </video>
+  <figcaption></figcaption>
+</figure>
+
+<Tabs>
+  <TabItem label="Configuração">
+    Primeira pilha
+    <Steps>
+    1. **Ativador:** Habbo anda no mobi
+        1. Selecione o Tapete de Boas-Vindas
+    2. **Efeito:** Mostrar mensagem
+        1. Escreva `Boas vindas ao centro de inteligência do Wired Club!`
+    3. **Extra:** Limite de execução
+        1. Selecione 1 na Quantidade de Execuções
+        2. Selecione 10 na Janela de Tempo
+    4. **Efeito:** Dar variável
+        1. Selecione a variável `inteligencia`
+        2. Desmarque a opção de Substituir variável existente
+    </Steps>
+    Segunda pilha
+    <Steps>
+    1. **Ativador:** Mobi é usado
+        1. Selecione a Estante de Livros
+    2. **Efeito:** Mostrar mensagem
+        1. Escreva `Você ganhou [b]+5[/b] de inteligência por [u]ler um livro[/u]!`
+    3. **Extra:** Limite de execução
+        1. Selecione 1 na Quantidade de Execuções
+        2. Selecione 10 na Janela de Tempo
+    4. **Efeito:** Mudar valor variável
+        1. Selecione a variável `inteligencia`
+        2. Selecione a operação Somar
+        3. Escreva o valor 5 como referência
+    </Steps>
+    Terceira pilha
+    <Steps>
+    1. **Ativador:** Habbo anda no mobi
+        1. Selecione a Cadeira de Jantar
+    2. **Efeito:** Mostrar mensagem
+        1. Escreva `Você ganhou [b]+10[/b] de inteligência por [u]resolver exercícios[/u]!`
+    3. **Extra:** Limite de execução
+        1. Selecione 1 na Quantidade de Execuções
+        2. Selecione 10 na Janela de Tempo
+    4. **Efeito:** Mudar valor variável
+        1. Selecione a variável `inteligencia`
+        2. Selecione a operação Somar
+        3. Escreva o valor 10 como referência
+    </Steps>
+    Quarta pilha
+    <Steps>
+    1. **Ativador:** Habbo anda no mobi
+        1. Selecione a Cadeira de Madeira
+    2. **Efeito:** Mostrar mensagem
+        1. Escreva `Você ganhou [b]+20[/b] de inteligência por [u]pesquisar um tema[/u]!`
+    3. **Extra:** Limite de execução
+        1. Selecione 1 na Quantidade de Execuções
+        2. Selecione 10 na Janela de Tempo
+    4. **Efeito:** Mudar valor variável
+        1. Selecione a variável `inteligencia`
+        2. Selecione a operação Somar
+        3. Escreva o valor 20 como referência
+    </Steps>
+    Quinta pilha
+    <Steps>
+    1. **Ativador:** Habbo anda no mobi
+        1. Selecione a Cadeira Iced Escura
+    2. **Efeito:** Mostrar mensagem
+        1. Escreva `Você ganhou [b]+25[/b] de inteligência por [u]resolver um desafio lógico[/u]!`
+    3. **Extra:** Limite de execução
+        1. Selecione 1 na Quantidade de Execuções
+        2. Selecione 10 na Janela de Tempo
+    4. **Efeito:** Mudar valor variável
+        1. Selecione a variável `inteligencia`
+        2. Selecione a operação Somar
+        3. Escreva o valor 25 como referência
+    </Steps>
+  </TabItem>
+  
+  <TabItem label="PseudoWired">
+    Primeira pilha
+    <PseudoWiredCodeBlock code={`
+    QUANDO
+      - Habbo anda no Mobi: Tapete de Boas-Vindas
+    COMO
+      - Limite de Execução: Quantidade de Execuções: 1
+        Janela de Tempo: 10
+    ENTÃO
+      - Mostrar mensagem: Boas vindas ao centro de inteligência do Wired Club!
+      - Dar Variável: inteligencia
+        Substituir variável existente: desmarcado
+    `} />
+    Segunda pilha
+    <PseudoWiredCodeBlock code={`
+    QUANDO
+      - Mobi é usado: Estante de Livros
+    COMO
+      - Limite de Execução: Quantidade de Execuções: 1
+        Janela de Tempo: 10
+    ENTÃO
+      - Mostrar mensagem: Você ganhou [b]+5[/b] de inteligência por [u]ler um livro[/u]!
+      - Mudar Valor Variável: inteligencia
+        Operação: Somar
+        Valor de referência: 5
+    `} />
+    Terceira pilha
+    <PseudoWiredCodeBlock code={`
+    QUANDO
+      - Habbo anda no Mobi: Cadeira de Jantar
+    COMO
+      - Limite de Execução: Quantidade de Execuções: 1
+        Janela de Tempo: 10
+    ENTÃO
+      - Mostrar mensagem: Você ganhou [b]+10[/b] de inteligência por [u]resolver exercícios[/u]!
+      - Mudar Valor Variável: inteligencia
+        Operação: Somar
+        Valor de referência: 10
+    `} />
+    Quarta pilha
+    <PseudoWiredCodeBlock code={`
+    QUANDO
+      - Habbo anda no Mobi: Cadeira Iced Escura
+    COMO
+      - Limite de Execução: Quantidade de Execuções: 1
+        Janela de Tempo: 10
+    ENTÃO
+      - Mostrar mensagem: Você ganhou [b]+25[/b] de inteligência por [u]resolver um desafio lógico[/u]!
+      - Mudar Valor Variável: inteligencia
+        Operação: Somar
+        Valor de referência: 25
+    `} />
+  </TabItem>
+</Tabs>
+
+### O que acontece nesse exemplo?
+
+O fluxo começa quando entramos no **Centro de Inteligência do Wired Club** pelo tapete de boas-vindas. Ao fazer isso, recebemos a variável de usuário `inteligencia`, que será usada para armazenar nossos pontos de experiência.
+
+Com a variável criada, podemos interagir com as estações de estudo ao redor do quarto. Cada interação adiciona uma quantidade diferente de XP a `inteligencia`:
+
+* Ao usar a **estante de livros**, ganhamos **5 XP** por ler um livro.
+* Ao sentar à **mesa de estudos**, ganhamos **10 XP** por resolver exercícios.
+* Ao sentar ao **computador de tela plana**, ganhamos **20 XP** por pesquisar um tema.
+* Ao sentar aos **jogos de mesa**, ganhamos **25 XP** por resolver um desafio lógico.
+
+Utilizando a janela do comando `:wired`, é possível acompanhar as subvariáveis de `inteligencia` sendo atualizadas após cada interação.
+
+O **Extra Variável: Sistema de Aumento de Nível** é especialmente útil em sistemas de RPG e progressão. Sem ele, seria necessário criar toda a lógica de cálculo de níveis, progresso e experiência restante manualmente. Com o Extra, essas contas são feitas automaticamente, permitindo focar nas outras mecânicas do sistema.
