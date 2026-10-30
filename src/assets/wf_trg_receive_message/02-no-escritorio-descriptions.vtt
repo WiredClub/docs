@@ -1,0 +1,10 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:07.000
+No escritório, a janela do Ativador: Receber Mensagem da Rede mostra Use mobis escolhidos. A torre do quarto é selecionada e a configuração é confirmada.
+
+00:00:07.000 --> 00:00:17.000
+No Efeito: Mostrar mensagem, o campo Mensagem contém [b]Informação encontrada:[/b] e, na linha seguinte, $(trigger_text). O estilo de notificação é Atenção, e a fonte dos usuários é Usar usuários do seletor.
+
+00:00:17.000 --> 00:00:24.192
+No Seletor: Habbos na Área, a seleção cobre toda a área do escritório, incluindo o sofá onde a esposa espera. A área é confirmada e a janela é fechada.

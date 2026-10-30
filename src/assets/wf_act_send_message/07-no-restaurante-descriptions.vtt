@@ -1,0 +1,13 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.500
+No restaurante, a janela da Torre da Rede Wired mostra a rede Investigações. A rede é conectada à torre, e o estado muda para Conectado.
+
+00:00:04.500 --> 00:00:12.000
+A janela do Efeito: Enviar Mensagem na Rede é aberta. A origem da mensagem está definida como Do Ativador Wired; a torre do restaurante é selecionada e a configuração é confirmada.
+
+00:00:12.000 --> 00:00:16.000
+No Ativador: Habbo Diz Algo, a opção Concordar com todo o texto está selecionada e Ocultar a mensagem do gatilho está marcada. A janela é fechada após a confirmação.
+
+00:00:16.000 --> 00:00:22.272
+Na Condição: Usuário tem item de mão, a lista Item de mão é aberta. Tijolão aparece selecionado, e a configuração é confirmada.

@@ -1,10 +1,10 @@
 ---
 title: "Efeito Wired: Enviar Mensagem na Rede"
-description: wf_act_send_message
+description: Envia mensagens pela Rede Wired e permite formatar o texto ou inserir campos.
 sidebar:
   label: "Enviar Mensagem na Rede"
   badge:
-    text: RASCUNHO
+    text: NOVO
     variant: note
 infobox:
   # == Infobox ==
@@ -16,7 +16,7 @@ infobox:
   revision: 75953
   classname: wf_act_send_message
   name: "WIRED EFEITO: Enviar Mensagem na Rede"
-  description: wf_act_send_message
+  description: Envia uma mensagem pela Torre da Rede Wired para a rede à qual ela está conectada.
   # product_name: # caso o nome na loja seja diferente do nome do Mobi
   # image_direction: 0 # valor padrão
   # image_not_animated: false # valor padrão
@@ -29,7 +29,7 @@ infobox:
   # == Dados do Wired ==
   type: Efeito
   # requires_bot: false # valor padrão
-  # requires_furni: false # valor padrão
+  requires_furni: true
   # requires_antena: false # valor padrão
   # requires_contract: false # valor padrão
   # requires_chest: false # valor padrão
@@ -45,5 +45,210 @@ infobox:
 ---
 
 import Infobox from "@components/Infobox.astro"
+import { Aside, Steps, Tabs, TabItem } from "@astrojs/starlight/components";
+import PseudoWiredCodeBlock from "@components/PseudoWiredCodeBlock.astro";
+import AccessibleVideo from "@components/AccessibleVideo.astro";
+import FormatacaoTexto from "@assets/wf_act_send_message/04-negrito-italico-e-sublinhado.mp4";
+import FormatacaoTextoDescriptionsUrl from "@assets/wf_act_send_message/04-negrito-italico-e-sublinhado-descriptions.vtt?url";
+import FormatacaoTextoDescriptionsRaw from "@assets/wf_act_send_message/04-negrito-italico-e-sublinhado-descriptions.vtt?raw";
+import Cor from "@assets/wf_act_send_message/04-cor.mp4";
+import CorDescriptionsUrl from "@assets/wf_act_send_message/04-cor-descriptions.vtt?url";
+import CorDescriptionsRaw from "@assets/wf_act_send_message/04-cor-descriptions.vtt?raw";
+import Alinhar from "@assets/wf_act_send_message/04-alinhar.mp4";
+import AlinharDescriptionsUrl from "@assets/wf_act_send_message/04-alinhar-descriptions.vtt?url";
+import AlinharDescriptionsRaw from "@assets/wf_act_send_message/04-alinhar-descriptions.vtt?raw";
+import AdicionarCampo from "@assets/wf_act_send_message/04-adicionar-campo.mp4";
+import AdicionarCampoDescriptionsUrl from "@assets/wf_act_send_message/04-adicionar-campo-descriptions.vtt?url";
+import AdicionarCampoDescriptionsRaw from "@assets/wf_act_send_message/04-adicionar-campo-descriptions.vtt?raw";
+import NoRestaurante from "@assets/wf_act_send_message/07-no-restaurante.mp4";
+import NoRestauranteDescriptionsUrl from "@assets/wf_act_send_message/07-no-restaurante-descriptions.vtt?url";
+import NoRestauranteDescriptionsRaw from "@assets/wf_act_send_message/07-no-restaurante-descriptions.vtt?raw";
+import Atraso from "@assets/wf_act_send_message/05-atraso.gif";
+import ConfiguracoesAvancadas from "@assets/wf_act_send_message/06-configuracoes-avancadas.gif";
+
+O **Efeito: Enviar Mensagem na Rede** transmite um texto pela [Torre da Rede Wired](/referencia/outros/utilitarios/wf_link/). A mensagem pode chegar a outros quartos conectados à rede ou ser recebida no próprio quarto de envio, se a torre estiver configurada para isso.
 
 <Infobox />
+
+Antes de configurar o efeito, conecte uma torre à rede e selecione-a como fonte de envio. Onde a mensagem será recebida, configure o [Ativador: Receber Mensagem da Rede](/referencia/ativadores/wf_trg_receive_message/) para observar a torre local. Para recebê-la no mesmo quarto, marque **Receber mensagens enviadas por este quarto** na torre. O efeito envia a mensagem; o ativador, por si só, não a mostra aos jogadores.
+
+## Como esse Wired funciona?
+
+Ao abrir a janela, primeiro escolha de onde virá a mensagem: do texto do ativador da pilha ou de um texto escrito no próprio efeito. Depois, ajuste o atraso e selecione a torre que fará o envio nas configurações avançadas.
+
+Quando essa pilha for acionada, a mensagem seguirá pela rede da torre selecionada. O texto recebido ficará disponível para os Wireds da pilha iniciada pelo ativador de recebimento. Você pode, por exemplo, mostrá-lo em uma mensagem ou utilizá-lo como parte de outro texto.
+
+![Janela do efeito Enviar Mensagem na Rede com a origem Do Ativador WIRED selecionada, campo Mensagem desativado e atraso em zero segundos.](@assets/wf_act_send_message/01-janela-do-wired.png)
+
+### Origem da mensagem
+
+Esta escolha determina o conteúdo enviado pela rede. Ela também define se o campo **Mensagem** pode ser editado:
+
+* **Do ativador Wired:** utiliza o texto que acionou a pilha. Com o [Ativador: Habbo Diz Algo](/referencia/ativadores/wf_trg_says_something/), por exemplo, o efeito pode enviar a fala do jogador. O campo **Mensagem** fica desativado porque o texto vem do ativador.
+* **Mensagem personalizada:** permite escrever o texto no campo **Mensagem**. O texto pode incluir formatação e espaços de texto disponíveis na pilha.
+
+<Aside type="note" title="Uso das mensagens dos jogadores">
+Ao adicionar este Wired no quarto, os jogadores recebem o aviso **“Os Wireds deste quarto podem usar o texto completo das mensagens que os ativam.”** quando entram.
+
+![Aviso exibido ao entrar no quarto: os Wireds podem usar o texto completo das mensagens que os ativam.](@assets/wf_act_send_message/02-aviso-wired-pode-utilizar-mensagens.png)
+</Aside>
+
+### Mensagem
+
+Com **Mensagem personalizada** selecionada, escreva no campo **Mensagem** o texto que deseja transmitir pela rede. Se ele precisar de estilos ou de espaços de texto, pressione **Abrir editor de mensagens** ao lado do campo. Você poderá montar a mensagem e conferir uma prévia antes de salvar.
+
+#### Editor de mensagens
+
+O editor possui uma área para escrever, um contador de caracteres e a seção **Prévia**. Essa prévia ajuda a conferir o resultado das tags de formatação e dos campos inseridos no texto. O limite indicado na janela é de **1.000 caracteres**.
+
+![Janela do Editor de mensagens aberta ao lado do efeito Enviar Mensagem na Rede, com o texto Wired Club e sua prévia no balão.](@assets/wf_act_send_message/03-janela-editor-de-mensagens.png)
+
+Os botões **B**, **I** e **U** inserem tags de negrito, itálico e sublinhado. Você pode selecionar um trecho já escrito antes de pressionar o botão ou escrever entre as tags inseridas. Por exemplo, `[b]A rodada começou![/b]` deixa esse aviso em negrito:
+
+<AccessibleVideo
+  id="enviar-mensagem-formatacao-texto"
+  src={FormatacaoTexto}
+  title="Aplicar negrito, itálico e sublinhado no Editor de mensagens"
+  descriptionsSrc={FormatacaoTextoDescriptionsUrl}
+  descriptionsContent={FormatacaoTextoDescriptionsRaw}
+/>
+
+O botão **A** abre a escolha de cor. Selecione o trecho que deseja destacar e escolha a cor; o editor acrescentará as tags correspondentes ao texto:
+
+| Cor | Exemplo de marcação |
+| --- | --- |
+| Vermelho | `[red]texto[/red]` |
+| Laranja | `[orange]texto[/orange]` |
+| Amarelo | `[yellow]texto[/yellow]` |
+| Verde | `[green]texto[/green]` |
+| Ciano | `[cyan]texto[/cyan]` |
+| Azul | `[blue]texto[/blue]` |
+| Roxo | `[purple]texto[/purple]` |
+| Rosa | `[pink]texto[/pink]` |
+
+Escreva no lugar de `texto` o trecho que deseja colorir. A seção **Prévia** mostra o resultado antes de salvar a mensagem.
+
+<AccessibleVideo
+  id="enviar-mensagem-cor"
+  src={Cor}
+  title="Aplicar cores ao texto no Editor de mensagens"
+  descriptionsSrc={CorDescriptionsUrl}
+  descriptionsContent={CorDescriptionsRaw}
+/>
+
+O botão **Alinhar** insere `[a]` como ponto de alinhamento. Ele é útil em mensagens com mais de uma linha, como uma lista de nomes e pontuações: os trechos posicionados após pontos correspondentes ficam alinhados em colunas. Confira a prévia para ajustar a posição de cada ponto.
+
+<AccessibleVideo
+  id="enviar-mensagem-alinhar"
+  src={Alinhar}
+  title="Alinhar trechos do texto no Editor de mensagens"
+  descriptionsSrc={AlinharDescriptionsUrl}
+  descriptionsContent={AlinharDescriptionsRaw}
+/>
+
+#### Adicionar campo
+
+O botão **Adicionar campo** lista os espaços de texto disponíveis na pilha. Os Extras [Campo Nome de Mobi](/referencia/extras/wf_xtra_text_output_furni_name/), [Campo Nome de Usuário](/referencia/extras/wf_xtra_text_output_username/) e [Campo Variável](/referencia/extras/wf_xtra_text_output_variable/) disponibilizam os nomes que você definiu em **Nome do Espaço**. Ao escolher um deles, o editor insere uma marcação como `$(nome_do_espaço)` na mensagem.
+
+Essa marcação reserva um lugar para o conteúdo do campo. Com um **Campo Nome de Usuário** chamado `nome_do_usuario`, por exemplo, `Olá, $(nome_do_usuario)!` utiliza o nome fornecido pelo Extra quando a pilha é executada. Se não houver nenhum dos Extras que disponibilizam espaços na pilha, o botão **Adicionar campo** ficará desabilitado.
+
+<AccessibleVideo
+  id="enviar-mensagem-adicionar-campo"
+  src={AdicionarCampo}
+  title="Inserir espaços de texto pelo botão Adicionar campo"
+  descriptionsSrc={AdicionarCampoDescriptionsUrl}
+  descriptionsContent={AdicionarCampoDescriptionsRaw}
+/>
+
+Também pode aparecer o campo `trigger_text`, criado automaticamente pelo Habbo. Em uma pilha acionada pelo **Habbo Diz Algo**, `$(trigger_text)` representa a fala que iniciou a execução. Você pode combiná-lo com outros campos em uma mensagem personalizada.
+
+Por exemplo, com um **Campo Nome de Usuário** cujo espaço se chama `nome_do_usuario`, você pode escrever:
+
+```text
+[b]$(nome_do_usuario)[/b], você utilizou o comando [b]$(trigger_text)[/b].
+```
+
+### Atraso (segundos)
+
+O atraso define quanto tempo o efeito espera depois que a pilha é acionada para enviar a mensagem. O campo aceita valores de **0 a 60 segundos**. Mantenha **0** para enviar o texto sem espera ou escolha um valor maior quando o aviso precisa chegar depois de outra ação do sistema.
+
+Você pode digitar o valor ou usar as setas abaixo do campo. No ícone de temporização, escolha quanto cada clique nas setas altera o atraso:
+
+* **Padrão (a cada 0.5s):** altera o atraso em meio segundo por clique.
+* **Preciso (a cada 0.05s):** altera o atraso em cinco centésimos de segundo por clique.
+
+<img
+  src={Atraso.src}
+  alt="Demonstração do ajuste do atraso do efeito Enviar Mensagem na Rede pelo campo numérico e pelas setas"
+  style={{ width: "35%" }}
+/>
+
+### Configurações avançadas
+
+Pressione **Mostrar configurações avançadas** para definir quais torres enviarão a mensagem. Use as setas da seção **Torre da Rede Wired** para alternar entre as fontes de mobis:
+
+* **Use mobis escolhidos:** clique nas torres do quarto para selecioná-las diretamente. Você pode escolher até **20**. Essa é a opção mais simples quando sabe quais torres serão usadas.
+* **Usar mobis do seletor:** utiliza as torres fornecidas por um Seletor de mobis na pilha. A escolha pode variar conforme a seleção feita pelo Seletor.
+* **Usar mobis do sinal:** utiliza as torres recebidas pelo sistema de [sinais](/referencia/ativadores/wf_trg_recv_signal/), quando outra parte do sistema fornece os mobis por esse caminho.
+* **Use o item de ativação:** utiliza o mobi que acionou a pilha. Para enviar pela rede, esse item precisa ser uma **Torre da Rede Wired**
+
+<img
+  src={ConfiguracoesAvancadas.src}
+  alt="Demonstração das configurações avançadas do efeito, com a seção Torre da Rede Wired aberta e as fontes de mobis disponíveis"
+  style={{ width: "35%" }}
+/>
+
+<Aside type="caution" title="Aviso">
+Se você selecionar um mobi que não seja uma **Torre da Rede Wired**, a configuração não será salva. Ao tentar confirmar, aparecerá uma janela com o texto **“Selecione pelo menos uma Torre da Rede Wired.”** Confira os mobis escolhidos e selecione uma torre.
+
+![Janela Falha ao atualizar com o aviso Selecione pelo menos uma Torre da Rede Wired.](@assets/wf_act_trg/01-janela-selecione-uma-torre-wired.png)
+</Aside>
+
+## Exemplo de uso: relatórios de uma investigação
+
+Em um RPG, uma esposa contrata uma detetive para descobrir se o marido está se encontrando com outra pessoa. A detetive acompanha `bobbyGatinho56` em um restaurante, disfarçada de atendente de caixa. Ela fica sentada atrás do balcão com um **Celular Tijolão** na mão, representando um walkie-talkie. À sua frente há uma mesa com quatro cadeiras e o mobi **Comida Coreana**. `bobbyGatinho56` ocupa a cadeira da direita, de frente para `JoyPixel`, a pessoa com quem saiu para o encontro.
+
+Durante a cena, `bobbyGatinho56` diz `minha mulher nem sabe q tô nesse encontro`, e `JoyPixel` responde `ahahahahaha`. A detetive relata à esposa o que está acontecendo.
+
+### No restaurante
+
+<AccessibleVideo
+  id="investigacao-no-restaurante"
+  src={NoRestaurante}
+  title="Configuração da pilha que envia os relatos da detetive no restaurante"
+  descriptionsSrc={NoRestauranteDescriptionsUrl}
+  descriptionsContent={NoRestauranteDescriptionsRaw}
+/>
+
+<Tabs>
+  <TabItem label="Configuração">
+    <Steps>
+1. Coloque uma **Torre da Rede Wired**, crie a rede `Investigações` e conecte a torre a ela.
+2. Monte uma pilha com o [Ativador: Habbo Diz Algo](/referencia/ativadores/wf_trg_says_something/), a [Condição: Usuário tem item de mão](/referencia/condicoes/wf_cnd_has_handitem/) e o **Efeito: Enviar Mensagem na Rede**.
+3. No **Habbo Diz Algo**, escolha **Concordar com todo o texto** e marque **Ocultar a mensagem do gatilho**. Assim, o ativador aceita qualquer texto e oculta a fala que o aciona. A condição do próximo passo determina se a mensagem será enviada à rede.
+4. Na condição, selecione **Tijolão** em **Item de mão**. É o item que a detetive carrega enquanto envia os relatos.
+5. No **Enviar Mensagem na Rede**, escolha **Do ativador Wired** em **Origem da mensagem**. Em **Configurações avançadas**, escolha **Use mobis escolhidos** e selecione a torre do restaurante.
+</Steps>
+  </TabItem>
+  <TabItem label="PseudoWired">
+    <PseudoWiredCodeBlock code={`
+QUANDO
+  - Habbo diz algo:
+    Escolha o tipo: Concordar com todo o texto
+    Ocultar a mensagem do gatilho: marcado
+
+SE
+  - Usuário tem item de mão:
+    Item de mão: Tijolão
+
+ENTÃO
+  - Enviar Mensagem na Rede:
+    Origem da mensagem: Do ativador Wired
+    Torre da Rede Wired: Use mobis escolhidos
+`} />
+  </TabItem>
+</Tabs>
+
+### No escritório
+
+A esposa espera no sofá, diante da escrivaninha vazia da detetive. A torre desse quarto está conectada à mesma rede `Investigações`. O [Ativador: Receber Mensagem da Rede](/referencia/ativadores/wf_trg_receive_message/) recebe cada relato e aciona uma pilha com **Mostrar mensagem** e **Habbos na Área**. O efeito mostra um aviso com **“Informação encontrada:”** seguido da fala recebida. Veja a [configuração dessa pilha](/referencia/ativadores/wf_trg_receive_message/#exemplo-de-uso-receber-os-relatórios-da-detetive).

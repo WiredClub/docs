@@ -1,0 +1,13 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:01.500
+O Editor de mensagens do efeito Enviar Mensagem na Rede está vazio. Ao pressionar Adicionar campo, aparece uma lista com checkpoint_user, nome_do_mobi e nome_do_usuario.
+
+00:00:01.500 --> 00:00:04.500
+O campo checkpoint_user é escolhido. O texto $(checkpoint_user) aparece na primeira linha do editor e na prévia da mensagem.
+
+00:00:04.500 --> 00:00:07.500
+O menu Adicionar campo é aberto novamente. O campo nome_do_mobi é inserido na segunda linha, e a prévia passa a mostrar os dois campos.
+
+00:00:07.500 --> 00:00:09.284
+O campo nome_do_usuario é inserido na terceira linha. A prévia mostra os três espaços de texto, um abaixo do outro.

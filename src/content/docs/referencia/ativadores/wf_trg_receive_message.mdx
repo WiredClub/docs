@@ -1,10 +1,10 @@
 ---
 title: "Ativador Wired: Receber Mensagem da Rede"
-description: wf_trg_receive_message
+description: Aciona uma pilha quando uma Torre da Rede Wired recebe uma mensagem e disponibiliza o texto em trigger_text.
 sidebar:
   label: "Receber Mensagem da Rede"
   badge:
-    text: RASCUNHO
+    text: NOVO
     variant: note
 infobox:
   # == Infobox ==
@@ -16,7 +16,7 @@ infobox:
   revision: 75953
   classname: wf_trg_receive_message
   name: "WIRED ATIVADOR: Receber Mensagem da Rede"
-  description: wf_trg_receive_message
+  description: Ativa a pilha quando uma Torre da Rede Wired configurada recebe uma mensagem.
   # product_name: # caso o nome na loja seja diferente do nome do Mobi
   # image_direction: 0 # valor padrão
   # image_not_animated: false # valor padrão
@@ -29,7 +29,7 @@ infobox:
   # == Dados do Wired ==
   type: Ativador
   # requires_bot: false # valor padrão
-  # requires_furni: false # valor padrão
+  requires_furni: true
   # requires_antena: false # valor padrão
   # requires_contract: false # valor padrão
   # requires_chest: false # valor padrão
@@ -47,5 +47,100 @@ infobox:
 ---
 
 import Infobox from "@components/Infobox.astro"
+import { Aside, Steps, Tabs, TabItem } from "@astrojs/starlight/components";
+import PseudoWiredCodeBlock from "@components/PseudoWiredCodeBlock.astro";
+import AccessibleVideo from "@components/AccessibleVideo.astro";
+import NoEscritorio from "@assets/wf_trg_receive_message/02-no-escritorio.mp4";
+import NoEscritorioDescriptionsUrl from "@assets/wf_trg_receive_message/02-no-escritorio-descriptions.vtt?url";
+import NoEscritorioDescriptionsRaw from "@assets/wf_trg_receive_message/02-no-escritorio-descriptions.vtt?raw";
+import ExemploDetetive from "@assets/wf_trg_receive_message/03-exemplo-rpg-de-detetive.mp4";
+import ExemploDetetiveDescriptionsUrl from "@assets/wf_trg_receive_message/03-exemplo-rpg-de-detetive-descriptions.vtt?url";
+import ExemploDetetiveDescriptionsRaw from "@assets/wf_trg_receive_message/03-exemplo-rpg-de-detetive-descriptions.vtt?raw";
+
+O **Ativador: Receber Mensagem da Rede** inicia uma pilha quando uma das [Torres da Rede Wired](/referencia/outros/utilitarios/wf_link/) escolhidas recebe um texto. Ele funciona em conjunto com o [Efeito: Enviar Mensagem na Rede](/referencia/efeitos/wf_act_send_message/), permitindo usar a mensagem em outro quarto ou no próprio quarto de envio.
 
 <Infobox />
+
+Conecte à rede a torre usada no envio e selecione neste ativador a torre que receberá a mensagem. Para receber uma mensagem enviada pelo próprio quarto, marque **Receber mensagens enviadas por este quarto** na configuração da torre.
+
+## Como esse Wired funciona?
+
+Ao abrir a janela de configuração, você encontra as seções **Informações de uso** e **Torre da Rede Wired**. Em **Informações de uso**, a janela explica qual espaço de texto receberá a mensagem. Em **Torre da Rede Wired**, você escolhe as torres capazes de acionar esta pilha.
+
+Quando a mensagem chega por uma das torres selecionadas, o ativador inicia a execução. O texto recebido pode então ser usado em um Efeito durante essa execução. Para mostrá-lo aos jogadores, por exemplo, acrescente o **Efeito: Mostrar mensagem** e configure quem deverá vê-la.
+
+![Janela do Ativador Receber Mensagem da Rede com as seções Informações de uso e Torre da Rede Wired e a seleção de mobis escolhidos.](@assets/wf_trg_receive_message/01-janela-do-wired.png)
+
+### Informações de uso
+
+A mensagem recebida fica disponível no espaço de texto `$(trigger_text)`, criado automaticamente pelo Habbo. Escreva essa marcação em um campo de texto de um Efeito da pilha para inserir o conteúdo que chegou pela rede. Não é necessário criar um Texto Extra chamado `trigger_text` para isso.
+
+No [Efeito: Mostrar mensagem](/referencia/efeitos/wf_act_show_message/), você pode preencher **Mensagem** apenas com `$(trigger_text)` para repetir o aviso recebido. Também pode acrescentar um texto próprio, como `Aviso da sala de jogos: $(trigger_text)`. Em ambos os casos, configure os usuários que deverão receber a mensagem do efeito.
+
+<Aside type="tip" title="Dica">
+O significado de `$(trigger_text)` depende da pilha em que ele aparece. Em uma pilha iniciada por **Habbo Diz Algo**, ele pode representar a fala do jogador. Se o efeito de envio utilizou campos como o nome de um usuário, essas substituições já fazem parte do texto recebido; o ativador não precisa refazê-las.
+</Aside>
+
+### Torre da Rede Wired
+
+Nesta seção, use as setas para definir de onde virão as torres que poderão acionar o ativador:
+
+* **Use mobis escolhidos:** clique diretamente nas torres do quarto. Você pode selecionar até **20**. É a escolha mais simples quando já sabe quais torres receberão as mensagens dessa pilha.
+* **Usar mobis do seletor:** utiliza as torres fornecidas por um Seletor de mobis. Escolha essa opção quando a seleção depender de outra parte da lógica Wired.
+
+<Aside type="caution" title="Aviso">
+Se você selecionar um mobi que não seja uma **Torre da Rede Wired**, a configuração não será salva. Ao tentar confirmar, aparecerá uma janela com o texto **“Selecione pelo menos uma Torre da Rede Wired.”** Volte à seleção e escolha uma torre.
+
+![Janela Falha ao atualizar com o aviso Selecione pelo menos uma Torre da Rede Wired.](@assets/wf_act_trg/01-janela-selecione-uma-torre-wired.png)
+</Aside>
+
+## Exemplo de uso: receber os relatórios da detetive
+
+No [exemplo da investigação](/referencia/efeitos/wf_act_send_message/#exemplo-de-uso-relatórios-de-uma-investigação), a detetive está disfarçada de atendente em um restaurante. Ela acompanha `bobbyGatinho56` e `JoyPixel` e envia relatos pela rede `Investigações`. Enquanto isso, a esposa de `bobbyGatinho56` espera no sofá do escritório, diante da escrivaninha vazia da detetive. A pilha deste quarto mostrará cada relato como uma notificação.
+
+<AccessibleVideo
+  id="investigacao-no-escritorio"
+  src={NoEscritorio}
+  title="Configuração da pilha que recebe os relatos da detetive no escritório"
+  descriptionsSrc={NoEscritorioDescriptionsUrl}
+  descriptionsContent={NoEscritorioDescriptionsRaw}
+/>
+
+<Tabs>
+  <TabItem label="Configuração">
+    <Steps>
+1. Coloque uma **Torre da Rede Wired** no escritório e conecte-a à rede `Investigações`, já criada no restaurante.
+2. Monte uma pilha com o **Ativador: Receber Mensagem da Rede**, o [Efeito: Mostrar mensagem](/referencia/efeitos/wf_act_show_message/) e o [Seletor: Habbos na Área](/referencia/seletores/wf_slc_users_area/).
+3. No **Receber Mensagem da Rede**, escolha **Use mobis escolhidos** e selecione a torre do escritório.
+4. No **Mostrar mensagem**, escreva `[b]Informação encontrada:[/b] $(trigger_text)` no campo **Mensagem**.
+5. No mesmo efeito, escolha **Atenção** em **Estilo de notificação** e **Usar Usuários do Seletor** em **Selecionar Usuários Fonte**.
+6. No **Habbos na Área**, pressione **Selecione a Área** e marque a área completa do escritório.
+</Steps>
+  </TabItem>
+  <TabItem label="PseudoWired">
+    <PseudoWiredCodeBlock code={`
+ALVOS
+  - Habbos na Área: quarto inteiro
+
+QUANDO
+  - Receber Mensagem da Rede:
+    Torre da Rede Wired: Use mobis escolhidos
+
+ENTÃO
+  - Mostrar mensagem:
+    Mensagem: "[b]Informação encontrada:[/b] $(trigger_text)"
+    Estilo de notificação: Atenção
+    Selecionar Usuários Fonte: Usar Usuários do Seletor
+`} />
+  </TabItem>
+</Tabs>
+
+Cada fala da detetive chega como uma mensagem separada e o **Mostrar mensagem** coloca cada texto após **“Informação encontrada:”**.
+
+<AccessibleVideo
+  id="exemplo-rpg-de-detetive"
+  src={ExemploDetetive}
+  title="Simulação da investigação com mensagens entre o restaurante e o escritório"
+  descriptionsSrc={ExemploDetetiveDescriptionsUrl}
+  descriptionsContent={ExemploDetetiveDescriptionsRaw}
+/>

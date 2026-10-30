@@ -1,0 +1,13 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:02.000
+No Editor de mensagens, o texto Wired Club Enviar Mensagem na Rede aparece em uma única linha. O cursor é posicionado entre Wired e Club, e o botão Alinhar é acionado.
+
+00:00:02.000 --> 00:00:05.000
+A marcação [a] é inserida após Wired. Na prévia, o texto passa a apresentar um espaço entre Wired e Club.
+
+00:00:05.000 --> 00:00:09.500
+O botão Alinhar é usado novamente entre Club e Enviar. Uma segunda marcação [a] aparece no editor, e a prévia separa os trechos em colunas.
+
+00:00:09.500 --> 00:00:15.734
+Outras marcações [a] são inseridas entre Enviar, Mensagem, na e Rede. A prévia atualiza o espaçamento entre as palavras a cada inserção.
