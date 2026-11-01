@@ -1,6 +1,6 @@
 ---
 title: "Torre da Rede Wired"
-description: Configure Torres da Rede Wired para enviar e receber mensagens e gerenciar as conexões da rede.
+description: Configure Torres da Rede Wired para trocar mensagens e dataframes entre quartos e gerenciar conexões.
 sidebar:
   label: "Torre da Rede Wired"
   badge:
@@ -16,7 +16,7 @@ infobox:
   revision: 75953
   classname: wf_link
   name: "Torre da Rede Wired"
-  description: Conecta o quarto a uma rede para enviar e receber mensagens por meio de Wireds.
+  description: Conecta o quarto a uma rede para enviar e receber mensagens e dataframes por meio de Wireds.
   # product_name: # caso o nome na loja seja diferente do nome do Mobi
   # image_direction: 0 # valor padrão
   # image_not_animated: false # valor padrão
@@ -43,11 +43,13 @@ infobox:
 import Infobox from "@components/Infobox.astro"
 import { Aside, Steps } from "@astrojs/starlight/components";
 
-A **Torre da Rede Wired** conecta um quarto à rede usada para trocar mensagens. Se você conectar torres de quartos diferentes à mesma rede, uma mensagem enviada em um deles poderá chegar aos demais. A torre também pode receber mensagens enviadas pelo próprio quarto quando a opção de auto-recebimento está marcada.
+A **Torre da Rede Wired** conecta um quarto à rede usada para trocar mensagens e dataframes. Se você conectar torres de quartos diferentes à mesma rede, os dados enviados em um deles poderão chegar aos demais. A torre também pode receber mensagens enviadas pelo próprio quarto quando a opção de auto-recebimento está marcada.
 
 <Infobox />
 
-A torre fornece a conexão; os Wireds definem o que acontece com a mensagem. O [Efeito: Enviar Mensagem na Rede](/referencia/efeitos/wf_act_send_message/) escolhe o texto e a torre usada no envio. O [Ativador: Receber Mensagem da Rede](/referencia/ativadores/wf_trg_receive_message/) observa a torre escolhida para o recebimento e inicia uma pilha quando ela recebe o texto. É nessa pilha que você configura como a mensagem será utilizada.
+A torre fornece a conexão; os Wireds definem o que será enviado e como usar o conteúdo recebido. Para trocar um texto, o [Efeito: Enviar Mensagem na Rede](/referencia/efeitos/wf_act_send_message/) escolhe a mensagem e a torre de envio. O [Ativador: Receber Mensagem da Rede](/referencia/ativadores/wf_trg_receive_message/) observa a torre receptora e inicia uma pilha quando o texto chega.
+
+Para enviar várias informações na mesma execução, use o [Efeito: Enviar Dataframe na Rede](/referencia/efeitos/wf_act_send_dataframe/). Ele organiza os dados em linhas com **chave** e **valor**. No outro quarto, o [Ativador: Receber Dataframe da Rede](/referencia/ativadores/wf_trg_receive_dataframe/) lê as chaves configuradas e disponibiliza cada valor em um espaço de texto ou uma variável de contexto. Cada tipo de envio utiliza seu ativador correspondente.
 
 ## Como esse mobi funciona?
 
@@ -125,6 +127,8 @@ Excluir a rede desconecta todas as suas torres, em todos os quartos. Essa ação
 
 ## Conectar dois quartos
 
+### Enviar uma mensagem
+
 <Steps>
 1. No quarto de envio, coloque uma torre, digite um nome em **Nova rede**, pressione **Criar rede** e, depois, **Conectar** na linha dessa rede.
 2. No quarto de recebimento, coloque outra torre. Em **Minhas redes**, procure a rede criada no primeiro quarto e pressione **Conectar**. Confira se o estado muda para **Conectado**.
@@ -133,3 +137,15 @@ Excluir a rede desconecta todas as suas torres, em todos os quartos. Essa ação
 </Steps>
 
 Com as duas torres conectadas, uma mensagem enviada pela primeira pode acionar o ativador ligado à segunda. No [exemplo da investigação](/referencia/efeitos/wf_act_send_message/#exemplo-de-uso-relatórios-de-uma-investigação), a rede `Investigações` conecta o restaurante ao escritório: a torre do restaurante envia os relatos da detetive, e a do escritório os entrega à pilha que mostra as mensagens à esposa. Como o envio parte de outro quarto, não é preciso marcar **Receber mensagens enviadas por este quarto** na torre do escritório. Veja também [como configurar o recebimento](/referencia/ativadores/wf_trg_receive_message/#exemplo-de-uso-receber-os-relatórios-da-detetive).
+
+### Enviar um dataframe
+
+Depois de conectar as torres de dois quartos à mesma rede, você também pode enviar várias informações de uma vez:
+
+<Steps>
+1. No quarto de envio, adicione o **Efeito: Enviar Dataframe na Rede** à pilha. Defina uma **chave** e um **valor** para cada linha que deseja enviar e selecione a torre desse quarto em **Configurações avançadas**.
+2. No quarto de recebimento, configure o **Ativador: Receber Dataframe da Rede** para observar a torre local. Informe as mesmas chaves do envio e escolha se cada valor recebido ficará disponível em um **espaço de texto** ou em uma **variável de contexto**.
+3. Acrescente à pilha de recebimento os Wireds que usarão esses valores. Para mostrar um texto recebido, por exemplo, você pode usar o [Efeito: Mostrar mensagem](/referencia/efeitos/wf_act_show_message/) com o espaço de texto configurado no ativador.
+</Steps>
+
+Veja a configuração completa no exemplo de [envio do aviso de uma rodada](/referencia/efeitos/wf_act_send_dataframe/#exemplo-de-uso-avisar-o-início-de-uma-rodada) e na continuação sobre o [recebimento desse aviso](/referencia/ativadores/wf_trg_receive_dataframe/#exemplo-de-uso-receber-o-aviso-da-rodada).
