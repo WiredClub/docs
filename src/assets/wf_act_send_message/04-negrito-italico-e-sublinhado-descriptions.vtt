@@ -1,0 +1,10 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:03.000
+No Editor de mensagens, Wired Club está selecionado. O botão B insere as tags [b] e [/b] em torno do texto, que aparece em negrito na prévia.
+
+00:00:03.000 --> 00:00:06.500
+Em uma segunda linha, Wired Club é selecionado e o botão I insere [i] e [/i]. A prévia mostra a nova linha em itálico, abaixo da linha em negrito.
+
+00:00:06.500 --> 00:00:09.784
+Uma terceira linha é selecionada. O botão U insere [u] e [/u], e a prévia exibe essa linha sublinhada abaixo das outras duas.

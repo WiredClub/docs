@@ -45,5 +45,27 @@ infobox:
 ---
 
 import Infobox from "@components/Infobox.astro"
+import { Aside } from '@astrojs/starlight/components';
+
+O **Efeito: Congelar Habbo**, atribui aos usuários selecionados a variável interna `@is_frozen` que impede a movimentação dos usuários por conta própria dentro do quarto.
+
+As únicas maneiras de o usuário se livrar do efeito de congelamento são sair e entrar novamente no quarto ou ser afetado por outro sistema que utilize o [Efeito: Wired Descongelar Habbo](/referencia/efeitos/wf_act_unfreeze/).
 
 <Infobox />
+
+## Configurações:
+**Escolha um efeito:**
+- Wired Freeze (padrão)
+- Congelado
+- Raio-x
+- Passarinhos
+- Armadilha
+
+**Configurações avançadas:**
+- Use o usuário acionador
+- Usar usuários do seletor
+- Usar usuários do Sinal
+
+<Aside type="caution" title="Nota importante">
+Esse wired não impede wireds como [Efeito: Move usuário ao mobi](/referencia/efeitos/wf_act_user_to_furni/) e [Efeito: Move e Gira usuário](/referencia/efeitos/wf_act_move_rotate_user/) de mover o usuário pelo quarto.
+</Aside>

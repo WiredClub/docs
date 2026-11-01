@@ -45,5 +45,27 @@ infobox:
 ---
 
 import Infobox from "@components/Infobox.astro"
+import { Aside } from '@astrojs/starlight/components';
+
+O **Efeito: Configurar a Altura do Mobi**, define a altura dos mobis selecionados no quarto.
 
 <Infobox />
+
+## Configurações
+**Escolha o tipo:**
+- Aumentar
+- Diminuir
+- Configurar valor
+
+**Selecione a altura**: Vai de 0 a 80.
+
+**Configurações avançadas:**
+- Use mobis escolhidos
+- Usar mobis do seletor
+- Usar mobis do sinal
+- Use o item de ativação
+
+
+<Aside type="note" title="Nota importante">
+Esse Wired permite ignorar as regras de empilhamento de mobis, assim como o mobi Lajota. Se houver um mobi acima e outro abaixo, e o mobi inferior for afetado por esse Wired, sua altura será ajustada conforme a configuração definida, sem a necessidade de utilizar uma Lajota.
+</Aside>

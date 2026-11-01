@@ -45,5 +45,26 @@ infobox:
 ---
 
 import Infobox from "@components/Infobox.astro"
+import { Aside } from '@astrojs/starlight/components';
+
+O **Efeito: Bot muda de roupa** altera a roupa de um ou mais bots, de acordo com a configuração avançada selecionada no Wired.
 
 <Infobox />
+
+## Configurações
+
+**Nome do bot**: Escreva o nome do bot que o efeito será aplicado, é importante conferir se o bot está com o mesmo nome e está no quarto.
+
+**Copiar os meus visuais**: Ao clicar no botão inferior com o mesmo nome, o visual que você está vestindo no momento será salvo no Wired e atribuído ao bot quando o efeito for ativado.
+
+<Aside type="note" title="Nem tudo é permitido">
+Esse Wired salva qualquer tipo de roupa, incluindo LTDs e NFTs, com **exceção dos efeitos**.
+</Aside>
+
+## Configurações avançadas
+
+**Selecione o bot fonte:**
+- Usar usuários do sinal
+- Usar usuários do seletor
+- Use usuário acionador
+- Use o bot especificado pelo nome
