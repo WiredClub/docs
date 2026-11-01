@@ -232,20 +232,20 @@ Durante a cena, `bobbyGatinho56` diz `minha mulher nem sabe q tô nesse encontro
   </TabItem>
   <TabItem label="PseudoWired">
     <PseudoWiredCodeBlock code={`
-QUANDO
-  - Habbo diz algo:
-    Escolha o tipo: Concordar com todo o texto
-    Ocultar a mensagem do gatilho: marcado
+      QUANDO
+        - Habbo diz algo
+          Concordar com todo o texto
+          Ocultar a mensagem do gatilho
 
-SE
-  - Usuário tem item de mão:
-    Item de mão: Tijolão
+      SE
+        - Usuário tem item de mão: Tijolão
 
-ENTÃO
-  - Enviar Mensagem na Rede:
-    Origem da mensagem: Do ativador Wired
-    Torre da Rede Wired: Use mobis escolhidos
-`} />
+      ENTÃO
+        - Enviar Mensagem na Rede:
+          Do ativador Wired
+          Use mobis escolhidos
+    `}
+  />
   </TabItem>
 </Tabs>
 
