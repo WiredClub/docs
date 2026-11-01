@@ -266,9 +266,6 @@ Para consultar as variáveis disponíveis, acesse a aba [Variáveis das Ferramen
 | `@dimensions.x` | A dimensão ocupada pelo mobi no eixo **X** (horizontal) do piso. Confira o tópico [Dimensões do mobi](#dimensões-do-mobi) para mais detalhes |
 | `@dimensions.y` | A dimensão ocupada pelo mobi no eixo **Y** (vertical) do piso. Confira o tópico [Dimensões do mobi](#dimensões-do-mobi) para mais detalhes |
 | `@owner_id` | O identificador único do proprietário do mobi. |
-| `~clock.is_game_aware` | Indica que o mobi pode iniciar ou encerrar partidas Battle Banzai e Freeze |
-| `~clock.pulse_count` | Armazena um valor numérico utilizado para controlar o tempo exibido no visor do cronômetro. |
-| `~clock.state` | Possui 3 valores, e cada um determina um comportamento diferente para o cronômetro. |
 
 ### Identificador do mobi
 
@@ -340,8 +337,19 @@ Por exemplo, o **Piso Transparente** possui dimensão **2** em ambos os eixos. I
 
 Essas dimensões descrevem o espaço ocupado no piso. Já `@height` representa a altura do próprio mobi, e `@altitude` indica a altitude em que ele está no quarto.
 
-### Tempo do mobi
-Alguns mobis possuem variáveis internas que começam com `~clock.`. Conhecê-las é importante, pois elas podem **afetar o funcionamento** de mobis Battle Banzai e Freeze, causar comportamentos indesejados no quarto ou permitir a configuração de tempos específicos no visor do relógio. Além disso, são essenciais para compreender os Wireds que manipulam ou verificam essas variáveis e entender como os cronômetros e relógios funcionam internamente:
+## Variáveis inteligentes de mobi
+Uma variável inteligente é identificada pelo caractere `~` (til) no início do nome. Ela só aparece na lista de variáveis do quarto quando existe algum elemento relacionado a ela no ambiente, como um mobi. Assim, sua exibição depende diretamente da presença desses elementos no quarto.
+
+Você pode consultar as variáveis inteligentes na aba [Variáveis das Ferramentas do Criador](/referencia/ferramentas-do-criador/variaveis/#como-acessar).
+
+| Variável | O que representa |
+| :--- | :--- |
+| `~clock.is_game_aware` | Indica que o mobi pode iniciar ou encerrar partidas Battle Banzai e Freeze |
+| `~clock.pulse_count` | Armazena um valor numérico utilizado para controlar o tempo exibido no visor do cronômetro. |
+| `~clock.state` | Possui 3 valores, e cada um determina um comportamento diferente para o cronômetro. |
+
+### Cronômetros
+Alguns mobis possuem variáveis internas que começam com `~clock.`. Conhecê-las é importante, pois elas podem **afetar o funcionamento** de mobis Battle Banzai e Freeze, causar comportamentos indesejados no quarto ou permitir a configuração de tempos específicos no visor do cronômetro. Além disso, são essenciais para compreender os Wireds que manipulam ou verificam essas variáveis e entender como os cronômetros funcionam internamente:
 
 `~clock.is_game_aware`: indica que o mobi pode **iniciar e encerrar** partidas de Battle Banzai ou Freeze. Portanto, se você precisa de um cronômetro, mas não deseja ativar as mecânicas desses jogos, utilize um mobi que não possua essa variável.
 
