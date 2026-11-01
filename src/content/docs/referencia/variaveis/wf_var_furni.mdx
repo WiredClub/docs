@@ -333,3 +333,45 @@ Por exemplo, o **Piso Transparente** possui dimensão **2** em ambos os eixos. I
 ![Piso Transparente ocupando uma área de dois por dois quadrados, com um dos quatro quadrados destacado pelo cursor.](@assets/wf_var_furni/04-dimensoes-piso-transparente.gif)
 
 Essas dimensões descrevem o espaço ocupado no piso. Já `@height` representa a altura do próprio mobi, e `@altitude` indica a altitude em que ele está no quarto.
+
+## Variáveis inteligentes de mobi
+Uma variável inteligente é identificada pelo caractere `~` (til) no início do nome. Ela só aparece na lista de variáveis do quarto quando existe algum elemento relacionado a ela no ambiente, como um mobi. Assim, sua exibição depende diretamente da presença desses elementos no quarto.
+
+Você pode consultar as variáveis inteligentes na aba [Variáveis das Ferramentas do Criador](/referencia/ferramentas-do-criador/variaveis/#como-acessar).
+
+| Variável | O que representa |
+| :--- | :--- |
+| `~clock.is_game_aware` | Indica que o mobi pode iniciar ou encerrar partidas Battle Banzai e Freeze |
+| `~clock.pulse_count` | Armazena um valor numérico utilizado para controlar o tempo exibido no visor do cronômetro. |
+| `~clock.state` | Possui 3 valores, e cada um determina um comportamento diferente para o cronômetro. |
+
+### Cronômetros
+Alguns mobis possuem variáveis internas que começam com `~clock.`. Conhecê-las é importante, pois elas podem **afetar o funcionamento** de mobis Battle Banzai e Freeze, causar comportamentos indesejados no quarto ou permitir a configuração de tempos específicos no visor do cronômetro. Além disso, são essenciais para compreender os Wireds que manipulam ou verificam essas variáveis e entender como os cronômetros funcionam internamente:
+
+`~clock.is_game_aware`: indica que o mobi pode **iniciar e encerrar** partidas de Battle Banzai ou Freeze. Portanto, se você precisa de um cronômetro, mas não deseja ativar as mecânicas desses jogos, utilize um mobi que não possua essa variável.
+
+`~clock.pulse_count`: Armazena um valor numérico utilizado para controlar o tempo exibido no visor do cronômetro. No entanto, o número armazenado nesta variável **não corresponde** diretamente ao tempo apresentado no visor.
+
+Isso acontece porque o cronômetro divide automaticamente o valor de `~clock.pulse_count` por 2 e utiliza o resultado como tempo **em segundos**.
+
+**Exemplo**:
+Se a variável estiver definida como 160, o cronômetro realizará o seguinte cálculo:
+
+| Conta | Resultado no visor|
+| :--- | :--- |
+| 160 / 2 = 80 segundos | 01:20 (1 minuto e 20 segundos) |
+
+<Aside type="note" title="Conversão automática">
+O visor faz a conversão automática de segundos para minutos sempre que o valor ultrapassa 59 segundos.
+</Aside>
+
+É possível modificar o valor dessa variável manualmente ou por meio de Wireds. Isso permite controlar dinamicamente o tempo exibido no cronômetro, possibilitando, por exemplo, a criação de um [relógio que exibe o horário atual](https://www.wiredclub.com.br/tutoriais/relogio-funcional-com-uma-unica-pilha-wired).
+
+`~clock.state`: possui 3 valores, e cada um determina um comportamento diferente para o cronômetro.
+
+
+| Valor | Tipo | Explicação |
+| :--- | :--- | :--- |
+| **0** | Inicial (Initial) | O cronômetro tem seu valor zerado. Ele recebe esse estado por padrão quando o mobi é colocado no quarto. A variável `~clock.pulse_count` também é inicializada com o valor 0, mas pode ser alterada. Caso `~clock.pulse_count` seja modificada enquanto `~clock.state` estiver em 0, seu valor será mantido. No entanto, se `~clock.state` mudar para 1 e, posteriormente, retornar para 0, `~clock.pulse_count` será zerada novamente. Quando seu valor é 0, jogos como Battle Banzai e Freeze **são encerrados**. |
+| **1** | Funcionando (Running) | Enquanto estiver com esse valor, por padrão a variável `~clock.pulse_count` recebe +1 a cada segundo, `~clock.pulse_count` pode receber valores adicionais de pilhas wireds. Se o mobi também possuir a variável `~clock.is_game_aware`, jogos como Battle Banzai e Freeze **serão ativados no quarto**. |
+| **2** | Pausado (Paused) | Ao receber esse valor, a variável `~clock.pulse_count` para de receber novos valores, **exceto** quando houver pilhas wireds mudando o valor dessa variável. Jogos como Battle Banzai e Freeze **não são encerrados**, mas as interações com os mobis desses jogos **ficam pausadas**. |
