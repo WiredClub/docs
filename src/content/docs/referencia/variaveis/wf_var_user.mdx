@@ -334,3 +334,80 @@ A variável `@room_entry.method` indica como o usuário acessou o quarto:
 | **1** | **Padrão:** entrada pelo navegador de quartos. |
 | **2** | **Teleporte:** entrada utilizando um teleporte. |
 | **3** | **Link de quarto:** entrada utilizando o mobi **Conector de Quarto WIRED**. |
+
+### Equipe
+
+Caso o usuário possua variáveis com o prefixo `@team.`, isso indica que elas estão relacionadas a equipes de jogos, como **Battle Banzai**, **Freeze** ou **Wired**. Conhecer essas variáveis é importante, pois determinados Wireds podem utilizá-las para verificar ou modificar informações relacionadas as equipes.
+
+`@team.score`: Armazena a pontuação total de uma equipe, considerando o **tipo de jogo** e a **cor da equipe**.
+
+Isso significa que a pontuação é **compartilhada entre todos os jogadores que pertencem a mesma equipe**, dentro do mesmo tipo de jogo e com a mesma cor.
+
+**Exemplo**: imagine que há quatro jogadores da equipe vermelha participando de uma partida de Battle Banzai. Se um deles marcar 5 pontos, os outros três também terão esses 5 pontos contabilizados em suas respectivas variáveis `@team.score`.
+
+A variável `@team.type` é utilizada para diferenciar os tipos de jogo. Portanto, caso exista uma partida de Freeze acontecendo no mesmo quarto, os jogadores da equipe vermelha de Freeze não receberão os pontos obtidos pelos jogadores de Battle Banzai, pois pertencem a tipos de jogo diferentes.
+
+É possível alterar diretamente essa variável utilizando o [Efeito: Mudar Valor Variável](/referencia/efeitos/wf_act_change_var_val/).
+
+<Aside type="note" title="Nota importante">
+
+Essa variável só pode ser modificada quando existe um mobi do **tipo cronômetro** no quarto que atende às seguintes condições:
+
+- A variável inteligente `~clock.is_game_aware` existe no cronômetro.
+- A variável inteligente `~clock.state` deve ser igual a 1.
+
+Se essas condições **não forem atendidas**, a variável `@team.score` **não poderá ser alterada**.
+
+Para entender melhor o funcionamento das variáveis inteligentes, recomendamos a leitura da seção sobre [Cronômetros](/referencia/variaveis/wf_var_furni/#cronômetros).
+
+</Aside>
+
+<Aside type="caution" title="Atenção para as próximas variáveis">
+- Não é possível alterar diretamente `@team.color` e `@team.type` utilizando o [Efeito: Mudar Valor Variável](/referencia/efeitos/wf_act_change_var_val/).
+- O usuário não pode ter mais de um `@team.color` e `@team.type`.
+</Aside>
+
+`@team.color`: Define a cor da equipe à qual o usuário pertence. Essa cor pode ser **atribuída ou alterada de diferentes maneiras**, como por meio do Wired [Efeito: Entrar na equipe](/referencia/efeitos/wf_act_join_team/) ou ao passar por um dos portões de equipe dos jogos Battle Banzai e Freeze.
+
+Se o usuário quiser mudar de cor em uma partida de Battle Banzai ou Freeze, será necessário que ele saia do quarto ou saia da equipe pelo respectivo portão e entre novamente pelo portão correspondente à cor desejada.
+
+O mesmo princípio se aplica quando o tipo da equipe é Wired. Nesse caso, será necessário construir um sistema próprio para permitir que o usuário escolha e altere a cor da equipe, utilizando o [Efeito: Entrar na equipe](/referencia/efeitos/wf_act_join_team/).
+
+Dessa forma, a mudança de cor deve ser realizada por meio dos mecanismos de entrada e saída de equipes, e não pela alteração direta da variável.
+
+A cor da equipe é representada por valores numéricos, permitindo que os Wireds identifiquem e manipulem a equipe à qual o usuário pertence.
+
+Os valores numéricos correspondentes a cada cor são:
+
+- 1 = Vermelho (Red)
+- 2 = Verde (Green)
+- 3 = Azul (Blue)
+- 4 = Amarelo (Yellow)
+
+`@team.type`: Define o tipo de equipe à qual o usuário pertence, identificando em qual modalidade de jogo ele está participando, como Battle Banzai, Freeze ou Wired.
+
+Essa variável é importante porque determina o contexto da equipe e permite que os Wireds e identifiquem a qual tipo de jogo o usuário está associado. Dependendo do valor definido em `@team.type`, o usuário poderá receber **efeitos** e **comportamentos específicos** relacionados ao respectivo jogo.
+
+Assim como `@team.color`, para o usuário mudar o tipo de equipe ele terá que sair da equipe atual e escolher a nova.
+
+Além disso, essa variável permite diferenciar equipes de modalidades distintas, mesmo quando possuem a mesma cor.
+
+Os valores numéricos correspondentes a cada tipo são:
+
+- 0 = Battle Banzai
+- 1 = Freeze
+- 2 = Tagging
+- 3 = Swimming
+- 4 = Wired
+
+#### Restrições e funcionamento das variáveis de equipe
+
+Um usuário **não pode** participar de mais de uma equipe ao mesmo tempo. Isso significa que ele não pode estar simultaneamente em uma equipe de Wired e em uma equipe de Battle Banzai, por exemplo, recebendo pontuações de ambas.
+
+Além disso, quando o usuário perde uma das variáveis com o prefixo `@team.`, isso indica que ele saiu da equipe à qual pertencia.
+
+Nesse caso, todas as demais variáveis que possuem o mesmo prefixo (@team.) terão seus valores zerados e removidos do usuário.
+
+<Aside type="note" title="Importante">
+A ausência dessas variáveis indica que o usuário não está mais associado a nenhuma equipe.
+</Aside>
