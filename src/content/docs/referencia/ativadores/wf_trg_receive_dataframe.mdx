@@ -16,7 +16,7 @@ infobox:
   revision: 75953
   classname: wf_trg_receive_dataframe
   name: "WIRED ATIVADOR: Receber Dataframe da Rede"
-  description: Ativa a pilha ao receber um dataframe e encaminha seus valores para espaços de texto ou variáveis de contexto.
+  description: Efeitos são ativados quando a Torre da Rede Wired selecionada recebe um dataframe.
   # product_name: # caso o nome na loja seja diferente do nome do Mobi
   # image_direction: 0 # valor padrão
   # image_not_animated: false # valor padrão
@@ -92,6 +92,10 @@ Esse espaço funciona como os espaços criados pelos Textos Extras: a marcação
 Ao escolher esta opção, o rótulo **Espaço** muda para **Variável** e o campo de texto é substituído por uma lista. Selecione nela uma [Contexto Variável](/referencia/variaveis/wf_var_context/) que você já criou no quarto. O valor recebido pela chave será encaminhado para essa variável na execução acionada pelo ativador.
 
 Para receber um número como o da rodada, crie a variável de contexto com **Tem valor** marcada. No exemplo abaixo, a chave `rodada` contém **1** e é direcionada a `rodada_atual`. Essa variável pode então ser utilizada pelos Wireds da mesma execução.
+
+Se você selecionar **Variável de contexto**, mas não escolher nenhuma variável na lista **Variável**, ao tentar salvar aparecerá a janela **Falha ao atualizar** com o aviso **“Escolha como destino uma variável de contexto, criada pelo usuário e com valor”**.
+
+![Janela Falha ao atualizar informando que a Linha 2 precisa ter como destino uma variável de contexto criada pelo usuário e com valor.](@assets/wf_trg_receive_dataframe/01-aviso-variavel-de-contexto.png)
 
 ### Configurações avançadas
 

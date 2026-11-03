@@ -16,7 +16,7 @@ infobox:
   revision: 75953
   classname: wf_act_send_dataframe
   name: "WIRED EFEITO: Enviar Dataframe na Rede"
-  description: Envia um dataframe com pares de chave e valor pela Torre da Rede Wired.
+  description: Este efeito envia um dataframe com pares de chave e valor pela Torre da Rede Wired.
   # product_name: # caso o nome na loja seja diferente do nome do Mobi
   # image_direction: 0 # valor padrão
   # image_not_animated: false # valor padrão
@@ -46,6 +46,7 @@ infobox:
 
 import Infobox from "@components/Infobox.astro";
 import { Aside, Steps } from "@astrojs/starlight/components";
+import NumeroDeLinhas from "@assets/wf_act_send_dataframe/02-numero-de-linhas.gif";
 
 O **Efeito: Enviar Dataframe na Rede** permite enviar várias informações de um quarto para outro pela [Torre da Rede Wired](/referencia/outros/utilitarios/wf_link/). Cada informação ocupa uma linha da configuração: você dá um nome a ela, chamado **chave**, e define o **valor** que será enviado.
 
@@ -60,6 +61,8 @@ Para que outro quarto receba esses dados, coloque uma torre em cada quarto, cone
 Quando a pilha executa este efeito, ele reúne as linhas configuradas e as envia pela torre selecionada. Antes disso, você escolhe quantas linhas utilizar, preenche a chave de cada uma, define a origem do valor e, se necessário, ajusta o atraso.
 
 A chave é o que permite reconhecer um dado no quarto de destino. Se você enviar uma linha chamada `rodada`, por exemplo, configure também a chave `rodada` no ativador de recebimento. Nesse ativador, você poderá decidir se o valor será colocado em um espaço de texto ou em uma variável de contexto.
+
+![Janela inicial do Efeito Enviar Dataframe na Rede com Número de linhas em 0, atraso em 0 segundo e a opção Mostrar configurações avançadas.](@assets/wf_act_send_dataframe/01-janela-do-wired.png)
 
 <Aside type="tip" title="Dica de Ouro">
 Em termos de programação, você pode imaginar as linhas como as propriedades de um objeto: cada chave identifica um valor. Três linhas poderiam ser representadas assim:
@@ -79,6 +82,12 @@ Nesse exemplo, `nome` e `genero` guardam textos, enquanto `idade_da_conta` guard
 
 No campo de lista **Número de linhas**, escolha um valor de **0 a 12**. Com **0**, não há linhas para preencher. Ao escolher **1**, aparece a seção **Linha 1**, com os campos **Chave** e **Valor**. Se você aumentar o número, surgem as seções **Linha 2**, **Linha 3** e assim por diante, até **Linha 12**.
 
+<img
+  src={NumeroDeLinhas.src}
+  alt="Animação da escolha do Número de linhas na janela do efeito, mostrando como aparecem as seções de Chave e Valor."
+  style={{ width: "35%" }}
+/>
+
 Cada linha é configurada separadamente. Você pode, por exemplo, enviar um texto na primeira e um número na segunda. Para saber quantas linhas preparar, conte quantas informações o quarto de destino precisará receber.
 
 #### Chave
@@ -95,6 +104,8 @@ Guarde o nome escolhido para configurar o recebimento. **Chave** é o nome pelo 
 
 Ao lado da chave, escolha como o valor será preenchido. A opção selecionada altera o campo **Valor** daquela linha:
 
+![Lista de tipos de valor aberta na Linha 1, com as opções Número, Texto da variável e Mensagem personalizada.](@assets/wf_act_send_dataframe/03-lista-tipagem-aberta.png)
+
 ##### Número
 
 Use esta opção para enviar um número. Você pode digitá-lo diretamente no campo **Valor**, como `14`, ou pressionar o ícone **Escolha uma variável** ao lado do campo para utilizar um valor já disponível em alguma variável.
@@ -103,7 +114,7 @@ O ícone abre a janela **Origem da variável**. Nela, escolha uma variável de *
 
 ##### Texto da Variável
 
-Escolha esta opção quando o número de uma variável tiver um texto associado e você quiser enviar o **texto**, em vez do número. A lista de escolha mostra as variáveis que possuem textos vinculados. Você pode conferir essas associações em [Valores textuais](/referencia/ferramentas-do-criador/variaveis/#valores-textuais).
+Escolha esta opção quando o número de uma variável tiver um texto associado e você quiser enviar o **texto**, em vez do número. A lista mostra todas as variáveis do alvo selecionado, mas só permite escolher aquelas que possuem textos vinculados. Nas demais, aparece o aviso **“Não pode ser selecionado neste contexto”**, e não é possível selecioná-las. Você pode conferir essas associações em [Valores textuais](/referencia/ferramentas-do-criador/variaveis/#valores-textuais).
 
 Aqui, o campo **Valor** não funciona como uma caixa para escrever uma mensagem livre. Se você tentar digitar, ele informa **“Selecione uma variável disponível ou deixe este campo vazio”**. Use o ícone **Escolha uma variável** para selecionar a variável cujo texto será enviado.
 
@@ -145,7 +156,7 @@ No efeito, prepare estas linhas:
 2. Monte uma pilha com o [Ativador: Habbo Clica no Mobi](/referencia/ativadores/wf_trg_click_furni/) e este efeito. No ativador, selecione o mobi que será usado para iniciar a rodada.
 3. No **Enviar Dataframe na Rede**, escolha **2** em **Número de linhas**. Na **Linha 1**, escreva `aviso` em **Chave**, selecione **Mensagem Personalizada** e digite `Rodada iniciada` em **Mensagem**.
 4. Na **Linha 2**, escreva `rodada` em **Chave**, selecione **Número** e digite `1` em **Valor**. Deixe **Atraso (segundos)** em **0** para enviar os dados quando a pilha for acionada.
-5. Em **Configurações avançadas**, escolha **Use mobis escolhidos** e selecione a torre do quarto de controle. O mobi clicado no passo 2 aciona a pilha; ele não substitui a torre usada no envio.
+5. Em **Configurações avançadas**, escolha **Use mobis escolhidos** e selecione a torre do quarto de controle.
 6. Na sala de espera, conecte outra torre à mesma rede e configure o **Receber Dataframe da Rede** para ler as chaves `aviso` e `rodada`. Veja [como configurar o recebimento](/referencia/ativadores/wf_trg_receive_dataframe/#exemplo-de-uso-receber-o-aviso-da-rodada).
 </Steps>
 
