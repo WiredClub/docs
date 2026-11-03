@@ -16,6 +16,7 @@ import MenuWiredDescriptionsRaw from "@assets/ferramentas-do-criador/configuraco
 import ReloadERollback from "@assets/ferramentas-do-criador/configuracoes/08-exemplo-recarregar-e-reverter.mp4";
 import ReloadERollbackDescriptionsUrl from "@assets/ferramentas-do-criador/configuracoes/08-exemplo-recarregar-e-reverter-descriptions.vtt?url";
 import ReloadERollbackDescriptionsRaw from "@assets/ferramentas-do-criador/configuracoes/08-exemplo-recarregar-e-reverter-descriptions.vtt?raw";
+import AvisoModoDeTeste from "@assets/ferramentas-do-criador/configuracoes/13-aviso-modo-de-teste.png";
 
 A aba **Configurações** reúne opções para ajustar o funcionamento do quarto e a forma como você utiliza as ferramentas. Quer permitir que outras pessoas consultem seus Wireds sem alterá-los? Ou testar um jogo sem que os seus direitos no quarto interfiram? É aqui que você encontra esses controles.
 
@@ -176,6 +177,14 @@ Utilizamos o botão **Inspect** em vários vídeos de exemplo do Wired Club. Val
 ### Habilitar o modo de teste para jogos
 
 Quando você cria um jogo no próprio quarto, os seus direitos podem interferir no teste. Esta opção permite **testar o sistema Wired com os seus direitos desabilitados**, ajudando a conferir seu funcionamento nessas condições.
+
+Com o modo de teste ativo, você fica sem direitos em todos os quartos onde normalmente os teria, não apenas naquele em que ativou a opção. Sempre que entrar em outro quarto onde teria direitos, aparecerá no lado direito da tela a notificação **“Info: você está atualmente no modo de teste. Desative-o no Menu Wired (clique).”**. Clique nela para abrir as Ferramentas do Criador diretamente na aba **Configurações**, onde você pode desativar o modo de teste.
+
+<img
+  src={AvisoModoDeTeste.src}
+  alt="Notificação do modo de teste com o texto Info: você está atualmente no modo de teste. Desative-o no Menu Wired (clique)."
+  style={{ width: "35%" }}
+/>
 
 Você também pode alternar essa opção utilizando o comando `:playtest`.
 
