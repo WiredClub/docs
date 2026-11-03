@@ -48,6 +48,8 @@ infobox:
 
 import Infobox from "@components/Infobox.astro";
 import { Steps } from "@astrojs/starlight/components";
+import NumeroDeLinhas from "@assets/wf_trg_receive_dataframe/03-numero-de-linhas.gif";
+import ConfiguracoesAvancadas from "@assets/wf_trg_receive_dataframe/06-configuracoes-avancadas.gif";
 
 O **Ativador: Receber Dataframe da Rede** aciona uma pilha quando a [Torre da Rede Wired](/referencia/outros/utilitarios/wf_link/) configurada recebe dados de outro quarto. Com ele, você escolhe quais informações enviadas pelo [Efeito: Enviar Dataframe na Rede](/referencia/efeitos/wf_act_send_dataframe/) serão usadas e onde cada valor ficará disponível.
 
@@ -61,9 +63,17 @@ O dataframe recebido reúne pares de chave e valor. Este ativador não pede que 
 
 Ao abrir a janela, comece pelo **Número de linhas**. Em cada seção **Linha**, preencha a chave e escolha se seu valor deve entrar em um **Espaço de texto** ou em uma **Variável de contexto**. Por último, nas configurações avançadas, selecione a torre que receberá os dados.
 
+![Janela inicial do Ativador Receber Dataframe da Rede, com Número de linhas em 0 e a opção Mostrar configurações avançadas.](@assets/wf_trg_receive_dataframe/02-janela-do-wired.png)
+
 ### Número de linhas
 
 No campo de lista **Número de linhas**, escolha um valor de **0 a 12**. Com **0**, não há linhas para preencher. Ao escolher **1**, aparece a seção **Linha 1**, com os campos **Chave** e **Espaço**. Para configurar outras chaves, aumente o número; novas seções aparecem até **Linha 12**.
+
+<img
+  src={NumeroDeLinhas.src}
+  alt="Animação da escolha do Número de linhas no ativador, mostrando como aparecem as seções de Chave e Espaço."
+  style={{ width: "35%" }}
+/>
 
 Configure uma chave por linha. Se o envio contém `aviso` e `rodada` e você quer utilizar as duas informações, escolha **2** e preencha uma seção para cada chave. O campo **Espaço** poderá mudar de nome conforme o destino escolhido.
 
@@ -85,13 +95,17 @@ Ao lado da chave, escolha o que o ativador fará com o valor encontrado. Há dua
 
 Com esta opção, digite no campo **Espaço** o nome pelo qual o texto recebido será utilizado na pilha. Você pode repetir o nome da chave ou escolher outro. Se a chave for `aviso` e o espaço for `mensagem_da_rodada`, o valor enviado com `aviso` ficará disponível como `$(mensagem_da_rodada)` nos campos de texto dos Wireds da pilha.
 
+![Linha 1 do ativador configurada com a chave aviso, o destino Espaço de texto e o espaço mensagem_da_rodada.](@assets/wf_trg_receive_dataframe/04-espaco-de-texto.png)
+
 Esse espaço funciona como os espaços criados pelos Textos Extras: a marcação `$(...)` é substituída pelo conteúdo recebido. Ao configurar um [Efeito: Mostrar mensagem](/referencia/efeitos/wf_act_show_message/), por exemplo, você pode escrever `$(mensagem_da_rodada)` no campo **Mensagem** para mostrar o aviso.
 
 ##### Variável de contexto
 
 Ao escolher esta opção, o rótulo **Espaço** muda para **Variável** e o campo de texto é substituído por uma lista. Selecione nela uma [Contexto Variável](/referencia/variaveis/wf_var_context/) que você já criou no quarto. O valor recebido pela chave será encaminhado para essa variável na execução acionada pelo ativador.
 
-Para receber um número como o da rodada, crie a variável de contexto com **Tem valor** marcada. No exemplo abaixo, a chave `rodada` contém **1** e é direcionada a `rodada_atual`. Essa variável pode então ser utilizada pelos Wireds da mesma execução.
+![Linha 1 do ativador configurada com a chave rodada, o destino Variável de contexto e a variável rodada_atual.](@assets/wf_trg_receive_dataframe/05-variavel-de-contexto.png)
+
+Escolha esse destino quando quiser alterar o número recebido no quarto atual. Para isso, crie a variável de contexto com **Tem valor** marcada. No exemplo abaixo, a chave `rodada` contém **1** e é direcionada a `rodada_atual`, que será aumentada em **1** antes de mostrar a próxima rodada.
 
 Se você selecionar **Variável de contexto**, mas não escolher nenhuma variável na lista **Variável**, ao tentar salvar aparecerá a janela **Falha ao atualizar** com o aviso **“Escolha como destino uma variável de contexto, criada pelo usuário e com valor”**.
 
@@ -104,9 +118,15 @@ Pressione **Mostrar configurações avançadas** e use as setas para definir de 
 * **Use mobis escolhidos:** clique nas torres do quarto para selecioná-las diretamente. Você pode escolher até **20** torres; a seleção fica registrada na configuração do ativador.
 * **Usar mobis do seletor:** utiliza as torres fornecidas por um [Seletor de mobis](/referencia/seletores/visao-geral/). Escolha essa opção se a seleção vier da lógica da pilha.
 
-## Exemplo de uso: receber o aviso da rodada
+<img
+  src={ConfiguracoesAvancadas.src}
+  alt="Animação da seção Torre da Rede Wired nas configurações avançadas do ativador, alternando as formas de escolher torres."
+  style={{ width: "35%" }}
+/>
 
-Este exemplo continua a [configuração do envio no quarto de controle](/referencia/efeitos/wf_act_send_dataframe/#exemplo-de-uso-avisar-o-início-de-uma-rodada). Quando a primeira rodada começa, o quarto de controle envia duas informações: `aviso` contém **“Rodada iniciada”** e `rodada` contém o número **1**. Na sala de espera, vamos usar as duas para mostrar **“Rodada iniciada (nº 1).”** aos jogadores selecionados.
+## Exemplo de uso: calcular a próxima rodada
+
+Este exemplo continua a [configuração do envio no quarto de controle](/referencia/efeitos/wf_act_send_dataframe/#exemplo-de-uso-anunciar-a-próxima-rodada). Quando a primeira rodada termina, o quarto de controle envia duas informações: `aviso` contém **“Próxima rodada”** e `rodada` contém o número **1**. Na sala de espera, vamos somar **1** ao número recebido e mostrar **“Próxima rodada: 2.”** aos jogadores selecionados.
 
 No ativador, as chaves enviadas e seus destinos ficam assim:
 
@@ -121,9 +141,10 @@ No ativador, as chaves enviadas e seus destinos ficam assim:
 3. Monte uma pilha com o **Receber Dataframe da Rede**. Escolha **2** em **Número de linhas**. Na **Linha 1**, escreva `aviso` em **Chave**, selecione **Espaço de texto** e digite `mensagem_da_rodada` em **Espaço**.
 4. Na **Linha 2**, escreva `rodada` em **Chave**, selecione **Variável de contexto** e escolha `rodada_atual` na lista **Variável**.
 5. Em **Configurações avançadas**, escolha **Use mobis escolhidos** e selecione a torre da sala de espera.
-6. Na mesma pilha, adicione o [Efeito: Mostrar mensagem](/referencia/efeitos/wf_act_show_message/), o [Texto Extra: Campo Variável](/referencia/extras/wf_xtra_text_output_variable/) e o [Seletor: Habbos na Área](/referencia/seletores/wf_slc_users_area/). No Extra, selecione `rodada_atual` e defina `numero_da_rodada` como **Nome do Espaço**.
-7. No **Mostrar mensagem**, escreva `$(mensagem_da_rodada) (nº $(numero_da_rodada)).` em **Mensagem**. Escolha **Somente o Usuário** em **Visibilidade da Mensagem** e **Usar Usuários do Seletor** em **Selecionar Usuários Fonte**.
-8. No **Habbos na Área**, marque a área da sala de espera onde os jogadores devem receber o aviso.
+6. Na mesma pilha, adicione o [Efeito: Mudar Valor Variável](/referencia/efeitos/wf_act_change_var_val/). Selecione `rodada_atual`, escolha a operação **Somar** e informe **1** como valor de referência.
+7. Adicione o [Efeito: Mostrar mensagem](/referencia/efeitos/wf_act_show_message/) acima de **Mudar Valor Variável** e o [Extra: Executa na Ordem](/referencia/extras/wf_xtra_exec_in_order/). Assim, a soma será feita antes de mostrar a mensagem. Escreva `$(mensagem_da_rodada): $(numero_da_rodada).` em **Mensagem**.
+8. Adicione o [Texto Extra: Campo Variável](/referencia/extras/wf_xtra_text_output_variable/). Selecione `rodada_atual` e defina `numero_da_rodada` como **Nome do Espaço**.
+9. Adicione o [Seletor: Habbos na Área](/referencia/seletores/wf_slc_users_area/) e marque a área da sala de espera onde os jogadores devem receber o aviso. No **Mostrar mensagem**, escolha **Somente o Usuário** em **Visibilidade da Mensagem** e **Usar Usuários do Seletor** em **Selecionar Usuários Fonte**.
 </Steps>
 
-Quando o dataframe chegar, a pilha será acionada. O espaço `mensagem_da_rodada` fornecerá o aviso, e o **Campo Variável** inserirá o número guardado em `rodada_atual`. A mensagem mostrada será **“Rodada iniciada (nº 1).”**. Se você quiser mostrar apenas o texto, pode usar `$(mensagem_da_rodada)` sem adicionar o Texto Extra.
+Quando o dataframe chegar, `rodada_atual` receberá **1**. O **Mudar Valor Variável** somará **1**, fazendo a variável passar a **2**. Só então o **Mostrar mensagem** utilizará o espaço `mensagem_da_rodada` e o valor atualizado pelo **Campo Variável** para mostrar **“Próxima rodada: 2.”**.

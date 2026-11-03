@@ -47,6 +47,10 @@ infobox:
 import Infobox from "@components/Infobox.astro";
 import { Aside, Steps } from "@astrojs/starlight/components";
 import NumeroDeLinhas from "@assets/wf_act_send_dataframe/02-numero-de-linhas.gif";
+import Numero from "@assets/wf_act_send_dataframe/04-numero.gif";
+import TextoDaVariavel from "@assets/wf_act_send_dataframe/05-texto-da-variavel.gif";
+import Atraso from "@assets/wf_act_send_dataframe/07-atraso.gif";
+import ConfiguracoesAvancadas from "@assets/wf_act_send_dataframe/08-configuracoes-avancadas.gif";
 
 O **Efeito: Enviar Dataframe na Rede** permite enviar várias informações de um quarto para outro pela [Torre da Rede Wired](/referencia/outros/utilitarios/wf_link/). Cada informação ocupa uma linha da configuração: você dá um nome a ela, chamado **chave**, e define o **valor** que será enviado.
 
@@ -112,15 +116,29 @@ Use esta opção para enviar um número. Você pode digitá-lo diretamente no ca
 
 O ícone abre a janela **Origem da variável**. Nela, escolha uma variável de **mobi**, **usuário**, **global** ou de **contexto** e, depois, selecione a variável desejada. Por exemplo, a variável de mobi [`@state`](/referencia/variaveis/wf_var_furni/#estado-do-mobi) fornece o estado numérico de um mobi; o significado do número depende do modelo do objeto.
 
+<img
+  src={Numero.src}
+  alt="Animação da janela Origem da variável na opção Número, alternando entre fontes de variáveis."
+  style={{ width: "35%" }}
+/>
+
 ##### Texto da Variável
 
 Escolha esta opção quando o número de uma variável tiver um texto associado e você quiser enviar o **texto**, em vez do número. A lista mostra todas as variáveis do alvo selecionado, mas só permite escolher aquelas que possuem textos vinculados. Nas demais, aparece o aviso **“Não pode ser selecionado neste contexto”**, e não é possível selecioná-las. Você pode conferir essas associações em [Valores textuais](/referencia/ferramentas-do-criador/variaveis/#valores-textuais).
 
 Aqui, o campo **Valor** não funciona como uma caixa para escrever uma mensagem livre. Se você tentar digitar, ele informa **“Selecione uma variável disponível ou deixe este campo vazio”**. Use o ícone **Escolha uma variável** para selecionar a variável cujo texto será enviado.
 
+<img
+  src={TextoDaVariavel.src}
+  alt="Animação da janela Origem da variável na opção Texto da variável, alternando entre fontes de variáveis."
+  style={{ width: "35%" }}
+/>
+
 ##### Mensagem Personalizada
 
-Nesta opção, o rótulo **Valor** muda para **Mensagem**. Digite o texto que deseja enviar, como `Rodada iniciada`. Diferentemente das opções anteriores, não há um seletor de variáveis ao lado desse campo.
+Nesta opção, o rótulo **Valor** muda para **Mensagem**. Digite o texto que deseja enviar, como `Próxima rodada`. Diferentemente das opções anteriores, não há um seletor de variáveis ao lado desse campo.
+
+![Linha 1 do efeito com Mensagem personalizada selecionada, a chave wired_club e a mensagem Wired Club.](@assets/wf_act_send_dataframe/06-mensagem-personalizada.png)
 
 Se o texto precisar incluir um nome que muda conforme a execução, você pode utilizar um espaço criado pelo [Texto Extra: Campo Nome de Usuário](/referencia/extras/wf_xtra_text_output_username/) na mesma pilha. Nesse caso, a marcação `$(nome_do_espaco)` no campo **Mensagem** é preenchida com o nome fornecido pelo Extra.
 
@@ -129,6 +147,12 @@ Se o texto precisar incluir um nome que muda conforme a execução, você pode u
 Este campo define quanto tempo o efeito esperará entre a execução da pilha e o envio do dataframe. Ele aceita valores de **0 a 60 segundos**. Para enviar sem espera, mantenha **0**.
 
 Você pode digitar o valor ou usar as setas. O ícone de temporização muda o intervalo de cada clique: **Padrão (a cada 0.5s)** ou **Preciso (a cada 0.05s)**. A opção precisa permite ajustar atrasos menores sem depender da digitação.
+
+<img
+  src={Atraso.src}
+  alt="Animação do ajuste do campo Atraso (segundos) pelas setas e do uso do ícone de temporização."
+  style={{ width: "35%" }}
+/>
 
 ### Configurações avançadas
 
@@ -140,24 +164,30 @@ Pressione **Mostrar configurações avançadas** para definir de onde virão as 
 * **Usar mobis do sinal:** utiliza os mobis recebidos pelo sistema de [sinais](/referencia/ativadores/wf_trg_recv_signal/), em vez de uma seleção fixa neste efeito.
 * **Use o item de ativação:** utiliza como torre o mobi que ativou a pilha. Essa escolha só faz sentido quando o item de ativação é a própria **Torre da Rede Wired**.
 
-## Exemplo de uso: avisar o início de uma rodada
+<img
+  src={ConfiguracoesAvancadas.src}
+  alt="Animação da seção Torre da Rede Wired nas configurações avançadas, alternando as formas de escolher torres."
+  style={{ width: "35%" }}
+/>
 
-Imagine um jogo com um quarto de controle e uma sala de espera. Ao clicar em um mobi no quarto de controle, você quer avisar que a primeira rodada começou. Junto com o texto do aviso, enviará o número **1**, para que o outro quarto possa usar essa informação na mesma execução.
+## Exemplo de uso: anunciar a próxima rodada
+
+Imagine um jogo com um quarto de controle e uma sala de espera. Ao concluir a primeira rodada, você clica em um mobi para avisar qual será a próxima. O quarto de controle enviará o texto **“Próxima rodada”** e o número **1**, da rodada concluída. Na sala de espera, o número recebido será aumentado em **1** para anunciar a rodada **2**.
 
 No efeito, prepare estas linhas:
 
 | Linha | Chave | Tipo de valor | Conteúdo |
 | --- | --- | --- | --- |
-| 1 | `aviso` | **Mensagem Personalizada** | `Rodada iniciada` |
+| 1 | `aviso` | **Mensagem Personalizada** | `Próxima rodada` |
 | 2 | `rodada` | **Número** | `1` |
 
 <Steps>
 1. No quarto de controle, coloque uma **Torre da Rede Wired**, crie uma rede e conecte a torre a ela.
-2. Monte uma pilha com o [Ativador: Habbo Clica no Mobi](/referencia/ativadores/wf_trg_click_furni/) e este efeito. No ativador, selecione o mobi que será usado para iniciar a rodada.
-3. No **Enviar Dataframe na Rede**, escolha **2** em **Número de linhas**. Na **Linha 1**, escreva `aviso` em **Chave**, selecione **Mensagem Personalizada** e digite `Rodada iniciada` em **Mensagem**.
+2. Monte uma pilha com o [Ativador: Habbo Clica no Mobi](/referencia/ativadores/wf_trg_click_furni/) e este efeito. No ativador, selecione o mobi que será usado ao concluir a rodada.
+3. No **Enviar Dataframe na Rede**, escolha **2** em **Número de linhas**. Na **Linha 1**, escreva `aviso` em **Chave**, selecione **Mensagem Personalizada** e digite `Próxima rodada` em **Mensagem**.
 4. Na **Linha 2**, escreva `rodada` em **Chave**, selecione **Número** e digite `1` em **Valor**. Deixe **Atraso (segundos)** em **0** para enviar os dados quando a pilha for acionada.
 5. Em **Configurações avançadas**, escolha **Use mobis escolhidos** e selecione a torre do quarto de controle.
-6. Na sala de espera, conecte outra torre à mesma rede e configure o **Receber Dataframe da Rede** para ler as chaves `aviso` e `rodada`. Veja [como configurar o recebimento](/referencia/ativadores/wf_trg_receive_dataframe/#exemplo-de-uso-receber-o-aviso-da-rodada).
+6. Na sala de espera, conecte outra torre à mesma rede e configure o **Receber Dataframe da Rede** para ler as chaves `aviso` e `rodada`. Veja [como calcular a próxima rodada](/referencia/ativadores/wf_trg_receive_dataframe/#exemplo-de-uso-calcular-a-próxima-rodada).
 </Steps>
 
-Ao clicar no mobi escolhido, a pilha envia as duas linhas. A primeira leva o texto do aviso; a segunda leva o número da rodada. Na sala de espera, cada chave será encaminhada ao destino definido no ativador, sem precisar recriar o texto e o número lá.
+Ao clicar no mobi escolhido, a pilha envia as duas linhas. A primeira leva o texto do aviso; a segunda leva o número da rodada concluída. Na sala de espera, o ativador entregará esse número a uma variável de contexto para que outro Wired possa somar **1** antes de mostrar a mensagem.
