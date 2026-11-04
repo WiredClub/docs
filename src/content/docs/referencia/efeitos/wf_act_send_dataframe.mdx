@@ -1,10 +1,10 @@
 ---
 title: "Efeito Wired: Enviar Dataframe na Rede"
-description: wf_act_send_dataframe
+description: Envie até 12 pares de chave e valor para outros quartos por meio da Torre da Rede Wired.
 sidebar:
   label: "Enviar Dataframe na Rede"
   badge:
-    text: RASCUNHO
+    text: NOVO
     variant: note
 infobox:
   # == Infobox ==
@@ -16,7 +16,7 @@ infobox:
   revision: 75953
   classname: wf_act_send_dataframe
   name: "WIRED EFEITO: Enviar Dataframe na Rede"
-  description: wf_act_send_dataframe
+  description: Este efeito envia um dataframe com pares de chave e valor pela Torre da Rede Wired.
   # product_name: # caso o nome na loja seja diferente do nome do Mobi
   # image_direction: 0 # valor padrão
   # image_not_animated: false # valor padrão
@@ -29,7 +29,7 @@ infobox:
   # == Dados do Wired ==
   type: Efeito
   # requires_bot: false # valor padrão
-  # requires_furni: false # valor padrão
+  requires_furni: true
   # requires_antena: false # valor padrão
   # requires_contract: false # valor padrão
   # requires_chest: false # valor padrão
@@ -44,6 +44,186 @@ infobox:
   #   classname: # classname técnico
 ---
 
-import Infobox from "@components/Infobox.astro"
+import Infobox from "@components/Infobox.astro";
+import { Aside, Steps, Tabs, TabItem } from "@astrojs/starlight/components";
+import AccessibleVideo from "@components/AccessibleVideo.astro";
+import PseudoWiredCodeBlock from "@components/PseudoWiredCodeBlock.astro";
+import NumeroDeLinhas from "@assets/wf_act_send_dataframe/02-numero-de-linhas.gif";
+import Numero from "@assets/wf_act_send_dataframe/04-numero.gif";
+import TextoDaVariavel from "@assets/wf_act_send_dataframe/05-texto-da-variavel.gif";
+import Atraso from "@assets/wf_act_send_dataframe/07-atraso.gif";
+import ConfiguracoesAvancadas from "@assets/wf_act_send_dataframe/08-configuracoes-avancadas.gif";
+import AnunciarProximaRodada from "@assets/wf_act_send_dataframe/09-exemplo-anunciar-a-proxima-rodada.mp4";
+import AnunciarProximaRodadaDescriptionsUrl from "@assets/wf_act_send_dataframe/09-exemplo-anunciar-a-proxima-rodada-descriptions.vtt?url";
+import AnunciarProximaRodadaDescriptionsRaw from "@assets/wf_act_send_dataframe/09-exemplo-anunciar-a-proxima-rodada-descriptions.vtt?raw";
+
+O **Efeito: Enviar Dataframe na Rede** permite enviar várias informações de um quarto para outro pela [Torre da Rede Wired](/referencia/outros/utilitarios/wf_link/). Cada informação ocupa uma linha da configuração: você dá um nome a ela, chamado **chave**, e define o **valor** que será enviado.
 
 <Infobox />
+
+Um dataframe organiza dados em linhas e colunas, de forma semelhante a uma tabela. Neste Wired, as colunas são **Chave** e **Valor**. Isso permite enviar, na mesma execução, dados diferentes como o nome de um jogador, um número e um texto associado a uma variável.
+
+Para que outro quarto receba esses dados, coloque uma torre em cada quarto, conecte as duas à mesma rede e configure o [Ativador: Receber Dataframe da Rede](/referencia/ativadores/wf_trg_receive_dataframe/) no destino. O efeito cuida do envio; o ativador define quais chaves serão lidas e onde cada valor ficará disponível.
+
+## Como esse Wired funciona?
+
+Quando a pilha executa este efeito, ele reúne as linhas configuradas e as envia pela torre selecionada. Antes disso, você escolhe quantas linhas utilizar, preenche a chave de cada uma, define a origem do valor e, se necessário, ajusta o atraso.
+
+A chave é o que permite reconhecer um dado no quarto de destino. Se você enviar uma linha chamada `rodada`, por exemplo, configure também a chave `rodada` no ativador de recebimento. Nesse ativador, você poderá decidir se o valor será colocado em um espaço de texto ou em uma variável de contexto.
+
+![Janela inicial do Efeito Enviar Dataframe na Rede com Número de linhas em 0, atraso em 0 segundo e a opção Mostrar configurações avançadas.](@assets/wf_act_send_dataframe/01-janela-do-wired.png)
+
+<Aside type="tip" title="Dica de Ouro">
+Em termos de programação, você pode imaginar as linhas como as propriedades de um objeto: cada chave identifica um valor. Três linhas poderiam ser representadas assim:
+
+```json
+{
+  "nome": "FSWiredClub",
+  "idade_da_conta": 1,
+  "genero": "M"
+}
+```
+
+Nesse exemplo, `nome` e `genero` guardam textos, enquanto `idade_da_conta` guarda um número. Cada par corresponde a uma linha do dataframe. O objeto serve apenas para visualizar a relação entre chaves e valores; ele não descreve o formato interno usado pela Rede Wired.
+</Aside>
+
+### Número de linhas
+
+No campo de lista **Número de linhas**, escolha um valor de **0 a 12**. Com **0**, não há linhas para preencher. Ao escolher **1**, aparece a seção **Linha 1**, com os campos **Chave** e **Valor**. Se você aumentar o número, surgem as seções **Linha 2**, **Linha 3** e assim por diante, até **Linha 12**.
+
+<img
+  src={NumeroDeLinhas.src}
+  alt="Animação da escolha do Número de linhas na janela do efeito, mostrando como aparecem as seções de Chave e Valor."
+  style={{ width: "35%" }}
+/>
+
+Cada linha é configurada separadamente. Você pode, por exemplo, enviar um texto na primeira e um número na segunda. Para saber quantas linhas preparar, conte quantas informações o quarto de destino precisará receber.
+
+#### Chave
+
+Digite um nome que ajude a identificar o valor, como `aviso`, `rodada` ou `nome_do_jogador`. O campo aceita entre **1 e 40 caracteres**, utilizando apenas **letras, números e sublinhado (`_`)**. Se você escrever um espaço, ele será substituído automaticamente por um sublinhado: `numero da rodada` se torna `numero_da_rodada`.
+
+Cada chave precisa ter um nome **único entre as linhas deste efeito**. Se outra linha já usar o mesmo nome, aparecerá um aviso ao tentar salvar a configuração. Escolha outro nome para a chave repetida.
+
+![Janela Falha ao atualizar avisando que o nome de variável já está em uso no quarto e solicitando um nome diferente.](@assets/wf_var/04-janela-de-aviso-nome-de-variavel-ja-em-uso.png)
+
+Guarde o nome escolhido para configurar o recebimento. **Chave** é o nome pelo qual o ativador do outro quarto encontrará essa linha. No destino, informe a mesma chave para decidir onde o valor será colocado.
+
+#### Valor
+
+Ao lado da chave, escolha como o valor será preenchido. A opção selecionada altera o campo **Valor** daquela linha:
+
+![Lista de tipos de valor aberta na Linha 1, com as opções Número, Texto da variável e Mensagem personalizada.](@assets/wf_act_send_dataframe/03-lista-tipagem-aberta.png)
+
+##### Número
+
+Use esta opção para enviar um número. Você pode digitá-lo diretamente no campo **Valor**, como `14`, ou pressionar o ícone **Escolha uma variável** ao lado do campo para utilizar um valor já disponível em alguma variável.
+
+O ícone abre a janela **Origem da variável**. Nela, escolha uma variável de **mobi**, **usuário**, **global** ou de **contexto** e, depois, selecione a variável desejada. Veja [como escolher a origem da variável](/referencia/configurando-wireds/#origem-da-variável). Por exemplo, a variável de mobi [`@state`](/referencia/variaveis/wf_var_furni/#estado-do-mobi) fornece o estado numérico de um mobi; o significado do número depende do modelo do objeto.
+
+<img
+  src={Numero.src}
+  alt="Animação da janela Origem da variável na opção Número, alternando entre fontes de variáveis."
+  style={{ width: "35%" }}
+/>
+
+##### Texto da Variável
+
+Escolha esta opção quando o número de uma variável tiver um texto associado e você quiser enviar o **texto**, em vez do número. A lista mostra todas as variáveis do alvo selecionado, mas só permite escolher aquelas que possuem textos vinculados. Nas demais, aparece o aviso **“Não pode ser selecionado neste contexto”**, e não é possível selecioná-las. Você pode conferir essas associações em [Valores textuais](/referencia/ferramentas-do-criador/variaveis/#valores-textuais).
+
+Aqui, o campo **Valor** não funciona como uma caixa para escrever uma mensagem livre. Se você tentar digitar, ele informa **“Selecione uma variável disponível ou deixe este campo vazio”**. O ícone **Escolha uma variável** também abre a janela **Origem da variável**: escolha de onde virá a variável e, na lista, selecione aquela cujo texto será enviado. Veja [as opções de origem da variável](/referencia/configurando-wireds/#origem-da-variável).
+
+<img
+  src={TextoDaVariavel.src}
+  alt="Animação da janela Origem da variável na opção Texto da variável, alternando entre fontes de variáveis."
+  style={{ width: "35%" }}
+/>
+
+##### Mensagem Personalizada
+
+Nesta opção, o rótulo **Valor** muda para **Mensagem**. Digite o texto que deseja enviar, como `Próxima rodada`. Diferentemente das opções anteriores, não há um seletor de variáveis ao lado desse campo.
+
+![Linha 1 do efeito com Mensagem personalizada selecionada, a chave wired_club e a mensagem Wired Club.](@assets/wf_act_send_dataframe/06-mensagem-personalizada.png)
+
+Se o texto precisar incluir um nome que muda conforme a execução, você pode utilizar um espaço criado pelo [Texto Extra: Campo Nome de Usuário](/referencia/extras/wf_xtra_text_output_username/) na mesma pilha. Nesse caso, a marcação `$(nome_do_espaco)` no campo **Mensagem** é preenchida com o nome fornecido pelo Extra.
+
+### Atraso (segundos)
+
+Este campo define quanto tempo o efeito esperará entre a execução da pilha e o envio do dataframe. Ele aceita valores de **0 a 60 segundos**. Para enviar sem espera, mantenha **0**.
+
+Você pode digitar o valor ou usar as setas. O ícone de temporização muda o intervalo de cada clique: **Padrão (a cada 0.5s)** ou **Preciso (a cada 0.05s)**. A opção "Preciso" permite ajustar atrasos menores sem depender da digitação.
+
+<img
+  src={Atraso.src}
+  alt="Animação do ajuste do campo Atraso (segundos) pelas setas e do uso do ícone de temporização."
+  style={{ width: "35%" }}
+/>
+
+### Configurações avançadas
+
+Pressione **Mostrar configurações avançadas** para definir de onde virão as torres utilizadas no envio. As setas desta seção alternam entre as seguintes formas de escolha:
+
+* **Use mobis escolhidos:** clique diretamente nas torres do quarto. Você pode selecionar até **20** delas; essa escolha fica definida na configuração do efeito.
+* **Escolha de mobis secundários:** permite escolher mais torres além das selecionadas na primeira opção, respeitando o limite de **20** para esse conjunto. Pressione o ícone **Habilitar escolha de mobis**, identificado por um cursor, e clique nas torres que deseja incluir.
+* **Usar mobis do seletor:** utiliza os mobis fornecidos por um [Seletor de mobis](/referencia/seletores/visao-geral/). Essa opção é útil quando a seleção deve ser feita pela lógica da pilha.
+* **Usar mobis do sinal:** utiliza os mobis recebidos pelo sistema de [sinais](/referencia/ativadores/wf_trg_recv_signal/), em vez de uma seleção fixa neste efeito.
+* **Use o item de ativação:** utiliza como torre o mobi que ativou a pilha. Essa escolha só faz sentido quando o item de ativação é a própria **Torre da Rede Wired**.
+
+<img
+  src={ConfiguracoesAvancadas.src}
+  alt="Animação da seção Torre da Rede Wired nas configurações avançadas, alternando as formas de escolher torres."
+  style={{ width: "35%" }}
+/>
+
+## Exemplo de uso: anunciar a próxima rodada
+
+Imagine um jogo com um quarto de controle e uma sala de espera. Ao concluir a primeira rodada, você clica em um mobi para avisar qual será a próxima. O quarto de controle enviará o texto **“Próxima rodada”** e o número **1**, da rodada concluída. Na sala de espera, o número recebido será aumentado em **1** para anunciar a rodada **2**.
+
+No efeito, prepare estas linhas:
+
+| Linha | Chave | Tipo de valor | Conteúdo |
+| --- | --- | --- | --- |
+| 1 | `aviso` | **Mensagem Personalizada** | `Próxima rodada` |
+| 2 | `rodada` | **Número** | `1` |
+
+<AccessibleVideo
+  id="enviar-dataframe-anunciar-proxima-rodada"
+  src={AnunciarProximaRodada}
+  title="Configuração dos Wireds para enviar o dataframe da próxima rodada"
+  descriptionsSrc={AnunciarProximaRodadaDescriptionsUrl}
+  descriptionsContent={AnunciarProximaRodadaDescriptionsRaw}
+/>
+
+<Tabs>
+  <TabItem label="Configuração">
+    <Steps>
+1. No quarto de controle, coloque uma **Torre da Rede Wired**, crie uma rede e conecte a torre a ela.
+2. Monte uma pilha com o [Ativador: Habbo Clica no Mobi](/referencia/ativadores/wf_trg_click_furni/) e este efeito. No ativador, selecione o **Botão Verde** que será usado ao concluir a rodada.
+3. No **Enviar Dataframe na Rede**, escolha **2** em **Número de linhas**. Na **Linha 1**, escreva `aviso` em **Chave**, selecione **Mensagem Personalizada** e digite `Próxima rodada` em **Mensagem**.
+4. Na **Linha 2**, escreva `rodada` em **Chave**, selecione **Número** e digite `1` em **Valor**. Deixe **Atraso (segundos)** em **0** para enviar os dados quando a pilha for acionada.
+5. Em **Configurações avançadas**, escolha **Use mobis escolhidos** e selecione a torre do quarto de controle.
+6. Na sala de espera, conecte outra torre à mesma rede e configure o **Receber Dataframe da Rede** para ler as chaves `aviso` e `rodada`. Veja [como calcular a próxima rodada](/referencia/ativadores/wf_trg_receive_dataframe/#exemplo-de-uso-calcular-a-próxima-rodada).
+</Steps>
+  </TabItem>
+  <TabItem label="PseudoWired">
+    <PseudoWiredCodeBlock code={`
+QUANDO
+  - Habbo Clica no Mobi: Botão Verde
+
+ENTÃO
+  - Enviar Dataframe na Rede
+    Número de linhas: 2
+    Linha 1:
+      aviso
+      Mensagem Personalizada
+      Próxima rodada
+    Linha 2:
+      rodada
+      Número
+      1
+    Torre da Rede Wired: Use mobis escolhidos
+`} />
+  </TabItem>
+</Tabs>
+
+Ao clicar no mobi escolhido, a pilha envia as duas linhas. A primeira leva o texto do aviso; a segunda leva o número da rodada concluída. Na sala de espera, o ativador entregará esse número a uma variável de contexto para que outro Wired possa somar **1** antes de mostrar a mensagem.
