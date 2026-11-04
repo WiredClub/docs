@@ -4,6 +4,7 @@ description: Aprenda a configurar Wireds no Habbo Hotel, incluindo seleção de 
 ---
 
 import { Aside } from '@astrojs/starlight/components';
+import OrigemDaVariavel from "@assets/wf_act_send_dataframe/04-numero.gif";
 
 A janela de configuração dos Wireds segue uma estrutura padronizada entre quase todos os tipos (Ativadores, Efeitos, Condições, etc.), embora cada um possua campos específicos de acordo com sua função (exceto por alguns que não possuem campos).
 
@@ -192,6 +193,38 @@ Galeria de exemplos:
 | Extra | ![](https://images.habbo.com/dcr/hof_furni/74772/wf_xtra_scan_chest_furni_by_type_icon.png) | **Baú de Tipo** | ![Janela de configuração do Wired Scanner Extra Baú de Tipo com a variável 'contexto_wired_club' selecionada, origem da variável definida como 'Use o item de ativação' e baús configurados como 'Use mobis escolhidos [0/20]'.](@assets/configurando-wireds/43-selecao-de-variavel-bau-de-tipo.png "Janela de configuração do Wired Scanner Extra Baú de Tipo com a variável 'contexto_wired_club' selecionada, origem da variável definida como 'Use o item de ativação' e baús configurados como 'Use mobis escolhidos [0/20]'.") |
 | Seletor | ![](https://images.habbo.com/dcr/hof_furni/71546/wf_slc_furni_with_var_icon.png) | **Mobi com Variável** | ![Janela de configuração do seletor Wired Mobi com Variável com a variável 'fs_wired_club' selecionada, comparação por igualdade, valor de referência em 'Definir valor' igual a '0' e opções 'Filtrar seleção existente' e 'Inverter' desmarcadas.](@assets/configurando-wireds/44-selecao-de-variavel-mobi-com-variavel.png) |
 | Filtro | ![](https://images.habbo.com/dcr/hof_furni/71472/wf_xtra_filter_users_by_var_icon.png) | **Usuários com Maior/Menor Variável** | ![Janela de configuração do filtro Wired Usuários com Maior/Menor Variável com a variável 'wired_club' selecionada, filtro de quantidade em 'Definir valor' igual a '10' e variável de referência definida como 'Use o usuário acionador'.](@assets/configurando-wireds/45-selecao-de-variavel-usuarios-com-maior-menor-variavel.png) |
+
+### Origem da variável
+
+Em campos que o ícone **Escolha uma variável** aparece, a janela **Origem da variável** pode ser acessada. Primeiro, escolha nos ícones se o alvo é **Mobi**, **Usuário**, **Global** ou **Contexto**. Para mobis e usuários, use as setas para definir de onde virá o alvo durante a execução da pilha. Depois, escolha a variável na lista exibida.
+
+<img
+  src={OrigemDaVariavel.src}
+  alt="Animação da janela Origem da variável, alternando entre os alvos Mobi, Usuário, Global e Contexto e suas opções de origem."
+  style={{ width: "35%" }}
+/>
+
+#### Mobi
+
+* **Use o item de ativação:** utiliza o mobi que acionou a pilha, como aquele em que o usuário clicou no ativador **Habbo Clica no Mobi**.
+* **Use mobis escolhidos:** clique nos mobis do quarto para selecioná-los diretamente. É possível escolher até **20**.
+* **Escolha de mobis secundários:** permite selecionar outro conjunto de até **20** mobis.
+* **Usar mobis do seletor:** utiliza os mobis fornecidos por um [Seletor de mobis](/referencia/seletores/visao-geral/) na pilha.
+* **Usar mobis do sinal:** utiliza os mobis incluídos em um sinal enviado por [Mandar Sinal](/referencia/efeitos/wf_act_send_signal/) e recebido por [Recebe Sinal](/referencia/ativadores/wf_trg_recv_signal/).
+
+#### Usuário
+
+* **Use o usuário acionador:** utiliza o usuário que acionou a pilha, como quem clicou no mobi de um ativador.
+* **Usar usuários do seletor:** utiliza os usuários fornecidos por um [Seletor de usuários](/referencia/seletores/visao-geral/) na pilha.
+* **Usar usuários do sinal:** utiliza os usuários incluídos em um sinal enviado por **Mandar Sinal** e recebido por **Recebe Sinal**.
+
+#### Global
+
+Em **Global**, escolha **Variáveis globais** para consultar as variáveis do quarto. Entre as opções estão `@furni_count`, `@user_count`, `@wired_timer`, `@teams`, `@room_id`, `@group_id` e `@current_time`. Consulte a página de [Variável de Quarto](/referencia/variaveis/wf_var_room/) para conhecer essas informações.
+
+#### Contexto
+
+Em **Contexto**, escolha **Variáveis de contexto** para consultar os dados da execução atual. A lista inclui `@selector_furni_count`, `@selector_user_count`, `@signal_furni_count`, `@signal_user_count` e `@event`. A página de [Variável de Contexto](/referencia/variaveis/wf_var_context/) explica o que cada uma informa.
 
 ## 7. Configurações Avançadas
 
