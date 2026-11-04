@@ -45,12 +45,17 @@ infobox:
 ---
 
 import Infobox from "@components/Infobox.astro";
-import { Aside, Steps } from "@astrojs/starlight/components";
+import { Aside, Steps, Tabs, TabItem } from "@astrojs/starlight/components";
+import AccessibleVideo from "@components/AccessibleVideo.astro";
+import PseudoWiredCodeBlock from "@components/PseudoWiredCodeBlock.astro";
 import NumeroDeLinhas from "@assets/wf_act_send_dataframe/02-numero-de-linhas.gif";
 import Numero from "@assets/wf_act_send_dataframe/04-numero.gif";
 import TextoDaVariavel from "@assets/wf_act_send_dataframe/05-texto-da-variavel.gif";
 import Atraso from "@assets/wf_act_send_dataframe/07-atraso.gif";
 import ConfiguracoesAvancadas from "@assets/wf_act_send_dataframe/08-configuracoes-avancadas.gif";
+import AnunciarProximaRodada from "@assets/wf_act_send_dataframe/09-exemplo-anunciar-a-proxima-rodada.mp4";
+import AnunciarProximaRodadaDescriptionsUrl from "@assets/wf_act_send_dataframe/09-exemplo-anunciar-a-proxima-rodada-descriptions.vtt?url";
+import AnunciarProximaRodadaDescriptionsRaw from "@assets/wf_act_send_dataframe/09-exemplo-anunciar-a-proxima-rodada-descriptions.vtt?raw";
 
 O **Efeito: Enviar Dataframe na Rede** permite enviar várias informações de um quarto para outro pela [Torre da Rede Wired](/referencia/outros/utilitarios/wf_link/). Cada informação ocupa uma linha da configuração: você dá um nome a ela, chamado **chave**, e define o **valor** que será enviado.
 
@@ -181,13 +186,44 @@ No efeito, prepare estas linhas:
 | 1 | `aviso` | **Mensagem Personalizada** | `Próxima rodada` |
 | 2 | `rodada` | **Número** | `1` |
 
-<Steps>
+<AccessibleVideo
+  id="enviar-dataframe-anunciar-proxima-rodada"
+  src={AnunciarProximaRodada}
+  title="Configuração dos Wireds para enviar o dataframe da próxima rodada"
+  descriptionsSrc={AnunciarProximaRodadaDescriptionsUrl}
+  descriptionsContent={AnunciarProximaRodadaDescriptionsRaw}
+/>
+
+<Tabs>
+  <TabItem label="Configuração">
+    <Steps>
 1. No quarto de controle, coloque uma **Torre da Rede Wired**, crie uma rede e conecte a torre a ela.
-2. Monte uma pilha com o [Ativador: Habbo Clica no Mobi](/referencia/ativadores/wf_trg_click_furni/) e este efeito. No ativador, selecione o mobi que será usado ao concluir a rodada.
+2. Monte uma pilha com o [Ativador: Habbo Clica no Mobi](/referencia/ativadores/wf_trg_click_furni/) e este efeito. No ativador, selecione o **Botão Verde** que será usado ao concluir a rodada.
 3. No **Enviar Dataframe na Rede**, escolha **2** em **Número de linhas**. Na **Linha 1**, escreva `aviso` em **Chave**, selecione **Mensagem Personalizada** e digite `Próxima rodada` em **Mensagem**.
 4. Na **Linha 2**, escreva `rodada` em **Chave**, selecione **Número** e digite `1` em **Valor**. Deixe **Atraso (segundos)** em **0** para enviar os dados quando a pilha for acionada.
 5. Em **Configurações avançadas**, escolha **Use mobis escolhidos** e selecione a torre do quarto de controle.
 6. Na sala de espera, conecte outra torre à mesma rede e configure o **Receber Dataframe da Rede** para ler as chaves `aviso` e `rodada`. Veja [como calcular a próxima rodada](/referencia/ativadores/wf_trg_receive_dataframe/#exemplo-de-uso-calcular-a-próxima-rodada).
 </Steps>
+  </TabItem>
+  <TabItem label="PseudoWired">
+    <PseudoWiredCodeBlock code={`
+QUANDO
+  - Habbo Clica no Mobi: Botão Verde
+
+ENTÃO
+  - Enviar Dataframe na Rede
+    Número de linhas: 2
+    Linha 1:
+      aviso
+      Mensagem Personalizada
+      Próxima rodada
+    Linha 2:
+      rodada
+      Número
+      1
+    Torre da Rede Wired: Use mobis escolhidos
+`} />
+  </TabItem>
+</Tabs>
 
 Ao clicar no mobi escolhido, a pilha envia as duas linhas. A primeira leva o texto do aviso; a segunda leva o número da rodada concluída. Na sala de espera, o ativador entregará esse número a uma variável de contexto para que outro Wired possa somar **1** antes de mostrar a mensagem.
