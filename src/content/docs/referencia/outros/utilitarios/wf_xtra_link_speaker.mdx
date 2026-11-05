@@ -1,6 +1,6 @@
 ---
 title: "Rádio da Rede Wired"
-description: wf_xtra_link_speaker
+description: Mostre no quarto as mensagens e os dataframes recebidos pelas Torres da Rede Wired escolhidas.
 sidebar:
   label: "Rádio da Rede Wired"
   badge:
@@ -16,7 +16,7 @@ infobox:
   revision: 75953
   classname: wf_xtra_link_speaker
   name: "Rádio da Rede Wired"
-  description: wf_xtra_link_speaker
+  description: Exibe no quarto as mensagens e os dataframes recebidos pelas Torres da Rede Wired selecionadas.
   # product_name: # caso o nome na loja seja diferente do nome do Mobi
   # image_direction: 0 # valor padrão
   # image_not_animated: false # valor padrão
@@ -29,7 +29,7 @@ infobox:
   # == Dados do Wired ==
   type: Utilitário
   # requires_bot: false # valor padrão
-  # requires_furni: false # valor padrão
+  requires_furni: true
   # requires_antena: false # valor padrão
   # requires_contract: false # valor padrão
   # requires_chest: false # valor padrão
@@ -40,6 +40,46 @@ infobox:
   additional_sources: []
 ---
 
-import Infobox from "@components/Infobox.astro"
+import Infobox from "@components/Infobox.astro";
+import { Aside } from "@astrojs/starlight/components";
+import FalarPara from "@assets/wf_xtra_link_speaker/03-topico-falar-para.gif";
+
+O **Rádio da Rede Wired** mostra para todos no quarto as mensagens e os dataframes recebidos pelas [Torres da Rede Wired](/referencia/outros/utilitarios/wf_link/) que você selecionar. Ele exibe o conteúdo que chegou à torre, sem alterar os valores. Assim, você pode acompanhar o que foi enviado pela rede sem precisar criar uma pilha para mostrar cada informação.
 
 <Infobox />
+
+Coloque o Rádio no quarto onde as informações devem aparecer e selecione as torres desse mesmo quarto em sua configuração. Se a torre receber dados enviados de outro quarto, ela precisa estar conectada à mesma rede da torre de envio. Para mostrar também os dados enviados pelo próprio quarto, marque **Receber mensagens enviadas por este quarto** na configuração da torre. Essa opção permite receber envios do próprio quarto mesmo sem uma rede conectada. Se ela estiver desmarcada, o Rádio local não mostrará esses envios, mas Rádios configurados em outros quartos da rede poderão mostrá-los.
+
+## Como esse mobi funciona?
+
+Ao abrir a configuração, você encontra **Falar para**, que define os tipos de envio exibidos pelo Rádio, e **Selecionar mobi**, onde escolhe as torres que ele acompanhará. Quando uma das torres escolhidas recebe uma mensagem ou um dataframe do tipo marcado, o Rádio mostra o conteúdo em um balão de fala para todos no quarto.
+
+![Janela do Rádio da Rede Wired com Mensagem e Dataframe marcados em Falar para e nenhuma torre selecionada em Selecionar Mobi.](@assets/wf_xtra_link_speaker/02-janela-do-mobi.png)
+
+### Falar para
+
+Marque **Mensagem** para mostrar textos enviados pelo [Efeito: Enviar Mensagem na Rede](/referencia/efeitos/wf_act_send_message/) e **Dataframe** para mostrar os pares de chave e valor enviados pelo [Efeito: Enviar Dataframe na Rede](/referencia/efeitos/wf_act_send_dataframe/). Você pode marcar só uma das opções ou as duas, se quiser que o Rádio mostre ambos os tipos de envio.
+
+<img
+  src={FalarPara.src}
+  alt="Animação das opções Mensagem e Dataframe na seção Falar para do Rádio da Rede Wired."
+  style={{ width: "35%" }}
+/>
+
+### Selecionar mobi
+
+Nesta seção, a janela informa: **“Você deve selecionar um ou mais mobis para esta ação. Você pode selecionar ou cancelar a seleção de mobis no seu quarto clicando neles.”** Selecione as **Torres da Rede Wired** que o Rádio deverá acompanhar. É possível escolher até **20** torres; se você escolher mais de uma, o Rádio mostrará as mensagens e os dataframes recebidos por qualquer uma delas, conforme as opções marcadas em **Falar para**.
+
+<Aside type="caution" title="Selecione apenas Torres da Rede Wired">
+Se a seleção incluir um mobi que não seja uma torre, não será possível salvar a configuração. Ao tentar confirmar, aparecerá o aviso **“Selecione pelo menos uma Torre da Rede Wired.”** Volte à seleção e escolha somente torres.
+
+![Janela Falha ao atualizar com o aviso Selecione pelo menos uma Torre da Rede Wired.](@assets/wf_act_trg/01-janela-selecione-uma-torre-wired.png)
+</Aside>
+
+## Como as informações aparecem?
+
+Uma **mensagem** aparece com a formatação definida no editor do efeito de envio. No **dataframe**, cada linha mostra a **chave em negrito** seguida do valor sem negrito. A imagem abaixo mostra as linhas `aviso: Próxima rodada` e `rodada: 1` do dataframe em um balão, além da mensagem `Wired Club` em outro.
+
+![Dois balões do Rádio da Rede Wired: um mostra as chaves aviso e rodada em negrito, seguidas dos valores Próxima rodada e 1; o outro mostra a mensagem Wired Club.](@assets/wf_xtra_link_speaker/01-exemplo-baloes-de-dataframe-e-mensagem.png)
+
+O Rádio mostra os dados **como foram recebidos**, sem aplicar as mudanças feitas por outros Wireds. No [exemplo da próxima rodada](/referencia/ativadores/wf_trg_receive_dataframe/#exemplo-de-uso-calcular-a-próxima-rodada), o dataframe leva `rodada` com valor **1**. Uma pilha na sala de espera soma **1** e usa **Mostrar mensagem** para anunciar **“Próxima rodada: 2”** aos jogadores selecionados. O balão do Rádio continua mostrando `rodada: 1`, que é o valor enviado pela torre.
