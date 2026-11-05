@@ -384,9 +384,9 @@ O encerramento antecipado ocorre nas seguintes condições:
 - Battle Banzai: quando todos os **pisos battle do quarto forem completados**, ou seja, quando todos os pisos battle estiverem com `@state = 5`.
 - Freeze: quando sobrar apenas uma equipe no quarto.
 
-Ao identificar que uma dessas condições foi atendida, o cronômetro será pausado automaticamente, desde que ainda esteja em funcionamento e que a variável ~clock.is_game_aware esteja habilitada.
+Ao identificar que uma dessas condições foi atendida, o cronômetro será pausado automaticamente, desde que ainda esteja em funcionamento e que a variável `~clock.is_game_aware` esteja habilitada.
 
-Quando o cronômetro é pausado pelo encerramento de uma partida, ele ainda pode ser reativado (~clock.state = 1), seja por meio de wireds ou pelo próprio mobi de cronômetro.
+Quando o cronômetro é pausado pelo encerramento de uma partida, ele ainda pode ser reativado (`~clock.state = 1`), seja por meio de wireds ou pelo próprio mobi de cronômetro.
 
-No entanto, em jogos como Battle Banzai e Freeze, uma nova partida só poderá ser iniciada após resetar o cronômetro (~clock.state = 0).
+No entanto, em jogos como Battle Banzai e Freeze, uma nova partida só poderá ser iniciada após resetar o cronômetro (`~clock.state = 0`).
 </Aside>
