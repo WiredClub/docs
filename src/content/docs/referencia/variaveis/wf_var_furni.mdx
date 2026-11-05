@@ -375,3 +375,18 @@ O visor faz a conversão automática de segundos para minutos sempre que o valor
 | **0** | Inicial (Initial) | O cronômetro tem seu valor zerado. Ele recebe esse estado por padrão quando o mobi é colocado no quarto. A variável `~clock.pulse_count` também é inicializada com o valor 0, mas pode ser alterada. Caso `~clock.pulse_count` seja modificada enquanto `~clock.state` estiver em 0, seu valor será mantido. No entanto, se `~clock.state` mudar para 1 e, posteriormente, retornar para 0, `~clock.pulse_count` será zerada novamente. Quando seu valor é 0, jogos como Battle Banzai e Freeze **são encerrados**. |
 | **1** | Funcionando (Running) | Enquanto estiver com esse valor, por padrão a variável `~clock.pulse_count` recebe +1 a cada segundo, `~clock.pulse_count` pode receber valores adicionais de pilhas wireds. Se o mobi também possuir a variável `~clock.is_game_aware`, jogos como Battle Banzai e Freeze **serão ativados no quarto**. |
 | **2** | Pausado (Paused) | Ao receber esse valor, a variável `~clock.pulse_count` para de receber novos valores, **exceto** quando houver pilhas wireds mudando o valor dessa variável. Jogos como Battle Banzai e Freeze **não são encerrados**, mas as interações com os mobis desses jogos **ficam pausadas**. |
+
+<Aside type="note" title="Pausa automática">
+Um cronômetro que possui a variável inteligente `~clock.is_game_aware` pode ter seu estado (`~clock.state`) alterado automaticamente de 1 (Funcionando) para 2 (Pausado) quando uma partida de Battle Banzai ou Freeze é encerrada antes de o tempo acabar.
+
+O encerramento antecipado ocorre nas seguintes condições:
+
+- Battle Banzai: quando todos os **pisos battle do quarto forem completados**, ou seja, quando todos os pisos battle estiverem com `@state = 5`.
+- Freeze: quando sobrar apenas uma equipe no quarto.
+
+Ao identificar que uma dessas condições foi atendida, o cronômetro será pausado automaticamente, desde que ainda esteja em funcionamento e que a variável ~clock.is_game_aware esteja habilitada.
+
+Quando o cronômetro é pausado pelo encerramento de uma partida, ele ainda pode ser reativado (~clock.state = 1), seja por meio de wireds ou pelo próprio mobi de cronômetro.
+
+No entanto, em jogos como Battle Banzai e Freeze, uma nova partida só poderá ser iniciada após o resetar o cronômetro (~clock.state = 0).
+</Aside>
