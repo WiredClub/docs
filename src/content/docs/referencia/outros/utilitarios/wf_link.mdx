@@ -69,6 +69,8 @@ Somente o **dono da Torre da Rede Wired** pode abrir a janela de configuração 
 
 No campo **Nova rede**, digite um nome que ajude a reconhecer a ligação entre os quartos e pressione **Criar rede**. A nova rede aparecerá em **Minhas redes**, mas a criação sozinha não termina a configuração da torre: pressione **Conectar** na linha da rede para vinculá-la.
 
+Não é possível criar duas redes com o mesmo nome. Se você digitar o nome de uma rede que já existe e pressionar **Criar rede**, nenhuma nova rede será adicionada a **Minhas redes**.
+
 ![Demonstração do clique em Conectar na linha de uma rede para vincular a Torre da Rede Wired.](@assets/wf_link/04-conectando-rede.gif)
 
 Por exemplo, se você tem um quarto de jogo e uma sala de espera, pode criar a rede `Avisos do jogo`. Coloque outra torre na sala de espera e conecte-a à rede já criada. Não é necessário criar uma segunda rede com o mesmo nome para fazer a ligação.
@@ -92,6 +94,10 @@ O estado **Vinculado ao quarto** aparece quando você coloca outra torre no mesm
 ### Receber mensagens enviadas por este quarto
 
 Marque **Receber mensagens enviadas por este quarto** se a torre também deve receber mensagens que saem do quarto onde ela está. No gerenciamento da rede, essa escolha aparece na coluna **Auto-recebimento**.
+
+Se a torre ainda não estiver conectada a uma rede, marcar essa opção abrirá a janela **Receber mensagens próprias**. Ela informa que a torre pode receber as próprias mensagens e dataframes sem uma rede. Para trocar mensagens com outros quartos, conecte a torre a uma rede.
+
+![Janela Receber mensagens próprias informando que a torre recebe mensagens e dataframes do próprio quarto sem uma rede e que precisa de uma rede para trocar mensagens com outros quartos.](@assets/wf_link/06-janela-receber-mensagens-proprias.png)
 
 Por exemplo, se uma pilha envia um aviso e outra pilha do **mesmo quarto** precisa reagir a ele pelo **Receber Mensagem da Rede**, habilite a opção na torre observada pelo ativador. Para uma sala de espera que recebe mensagens enviadas de outro quarto, esta opção não é necessária.
 

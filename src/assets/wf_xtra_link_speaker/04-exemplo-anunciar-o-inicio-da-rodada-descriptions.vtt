@@ -1,0 +1,16 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.000
+No quarto de controle, a opção Receber mensagens enviadas por este quarto é marcada na Torre da Rede Wired. Aparece o aviso Receber mensagens próprias, que informa que a torre pode receber os próprios envios sem estar conectada a uma rede.
+
+00:00:04.000 --> 00:00:11.500
+No Efeito: Enviar Mensagem na Rede, a origem Mensagem personalizada está selecionada e o campo Mensagem contém “A rodada começou!”. A torre do quarto é selecionada para o envio, e a configuração é confirmada.
+
+00:00:11.500 --> 00:00:17.000
+No Ativador: Habbo Clica no Mobi, a própria caixa Wired é selecionada como o mobi que acionará a pilha. A configuração é confirmada.
+
+00:00:17.000 --> 00:00:25.500
+No Rádio da Rede Wired, Mensagem fica marcada em Falar para e Dataframe fica desmarcada. A torre do quarto é selecionada em Selecionar Mobi, e a configuração é confirmada.
+
+00:00:25.500 --> 00:00:27.946
+Ao clicar na caixa do ativador, o Rádio mostra o balão “A rodada começou!” no quarto de controle.
