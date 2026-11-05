@@ -1,0 +1,22 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:03.000
+Na sala de espera, a janela da Torre da Rede Wired mostra a rede Rede Wired Club selecionada, com duas torres conectadas e estado Conectado.
+
+00:00:03.000 --> 00:00:05.000
+O Wired Contexto Variável tem o nome rodada_atual e a opção Tem valor marcada.
+
+00:00:05.000 --> 00:00:13.000
+O Ativador: Receber Dataframe da Rede usa duas linhas: a chave aviso vai para o espaço de texto mensagem_da_rodada, e a chave rodada vai para a variável de contexto rodada_atual. A torre da sala de espera é selecionada.
+
+00:00:13.000 --> 00:00:21.000
+No Efeito: Mudar Valor Variável, rodada_atual está selecionada. A operação é Somar, o valor de referência é 1 e o destino usa variáveis de contexto.
+
+00:00:21.000 --> 00:00:28.000
+No Efeito: Mostrar mensagem, o campo Mensagem utiliza os espaços da mensagem recebida e do número da rodada. A fonte dos usuários está definida como Usar usuários do seletor.
+
+00:00:28.000 --> 00:00:34.000
+O Texto Extra: Campo Variável associa o espaço numero_da_rodada à variável rodada_atual, com exibição numérica.
+
+00:00:34.000 --> 00:00:40.085
+No Seletor: Habbos na Área, a área marcada cobre o piso da sala de espera onde os jogadores receberão o aviso.
