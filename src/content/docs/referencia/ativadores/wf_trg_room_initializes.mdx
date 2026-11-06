@@ -1,10 +1,10 @@
 ---
 title: "Ativador Wired: Quarto Inicializado"
-description: wf_trg_room_initializes
+description: Acione uma pilha Wired uma vez quando o quarto for inicializado, inclusive após uma recarga.
 sidebar:
   label: "Quarto Inicializado"
   badge:
-    text: RASCUNHO
+    text: NOVO
     variant: note
 infobox:
   # == Infobox ==
@@ -16,7 +16,7 @@ infobox:
   revision: 75953
   classname: wf_trg_room_initializes
   name: "WIRED ATIVADOR: Quarto Inicializado"
-  description: wf_trg_room_initializes
+  description: Efeitos são ativados uma vez quando o quarto é inicializado.
   # product_name: # caso o nome na loja seja diferente do nome do Mobi
   # image_direction: 0 # valor padrão
   # image_not_animated: false # valor padrão
@@ -46,6 +46,57 @@ infobox:
   # - Item de ativação
 ---
 
-import Infobox from "@components/Infobox.astro"
+import Infobox from "@components/Infobox.astro";
+import AccessibleVideo from "@components/AccessibleVideo.astro";
+import { Steps, Tabs, TabItem } from "@astrojs/starlight/components";
+import PseudoWiredCodeBlock from "@components/PseudoWiredCodeBlock.astro";
+import ExemploContarInicializacoes from "@assets/wf_trg_room_initializes/02-exemplo-contar-as-inicializacoes.mp4";
+import ExemploContarInicializacoesDescriptionsUrl from "@assets/wf_trg_room_initializes/02-exemplo-contar-as-inicializacoes-descriptions.vtt?url";
+import ExemploContarInicializacoesDescriptionsRaw from "@assets/wf_trg_room_initializes/02-exemplo-contar-as-inicializacoes-descriptions.vtt?raw";
+
+O **Ativador: Quarto Inicializado** aciona uma pilha uma vez quando o quarto é inicializado. Ele é o primeiro Wired a ser acionado nesse momento, antes dos demais ativadores.
 
 <Infobox />
+
+## Informações de uso
+
+O quarto é inicializado quando alguém entra depois que ele ficou vazio por mais de **30 segundos**. Isso também acontece ao recarregar o quarto com o comando `:reload` ou com o botão **Recarregar** das [Ferramentas do Criador](/referencia/ferramentas-do-criador/configuracoes/#estado-do-quarto).
+
+Em um jogo, aproveite esse acionamento para devolver o sistema ao estado inicial. O quarto pode ter sido descarregado no meio de uma partida, por exemplo, ou interrompido durante uma manutenção. Ao inicializá-lo novamente, a pilha pode preparar o jogo para a próxima rodada.
+
+![Janela de informações de uso do Ativador Quarto Inicializado, explicando quando o quarto é inicializado e que este ativador é acionado primeiro.](@assets/wf_trg_room_initializes/01-janela-do-wired.png)
+
+### Exemplo de uso: contar as inicializações
+
+Você pode usar uma variável global para acompanhar quantas vezes o quarto foi inicializado. Cada acionamento deste ativador aumentará o valor de `contador` em **1**.
+
+<AccessibleVideo
+  id="exemplo-contar-inicializacoes"
+  src={ExemploContarInicializacoes}
+  title="Configuração da pilha Wired que conta as inicializações do quarto"
+  descriptionsSrc={ExemploContarInicializacoesDescriptionsUrl}
+  descriptionsContent={ExemploContarInicializacoesDescriptionsRaw}
+/>
+
+<Tabs>
+  <TabItem label="Configuração">
+    <Steps>
+1. Crie uma [Variável Global](/referencia/variaveis/wf_var_room/) chamada `contador`. Em **Opções de disponibilidade**, escolha **Permanente** para que o valor continue guardado depois que o quarto for descarregado. A variável começa em **0**.
+2. Monte uma pilha com o **Ativador: Quarto Inicializado** e o [Efeito: Mudar Valor Variável](/referencia/efeitos/wf_act_change_var_val/).
+3. No efeito, selecione a variável global `contador`, escolha **Somar** e informe **1** como valor.
+</Steps>
+  </TabItem>
+  <TabItem label="PseudoWired">
+    <PseudoWiredCodeBlock code={`
+QUANDO
+  - Quarto Inicializado
+
+ENTÃO
+  - Mudar Valor Variável: contador
+    Somar
+    1
+`} />
+  </TabItem>
+</Tabs>
+
+Para testar, use `:reload` ou pressione **Recarregar** nas Ferramentas do Criador. Quando o quarto for inicializado novamente, `contador` passará de **0** para **1**. Nas próximas inicializações, continuará somando **1** ao valor guardado.

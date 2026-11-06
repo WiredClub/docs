@@ -1,0 +1,16 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:02.000
+Em um quarto do Habbo, um avatar está ao lado de uma variável global e de uma pilha Wired.
+
+00:00:02.000 --> 00:00:05.500
+A janela da variável global é aberta. Ela recebe o nome “contador”, e a opção de disponibilidade “Permanente” permanece marcada. A configuração é confirmada.
+
+00:00:05.500 --> 00:00:10.700
+A janela do ativador “Quarto Inicializado” é aberta sobre a pilha Wired. Ela mostra as informações de uso do ativador, e a configuração é confirmada.
+
+00:00:10.700 --> 00:00:15.500
+A janela do efeito “Mudar Valor Variável” é aberta. A variável “contador” é selecionada, e a operação é alterada para “Somar”.
+
+00:00:15.500 --> 00:00:18.474
+O valor de referência permanece em 1 e o atraso, em 0 segundos. A configuração do efeito é confirmada.
