@@ -196,27 +196,13 @@ Galeria de exemplos:
 
 ### Origem da variável
 
-Em campos que o ícone **Escolha uma variável** aparece, a janela **Origem da variável** pode ser acessada. Primeiro, escolha nos ícones se o alvo é **Mobi**, **Usuário**, **Global** ou **Contexto**. Para mobis e usuários, use as setas para definir de onde virá o alvo durante a execução da pilha. Depois, escolha a variável na lista exibida.
+Nos campos que mostram o ícone **Escolha uma variável**, abra a janela **Origem da variável** e escolha **Mobi**, **Usuário**, **Global** ou **Contexto**. Para mobis e usuários, use as setas para definir de onde virá o alvo durante a execução da pilha. As opções estão explicadas em [Fonte de Usuário ou Mobi](#fonte-de-usuário-ou-mobi). Depois, escolha a variável na lista exibida.
 
 <img
   src={OrigemDaVariavel.src}
   alt="Animação da janela Origem da variável, alternando entre os alvos Mobi, Usuário, Global e Contexto e suas opções de origem."
   style={{ width: "35%" }}
 />
-
-#### Mobi
-
-* **Use o item de ativação:** utiliza o mobi que acionou a pilha, como aquele em que o usuário clicou no ativador **Habbo Clica no Mobi**.
-* **Use mobis escolhidos:** clique nos mobis do quarto para selecioná-los diretamente. É possível escolher até **20**.
-* **Escolha de mobis secundários:** permite selecionar outro conjunto de até **20** mobis.
-* **Usar mobis do seletor:** utiliza os mobis fornecidos por um [Seletor de mobis](/referencia/seletores/visao-geral/) na pilha.
-* **Usar mobis do sinal:** utiliza os mobis incluídos em um sinal enviado por [Mandar Sinal](/referencia/efeitos/wf_act_send_signal/) e recebido por [Recebe Sinal](/referencia/ativadores/wf_trg_recv_signal/).
-
-#### Usuário
-
-* **Use o usuário acionador:** utiliza o usuário que acionou a pilha, como quem clicou no mobi de um ativador.
-* **Usar usuários do seletor:** utiliza os usuários fornecidos por um [Seletor de usuários](/referencia/seletores/visao-geral/) na pilha.
-* **Usar usuários do sinal:** utiliza os usuários incluídos em um sinal enviado por **Mandar Sinal** e recebido por **Recebe Sinal**.
 
 #### Global
 
@@ -239,33 +225,29 @@ Galeria de exemplos:
 
 ### Fonte de Usuário ou Mobi
 
-A vasta maioria dos Wireds que possuem configurações avançadas utilizam essa seção para poder definir qual entidade será utilizada como referência durante a execução. Essa configuração altera diretamente **quem ou o que será afetado** pelo Wired.
+Em alguns Wireds, as configurações avançadas permitem escolher de onde virão os usuários ou mobis usados durante a execução. A fonte pode ser quem acionou a pilha, um conjunto escolhido na janela ou o resultado de um Seletor, por exemplo. Dependendo do Wired, esses usuários ou mobis podem ser afetados por um Efeito ou usados como referência em uma Condição. As opções disponíveis variam conforme o Wired e o contexto da pilha.
 
-**Possíveis fontes de mobis (disponíveis a depender do contexto):**
+#### Fontes de usuários
 
-* Use o item de ativação
-* Use mobis escolhidos
-* Escolha de mobis secundários
-* Usar mobis do seletor
-* Usar mobis do sinal
-* Todos os mobis do quarto
+* **Use o usuário acionador:** usa o usuário que ativou a pilha. Se o ativador for [Mobi é usado](/referencia/ativadores/wf_trg_state_changed/), por exemplo, será o usuário que utilizou o mobi.
+* **Use o bot especificado pelo nome:** usa o bot cujo nome você digitar no campo de texto, como no **Teletransportar Bot ao Mobi**.
+* **Use o Habbo especificado pelo nome:** usa o Habbo cujo nome você digitar no campo de texto. Na Condição **Ativador coincide**, ele pode ser comparado com quem ativou a pilha.
+* **O usuário alcançado:** usa o usuário alcançado pelo bot. A opção aparece em outros Wireds da pilha quando ela contém o ativador [Bot alcança usuário](/referencia/ativadores/wf_trg_bot_reached_avtr/).
+* **O usuário clicado:** usa o usuário em quem alguém clicou. A opção aparece em outros Wireds da pilha quando ela contém o ativador [Usuário clica em Usuário](/referencia/ativadores/wf_trg_click_user/).
+* **Usar usuários do seletor:** usa os usuários encontrados por um [Seletor de usuários](/referencia/seletores/visao-geral/) da pilha.
+* **Usar usuários do sinal:** usa os usuários incluídos em um sinal enviado por [Mandar Sinal](/referencia/efeitos/wf_act_send_signal/) e recebido por [Recebe Sinal](/referencia/ativadores/wf_trg_recv_signal/).
+* **Todos os usuários no quarto:** usa todos os usuários presentes no quarto durante a execução. Essa fonte está disponível, por exemplo, no Extra **Carrega Habbos**.
 
-**Possíveis fontes de usuários (disponíveis a depender do contexto):**
+#### Fontes de mobis
 
-* Use o usuário acionador
-* Use o bot especificado pelo nome
-* Use o Habbo especificado pelo nome
-* O usuário alcançado
-* O usuário clicado
-* Usar usuários do seletor
-* Usar usuários do Sinal
-* Todos os usuários no quarto
-
-**Importância:**
-
-* Essencial para evitar comportamentos fixos
-* Permite criar lógica dinâmica baseada no contexto
-* Fundamental para integração com Seletores e Sinais
+* **Use o item de ativação:** usa o mobi que ativou a pilha. Com o ativador [Habbo Clica no Mobi](/referencia/ativadores/wf_trg_click_furni/), por exemplo, o Efeito **Mudar estado do Mobi** pode atuar sobre o mobi clicado.
+* **Use mobis escolhidos:** usa os mobis que você seleciona ao clicar neles enquanto a janela de configuração está aberta.
+* **Escolha de mobis secundários:** permite selecionar separadamente outro conjunto de mobis, clicando neles enquanto a janela está aberta. No Efeito **Mover Mobi a Mobi**, por exemplo, essa escolha pode definir os mobis de destino.
+* **Usar combinação capturada:** guarda a posição, a altura e o estado dos mobis selecionados ao salvar a configuração com **Pronto**. No jogo, esta opção aparece como **Use the snapshot**. Ela está disponível, por exemplo, no Efeito **Colocar Mobi Temporário**.
+* **Usar mobis do seletor:** usa os mobis encontrados por um [Seletor de mobis](/referencia/seletores/visao-geral/) da pilha.
+* **Usar mobis do sinal:** usa os mobis incluídos em um sinal enviado por **Mandar Sinal** e recebido por **Recebe Sinal**.
+* **Todos os mobis do quarto:** usa todos os mobis presentes no quarto durante a execução. Essa fonte está disponível, por exemplo, no Extra **Física do Movimento**.
+* **Todo o mobi movido pela pilha Wired:** utiliza todos os mobis movidos pela pilha Wired. Essa fonte está disponível, por exemplo, no Extra **Projétil**.
 
 Galeria de exemplos:
 
