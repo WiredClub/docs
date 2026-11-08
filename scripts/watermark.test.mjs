@@ -5,7 +5,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { createRequire } from 'node:module';
-import { buildWatermarkArgs, getVideoDisplayWidth, WATERMARK_OPACITY } from '../src/utils/watermark.ts';
+import { buildWatermarkArgs, getVideoDisplayWidth, WATERMARK_OPACITY, DEFAULT_CRF, DEFAULT_PRESET, DEFAULT_AUDIO_BITRATE } from '../src/utils/watermark.ts';
 
 function run(command, args) {
   const result = spawnSync(command, args, { encoding: 'utf8', timeout: 20000, maxBuffer: 8 * 1024 * 1024 });
@@ -62,6 +62,26 @@ test('exports the logo at the selected minimum, default, and maximum sizes', () 
   } finally {
     rmSync(directory, { recursive: true, force: true });
   }
+});
+
+test('buildWatermarkArgs configures compression parameters with defaults and overrides', () => {
+  const defaultArgs = buildWatermarkArgs('in.mp4', 'logo.png', 'out.mp4', 1920);
+  assert.ok(defaultArgs.includes('-preset'));
+  assert.equal(defaultArgs[defaultArgs.indexOf('-preset') + 1], DEFAULT_PRESET);
+  assert.ok(defaultArgs.includes('-crf'));
+  assert.equal(defaultArgs[defaultArgs.indexOf('-crf') + 1], String(DEFAULT_CRF));
+  assert.ok(defaultArgs.includes('-b:a'));
+  assert.equal(defaultArgs[defaultArgs.indexOf('-b:a') + 1], DEFAULT_AUDIO_BITRATE);
+
+  const customArgs = buildWatermarkArgs('in.mp4', 'logo.png', 'out.mp4', 1920, {
+    size: 0.3,
+    crf: 26,
+    preset: 'superfast',
+    audioBitrate: '64k',
+  });
+  assert.equal(customArgs[customArgs.indexOf('-preset') + 1], 'superfast');
+  assert.equal(customArgs[customArgs.indexOf('-crf') + 1], '26');
+  assert.equal(customArgs[customArgs.indexOf('-b:a') + 1], '64k');
 });
 
 test('the bundled WebAssembly core probes and exports MP4 and MKV files', async () => {
