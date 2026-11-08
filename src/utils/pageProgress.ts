@@ -74,3 +74,4 @@ export function getCategoryLabel(id: string): string {
 
 	return 'Documentação';
 }
+

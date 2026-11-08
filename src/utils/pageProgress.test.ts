@@ -41,3 +41,4 @@ test('STATUS_MAP provides labels and descriptions for all statuses', () => {
 	assert.equal(STATUS_MAP.novo.label, 'Novo');
 	assert.equal(STATUS_MAP.rascunho.label, 'Rascunho');
 });
+
