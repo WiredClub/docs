@@ -14,6 +14,7 @@
     "test:thumbnail": "node --experimental-strip-types --test scripts/thumbnail-transform.test.ts",
     "check:thumbnail": "tsc -p scripts/tsconfig.thumbnail.json",
     "test:activity": "node --experimental-strip-types --test plugins/starlight-recent-changes/test/activity.test.ts",
+    "test:progress": "node --experimental-strip-types --test src/utils/pageProgress.test.ts",
     "check:activity": "tsc -p plugins/starlight-recent-changes/tsconfig.json",
     "test:sidebar-sort": "node --experimental-strip-types --test plugins/starlight-sidebar-label-sort/test/sort.test.ts",
     "preview": "astro preview",

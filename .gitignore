@@ -27,4 +27,4 @@ pnpm-debug.log*
 
 # generated script output
 scripts/output/
-
+scripts/optimized/

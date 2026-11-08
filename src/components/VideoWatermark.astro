@@ -4,14 +4,14 @@ import { WATERMARK_WIDTH, WATERMARK_WIDTH_MIN, WATERMARK_WIDTH_MAX, WATERMARK_OP
 ---
 
 <div class="watermark-tool" data-watermark-logo={watermarkLogo.src} data-pagefind-ignore>
-  <p class="intro">Escolha um vídeo, ajuste o tamanho da logo na prévia e aplique a marca d’água para baixar o resultado em MP4.</p>
+  <p class="intro">Escolha um vídeo, ajuste o tamanho da logo e as opções de compressão na prévia e aplique a marca d’água para baixar o resultado em MP4 otimizado.</p>
 
   <label class="dropzone" id="dropzone" for="video-file" tabindex="0" role="button" aria-controls="video-file">
     <input id="video-file" type="file" accept="video/*,.mp4,.mov,.webm,.mkv" hidden />
     <span class="upload-icon" aria-hidden="true">↑</span>
     <strong id="drop-title">Arraste seu vídeo aqui</strong>
     <span id="drop-description">ou clique para escolher um arquivo</span>
-    <small>MP4, MOV, WebM ou MKV · saída em MP4</small>
+    <small>MP4, MOV, WebM ou MKV · saída em MP4 otimizado</small>
   </label>
 
   <section id="editor-panel" class="editor-panel" aria-labelledby="editor-title" hidden>
@@ -27,6 +27,17 @@ import { WATERMARK_WIDTH, WATERMARK_WIDTH_MIN, WATERMARK_WIDTH_MAX, WATERMARK_OP
     </div>
     <input id="logo-size" type="range" min={WATERMARK_WIDTH_MIN} max={WATERMARK_WIDTH_MAX} step="0.01" value={WATERMARK_WIDTH} aria-describedby="size-hint" />
     <p id="size-hint" class="hint">Porcentagem da largura do vídeo. A prévia acompanha o ajuste em tempo real.</p>
+
+    <div class="compression-group">
+      <label for="compression-profile">Qualidade e compressão</label>
+      <select id="compression-profile" aria-describedby="compression-hint">
+        <option value="optimized" selected>Otimizado para web (CRF 28 · menor tamanho)</option>
+        <option value="balanced">Equilibrado (CRF 24 · maior fidelidade)</option>
+        <option value="fast">Rápido (CRF 20 · processamento mais veloz)</option>
+      </select>
+      <p id="compression-hint" class="hint">Aplica compressão equilibrada com áudio a 96k, similar ao script da documentação.</p>
+    </div>
+
     <button id="process-video" class="process" type="button">Aplicar marca d’água</button>
   </section>
 
@@ -38,6 +49,10 @@ import { WATERMARK_WIDTH, WATERMARK_WIDTH_MIN, WATERMARK_WIDTH_MAX, WATERMARK_OP
 
   <section id="result-panel" class="result-panel" aria-labelledby="result-title" hidden>
     <h2 id="result-title">Prévia do resultado</h2>
+    <div id="result-stats" class="result-stats" hidden>
+      <span id="stat-badge" class="stat-badge"></span>
+      <span id="stat-sizes" class="stat-detail"></span>
+    </div>
     <video id="result-video" controls playsinline preload="metadata" aria-label="Vídeo com marca d’água">
       Seu navegador não suporta a reprodução deste vídeo. Use o botão abaixo para baixar o resultado.
     </video>
@@ -64,6 +79,9 @@ import { WATERMARK_WIDTH, WATERMARK_WIDTH_MIN, WATERMARK_WIDTH_MAX, WATERMARK_OP
   const statusText = document.querySelector<HTMLElement>('#status-text')!;
   const download = document.querySelector<HTMLAnchorElement>('#download')!;
   const resultPanel = document.querySelector<HTMLElement>('#result-panel')!;
+  const resultStats = document.querySelector<HTMLElement>('#result-stats')!;
+  const statBadge = document.querySelector<HTMLElement>('#stat-badge')!;
+  const statSizes = document.querySelector<HTMLElement>('#stat-sizes')!;
   const resultVideo = document.querySelector<HTMLVideoElement>('#result-video')!;
   const editorPanel = document.querySelector<HTMLElement>('#editor-panel')!;
   const previewStage = document.querySelector<HTMLElement>('#preview-stage')!;
@@ -71,6 +89,7 @@ import { WATERMARK_WIDTH, WATERMARK_WIDTH_MIN, WATERMARK_WIDTH_MAX, WATERMARK_OP
   const previewMessage = document.querySelector<HTMLElement>('#preview-message')!;
   const sizeSlider = document.querySelector<HTMLInputElement>('#logo-size')!;
   const sizeValue = document.querySelector<HTMLOutputElement>('#logo-size-value')!;
+  const compressionSelect = document.querySelector<HTMLSelectElement>('#compression-profile')!;
   const processButton = document.querySelector<HTMLButtonElement>('#process-video')!;
   const watermarkLogoUrl = document.querySelector<HTMLElement>('.watermark-tool')!.dataset.watermarkLogo!;
 
@@ -79,6 +98,12 @@ import { WATERMARK_WIDTH, WATERMARK_WIDTH_MIN, WATERMARK_WIDTH_MAX, WATERMARK_OP
   let outputUrl: string | undefined;
   let sourceUrl: string | undefined;
   let selectedFile: File | undefined;
+
+  function formatBytes(bytes: number): string {
+    if (bytes < 1024) return `${bytes} B`;
+    if (bytes < 1024 ** 2) return `${(bytes / 1024).toFixed(0)} KB`;
+    return `${(bytes / 1024 ** 2).toFixed(1)} MB`;
+  }
 
   function setProgress(value: number, message: string) {
     progressBar.value = Math.max(0, Math.min(100, value));
@@ -90,10 +115,14 @@ import { WATERMARK_WIDTH, WATERMARK_WIDTH_MIN, WATERMARK_WIDTH_MAX, WATERMARK_OP
     resultVideo.removeAttribute('src');
     resultVideo.load();
     resultPanel.hidden = true;
+    resultStats.hidden = true;
+    statBadge.textContent = '';
+    statSizes.textContent = '';
     if (outputUrl) URL.revokeObjectURL(outputUrl);
     outputUrl = undefined;
     download.removeAttribute('href');
     download.hidden = true;
+    download.innerHTML = 'Baixar vídeo com marca d’água <span aria-hidden="true">↓</span>';
   }
 
   function clearSource() {
@@ -113,9 +142,7 @@ import { WATERMARK_WIDTH, WATERMARK_WIDTH_MIN, WATERMARK_WIDTH_MAX, WATERMARK_OP
     input.value = '';
     statusPanel.hidden = false;
     fileName.textContent = file.name;
-    fileSize.textContent = file.size < 1024 ** 2
-      ? `${(file.size / 1024).toFixed(0)} KB`
-      : `${(file.size / 1024 ** 2).toFixed(1)} MB`;
+    fileSize.textContent = formatBytes(file.size);
     if (file.size === 0 || !(file.type.startsWith('video/') || /\.(mp4|mov|webm|mkv)$/i.test(file.name))) {
       setProgress(0, 'Escolha um arquivo de vídeo válido e não vazio.');
       return;
@@ -150,6 +177,11 @@ import { WATERMARK_WIDTH, WATERMARK_WIDTH_MIN, WATERMARK_WIDTH_MAX, WATERMARK_OP
     clearOutput();
     if (selectedFile) setProgress(0, 'Tamanho atualizado. Clique em Aplicar marca d’água para gerar o vídeo.');
   });
+  compressionSelect.addEventListener('change', () => {
+    if (busy) return;
+    clearOutput();
+    if (selectedFile) setProgress(0, 'Opções atualizadas. Clique em Aplicar marca d’água para gerar o vídeo.');
+  });
 
   async function getEngine() {
     if (ffmpeg?.loaded) return ffmpeg;
@@ -157,7 +189,7 @@ import { WATERMARK_WIDTH, WATERMARK_WIDTH_MIN, WATERMARK_WIDTH_MAX, WATERMARK_OP
     const engine = new FFmpeg();
     ffmpeg = engine;
     engine.on('progress', ({ progress }) => {
-      if (busy) setProgress(8 + Math.round(progress * 86), 'Aplicando a marca d’água…');
+      if (busy) setProgress(8 + Math.round(progress * 86), 'Aplicando a marca d’água e compactando…');
     });
     try {
       await engine.load({ coreURL, wasmURL });
@@ -193,6 +225,7 @@ import { WATERMARK_WIDTH, WATERMARK_WIDTH_MIN, WATERMARK_WIDTH_MAX, WATERMARK_OP
     busy = true;
     input.disabled = true;
     sizeSlider.disabled = true;
+    compressionSelect.disabled = true;
     processButton.disabled = true;
     sourceVideo.pause();
     dropzone.setAttribute('aria-disabled', 'true');
@@ -203,6 +236,21 @@ import { WATERMARK_WIDTH, WATERMARK_WIDTH_MIN, WATERMARK_WIDTH_MAX, WATERMARK_OP
     const inputName = `input.${file.name.split('.').pop()?.replace(/[^a-z0-9]/gi, '') || 'mp4'}`;
     const outputName = 'watermarked.mp4';
 
+    const profile = compressionSelect.value;
+    let crf = 28;
+    let preset = 'veryfast';
+    let audioBitrate = '96k';
+
+    if (profile === 'balanced') {
+      crf = 24;
+      preset = 'veryfast';
+      audioBitrate = '128k';
+    } else if (profile === 'fast') {
+      crf = 20;
+      preset = 'ultrafast';
+      audioBitrate = '192k';
+    }
+
     try {
       setProgress(3, 'Carregando o processador de vídeo…');
       const engine = await getEngine();
@@ -211,8 +259,13 @@ import { WATERMARK_WIDTH, WATERMARK_WIDTH_MIN, WATERMARK_WIDTH_MAX, WATERMARK_OP
       await engine.writeFile(inputName, new Uint8Array(await file.arrayBuffer()));
       await engine.writeFile('watermark.png', new Uint8Array(await logoResponse.arrayBuffer()));
       const width = await videoWidth(engine, inputName);
-      setProgress(8, 'Aplicando a marca d’água centralizada…');
-      const exitCode = await engine.exec(buildWatermarkArgs(inputName, 'watermark.png', outputName, width, logoSize));
+      setProgress(8, 'Aplicando a marca d’água e compactando…');
+      const exitCode = await engine.exec(buildWatermarkArgs(inputName, 'watermark.png', outputName, width, {
+        size: logoSize,
+        crf,
+        preset,
+        audioBitrate,
+      }));
       if (exitCode !== 0) throw new Error('A exportação falhou. Tente um vídeo menor ou em outro formato.');
       setProgress(97, 'Preparando a prévia e o download…');
       const data = await engine.readFile(outputName);
@@ -221,10 +274,30 @@ import { WATERMARK_WIDTH, WATERMARK_WIDTH_MIN, WATERMARK_WIDTH_MAX, WATERMARK_OP
       resultVideo.src = outputUrl;
       resultVideo.load();
       resultPanel.hidden = false;
+
+      const originalBytes = file.size;
+      const compressedBytes = data.byteLength;
+      const savedBytes = originalBytes - compressedBytes;
+      const savedPercent = originalBytes > 0 ? Math.round((savedBytes * 100) / originalBytes) : 0;
+
+      if (savedPercent > 0) {
+        statBadge.className = 'stat-badge saved';
+        statBadge.textContent = `-${savedPercent}% economizado`;
+        statSizes.textContent = `${formatBytes(originalBytes)} → ${formatBytes(compressedBytes)}`;
+        resultStats.hidden = false;
+        setProgress(100, `Vídeo pronto e compactado! Economia de ${savedPercent}% (${formatBytes(originalBytes)} → ${formatBytes(compressedBytes)}).`);
+      } else {
+        statBadge.className = 'stat-badge';
+        statBadge.textContent = 'Otimizado';
+        statSizes.textContent = `Tamanho final: ${formatBytes(compressedBytes)}`;
+        resultStats.hidden = false;
+        setProgress(100, `Seu vídeo está pronto. Tamanho final: ${formatBytes(compressedBytes)}.`);
+      }
+
       download.href = outputUrl;
       download.download = `${file.name.replace(/\.[^.]+$/, '')}-watermarked.mp4`;
+      download.innerHTML = `Baixar vídeo com marca d’água (${formatBytes(compressedBytes)}) <span aria-hidden="true">↓</span>`;
       download.hidden = false;
-      setProgress(100, 'Seu vídeo está pronto. Confira a prévia antes de baixar.');
     } catch (error) {
       setProgress(0, error instanceof Error ? error.message : 'Não foi possível processar o vídeo. Tente um arquivo menor.');
       ffmpeg?.terminate();
@@ -236,6 +309,7 @@ import { WATERMARK_WIDTH, WATERMARK_WIDTH_MIN, WATERMARK_WIDTH_MAX, WATERMARK_OP
       busy = false;
       input.disabled = false;
       sizeSlider.disabled = false;
+      compressionSelect.disabled = false;
       processButton.disabled = false;
       input.value = '';
       dropzone.setAttribute('aria-disabled', 'false');
@@ -297,10 +371,18 @@ import { WATERMARK_WIDTH, WATERMARK_WIDTH_MIN, WATERMARK_WIDTH_MAX, WATERMARK_OP
   .size-label { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-top: 1rem; color: var(--sl-color-white); }
   .size-label > * { margin: 0; }
   #logo-size { display: block; width: 100%; margin: .75rem 0; accent-color: var(--sl-color-accent); cursor: pointer; }
+  .compression-group { margin: 1.25rem 0 1.25rem; }
+  .compression-group label { display: block; margin-bottom: .4rem; font-size: .9rem; font-weight: 600; color: var(--sl-color-white); }
+  .compression-group select { width: 100%; padding: .6rem .75rem; border: 1px solid var(--wc-border); border-radius: var(--wc-radius); background: var(--wc-panel); color: var(--sl-color-white); font: inherit; font-size: .85rem; cursor: pointer; outline: none; transition: border-color .15s; }
+  .compression-group select:focus { border-color: var(--sl-color-accent); }
   .process { width: 100%; border: 0; font: inherit; cursor: pointer; }
   .process:disabled { cursor: wait; opacity: .6; }
   .result-panel { margin-top: 1.5rem; }
   .result-panel h2 { margin: 0 0 .75rem; font-size: 1rem; }
+  .result-stats { display: flex; align-items: center; flex-wrap: wrap; gap: .75rem; margin-bottom: .85rem; font-size: .85rem; }
+  .stat-badge { display: inline-flex; align-items: center; padding: .2rem .55rem; border-radius: var(--wc-radius-sm, 4px); background: var(--sl-color-accent-low); color: var(--sl-color-text-accent); font-weight: 600; font-size: .8rem; }
+  .stat-badge.saved { background: rgba(34, 197, 94, 0.15); color: #4ade80; }
+  .stat-detail { color: var(--sl-color-gray-2); }
   .result-panel video { display: block; width: 100%; max-height: 70vh; border: 1px solid var(--sl-color-hairline); border-radius: var(--wc-radius); background: black; }
   .download, .process { display: flex; align-items: center; justify-content: space-between; gap: .75rem; margin-top: 1.5rem; padding: 1rem; border-radius: var(--wc-radius); background: var(--sl-color-accent); color: var(--sl-color-text-invert); text-decoration: none; font-weight: 600; }
   .download:hover, .process:hover:not(:disabled) { filter: brightness(1.1); }

@@ -6,6 +6,17 @@ export const WATERMARK_WIDTH_MAX = 1.5;
 export const WATERMARK_TRANSPARENCY = 0.9;
 export const WATERMARK_OPACITY = 1 - WATERMARK_TRANSPARENCY;
 
+export const DEFAULT_CRF = 28;
+export const DEFAULT_PRESET = 'veryfast';
+export const DEFAULT_AUDIO_BITRATE = '96k';
+
+export interface WatermarkOptions {
+  size?: number;
+  crf?: number;
+  preset?: string;
+  audioBitrate?: string;
+}
+
 /** Shared by the browser processor and the export integration test. */
 export function getVideoDisplayWidth(metadata: {
   streams?: { width?: number; height?: number; side_data_list?: { rotation?: number }[] }[];
@@ -17,7 +28,22 @@ export function getVideoDisplayWidth(metadata: {
   return width;
 }
 
-export function buildWatermarkArgs(input: string, logo: string, output: string, width: number, size = WATERMARK_WIDTH): string[] {
+export function buildWatermarkArgs(
+  input: string,
+  logo: string,
+  output: string,
+  width: number,
+  optionsOrSize: number | WatermarkOptions = WATERMARK_WIDTH,
+): string[] {
+  const options: WatermarkOptions = typeof optionsOrSize === 'number'
+    ? { size: optionsOrSize }
+    : (optionsOrSize ?? {});
+
+  const size = options.size ?? WATERMARK_WIDTH;
+  const crf = String(options.crf ?? DEFAULT_CRF);
+  const preset = options.preset ?? DEFAULT_PRESET;
+  const audioBitrate = options.audioBitrate ?? DEFAULT_AUDIO_BITRATE;
+
   const fraction = Number.isFinite(size) ? Math.max(WATERMARK_WIDTH_MIN, Math.min(WATERMARK_WIDTH_MAX, size)) : WATERMARK_WIDTH;
   const logoWidth = Math.max(2, Math.floor(width * fraction / 2) * 2);
   const filter = `[1:v]scale=${logoWidth}:-2,format=rgba,colorchannelmixer=aa=${WATERMARK_OPACITY}[logo];` +
@@ -26,8 +52,8 @@ export function buildWatermarkArgs(input: string, logo: string, output: string, 
     '-i', input, '-i', logo,
     '-filter_complex', filter,
     '-map', '[outv]', '-map', '0:a?',
-    '-c:v', 'libx264', '-preset', 'ultrafast', '-crf', '20',
-    '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-b:a', '192k',
+    '-c:v', 'libx264', '-preset', preset, '-crf', crf,
+    '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-b:a', audioBitrate,
     '-movflags', '+faststart', output,
   ];
 }
