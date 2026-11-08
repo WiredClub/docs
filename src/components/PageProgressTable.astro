@@ -70,7 +70,7 @@ const percentages = {
 const uniqueCategories = [...new Set(pages.map((p) => p.category))].sort((a, b) => a.localeCompare(b, 'pt-BR'));
 ---
 
-<section class="doc-progress" aria-label="Progresso por página da documentação" data-pagefind-ignore>
+<section class="doc-progress not-content" aria-label="Progresso por página da documentação" data-pagefind-ignore>
 	<div class="progress-summary-card">
 		<div class="summary-top">
 			<div class="summary-heading">
@@ -164,19 +164,19 @@ const uniqueCategories = [...new Set(pages.map((p) => p.category))].sort((a, b) 
 		<table class="progress-table">
 			<thead>
 				<tr>
-					<th scope="col" class="th-sortable" data-sort-key="title" aria-sort="none">
+					<th scope="col" class="th-sortable th-page" data-sort-key="title" aria-sort="none">
 						<button type="button" class="th-btn">
 							<span>Página</span>
 							<span class="sort-indicator" aria-hidden="true">↕</span>
 						</button>
 					</th>
-					<th scope="col" class="th-sortable" data-sort-key="status" aria-sort="none">
+					<th scope="col" class="th-sortable th-status" data-sort-key="status" aria-sort="none">
 						<button type="button" class="th-btn">
 							<span>Status</span>
 							<span class="sort-indicator" aria-hidden="true">↕</span>
 						</button>
 					</th>
-					<th scope="col" class="th-sortable" data-sort-key="date" aria-sort="none">
+					<th scope="col" class="th-sortable th-date" data-sort-key="date" aria-sort="none">
 						<button type="button" class="th-btn">
 							<span>Última alteração</span>
 							<span class="sort-indicator" aria-hidden="true">↕</span>
@@ -516,22 +516,30 @@ const uniqueCategories = [...new Set(pages.map((p) => p.category))].sort((a, b) 
 		display: flex;
 		flex-wrap: wrap;
 		gap: 0.5rem;
+		align-items: center;
 	}
 
 	.status-filter-btn {
 		display: inline-flex;
 		align-items: center;
-		gap: 0.4rem;
-		padding: 0.4rem 0.85rem;
+		justify-content: center;
+		gap: 0.45rem;
+		height: 2.25rem;
+		min-height: 2.25rem;
+		max-height: 2.25rem;
+		box-sizing: border-box;
+		padding: 0 0.85rem;
 		border-radius: 999px;
 		border: 1px solid var(--sl-color-hairline);
 		background: var(--sl-color-gray-6);
 		color: var(--sl-color-gray-2);
 		font-size: 0.8rem;
+		line-height: 1;
 		font-family: inherit;
 		cursor: pointer;
 		transition: all 0.15s ease;
 		user-select: none;
+		vertical-align: middle;
 	}
 
 	.status-filter-btn:hover {
@@ -570,12 +578,22 @@ const uniqueCategories = [...new Set(pages.map((p) => p.category))].sort((a, b) 
 		background: var(--sl-color-orange, #ff9c27);
 	}
 
+	.pill-label {
+		line-height: 1;
+	}
+
 	.pill-count {
-		padding: 0.1rem 0.4rem;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		height: 1.25rem;
+		padding: 0 0.45rem;
 		border-radius: 999px;
 		background: var(--sl-color-gray-5);
 		font-size: 0.72rem;
 		font-weight: 600;
+		line-height: 1;
+		box-sizing: border-box;
 	}
 
 	.status-filter-btn.active .pill-count {
@@ -586,26 +604,30 @@ const uniqueCategories = [...new Set(pages.map((p) => p.category))].sort((a, b) 
 	.pill-percent {
 		font-size: 0.72rem;
 		color: var(--sl-color-gray-3);
+		line-height: 1;
 	}
 
 	.status-filter-btn.active .pill-percent {
 		color: var(--sl-color-accent-high);
 	}
 
-	/* Controls Bar */
+	/* Controls Bar - Perfectly Aligned Horizontally */
 	.table-controls {
 		display: flex;
 		align-items: center;
-		justify-content: space-between;
+		justify-content: flex-start;
 		gap: 0.85rem;
-		margin-bottom: 1rem;
-		flex-wrap: wrap;
+		margin-bottom: 1.25rem;
+		width: 100%;
+		box-sizing: border-box;
 	}
 
 	.search-box {
 		position: relative;
-		flex: 1 1 15rem;
-		min-width: 14rem;
+		flex: 1 1 18rem;
+		min-width: 13rem;
+		display: flex;
+		align-items: center;
 	}
 
 	.search-icon {
@@ -619,13 +641,17 @@ const uniqueCategories = [...new Set(pages.map((p) => p.category))].sort((a, b) 
 
 	.search-input {
 		width: 100%;
-		padding: 0.55rem 0.85rem 0.55rem 2.4rem;
+		height: 2.5rem;
+		box-sizing: border-box;
+		padding: 0 0.85rem 0 2.4rem;
 		border-radius: var(--wc-radius, 0.625rem);
 		border: 1px solid var(--sl-color-hairline);
 		background: var(--sl-color-gray-6);
 		color: var(--sl-color-white);
 		font-size: 0.85rem;
 		font-family: inherit;
+		line-height: normal;
+		margin: 0;
 		transition: border-color 0.15s, box-shadow 0.15s;
 	}
 
@@ -636,35 +662,57 @@ const uniqueCategories = [...new Set(pages.map((p) => p.category))].sort((a, b) 
 	}
 
 	.category-filter-box {
-		flex: 0 1 15rem;
+		flex: 0 0 auto;
+		width: 16rem;
+		max-width: 100%;
+		display: flex;
+		align-items: center;
 	}
 
 	.category-select {
 		width: 100%;
-		padding: 0.55rem 0.85rem;
+		height: 2.5rem;
+		box-sizing: border-box;
+		padding: 0 2.2rem 0 0.85rem;
 		border-radius: var(--wc-radius, 0.625rem);
 		border: 1px solid var(--sl-color-hairline);
 		background: var(--sl-color-gray-6);
 		color: var(--sl-color-white);
 		font-size: 0.85rem;
 		font-family: inherit;
+		line-height: normal;
 		cursor: pointer;
-		transition: border-color 0.15s;
+		margin: 0;
+		transition: border-color 0.15s, box-shadow 0.15s;
+		appearance: none;
+		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%238291ac' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3E%3C/svg%3E");
+		background-position: right 0.65rem center;
+		background-repeat: no-repeat;
+		background-size: 1.25rem 1.25rem;
 	}
 
 	.category-select:focus {
 		outline: none;
 		border-color: var(--sl-color-accent);
+		box-shadow: 0 0 0 2px var(--sl-color-accent-low);
 	}
 
 	.results-feedback {
-		font-size: 0.8rem;
+		display: inline-flex;
+		align-items: center;
+		height: 2.5rem;
+		box-sizing: border-box;
+		margin-left: auto;
+		font-size: 0.85rem;
 		color: var(--sl-color-gray-3);
 		white-space: nowrap;
+		line-height: 1;
+		flex: 0 0 auto;
 	}
 
 	.results-feedback strong {
 		color: var(--sl-color-white);
+		margin: 0 0.15rem;
 	}
 
 	/* Table Responsive Container */
@@ -679,7 +727,6 @@ const uniqueCategories = [...new Set(pages.map((p) => p.category))].sort((a, b) 
 	.progress-table {
 		width: 100%;
 		border-collapse: collapse;
-		text-align: left;
 		font-size: 0.85rem;
 		margin: 0 !important;
 	}
@@ -690,13 +737,31 @@ const uniqueCategories = [...new Set(pages.map((p) => p.category))].sort((a, b) 
 	}
 
 	.progress-table th {
-		padding: 0.75rem 1rem;
+		padding: 0.85rem 1rem;
 		font-size: 0.75rem;
 		font-weight: 700;
 		text-transform: uppercase;
 		letter-spacing: 0.05em;
 		color: var(--sl-color-gray-2);
 		white-space: nowrap;
+	}
+
+	.progress-table th.th-page {
+		text-align: left !important;
+		padding-left: 1.25rem;
+	}
+
+	.progress-table th.th-status {
+		text-align: center !important;
+	}
+
+	.progress-table th.th-date {
+		text-align: center !important;
+	}
+
+	.progress-table th.th-contributors {
+		text-align: right !important;
+		padding-right: 1.25rem;
 	}
 
 	.th-btn {
@@ -711,6 +776,22 @@ const uniqueCategories = [...new Set(pages.map((p) => p.category))].sort((a, b) 
 		text-transform: inherit;
 		letter-spacing: inherit;
 		cursor: pointer;
+	}
+
+	.th-page .th-btn {
+		justify-content: flex-start;
+		text-align: left;
+	}
+
+	.th-status .th-btn,
+	.th-date .th-btn {
+		justify-content: center;
+		margin: 0 auto;
+	}
+
+	.th-contributors span {
+		display: block;
+		text-align: right;
 	}
 
 	.th-btn:hover {
@@ -741,14 +822,17 @@ const uniqueCategories = [...new Set(pages.map((p) => p.category))].sort((a, b) 
 		vertical-align: middle;
 	}
 
-	/* Column 1: Page */
+	/* Column 1: Page - Left Aligned */
 	.col-page {
+		text-align: left !important;
 		min-width: 14rem;
 		max-width: 22rem;
+		padding-left: 1.25rem !important;
 	}
 
 	.page-title-link {
 		display: block;
+		text-align: left;
 		font-weight: 600;
 		color: var(--sl-color-white);
 		text-decoration: none;
@@ -765,15 +849,17 @@ const uniqueCategories = [...new Set(pages.map((p) => p.category))].sort((a, b) 
 	}
 
 	.page-category-tag {
-		display: inline-block;
+		display: block;
+		text-align: left;
 		font-size: 0.7rem;
 		color: var(--sl-color-gray-3);
 	}
 
-	/* Column 2: Status */
+	/* Column 2: Status - Centered */
 	.col-status {
+		text-align: center !important;
 		white-space: nowrap;
-		width: 9rem;
+		width: 10rem;
 	}
 
 	.status-badge {
@@ -808,25 +894,32 @@ const uniqueCategories = [...new Set(pages.map((p) => p.category))].sort((a, b) 
 		border: 1px solid rgba(255, 156, 39, 0.25);
 	}
 
-	/* Column 3: Date */
+	/* Column 3: Date - Centered */
 	.col-date {
+		text-align: center !important;
 		white-space: nowrap;
 		width: 9rem;
 	}
 
 	.page-date {
+		display: inline-block;
+		text-align: center;
 		font-size: 0.8rem;
 		color: var(--sl-color-gray-2);
 	}
 
-	/* Column 4: Contributors (Avatar Stack) */
+	/* Column 4: Contributors - Right Aligned */
 	.col-contributors {
-		width: 9rem;
+		text-align: right !important;
+		padding-right: 1.25rem !important;
+		width: 10rem;
 	}
 
-	.avatar-stack {
+	.col-contributors .avatar-stack {
 		display: inline-flex;
 		align-items: center;
+		justify-content: flex-end;
+		margin-left: auto;
 		padding-left: 2px;
 	}
 
@@ -875,6 +968,8 @@ const uniqueCategories = [...new Set(pages.map((p) => p.category))].sort((a, b) 
 	}
 
 	.no-contributors {
+		display: inline-block;
+		text-align: right;
 		color: var(--sl-color-gray-4);
 		font-size: 0.85rem;
 	}
@@ -927,6 +1022,7 @@ const uniqueCategories = [...new Set(pages.map((p) => p.category))].sort((a, b) 
 		.table-controls {
 			flex-direction: column;
 			align-items: stretch;
+			gap: 0.65rem;
 		}
 
 		.search-box,
@@ -936,7 +1032,8 @@ const uniqueCategories = [...new Set(pages.map((p) => p.category))].sort((a, b) 
 		}
 
 		.results-feedback {
-			text-align: right;
+			margin-left: 0;
+			justify-content: flex-end;
 		}
 
 		.progress-summary-card {
@@ -944,4 +1041,3 @@ const uniqueCategories = [...new Set(pages.map((p) => p.category))].sort((a, b) 
 		}
 	}
 </style>
-
