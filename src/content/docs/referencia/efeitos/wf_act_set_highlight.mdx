@@ -1,10 +1,10 @@
 ---
 title: "Efeito Wired: Definir Realce"
-description: wf_act_set_highlight
+description: Defina o realce de mobis ou usuários, sua cor e animação, e quem verá o efeito no quarto.
 sidebar:
   label: "Definir Realce"
   badge:
-    text: RASCUNHO
+    text: NOVO
     variant: note
 infobox:
   # == Infobox ==
@@ -16,7 +16,7 @@ infobox:
   revision: 75953
   classname: wf_act_set_highlight
   name: "WIRED EFEITO: Definir Realce"
-  description: wf_act_set_highlight
+  description: Este efeito realça mobis ou usuários e permite escolher o tipo de realce, a cor e quem poderá vê-lo.
   # product_name: # caso o nome na loja seja diferente do nome do Mobi
   # image_direction: 0 # valor padrão
   # image_not_animated: false # valor padrão
@@ -44,6 +44,207 @@ infobox:
   #   classname: # classname técnico
 ---
 
-import Infobox from "@components/Infobox.astro"
+import Infobox from "@components/Infobox.astro";
+import { Aside } from "@astrojs/starlight/components";
+import Atraso from "@assets/wf_act_set/02-atraso.gif";
+import SelecionarMobi from "@assets/wf_act_set/03-mobi-selecionar-alvo.gif";
+import SelecionarUsuario from "@assets/wf_act_set/04-usuario-selecionar-alvo.gif";
+import VisivelPara from "@assets/wf_act_set/05-visivel-para.gif";
+
+O **Efeito: Definir Realce** destaca um mobi ou usuário no quarto. Você escolhe como o realce aparecerá, sua cor, se ele ficará constante ou pulsará e quem poderá vê-lo.
 
 <Infobox />
+
+## Como esse Wired funciona?
+
+Quando a pilha executa este efeito, o alvo recebe o **Tipo de realce** configurado. A opção **Intensidade** permite ativar ou desativar o realce; para **Tonalidade de Cor**, ela também controla a força da cor. Algumas configurações mudam conforme o tipo escolhido, como a disponibilidade das cores e da função de suavização.
+
+O **alvo** é o mobi ou usuário que receberá o realce. Em **Visível para**, você define quais usuários verão a mudança quando escolher mostrá-la apenas a usuários selecionados.
+
+![Janela de configuração do Efeito Definir Realce com Contorno, Ativado, Constante e Início e fim suaves selecionados.](@assets/wf_act_set_highlight/01-janela-do-wired.png)
+
+### Quem deve ver o efeito?
+
+Esta lista determina para quem o realce será mostrado:
+
+- **Usuários Selecionados:** o realce será mostrado aos usuários definidos em **Visível para**.
+- **Todos, Incluindo Usuários Que Entraram Depois:** o realce será mostrado a todos no quarto, inclusive a quem entrar após a execução. Com esta opção, **Visível para** fica desativado.
+
+<Aside type="note" title="Manter o efeito após recarregar o quarto">
+Ao escolher **Todos, Incluindo Usuários Que Entraram Depois**, aparece a janela **“Manter este efeito visível após recarregar”**:
+
+![Janela Manter este efeito visível após recarregar com a orientação para empilhar o efeito com o Ativador Quarto Inicializado.](@assets/wf_act_set/01-janela-manter-este-efeito-visivel-apos-recarregar.png)
+
+Veja a página do [Ativador: Quarto Inicializado](/referencia/ativadores/wf_trg_room_initializes/) para entender quando essa pilha é acionada.
+</Aside>
+
+### Tipo de realce
+
+Escolha como o alvo será destacado:
+
+#### Contorno
+
+Mostra um contorno no mobi ou usuário com a cor escolhida em **Cor do realce**.
+
+![Exemplo do tipo Contorno: um mobi e um usuário aparecem com as bordas realçadas.](@assets/wf_act_set_highlight/02-contorno.png)
+
+#### Brilho Suave
+
+Mostra um brilho suave no mobi ou usuário com a cor escolhida em **Cor do realce**.
+
+![Exemplo do tipo Brilho Suave: um mobi e um usuário aparecem cercados por um brilho amarelo.](@assets/wf_act_set_highlight/03-brilho-suave.png)
+
+#### Tonalidade de Cor
+
+Aplica ao mobi ou usuário uma tonalidade da cor escolhida em **Cor do realce**.
+
+![Exemplo do tipo Tonalidade de Cor: um mobi e um usuário aparecem com tonalidade roxa.](@assets/wf_act_set_highlight/04-tonalidade-de-cor.png)
+
+Ao selecionar **Tonalidade de Cor** com o alvo sendo um mobi, aparece abaixo de **Tipo de realce** o aviso:
+
+> Este tipo de realce não funciona em itens que não sejam do Clube do Arquiteto se a animação estiver como "Constante"
+
+![Aviso abaixo de Tipo de realce ao selecionar Tonalidade de Cor para um mobi, informando que a animação Constante não funciona em itens fora do Clube do Arquiteto.](@assets/wf_act_set_highlight/07-aviso-no-topico-tipo-de-realce.png)
+
+#### Clarear
+
+Mostra uma animação pulsante branca no mobi ou usuário.
+
+![Animação do tipo Clarear aplicada a um mobi e um usuário.](@assets/wf_act_set_highlight/05-clarear.gif)
+
+#### Aura Neon
+
+Mostra uma aura neon no mobi ou usuário com a cor escolhida em **Cor do realce**.
+
+![Exemplo do tipo Aura Neon: um mobi e um usuário aparecem cercados por uma aura colorida.](@assets/wf_act_set_highlight/06-aura-neon.png)
+
+### Intensidade
+
+Para **Contorno**, **Brilho Suave**, **Clarear** e **Aura Neon**, esta lista tem duas opções:
+
+- **Ativado:** mostra o tipo de realce escolhido.
+- **Desativado:** não mostra o realce.
+
+Ao escolher **Tonalidade de Cor**, a lista passa a oferecer **Desativado** e quatro níveis. **Desativado** não mostra a tonalidade; os demais aplicam a cor escolhida em **Cor do realce** com intensidades crescentes:
+
+| Opção | Resultado | Exemplo |
+| --- | --- | --- |
+| **Nível 1** | Aplica a tonalidade ao alvo. | ![Mobi e usuário com a tonalidade roxa no Nível 1 de intensidade.](@assets/wf_act_set_highlight/08-intensidade-nivel-1.png) |
+| **Nível 2** | Aplica uma tonalidade mais forte que a do Nível 1. | ![Mobi e usuário com a tonalidade roxa no Nível 2 de intensidade.](@assets/wf_act_set_highlight/08-intensidade-nivel-2.png) |
+| **Nível 3** | Aplica uma tonalidade mais forte que a do Nível 2. | ![Mobi e usuário com a tonalidade roxa no Nível 3 de intensidade.](@assets/wf_act_set_highlight/08-intensidade-nivel-3.png) |
+| **Nível 4** | Aplica uma tonalidade mais forte que a do Nível 3. | ![Mobi e usuário com a tonalidade roxa no Nível 4 de intensidade.](@assets/wf_act_set_highlight/08-intensidade-nivel-4.png) |
+
+### Cor do realce
+
+Você pode escolher entre **21 cores**. Ao selecionar **Tonalidade de Cor** em **Tipo de realce**, **Branco** deixa de estar disponível, restando **20 cores**. Com **Clarear**, a lista fica desativada, pois esse tipo usa uma animação branca.
+
+<table style={{ width: "65%" }}>
+  <thead>
+    <tr>
+      <th scope="col" style={{ width: "33.33%" }}>Cor</th>
+      <th scope="col" style={{ width: "33.33%" }}>Código</th>
+      <th scope="col" style={{ width: "33.33%" }}>Amostra</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><th scope="row">Branco</th><td><code>#FFFFFF</code></td><td aria-label="Amostra da cor Branco" style={{ backgroundColor: "#FFFFFF", boxShadow: "inset 0 0 0 1px #777" }}></td></tr>
+    <tr><th scope="row">Amarelo</th><td><code>#FFEF2E</code></td><td aria-label="Amostra da cor Amarelo" style={{ backgroundColor: "#FFEF2E" }}></td></tr>
+    <tr><th scope="row">Amarelo-ouro</th><td><code>#FFB700</code></td><td aria-label="Amostra da cor Amarelo-ouro" style={{ backgroundColor: "#FFB700" }}></td></tr>
+    <tr><th scope="row">Laranja</th><td><code>#FF8A00</code></td><td aria-label="Amostra da cor Laranja" style={{ backgroundColor: "#FF8A00" }}></td></tr>
+    <tr><th scope="row">Coral</th><td><code>#FF5A36</code></td><td aria-label="Amostra da cor Coral" style={{ backgroundColor: "#FF5A36" }}></td></tr>
+    <tr><th scope="row">Vermelho</th><td><code>#FF3030</code></td><td aria-label="Amostra da cor Vermelho" style={{ backgroundColor: "#FF3030" }}></td></tr>
+    <tr><th scope="row">Rosa-escuro</th><td><code>#FF3377</code></td><td aria-label="Amostra da cor Rosa-escuro" style={{ backgroundColor: "#FF3377" }}></td></tr>
+    <tr><th scope="row">Rosa-choque</th><td><code>#FF55BB</code></td><td aria-label="Amostra da cor Rosa-choque" style={{ backgroundColor: "#FF55BB" }}></td></tr>
+    <tr><th scope="row">Magenta</th><td><code>#F030D8</code></td><td aria-label="Amostra da cor Magenta" style={{ backgroundColor: "#F030D8" }}></td></tr>
+    <tr><th scope="row">Roxo</th><td><code>#B844FF</code></td><td aria-label="Amostra da cor Roxo" style={{ backgroundColor: "#B844FF" }}></td></tr>
+    <tr><th scope="row">Violeta</th><td><code>#7848FF</code></td><td aria-label="Amostra da cor Violeta" style={{ backgroundColor: "#7848FF" }}></td></tr>
+    <tr><th scope="row">Azul-arroxeado</th><td><code>#465CFF</code></td><td aria-label="Amostra da cor Azul-arroxeado" style={{ backgroundColor: "#465CFF" }}></td></tr>
+    <tr><th scope="row">Azul-vivo</th><td><code>#248CFF</code></td><td aria-label="Amostra da cor Azul-vivo" style={{ backgroundColor: "#248CFF" }}></td></tr>
+    <tr><th scope="row">Azul-celeste</th><td><code>#20BFFF</code></td><td aria-label="Amostra da cor Azul-celeste" style={{ backgroundColor: "#20BFFF" }}></td></tr>
+    <tr><th scope="row">Ciano</th><td><code>#20E5F0</code></td><td aria-label="Amostra da cor Ciano" style={{ backgroundColor: "#20E5F0" }}></td></tr>
+    <tr><th scope="row">Turquesa</th><td><code>#18D9B0</code></td><td aria-label="Amostra da cor Turquesa" style={{ backgroundColor: "#18D9B0" }}></td></tr>
+    <tr><th scope="row">Verde-esmeralda</th><td><code>#20CC68</code></td><td aria-label="Amostra da cor Verde-esmeralda" style={{ backgroundColor: "#20CC68" }}></td></tr>
+    <tr><th scope="row">Verde-vivo</th><td><code>#50E030</code></td><td aria-label="Amostra da cor Verde-vivo" style={{ backgroundColor: "#50E030" }}></td></tr>
+    <tr><th scope="row">Verde-limão</th><td><code>#A0ED20</code></td><td aria-label="Amostra da cor Verde-limão" style={{ backgroundColor: "#A0ED20" }}></td></tr>
+    <tr><th scope="row">Rosa-claro</th><td><code>#FCA5DA</code></td><td aria-label="Amostra da cor Rosa-claro" style={{ backgroundColor: "#FCA5DA" }}></td></tr>
+    <tr><th scope="row">Marrom</th><td><code>#BB8D59</code></td><td aria-label="Amostra da cor Marrom" style={{ backgroundColor: "#BB8D59" }}></td></tr>
+  </tbody>
+</table>
+
+### Animação
+
+Escolha se o realce permanecerá da mesma forma ou pulsará:
+
+| Opção | Resultado | Exemplo |
+| --- | --- | --- |
+| **Constante** | Mantém o realce sem pulsar. | ![Exemplo de um mobi e um usuário com realce constante.](@assets/wf_act_set_highlight/09-animacao-constante.png) |
+| **Pulsante** | Faz o realce pulsar no alvo. | ![Animação de um mobi e um usuário com realce pulsante.](@assets/wf_act_set_highlight/09-animacao-pulsante.gif) |
+
+Ao escolher **Clarear** em **Tipo de realce**, apenas **Pulsante** fica disponível.
+
+### Função de suavização
+
+Esta lista define como acontece a transição do realce:
+
+| Opção | Resultado | Exemplo |
+| --- | --- | --- |
+| **Instantâneo** | A mudança acontece de uma vez. | ![Animação da função Instantâneo: o realce aparece de uma vez em um mobi e um usuário.](@assets/wf_act_set_highlight/10-funcao-de-suavizacao-instantaneo.gif) |
+| **Linear** | A mudança acontece de forma uniforme. | ![Animação da função Linear: o realce aparece gradualmente em um mobi e um usuário, em ritmo uniforme.](@assets/wf_act_set_highlight/10-funcao-de-suavizacao-linear.gif) |
+| **Início suave** | A mudança começa suavemente. | ![Animação da função Início suave: o realce aparece em um mobi e um usuário, começando devagar.](@assets/wf_act_set_highlight/10-funcao-de-suavizacao-inicio-suave.gif) |
+| **Fim suave** | A mudança termina suavemente. | ![Animação da função Fim suave: o realce aparece em um mobi e um usuário, desacelerando no final.](@assets/wf_act_set_highlight/10-funcao-de-suavizacao-fim-suave.gif) |
+| **Início e fim suaves** | O começo e o fim da mudança são suaves. | ![Animação da função Início e fim suaves: o realce aparece em um mobi e um usuário, começando e terminando devagar.](@assets/wf_act_set_highlight/10-funcao-de-suavizacao-inicio-e-fim-suaves.gif) |
+
+Com **Animação** em **Constante**, você pode escolher uma função de suavização para **Contorno**, **Brilho Suave**, **Tonalidade de Cor** e **Aura Neon**. Com **Pulsante**, a lista fica desativada para qualquer tipo de realce. **Clarear** só permite **Pulsante** e, por isso, também deixa a lista desativada.
+
+### Atraso (segundos)
+
+Este campo define quanto tempo o efeito espera após a execução da pilha antes de aplicar o realce. Ele aceita valores de **0 a 60 segundos**; mantenha **0** para executar sem espera.
+
+Você pode digitar o valor ou usar as setas. O ícone de temporização alterna o intervalo de cada clique entre **Padrão (a cada 0.5s)** e **Preciso (a cada 0.05s)**. No modo preciso, é possível ajustar atrasos menores pelas setas.
+
+<img
+  src={Atraso.src}
+  alt="Animação do campo Atraso (segundos): o valor é ajustado com as setas e o ícone de temporização muda o intervalo de cada clique."
+  style={{ width: "400px", maxWidth: "100%" }}
+/>
+
+### Selecionar alvo
+
+Escolha o ícone de **mobi** ou **usuário** para indicar o tipo de alvo que receberá o realce. Depois, use as setas para definir de onde virá esse alvo.
+
+Com o ícone de **mobi** selecionado, você pode escolher:
+
+- **Use mobis escolhidos:** clique nos mobis do quarto enquanto a janela de configuração estiver aberta.
+- **Usar mobis do seletor:** usa os mobis encontrados por um [Seletor de mobis](/referencia/seletores/visao-geral/) da pilha.
+- **Usar mobis do sinal:** usa os mobis incluídos em um sinal enviado por [Mandar Sinal](/referencia/efeitos/wf_act_send_signal/) e recebido por [Recebe Sinal](/referencia/ativadores/wf_trg_recv_signal/).
+- **Use o item de ativação:** usa o mobi que ativou a pilha. Com [Habbo Clica no Mobi](/referencia/ativadores/wf_trg_click_furni/), por exemplo, pode ser o mobi clicado.
+
+<img
+  src={SelecionarMobi.src}
+  alt="Animação da seleção do alvo do tipo mobi, alternando entre mobis escolhidos, mobis do seletor, mobis do sinal e item de ativação."
+  style={{ width: "400px", maxWidth: "100%" }}
+/>
+
+Com o ícone de **usuário** selecionado, as opções são:
+
+- **Use o usuário acionador:** usa o usuário que ativou a pilha.
+- **Usar usuários do seletor:** usa os usuários encontrados por um [Seletor de usuários](/referencia/seletores/visao-geral/) da pilha.
+- **Usar usuários do sinal:** usa os usuários incluídos em um sinal enviado por **Mandar Sinal** e recebido por **Recebe Sinal**.
+
+<img
+  src={SelecionarUsuario.src}
+  alt="Animação da seleção do alvo do tipo usuário, alternando entre usuário acionador, usuários do seletor e usuários do sinal."
+  style={{ width: "400px", maxWidth: "100%" }}
+/>
+
+Para conhecer outras fontes que podem aparecer em diferentes Wireds, veja [Fonte de Usuário ou Mobi](/referencia/configurando-wireds/#fonte-de-usuário-ou-mobi).
+
+### Visível para
+
+Se você escolheu **Usuários Selecionados** em **Quem deve ver o efeito?**, use as setas de **Visível para** para definir quem verá o realce. As opções são **Use o usuário acionador**, **Usar usuários do seletor** e **Usar usuários do sinal**, explicadas acima em **Selecionar alvo**. Esta seção fica desativada quando o efeito é configurado para **Todos, Incluindo Usuários Que Entraram Depois**.
+
+<img
+  src={VisivelPara.src}
+  alt="Animação da seção Visível para, alternando entre usuário acionador, usuários do seletor e usuários do sinal."
+  style={{ width: "550px", maxWidth: "100%" }}
+/>
