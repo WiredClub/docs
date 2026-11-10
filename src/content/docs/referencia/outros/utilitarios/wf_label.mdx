@@ -1,10 +1,10 @@
 ---
 title: "Anotação Wired"
-description: wf_label
+description: Escreva anotações para explicar pilhas Wired ou mostrar informações aos jogadores do quarto.
 sidebar:
   label: "Anotação Wired"
   badge:
-    text: RASCUNHO
+    text: NOVO
     variant: note
 infobox:
   # == Infobox ==
@@ -16,7 +16,7 @@ infobox:
   revision: 75953
   classname: wf_label
   name: "Anotação Wired"
-  description: wf_label
+  description: Este utilitário permite escrever anotações e escolher a cor e quem pode vê-las no quarto.
   # product_name: # caso o nome na loja seja diferente do nome do Mobi
   # image_direction: 0 # valor padrão
   image_not_animated: true
@@ -40,6 +40,31 @@ infobox:
   additional_sources: []
 ---
 
-import Infobox from "@components/Infobox.astro"
+import Infobox from "@components/Infobox.astro";
+
+A **Anotação Wired** permite escrever um texto em um balão ligado ao mobi. Você pode usá-la para explicar o que uma pilha faz ou apresentar as regras de um jogo aos jogadores do quarto.
 
 <Infobox />
+
+## Como esse mobi funciona?
+
+Ao passar o mouse sobre o mobi, aparece o balão de anotação. Clique uma vez no mobi para habilitar a edição: o balão mostrará **“Escreva algo aqui…”**. Depois, clique no balão e digite o texto, com até **1.000 caracteres**.
+
+### Configurações
+
+No menu de informações do mobi, além de **Mover**, **Girar** e **Escolher**, aparece a opção **Configurações**. Use-a para abrir a janela **Configurações da Anotação**, onde você define a cor e quem poderá ver o texto.
+
+#### Cor da anotação
+
+Escolha uma das oito cores disponíveis: **Azul**, **Verde-petróleo**, **Verde**, **Ouro**, **Laranja**, **Vermelho**, **Roxo** ou **Cinza-carvão**.
+
+#### Quem pode ver esta anotação?
+
+Esta lista oferece duas opções:
+
+- **Todos:** todos os jogadores podem ver a anotação.
+- **Usuários com Permissão para Inspecionar Wired:** apenas os jogadores autorizados a inspecionar Wireds no quarto podem vê-la. Essa permissão é definida nas [configurações das Ferramentas do Criador](/referencia/ferramentas-do-criador/configuracoes/#quem-pode-inspecionar-os-wireds).
+
+#### Manter esta anotação sempre aberta
+
+Você pode marcar ou desmarcar esta caixa quando **Todos** está selecionado em **Quem pode ver esta anotação?**. Ao escolher **Usuários com Permissão para Inspecionar Wired**, a caixa fica desativada.
