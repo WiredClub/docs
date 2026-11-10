@@ -61,6 +61,8 @@ Quando a pilha executa este efeito, o alvo recebe o **Tipo de realce** configura
 
 O **alvo** é o mobi ou usuário que receberá o realce. Em **Visível para**, você define quais usuários verão a mudança quando escolher mostrá-la apenas a usuários selecionados.
 
+![Janela de configuração do Efeito Definir Realce com Contorno, Ativado, Constante e Início e fim suaves selecionados.](@assets/wf_act_set_highlight/01-janela-do-wired.png)
+
 ### Quem deve ver o efeito?
 
 Esta lista determina para quem o realce será mostrado:
@@ -80,11 +82,41 @@ Veja a página do [Ativador: Quarto Inicializado](/referencia/ativadores/wf_trg_
 
 Escolha como o alvo será destacado:
 
-- **Contorno:** mostra um contorno no mobi ou usuário com a cor escolhida em **Cor do Realce**.
-- **Brilho Suave:** mostra um brilho suave com a cor escolhida.
-- **Tonalidade de Cor:** aplica ao mobi ou usuário uma tonalidade da cor escolhida.
-- **Clarear:** mostra uma animação pulsante branca no alvo.
-- **Aura Neon:** mostra uma aura neon com a cor escolhida.
+#### Contorno
+
+Mostra um contorno no mobi ou usuário com a cor escolhida em **Cor do Realce**.
+
+![Exemplo do tipo Contorno: um mobi e um usuário aparecem com as bordas realçadas.](@assets/wf_act_set_highlight/02-contorno.png)
+
+#### Brilho Suave
+
+Mostra um brilho suave no mobi ou usuário com a cor escolhida em **Cor do Realce**.
+
+![Exemplo do tipo Brilho Suave: um mobi e um usuário aparecem cercados por um brilho amarelo.](@assets/wf_act_set_highlight/03-brilho-suave.png)
+
+#### Tonalidade de Cor
+
+Aplica ao mobi ou usuário uma tonalidade da cor escolhida em **Cor do Realce**.
+
+![Exemplo do tipo Tonalidade de Cor: um mobi e um usuário aparecem com tonalidade roxa.](@assets/wf_act_set_highlight/04-tonalidade-de-cor.png)
+
+Ao selecionar **Tonalidade de Cor** com o alvo sendo um mobi, aparece abaixo de **Tipo de realce** o aviso:
+
+> Este tipo de realce não funciona em itens que não sejam do Clube do Arquiteto se a animação estiver como "Constante"
+
+![Aviso abaixo de Tipo de realce ao selecionar Tonalidade de Cor para um mobi, informando que a animação Constante não funciona em itens fora do Clube do Arquiteto.](@assets/wf_act_set_highlight/07-aviso-no-topico-tipo-de-realce.png)
+
+#### Clarear
+
+Mostra uma animação pulsante branca no mobi ou usuário.
+
+![Animação do tipo Clarear aplicada a um mobi e um usuário.](@assets/wf_act_set_highlight/05-clarear.gif)
+
+#### Aura Neon
+
+Mostra uma aura neon no mobi ou usuário com a cor escolhida em **Cor do Realce**.
+
+![Exemplo do tipo Aura Neon: um mobi e um usuário aparecem cercados por uma aura colorida.](@assets/wf_act_set_highlight/06-aura-neon.png)
 
 ### Intensidade
 
@@ -95,59 +127,120 @@ Para **Contorno**, **Brilho Suave**, **Clarear** e **Aura Neon**, esta lista tem
 
 Ao escolher **Tonalidade de Cor**, a lista passa a oferecer **Desativado** e quatro níveis. **Desativado** não mostra a tonalidade; os demais aplicam a cor escolhida em **Cor do Realce** com intensidades crescentes:
 
-- **Nível 1:** aplica a tonalidade ao alvo.
-- **Nível 2:** aplica uma tonalidade mais forte que a do Nível 1.
-- **Nível 3:** aplica uma tonalidade mais forte que a do Nível 2.
-- **Nível 4:** aplica uma tonalidade mais forte que a do Nível 3.
+#### Nível 1
+
+Aplica a tonalidade ao alvo.
+
+![Mobi e usuário com a tonalidade roxa no Nível 1 de intensidade.](@assets/wf_act_set_highlight/08-intensidade-nivel-1.png)
+
+#### Nível 2
+
+Aplica uma tonalidade mais forte que a do Nível 1.
+
+![Mobi e usuário com a tonalidade roxa no Nível 2 de intensidade.](@assets/wf_act_set_highlight/08-intensidade-nivel-2.png)
+
+#### Nível 3
+
+Aplica uma tonalidade mais forte que a do Nível 2.
+
+![Mobi e usuário com a tonalidade roxa no Nível 3 de intensidade.](@assets/wf_act_set_highlight/08-intensidade-nivel-3.png)
+
+#### Nível 4
+
+Aplica uma tonalidade mais forte que a do Nível 3.
+
+![Mobi e usuário com a tonalidade roxa no Nível 4 de intensidade.](@assets/wf_act_set_highlight/08-intensidade-nivel-4.png)
 
 ### Cor do Realce
 
-Você pode escolher entre **21 cores**. Com **Tonalidade de Cor**, a cor **Branco** não pode ser selecionada, então restam **20 opções**. Com **Clarear**, a lista fica desativada, pois esse tipo usa uma animação branca.
+Você pode escolher entre **21 cores**. Com **Tipo de realce** sendo **Tonalidade de Cor**, a cor **Branco** não pode ser selecionada, então restam **20 opções**. Com **Tipo de realce** sendo **Clarear**, a lista fica desativada, pois esse tipo usa uma animação branca.
 
-| Cor | Código |
-| --- | --- |
-| Branco | `#FFFFFF` |
-| Amarelo | `#FFEF2E` |
-| Amarelo-ouro | `#FFB700` |
-| Laranja | `#FF8A00` |
-| Coral | `#FF5A36` |
-| Vermelho | `#FF3030` |
-| Rosa-escuro | `#FF3377` |
-| Rosa-choque | `#FF55BB` |
-| Magenta | `#F030D8` |
-| Roxo | `#B844FF` |
-| Violeta | `#7848FF` |
-| Azul-arroxeado | `#465CFF` |
-| Azul-vivo | `#248CFF` |
-| Azul-celeste | `#20BFFF` |
-| Ciano | `#20E5F0` |
-| Turquesa | `#18D9B0` |
-| Verde-esmeralda | `#20CC68` |
-| Verde-vivo | `#50E030` |
-| Verde-limão | `#A0ED20` |
-| Rosa-claro | `#FCA5DA` |
-| Marrom | `#BB8D59` |
+<table style={{ width: "65%" }}>
+  <thead>
+    <tr>
+      <th scope="col" style={{ width: "33.33%" }}>Cor</th>
+      <th scope="col" style={{ width: "33.33%" }}>Código</th>
+      <th scope="col" style={{ width: "33.33%" }}>Amostra</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><th scope="row">Branco</th><td><code>#FFFFFF</code></td><td aria-label="Amostra da cor Branco" style={{ backgroundColor: "#FFFFFF", boxShadow: "inset 0 0 0 1px #777" }}></td></tr>
+    <tr><th scope="row">Amarelo</th><td><code>#FFEF2E</code></td><td aria-label="Amostra da cor Amarelo" style={{ backgroundColor: "#FFEF2E" }}></td></tr>
+    <tr><th scope="row">Amarelo-ouro</th><td><code>#FFB700</code></td><td aria-label="Amostra da cor Amarelo-ouro" style={{ backgroundColor: "#FFB700" }}></td></tr>
+    <tr><th scope="row">Laranja</th><td><code>#FF8A00</code></td><td aria-label="Amostra da cor Laranja" style={{ backgroundColor: "#FF8A00" }}></td></tr>
+    <tr><th scope="row">Coral</th><td><code>#FF5A36</code></td><td aria-label="Amostra da cor Coral" style={{ backgroundColor: "#FF5A36" }}></td></tr>
+    <tr><th scope="row">Vermelho</th><td><code>#FF3030</code></td><td aria-label="Amostra da cor Vermelho" style={{ backgroundColor: "#FF3030" }}></td></tr>
+    <tr><th scope="row">Rosa-escuro</th><td><code>#FF3377</code></td><td aria-label="Amostra da cor Rosa-escuro" style={{ backgroundColor: "#FF3377" }}></td></tr>
+    <tr><th scope="row">Rosa-choque</th><td><code>#FF55BB</code></td><td aria-label="Amostra da cor Rosa-choque" style={{ backgroundColor: "#FF55BB" }}></td></tr>
+    <tr><th scope="row">Magenta</th><td><code>#F030D8</code></td><td aria-label="Amostra da cor Magenta" style={{ backgroundColor: "#F030D8" }}></td></tr>
+    <tr><th scope="row">Roxo</th><td><code>#B844FF</code></td><td aria-label="Amostra da cor Roxo" style={{ backgroundColor: "#B844FF" }}></td></tr>
+    <tr><th scope="row">Violeta</th><td><code>#7848FF</code></td><td aria-label="Amostra da cor Violeta" style={{ backgroundColor: "#7848FF" }}></td></tr>
+    <tr><th scope="row">Azul-arroxeado</th><td><code>#465CFF</code></td><td aria-label="Amostra da cor Azul-arroxeado" style={{ backgroundColor: "#465CFF" }}></td></tr>
+    <tr><th scope="row">Azul-vivo</th><td><code>#248CFF</code></td><td aria-label="Amostra da cor Azul-vivo" style={{ backgroundColor: "#248CFF" }}></td></tr>
+    <tr><th scope="row">Azul-celeste</th><td><code>#20BFFF</code></td><td aria-label="Amostra da cor Azul-celeste" style={{ backgroundColor: "#20BFFF" }}></td></tr>
+    <tr><th scope="row">Ciano</th><td><code>#20E5F0</code></td><td aria-label="Amostra da cor Ciano" style={{ backgroundColor: "#20E5F0" }}></td></tr>
+    <tr><th scope="row">Turquesa</th><td><code>#18D9B0</code></td><td aria-label="Amostra da cor Turquesa" style={{ backgroundColor: "#18D9B0" }}></td></tr>
+    <tr><th scope="row">Verde-esmeralda</th><td><code>#20CC68</code></td><td aria-label="Amostra da cor Verde-esmeralda" style={{ backgroundColor: "#20CC68" }}></td></tr>
+    <tr><th scope="row">Verde-vivo</th><td><code>#50E030</code></td><td aria-label="Amostra da cor Verde-vivo" style={{ backgroundColor: "#50E030" }}></td></tr>
+    <tr><th scope="row">Verde-limão</th><td><code>#A0ED20</code></td><td aria-label="Amostra da cor Verde-limão" style={{ backgroundColor: "#A0ED20" }}></td></tr>
+    <tr><th scope="row">Rosa-claro</th><td><code>#FCA5DA</code></td><td aria-label="Amostra da cor Rosa-claro" style={{ backgroundColor: "#FCA5DA" }}></td></tr>
+    <tr><th scope="row">Marrom</th><td><code>#BB8D59</code></td><td aria-label="Amostra da cor Marrom" style={{ backgroundColor: "#BB8D59" }}></td></tr>
+  </tbody>
+</table>
 
 ### Animação
 
 Escolha se o realce permanecerá da mesma forma ou pulsará:
 
-- **Constante:** mantém o realce sem pulsar.
-- **Pulsante:** faz o realce pulsar no alvo.
+#### Constante
 
-Com **Clarear**, apenas **Pulsante** fica disponível.
+Mantém o realce sem pulsar.
+
+![Exemplo de um mobi e um usuário com realce constante.](@assets/wf_act_set_highlight/09-animacao-constante.png)
+
+#### Pulsante
+
+Faz o realce pulsar no alvo.
+
+![Animação de um mobi e um usuário com realce pulsante.](@assets/wf_act_set_highlight/09-animacao-pulsante.gif)
+
+Com **Tipo de realce** sendo **Clarear**, apenas **Pulsante** fica disponível.
 
 ### Função de suavização
 
 Esta lista define como acontece a transição do realce:
 
-- **Instantâneo:** a mudança acontece de uma vez.
-- **Linear:** a mudança acontece de forma uniforme.
-- **Início suave:** a mudança começa suavemente.
-- **Fim suave:** a mudança termina suavemente.
-- **Início e fim suaves:** o começo e o fim da mudança são suaves.
+#### Instantâneo
 
-Com **Clarear** ou **Aura Neon**, esta lista fica desativada.
+A mudança acontece de uma vez.
+
+![Animação da função Instantâneo: o realce aparece de uma vez em um mobi e um usuário.](@assets/wf_act_set_highlight/10-funcao-de-suavizacao-instantaneo.gif)
+
+#### Linear
+
+A mudança acontece de forma uniforme.
+
+![Animação da função Linear: o realce aparece gradualmente em um mobi e um usuário, em ritmo uniforme.](@assets/wf_act_set_highlight/10-funcao-de-suavizacao-linear.gif)
+
+#### Início suave
+
+A mudança começa suavemente.
+
+![Animação da função Início suave: o realce aparece em um mobi e um usuário, começando devagar.](@assets/wf_act_set_highlight/10-funcao-de-suavizacao-inicio-suave.gif)
+
+#### Fim suave
+
+A mudança termina suavemente.
+
+![Animação da função Fim suave: o realce aparece em um mobi e um usuário, desacelerando no final.](@assets/wf_act_set_highlight/10-funcao-de-suavizacao-fim-suave.gif)
+
+#### Início e fim suaves
+
+O começo e o fim da mudança são suaves.
+
+![Animação da função Início e fim suaves: o realce aparece em um mobi e um usuário, começando e terminando devagar.](@assets/wf_act_set_highlight/10-funcao-de-suavizacao-inicio-e-fim-suaves.gif)
+
+Com **Animação** em **Constante**, esta lista fica disponível para os tipos de realce **Contorno**, **Brilho Suave**, **Tonalidade de Cor** e **Aura Neon**. **Clarear** deixa a lista desativada e só permite a animação **Pulsante**. Com **Animação** em **Pulsante**, a lista fica desativada para qualquer tipo de realce.
 
 ### Atraso (segundos)
 
