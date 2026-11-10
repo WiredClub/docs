@@ -46,6 +46,10 @@ infobox:
 
 import Infobox from "@components/Infobox.astro";
 import { Aside } from "@astrojs/starlight/components";
+import Atraso from "@assets/wf_act_set/02-atraso.gif";
+import SelecionarMobi from "@assets/wf_act_set/03-mobi-selecionar-alvo.gif";
+import SelecionarUsuario from "@assets/wf_act_set/04-usuario-selecionar-alvo.gif";
+import VisivelPara from "@assets/wf_act_set/05-visivel-para.gif";
 
 O **Efeito: Definir Realce** destaca um mobi ou usuário no quarto. Você escolhe como o realce aparecerá, sua cor, se ele ficará constante ou pulsará e quem poderá vê-lo.
 
@@ -151,6 +155,12 @@ Este campo define quanto tempo o efeito espera após a execução da pilha antes
 
 Você pode digitar o valor ou usar as setas. O ícone de temporização alterna o intervalo de cada clique entre **Padrão (a cada 0.5s)** e **Preciso (a cada 0.05s)**. No modo preciso, é possível ajustar atrasos menores pelas setas.
 
+<img
+  src={Atraso.src}
+  alt="Animação do campo Atraso (segundos): o valor é ajustado com as setas e o ícone de temporização muda o intervalo de cada clique."
+  style={{ width: "400px", maxWidth: "100%" }}
+/>
+
 ### Selecionar alvo
 
 Escolha o ícone de **mobi** ou **usuário** para indicar o tipo de alvo que receberá o realce. Depois, use as setas para definir de onde virá esse alvo.
@@ -162,14 +172,32 @@ Com o ícone de **mobi** selecionado, você pode escolher:
 - **Usar mobis do sinal:** usa os mobis incluídos em um sinal enviado por [Mandar Sinal](/referencia/efeitos/wf_act_send_signal/) e recebido por [Recebe Sinal](/referencia/ativadores/wf_trg_recv_signal/).
 - **Use o item de ativação:** usa o mobi que ativou a pilha. Com [Habbo Clica no Mobi](/referencia/ativadores/wf_trg_click_furni/), por exemplo, pode ser o mobi clicado.
 
+<img
+  src={SelecionarMobi.src}
+  alt="Animação da seleção do alvo do tipo mobi, alternando entre mobis escolhidos, mobis do seletor, mobis do sinal e item de ativação."
+  style={{ width: "400px", maxWidth: "100%" }}
+/>
+
 Com o ícone de **usuário** selecionado, as opções são:
 
 - **Use o usuário acionador:** usa o usuário que ativou a pilha.
 - **Usar usuários do seletor:** usa os usuários encontrados por um [Seletor de usuários](/referencia/seletores/visao-geral/) da pilha.
 - **Usar usuários do sinal:** usa os usuários incluídos em um sinal enviado por **Mandar Sinal** e recebido por **Recebe Sinal**.
 
+<img
+  src={SelecionarUsuario.src}
+  alt="Animação da seleção do alvo do tipo usuário, alternando entre usuário acionador, usuários do seletor e usuários do sinal."
+  style={{ width: "400px", maxWidth: "100%" }}
+/>
+
 Para conhecer outras fontes que podem aparecer em diferentes Wireds, veja [Fonte de Usuário ou Mobi](/referencia/configurando-wireds/#fonte-de-usuário-ou-mobi).
 
 ### Visível para
 
 Se você escolheu **Usuários Selecionados** em **Quem deve ver o efeito?**, use as setas de **Visível para** para definir quem verá o realce. As opções são **Use o usuário acionador**, **Usar usuários do seletor** e **Usar usuários do sinal**, explicadas acima em **Selecionar alvo**. Esta seção fica desativada quando o efeito é configurado para **Todos, Incluindo Usuários Que Entraram Depois**.
+
+<img
+  src={VisivelPara.src}
+  alt="Animação da seção Visível para, alternando entre usuário acionador, usuários do seletor e usuários do sinal."
+  style={{ width: "550px", maxWidth: "100%" }}
+/>
