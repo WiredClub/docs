@@ -1,6 +1,6 @@
 ---
 title: "Desativador de :chooser"
-description: conf_chooser_disable
+description: Impeça que pessoas sem direitos no quarto usem o comando :chooser para abrir a Lista de Habbos.
 sidebar:
   label: "Desativador de :chooser"
   badge:
@@ -16,7 +16,7 @@ infobox:
   revision: 75953
   classname: conf_chooser_disable
   name: "Desativador de :chooser"
-  description: conf_chooser_disable
+  description: Este configurador desativa o comando :chooser para pessoas sem direitos no quarto.
   # product_name: # caso o nome na loja seja diferente do nome do Mobi
   # image_direction: 0 # valor padrão
   # image_not_animated: false # valor padrão
@@ -40,6 +40,24 @@ infobox:
   additional_sources: []
 ---
 
-import Infobox from "@components/Infobox.astro"
+import Infobox from "@components/Infobox.astro";
+
+O **Desativador de :chooser** impede que pessoas sem direitos no quarto abram a **Lista de Habbos** com o comando `:chooser`. Essa lista permite encontrar Habbos, mascotes e bots pelo nome e clicar neles sem procurá-los na visão do quarto.
 
 <Infobox />
+
+## Como esse mobi funciona?
+
+Clique duas vezes no mobi para bloquear o comando para quem não tem direitos no quarto. Quando essas pessoas digitarem `:chooser`, a janela **Lista de Habbos** não será aberta.
+
+### Lista de Habbos
+
+Quando o comando está disponível, a janela mostra um campo de busca para filtrar a lista pelo nome de um Habbo, mascote ou bot. Ao lado, você pode escolher **Todos os tipos**, **Habbo**, **Mascote** ou **Bot** para mostrar todas as categorias ou apenas a escolhida.
+
+A tabela tem as colunas **Nome**, com o nome de cada Habbo, mascote ou bot, e **Tipo**, que identifica a categoria. O rodapé informa quantos registros foram encontrados, como **“3 usuários encontrados”** na imagem abaixo.
+
+![Janela Lista de Habbos com campo de busca, filtro Todos os tipos, colunas Nome e Tipo e indicação de 3 usuários encontrados.](@assets/conf_chooser_disable/01-janela-lista-de-habbos.png)
+
+### Exemplo de uso: encontrar um bot escondido
+
+Imagine um jogo em que os participantes precisam encontrar um bot escondido e clicar nele para diminuir sua vida. Sem o bloqueio, alguém poderia localizar o bot pelo nome na **Lista de Habbos** e clicar nele sem procurá-lo no quarto. Ao usar o **Desativador de :chooser**, você impede que os participantes sem direitos usem esse atalho.
