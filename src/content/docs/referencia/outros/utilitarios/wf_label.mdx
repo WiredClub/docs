@@ -41,6 +41,7 @@ infobox:
 ---
 
 import Infobox from "@components/Infobox.astro";
+import InteragindoComMobi from "@assets/wf_label/01-interagindo-com-mobi.gif";
 
 A **Anotação Wired** permite escrever um texto em um balão ligado ao mobi. Você pode usá-la para explicar o que uma pilha faz ou apresentar as regras de um jogo aos jogadores do quarto.
 
@@ -50,13 +51,25 @@ A **Anotação Wired** permite escrever um texto em um balão ligado ao mobi. Vo
 
 Ao passar o mouse sobre o mobi, aparece o balão de anotação. Clique uma vez no mobi para habilitar a edição: o balão mostrará **“Escreva algo aqui…”**. Depois, clique no balão e digite o texto, com até **1.000 caracteres**.
 
+<img
+  src={InteragindoComMobi.src}
+  alt="Animação da interação com a Anotação Wired: o balão aparece e mostra o texto Escreva algo aqui."
+  style={{ width: "55%", maxWidth: "100%" }}
+/>
+
+O texto exibido no balão pode ser selecionado para que você o copie e cole em outro lugar.
+
 ### Configurações
 
 No menu de informações do mobi, além de **Mover**, **Girar** e **Escolher**, aparece a opção **Configurações**. Use-a para abrir a janela **Configurações da Anotação**, onde você define a cor e quem poderá ver o texto.
 
+![Menu de informações da Anotação Wired com os botões Mover, Girar, Escolher e Configurações.](@assets/wf_label/02-opcao-configuracoes.png)
+
 #### Cor da anotação
 
 Escolha uma das oito cores disponíveis: **Azul**, **Verde-petróleo**, **Verde**, **Ouro**, **Laranja**, **Vermelho**, **Roxo** ou **Cinza-carvão**.
+
+![Animação da janela Configurações da Anotação alternando as cores e mudando a cor do balão com o texto Wired Club.](@assets/wf_label/03-cor-da-anotacao.gif)
 
 #### Quem pode ver esta anotação?
 
@@ -65,6 +78,15 @@ Esta lista oferece duas opções:
 - **Todos:** todos os jogadores podem ver a anotação.
 - **Usuários com Permissão para Inspecionar Wired:** apenas os jogadores autorizados a inspecionar Wireds no quarto podem vê-la. Essa permissão é definida nas [configurações das Ferramentas do Criador](/referencia/ferramentas-do-criador/configuracoes/#quem-pode-inspecionar-os-wireds).
 
+![Janela Configurações da Anotação com a lista Quem pode ver esta anotação? aberta, mostrando as opções Todos e Usuários com permissão para inspecionar Wired.](@assets/wf_label/06-opcao-quem-pode-ver-esta-anotacao.png)
+
 #### Manter esta anotação sempre aberta
 
 Você pode marcar ou desmarcar esta caixa quando **Todos** está selecionado em **Quem pode ver esta anotação?**. Ao escolher **Usuários com Permissão para Inspecionar Wired**, a caixa fica desativada.
+
+Com a caixa marcada, o balão com o texto já fica visível quando você entra no quarto e não é possível ocultá-lo. Se ela estiver desmarcada, o balão fica oculto até que você passe o mouse sobre a **Anotação Wired**. Nesse caso, ele aparece desfocado; clique uma vez no mobi para ler o texto com mais foco. Clicar mais uma vez na **Anotação Wired** fecha o balão com o texto.
+
+| Estado da opção | Aparência da anotação |
+| --- | --- |
+| **Desmarcada** | ![Animação da Anotação Wired com o balão de texto aparecendo ao interagir com o mobi.](@assets/wf_label/05-checkbox-desmarcado.gif) |
+| **Marcada** | ![Anotação Wired com o balão de texto Wired Club visível sobre o mobi.](@assets/wf_label/05-checkbox-marcado.png) |
