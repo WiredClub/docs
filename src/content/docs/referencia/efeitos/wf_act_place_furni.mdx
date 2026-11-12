@@ -88,9 +88,9 @@ Marque uma ou mais caixas para deslocar o mobi temporário em relação à posi�
 
 | Caixa | Valor alterado | Exemplo |
 | --- | --- | --- |
-| **X** | `@position.x`, a posição horizontal no quarto. | Se o valor de referência é **8** e você informa **1**, o temporário terá **9**. |
-| **Y** | `@position.y`, a posição vertical no quarto. | Se o valor de referência é **8** e você informa **1**, o temporário terá **9**. |
-| **Altitude** | `@altitude`, a altitude no quarto. | Se o valor de referência é **0** e você informa **100**, o temporário terá **100**. |
+| **X** | `@position.x`, a posição horizontal no quarto. | Se o valor de referência é **8** e você informa **1**, o mobi temporário terá **9**. |
+| **Y** | `@position.y`, a posição vertical no quarto. | Se o valor de referência é **8** e você informa **1**, o mobi temporário terá **9**. |
+| **Altitude** | `@altitude`, a altitude no quarto. | Se o valor de referência é **0** e você informa **100**, o mobi temporário terá **100**. |
 
 ### Gerar com variável
 
@@ -151,13 +151,19 @@ Com o ícone de **usuário**, você pode escolher:
 
 ![Animação da seção Destino personalizado, alternando entre fontes de mobis e usuários que podem servir como referência.](@assets/wf_act_place_furni/07-destino-personalizado.gif)
 
+<Aside type="caution" title="Mobis temporários não podem ser selecionados">
+Você não pode escolher um mobi temporário em **Mobi a ser colocado** nem em **Destino personalizado**. Se selecionar um nessas seções e tentar salvar a configuração, aparecerá a janela **Falha ao atualizar** com o aviso **“Não é possível selecionar mobis temporários no WIRED.”**
+
+![Janela Falha ao atualizar com o aviso Não é possível selecionar mobis temporários no WIRED.](@assets/wf_act_place_furni/10-janela-falha-ao-selecionar-mobi-temporario.png)
+</Aside>
+
 Para conhecer outras fontes disponíveis em diferentes Wireds, veja [Fonte de Usuário ou Mobi](/referencia/configurando-wireds/#fonte-de-usuário-ou-mobi).
 
 ## Pontos importantes
 
 ### Falha ao colocar um mobi
 
-Se o destino já estiver ocupado por outro mobi e não permitir empilhamento, a tentativa de colocar o temporário pode falhar. Nesse caso, o [Monitoramento](/referencia/ferramentas-do-criador/monitoramento/#placement_failure) pode registrar o erro `PLACEMENT_FAILURE`. A variável `@is_stackable` ajuda a verificar se um mobi permite empilhamento; ela não está disponível em todos os mobis.
+Se o destino já estiver ocupado por outro mobi e não permitir empilhamento, a tentativa de colocar o mobi temporário pode falhar. Nesse caso, o [Monitoramento](/referencia/ferramentas-do-criador/monitoramento/#placement_failure) pode registrar o erro `PLACEMENT_FAILURE`. A variável `@is_stackable` ajuda a verificar se um mobi permite empilhamento; ela não está disponível em todos os mobis.
 
 Para contornar essa situação, adicione o [Extra: Física do Movimento](/referencia/extras/wf_xtra_mov_physics/) à pilha e marque **Mover através dos mobis**. Esse extra altera a interação do efeito com os mobis que ocupam o destino.
 
