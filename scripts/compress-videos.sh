@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Execute com Bash (macOS ou Git Bash no Windows) e ffmpeg disponível no PATH.
+
 # Garante que a pasta de saída existe
 mkdir -p ./optimized
 
@@ -23,9 +25,9 @@ while IFS= read -r -d '' file; do
 
     # Verificação de segurança de tamanho
     if [ -f "$output" ]; then
-        # Pega o tamanho em bytes de forma compatível com Git Bash (Windows)
-        size_orig=$(stat -c%s "$file")
-        size_opt=$(stat -c%s "$output")
+        # wc -c funciona tanto no macOS quanto no Git Bash (Windows).
+        size_orig=$(( $(wc -c < "$file") ))
+        size_opt=$(( $(wc -c < "$output") ))
 
         if [ "$size_opt" -ge "$size_orig" ]; then
             echo "⚠️ O arquivo otimizado ficou maior ou igual ao original ($size_opt vs $size_orig bytes)."
