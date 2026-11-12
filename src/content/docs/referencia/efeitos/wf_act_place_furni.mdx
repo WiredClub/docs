@@ -55,6 +55,15 @@ import AltitudeDeOrigemDescriptionsRaw from "@assets/wf_act_place_furni/09-exemp
 import AltitudePersonalizada from "@assets/wf_act_place_furni/09-exemplo-altitude-personalizada.mp4";
 import AltitudePersonalizadaDescriptionsUrl from "@assets/wf_act_place_furni/09-exemplo-altitude-personalizada-descriptions.vtt?url";
 import AltitudePersonalizadaDescriptionsRaw from "@assets/wf_act_place_furni/09-exemplo-altitude-personalizada-descriptions.vtt?raw";
+import Deslocamentos from "@assets/wf_act_place_furni/11-deslocamentos.mp4";
+import DeslocamentosDescriptionsUrl from "@assets/wf_act_place_furni/11-deslocamentos-descriptions.vtt?url";
+import DeslocamentosDescriptionsRaw from "@assets/wf_act_place_furni/11-deslocamentos-descriptions.vtt?raw";
+import GerarComVariavel from "@assets/wf_act_place_furni/12-gerar-com-variavel.mp4";
+import GerarComVariavelDescriptionsUrl from "@assets/wf_act_place_furni/12-gerar-com-variavel-descriptions.vtt?url";
+import GerarComVariavelDescriptionsRaw from "@assets/wf_act_place_furni/12-gerar-com-variavel-descriptions.vtt?raw";
+import FalhaAoColocarUmMobi from "@assets/wf_act_place_furni/13-falha-ao-colocar-um-mobi.mp4";
+import FalhaAoColocarUmMobiDescriptionsUrl from "@assets/wf_act_place_furni/13-falha-ao-colocar-um-mobi-descriptions.vtt?url";
+import FalhaAoColocarUmMobiDescriptionsRaw from "@assets/wf_act_place_furni/13-falha-ao-colocar-um-mobi-descriptions.vtt?raw";
 
 O **Efeito: Colocar Mobi Temporário** cria um ou mais mobis temporários no quarto a partir dos mobis escolhidos em sua configuração. Você define onde eles aparecerão, em que altitude ficarão e, se precisar, qual variável receberão ao serem gerados.
 
@@ -104,7 +113,7 @@ Escolha de onde virá a posição em que o mobi temporário será colocado:
 
 Esta opção define a altitude em que o novo mobi ficará no quarto. Ela não muda a altura própria do modelo, indicada por `@height`; o que muda é sua `@altitude`.
 
-- **Acima do local de destino:** posiciona o mobi temporário acima do local escolhido. Por exemplo, com **Local de origem** selecionado, se o mobi original tem `@height` (altura) igual a **44** e `@altitude` igual a **0**, o mobi temporário fica com `@altitude` igual a **44**. Ele mantém o `@height` próprio de seu modelo.
+- **Acima do local de destino:** posiciona o mobi temporário acima do local escolhido. Por exemplo, com **Local de origem** selecionado, se o mobi original tem `@height` (altura) igual a **44** e `@altitude` igual a **0**, o mobi temporário fica com `@altitude` igual a **44**. Ele mantém o `@height` próprio de seu modelo. Os vídeos de exemplo acima mostram como esta opção pode ser utilizada.
 
 - **Altitude de origem:** usa a `@altitude` do mobi escolhido em **Mobi a ser colocado**. Se o original está em **0**, o mobi temporário também fica em **0**.
 
@@ -140,13 +149,33 @@ Marque uma ou mais caixas para deslocar o mobi temporário em relação à posi�
 | **Y** | `@position.y`, a posição vertical no quarto. | Se o valor de referência é **8** e você informa **1**, o mobi temporário terá **9**. |
 | **Altitude** | `@altitude`, a altitude no quarto. | Se o valor de referência é **0** e você informa **100**, o mobi temporário terá **100**. |
 
+No vídeo, os três deslocamentos são usados juntos: **X = 2**, **Y = 1** e **Altitude = 500**. Para que o deslocamento de altitude funcionasse como esperado neste exemplo, foi necessário acrescentar o [Extra: Física do Movimento](/referencia/extras/wf_xtra_mov_physics/) à pilha e marcar **Mover através dos mobis**.
+
+<AccessibleVideo
+  id="colocar-mobi-temporario-deslocamentos"
+  src={Deslocamentos}
+  title="Deslocamentos X, Y e Altitude com o Extra: Física do Movimento"
+  descriptionsSrc={DeslocamentosDescriptionsUrl}
+  descriptionsContent={DeslocamentosDescriptionsRaw}
+/>
+
 ### Gerar com variável
 
 ![Seção Gerar com variável com a caixa desmarcada e os campos Selecione uma variável e Gerar com valor desativados.](@assets/wf_act_place_furni/05-gerar-com-variavel.png)
 
 Marque **Gerar com variável** se quiser vincular uma variável ao mobi temporário no momento em que ele for colocado. Em **Selecione uma variável**, abra a lista **Buscar uma variável** para escolher uma variável de mobi. Se não houver nenhuma que você possa selecionar, crie uma com o [Wired Variável: Mobi Variável](/referencia/variaveis/wf_var_furni/).
 
-Depois de escolher a variável, **Gerar com valor** fica disponível. Você pode digitar um valor no campo ou usar o ícone **Escolha uma variável** para abrir **Origem da variável** e obter o valor de outra variável. Veja como essa escolha funciona em [Origem da variável](/referencia/configurando-wireds/#origem-da-variável).
+Depois de escolher a variável, **Gerar com valor** fica disponível se a variável escolhida possibilitar ter seu valor alterado. Você pode digitar um valor no campo ou usar o ícone **Escolha uma variável** para abrir **Origem da variável** e obter o valor de outra variável. Veja como essa escolha funciona em [Origem da variável](/referencia/configurando-wireds/#origem-da-variável).
+
+No vídeo, a variável `wired_club` é escolhida e recebe o valor **1**. Depois que o mobi temporário é gerado, a aba **Inspeção** das Ferramentas do Criador mostra esse valor vinculado a ele.
+
+<AccessibleVideo
+  id="colocar-mobi-temporario-gerar-com-variavel"
+  src={GerarComVariavel}
+  title="Gerar um mobi temporário com a variável wired_club no valor 1"
+  descriptionsSrc={GerarComVariavelDescriptionsUrl}
+  descriptionsContent={GerarComVariavelDescriptionsRaw}
+/>
 
 ### Atraso (segundos)
 
@@ -211,9 +240,19 @@ Para conhecer outras fontes disponíveis em diferentes Wireds, veja [Fonte de Us
 
 ### Falha ao colocar um mobi
 
-Se o destino já estiver ocupado por outro mobi e não permitir empilhamento, a tentativa de colocar o mobi temporário pode falhar. Nesse caso, o [Monitoramento](/referencia/ferramentas-do-criador/monitoramento/#placement_failure) pode registrar o erro `PLACEMENT_FAILURE`. A variável `@is_stackable` ajuda a verificar se um mobi permite empilhamento; ela não está disponível em todos os mobis.
+Se o destino já estiver ocupado por outro mobi e não permitir empilhamento, a tentativa de colocar o mobi temporário pode falhar. Nesse caso, o [Monitoramento](/referencia/ferramentas-do-criador/monitoramento/#placement_failure) pode registrar o erro `PLACEMENT_FAILURE`. A variável `@is_stackable` (é empilhável) ajuda a verificar se um mobi permite empilhamento; ela não está disponível em todos os mobis.
 
 Para contornar essa situação, adicione o [Extra: Física do Movimento](/referencia/extras/wf_xtra_mov_physics/) à pilha e marque **Mover através dos mobis**. Esse extra altera a interação do efeito com os mobis que ocupam o destino.
+
+No vídeo, o Extra: Física do Movimento já está configurado com **Mover através dos mobis**. A pilha é acionada duas vezes e, nas duas execuções, os peões temporários aparecem sobre os que já ocupam o destino.
+
+<AccessibleVideo
+  id="colocar-mobi-temporario-falha-ao-colocar"
+  src={FalhaAoColocarUmMobi}
+  title="Peões temporários colocados sobre outros mobis com o Extra: Física do Movimento"
+  descriptionsSrc={FalhaAoColocarUmMobiDescriptionsUrl}
+  descriptionsContent={FalhaAoColocarUmMobiDescriptionsRaw}
+/>
 
 ### Como reconhecer um mobi temporário
 
