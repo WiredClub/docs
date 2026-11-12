@@ -1,6 +1,6 @@
 ---
 title: "Efeito WIRED: Colocar Móbi Temporário"
-description: Este efeito permite posicionar um mobi ou um grupo de mobis no quarto, numa localização e altitude de sua escolha.
+description: Coloque mobis temporários no quarto e escolha sua posição, altitude, deslocamentos e variáveis.
 sidebar:
   label: Colocar Móbi Temporário
   badge:
@@ -16,7 +16,7 @@ infobox:
   revision: 75129
   classname: wf_act_place_furni
   name: "Efeito WIRED: Colocar Móbi Temporário"
-  description: Este efeito permite posicionar um mobi ou um grupo de mobis no quarto, numa localização e altitude de sua escolha.
+  description: Este efeito gera mobis temporários no quarto e permite definir sua localização, altitude e variáveis.
   # product_name: # caso o nome na loja seja diferente do nome do Mobi
   # image_direction: 0 # valor padrão
   # image_animated_state: 100 # valor padrão
@@ -39,6 +39,132 @@ infobox:
   additional_sources: []
 ---
 
-import Infobox from "@components/Infobox.astro"
+import Infobox from "@components/Infobox.astro";
+import { Aside } from "@astrojs/starlight/components";
+import Atraso from "@assets/wf_act/02-atraso.gif";
+
+O **Efeito: Colocar Mobi Temporário** cria um ou mais mobis temporários no quarto a partir dos mobis escolhidos em sua configuração. Você define onde eles aparecerão, em que altitude ficarão e, se precisar, qual variável receberão ao serem gerados.
 
 <Infobox />
+
+## Como esse Wired funciona?
+
+Quando a pilha executa este efeito, **Mobi a ser colocado** determina quais mobis serão usados para gerar os temporários. **Local de destino** e **Altitude de destino** definem onde os novos mobis aparecerão. Você também pode ajustar a posição com **Deslocamentos** e adicionar uma variável em **Gerar com variável**.
+
+Os mobis gerados permanecem no quarto enquanto ele está ativo. Eles não substituem os mobis usados como origem e deixam de existir quando o quarto fica inativo.
+
+![Janela do Efeito Colocar Mobi Temporário com Informações de uso, Local de origem, Acima do local de destino, Deslocamentos, Gerar com variável e Atraso visíveis.](@assets/wf_act_place_furni/03-janela-do-wired.png)
+
+### Informações de uso
+
+Esta seção explica que você pode posicionar um mobi ou grupo de mobis na localização e altitude escolhidas. Antes de configurar o efeito, confira se o tipo de mobi que pretende gerar pode ser usado e se o destino permite a colocação.
+
+<Aside type="tip" title="Design pré-carregado">
+Ao colocar mobis com o Wired, certifique-se de que os tipos de mobi já estejam em uma área visível do quarto. Isso garante que o cliente do jogo tenha o design pré-carregado.
+</Aside>
+
+### Local de destino
+
+Escolha de onde virá a posição em que o mobi temporário será colocado:
+
+- **Local de origem:** usa a localização dos mobis escolhidos em **Mobi a ser colocado**. O tópico **Destino personalizado** fica desativado ao escolher esta opção.
+- **Local personalizado:** usa a localização do alvo escolhido em **Destino personalizado**, que fica habilitado para você indicar essa referência.
+
+### Altitude de destino
+
+Esta opção define a altitude em que o novo mobi ficará no quarto. Ela não muda a altura própria do modelo, indicada por `@height`; o que muda é sua `@altitude`.
+
+- **Acima do local de destino:** posiciona o mobi temporário acima do local escolhido. Por exemplo, com **Local de origem** selecionado, se o mobi original tem `@height` (altura) igual a **44** e `@altitude` igual a **0**, o mobi temporário fica com `@altitude` igual a **44**. Ele mantém o `@height` próprio de seu modelo.
+- **Altitude de origem:** usa a `@altitude` do mobi escolhido em **Mobi a ser colocado**. Se o original está em **0**, o mobi temporário também fica em **0**.
+- **Altitude personalizada:** usa a altitude do alvo escolhido em **Destino personalizado**. Se esse alvo tem `@altitude` igual a **100**, o mobi temporário também terá **100**. Selecionar esta opção habilita **Destino personalizado**.
+
+As variáveis `@height` e `@altitude` estão explicadas na página [Mobi Variável](/referencia/variaveis/wf_var_furni/#variáveis-internas-de-mobi).
+
+### Deslocamentos
+
+![Seção Deslocamentos com caixas e campos de valor para X, Y e Altitude.](@assets/wf_act_place_furni/04-opcao-deslocamentos.png)
+
+Marque uma ou mais caixas para deslocar o mobi temporário em relação à posição e à altitude definidas acima. Cada caixa possui um campo para informar quanto será acrescentado:
+
+| Caixa | Valor alterado | Exemplo |
+| --- | --- | --- |
+| **X** | `@position.x`, a posição horizontal no quarto. | Se o valor de referência é **8** e você informa **1**, o temporário terá **9**. |
+| **Y** | `@position.y`, a posição vertical no quarto. | Se o valor de referência é **8** e você informa **1**, o temporário terá **9**. |
+| **Altitude** | `@altitude`, a altitude no quarto. | Se o valor de referência é **0** e você informa **100**, o temporário terá **100**. |
+
+### Gerar com variável
+
+![Seção Gerar com variável com a caixa desmarcada e os campos Selecione uma variável e Gerar com valor desativados.](@assets/wf_act_place_furni/05-gerar-com-variavel.png)
+
+Marque **Gerar com variável** se quiser vincular uma variável ao mobi temporário no momento em que ele for colocado. Em **Selecione uma variável**, abra a lista **Buscar uma variável** para escolher uma variável de mobi. Se não houver nenhuma que você possa selecionar, crie uma com o [Wired Variável: Mobi Variável](/referencia/variaveis/wf_var_furni/).
+
+Depois de escolher a variável, **Gerar com valor** fica disponível. Você pode digitar um valor no campo ou usar o ícone **Escolha uma variável** para abrir **Origem da variável** e obter o valor de outra variável. Veja como essa escolha funciona em [Origem da variável](/referencia/configurando-wireds/#origem-da-variável).
+
+### Atraso (segundos)
+
+Este campo define quanto tempo o efeito espera após a execução da pilha antes de colocar o mobi. Ele aceita valores de **0 a 60 segundos**; mantenha **0** para executar sem espera.
+
+Você pode digitar o valor ou usar as setas. O ícone de temporização alterna o intervalo de cada clique entre **Padrão (a cada 0.5s)** e **Preciso (a cada 0.05s)**. No modo preciso, é possível ajustar atrasos menores pelas setas.
+
+<img
+  src={Atraso.src}
+  alt="Animação do campo Atraso (segundos): as setas ajustam o valor e o ícone de temporização altera o intervalo de cada clique."
+  style={{ width: "400px", maxWidth: "100%" }}
+/>
+
+### Mobi a ser colocado
+
+Clique em **Mostrar configurações avançadas** para encontrar esta seção. Use as setas para escolher de onde virão os mobis que servirão de origem para os temporários:
+
+- **Usar combinação capturada:** guarda a posição, a altura e o estado dos mobis selecionados quando você salva a configuração com **Pronto**. No jogo, a opção aparece como **Use the snapshot**.
+- **Usar mobis do seletor:** usa os mobis encontrados por um [Seletor de mobis](/referencia/seletores/visao-geral/) da pilha.
+- **Usar mobis do sinal:** usa os mobis incluídos em um sinal enviado por [Mandar Sinal](/referencia/efeitos/wf_act_send_signal/) e recebido por [Recebe Sinal](/referencia/ativadores/wf_trg_recv_signal/).
+- **Use o item de ativação:** usa o mobi que ativou a pilha. Com [Habbo Clica no Mobi](/referencia/ativadores/wf_trg_click_furni/), por exemplo, pode ser o mobi clicado.
+- **Use mobis escolhidos:** usa os mobis que você seleciona clicando neles no quarto enquanto a janela de configuração está aberta.
+- **Escolha de mobis secundários:** permite selecionar separadamente outro conjunto de mobis no quarto enquanto a janela está aberta.
+
+![Animação das opções de origem dos mobis em Mobi a ser colocado, alternando entre combinação capturada, seletores, sinais, item de ativação e mobis escolhidos.](@assets/wf_act_place_furni/06-opcao-mobi-a-ser-colocado.gif)
+
+<Aside type="caution" title="Escolha mobis permitidos">
+Este efeito só permite selecionar mobis do **Clube do Arquiteto** que não tenham funcionalidades avançadas. Se você escolher um mobi de outro tipo e tentar salvar, aparecerá a janela **Falha ao atualizar** com o aviso **“Posicionamento não permitido para este tipo de mobi. Você só pode selecionar mobis do Clube do Arquiteto que não tenham funcionalidades avançadas.”**
+
+![Janela Falha ao atualizar informando que só podem ser selecionados mobis do Clube do Arquiteto sem funcionalidades avançadas.](@assets/wf_act_place_furni/01-janela-falha-ao-atualizar.png)
+</Aside>
+
+### Destino personalizado
+
+Esta seção é habilitada quando você escolhe **Local personalizado** ou **Altitude personalizada**. Escolha o ícone de **mobi** ou **usuário** e use as setas para definir de onde virá o alvo que servirá de referência para a colocação.
+
+Com o ícone de **mobi**, as opções são:
+
+- **Use o item de ativação:** usa o mobi que ativou a pilha.
+- **Use mobis escolhidos:** usa os mobis selecionados por você no quarto enquanto a janela está aberta.
+- **Escolha de mobis secundários:** usa outro conjunto de mobis selecionado separadamente no quarto.
+- **Usar mobis do seletor:** usa os mobis encontrados por um Seletor de mobis da pilha.
+- **Usar mobis do sinal:** usa os mobis incluídos em um sinal recebido pela pilha.
+
+Com o ícone de **usuário**, você pode escolher:
+
+- **Use o usuário acionador:** usa o usuário que ativou a pilha.
+- **Usar usuários do seletor:** usa os usuários encontrados por um Seletor de usuários da pilha.
+- **Usar usuários do sinal:** usa os usuários incluídos em um sinal recebido pela pilha.
+
+![Animação da seção Destino personalizado, alternando entre fontes de mobis e usuários que podem servir como referência.](@assets/wf_act_place_furni/07-destino-personalizado.gif)
+
+Para conhecer outras fontes disponíveis em diferentes Wireds, veja [Fonte de Usuário ou Mobi](/referencia/configurando-wireds/#fonte-de-usuário-ou-mobi).
+
+## Pontos importantes
+
+### Falha ao colocar um mobi
+
+Se o destino já estiver ocupado por outro mobi e não permitir empilhamento, a tentativa de colocar o temporário pode falhar. Nesse caso, o [Monitoramento](/referencia/ferramentas-do-criador/monitoramento/#placement_failure) pode registrar o erro `PLACEMENT_FAILURE`. A variável `@is_stackable` ajuda a verificar se um mobi permite empilhamento; ela não está disponível em todos os mobis.
+
+Para contornar essa situação, adicione o [Extra: Física do Movimento](/referencia/extras/wf_xtra_mov_physics/) à pilha e marque **Mover através dos mobis**. Esse extra altera a interação do efeito com os mobis que ocupam o destino.
+
+### Como reconhecer um mobi temporário
+
+Clique no mobi gerado para abrir sua caixa de informações. Ela aparece em azul e mostra **Mobi Temporário**. Outra forma de reconhecê-lo é consultar sua variável interna `@type`: o valor **2** indica um mobi temporário. Saiba mais em [Tipo do mobi](/referencia/variaveis/wf_var_furni/#tipo-do-mobi).
+
+![Caixa de informações azul de um Token Banzai Azul gerado pelo efeito, com a indicação Mobi Temporário.](@assets/wf_act_place_furni/02-mobi-temporario.png)
+
+Esses mobis só permanecem enquanto o quarto está ativo. Depois que o quarto fica vazio por **30 segundos** e é descarregado, eles desaparecem. Ao entrar novamente, será preciso executar o efeito outra vez para colocá-los no quarto.
