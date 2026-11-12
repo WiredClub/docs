@@ -40,8 +40,21 @@ infobox:
 ---
 
 import Infobox from "@components/Infobox.astro";
+import AccessibleVideo from "@components/AccessibleVideo.astro";
 import { Aside } from "@astrojs/starlight/components";
 import Atraso from "@assets/wf_act/02-atraso.gif";
+import LocalDeOrigem from "@assets/wf_act_place_furni/08-exemplo-local-de-origem.mp4";
+import LocalDeOrigemDescriptionsUrl from "@assets/wf_act_place_furni/08-exemplo-local-de-origem-descriptions.vtt?url";
+import LocalDeOrigemDescriptionsRaw from "@assets/wf_act_place_furni/08-exemplo-local-de-origem-descriptions.vtt?raw";
+import LocalPersonalizado from "@assets/wf_act_place_furni/08-exemplo-local-personalizado.mp4";
+import LocalPersonalizadoDescriptionsUrl from "@assets/wf_act_place_furni/08-exemplo-local-personalizado-descriptions.vtt?url";
+import LocalPersonalizadoDescriptionsRaw from "@assets/wf_act_place_furni/08-exemplo-local-personalizado-descriptions.vtt?raw";
+import AltitudeDeOrigem from "@assets/wf_act_place_furni/09-exemplo-altitude-de-origem.mp4";
+import AltitudeDeOrigemDescriptionsUrl from "@assets/wf_act_place_furni/09-exemplo-altitude-de-origem-descriptions.vtt?url";
+import AltitudeDeOrigemDescriptionsRaw from "@assets/wf_act_place_furni/09-exemplo-altitude-de-origem-descriptions.vtt?raw";
+import AltitudePersonalizada from "@assets/wf_act_place_furni/09-exemplo-altitude-personalizada.mp4";
+import AltitudePersonalizadaDescriptionsUrl from "@assets/wf_act_place_furni/09-exemplo-altitude-personalizada-descriptions.vtt?url";
+import AltitudePersonalizadaDescriptionsRaw from "@assets/wf_act_place_furni/09-exemplo-altitude-personalizada-descriptions.vtt?raw";
 
 O **Efeito: Colocar Mobi Temporário** cria um ou mais mobis temporários no quarto a partir dos mobis escolhidos em sua configuração. Você define onde eles aparecerão, em que altitude ficarão e, se precisar, qual variável receberão ao serem gerados.
 
@@ -68,15 +81,50 @@ Ao colocar mobis com o Wired, certifique-se de que os tipos de mobi já estejam 
 Escolha de onde virá a posição em que o mobi temporário será colocado:
 
 - **Local de origem:** usa a localização dos mobis escolhidos em **Mobi a ser colocado**. O tópico **Destino personalizado** fica desativado ao escolher esta opção.
+
+<AccessibleVideo
+  id="colocar-mobi-temporario-local-de-origem"
+  src={LocalDeOrigem}
+  title="Local de origem: o mobi temporário aparece na posição do mobi escolhido"
+  descriptionsSrc={LocalDeOrigemDescriptionsUrl}
+  descriptionsContent={LocalDeOrigemDescriptionsRaw}
+/>
+
 - **Local personalizado:** usa a localização do alvo escolhido em **Destino personalizado**, que fica habilitado para você indicar essa referência.
+
+<AccessibleVideo
+  id="colocar-mobi-temporario-local-personalizado"
+  src={LocalPersonalizado}
+  title="Local personalizado: o mobi temporário aparece sobre o destino escolhido"
+  descriptionsSrc={LocalPersonalizadoDescriptionsUrl}
+  descriptionsContent={LocalPersonalizadoDescriptionsRaw}
+/>
 
 ### Altitude de destino
 
 Esta opção define a altitude em que o novo mobi ficará no quarto. Ela não muda a altura própria do modelo, indicada por `@height`; o que muda é sua `@altitude`.
 
 - **Acima do local de destino:** posiciona o mobi temporário acima do local escolhido. Por exemplo, com **Local de origem** selecionado, se o mobi original tem `@height` (altura) igual a **44** e `@altitude` igual a **0**, o mobi temporário fica com `@altitude` igual a **44**. Ele mantém o `@height` próprio de seu modelo.
+
 - **Altitude de origem:** usa a `@altitude` do mobi escolhido em **Mobi a ser colocado**. Se o original está em **0**, o mobi temporário também fica em **0**.
+
+<AccessibleVideo
+  id="colocar-mobi-temporario-altitude-de-origem"
+  src={AltitudeDeOrigem}
+  title="Altitude de origem: o mobi temporário fica na altitude do mobi escolhido"
+  descriptionsSrc={AltitudeDeOrigemDescriptionsUrl}
+  descriptionsContent={AltitudeDeOrigemDescriptionsRaw}
+/>
+
 - **Altitude personalizada:** usa a altitude do alvo escolhido em **Destino personalizado**. Se esse alvo tem `@altitude` igual a **100**, o mobi temporário também terá **100**. Selecionar esta opção habilita **Destino personalizado**.
+
+<AccessibleVideo
+  id="colocar-mobi-temporario-altitude-personalizada"
+  src={AltitudePersonalizada}
+  title="Altitude personalizada: o mobi temporário usa a altitude do usuário acionador"
+  descriptionsSrc={AltitudePersonalizadaDescriptionsUrl}
+  descriptionsContent={AltitudePersonalizadaDescriptionsRaw}
+/>
 
 As variáveis `@height` e `@altitude` estão explicadas na página [Mobi Variável](/referencia/variaveis/wf_var_furni/#variáveis-internas-de-mobi).
 
