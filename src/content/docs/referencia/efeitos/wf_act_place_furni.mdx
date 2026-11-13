@@ -79,7 +79,7 @@ Os mobis gerados permanecem no quarto enquanto ele está ativo. Eles não substi
 
 ### Informações de uso
 
-Esta seção explica que você pode posicionar um mobi ou grupo de mobis na localização e altitude escolhidas. Antes de configurar o efeito, confira se o tipo de mobi que pretende gerar pode ser usado e se o destino permite a colocação.
+Você pode colocar um mobi ou grupo de mobis na localização e altitude escolhidas. Confira se o tipo de mobi que pretende gerar pode ser usado e se o destino permite a colocação.
 
 <Aside type="tip" title="Design pré-carregado">
 Ao colocar mobis com o Wired, certifique-se de que os tipos de mobi já estejam em uma área visível do quarto. Isso garante que o cliente do jogo tenha o design pré-carregado.
@@ -176,6 +176,14 @@ No vídeo, a variável `wired_club` é escolhida e recebe o valor **1**. Depois 
   descriptionsSrc={GerarComVariavelDescriptionsUrl}
   descriptionsContent={GerarComVariavelDescriptionsRaw}
 />
+
+<Aside type="tip" title="Manipular o mobi temporário logo após criá-lo">
+Se você precisa manipular o mobi temporário logo após sua criação, **Gerar com variável** é o único modo de identificá-lo para a próxima pilha. Escolha uma variável de mobi para marcar os mobis gerados.
+
+Na pilha que coloca o mobi, deixe **Atraso (segundos)** em **0** e coloque **Colocar Mobi Temporário** na mesma pilha com um [Efeito: Mandar Sinal](/referencia/efeitos/wf_act_send_signal/). Configure o [Ativador: Recebe Sinal](/referencia/ativadores/wf_trg_recv_signal/) em outra pilha com a mesma Antena Wired selecionada.
+
+Nessa segunda pilha, use o [Seletor: Mobi com Variável](/referencia/seletores/wf_slc_furni_with_var/) para encontrar o mobi recém-gerado e configure os efeitos que vão manipulá-lo para usar os mobis do seletor. Depois de selecionar o mobi, remova dele a variável com o [Efeito: Remover Variável](/referencia/efeitos/wf_act_remove_var/), também usando os mobis do seletor. Isso evita que a próxima execução selecione mobis temporários de ciclos anteriores.
+</Aside>
 
 ### Atraso (segundos)
 
