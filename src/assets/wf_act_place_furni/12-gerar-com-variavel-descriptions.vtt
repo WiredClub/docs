@@ -1,0 +1,16 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:03.500
+No quarto, um Token Banzai Azul está ao lado da pilha Wired. A janela do Efeito Colocar Mobi Temporário é aberta com a seção Gerar com variável expandida.
+
+00:00:03.500 --> 00:00:09.500
+A caixa Gerar com variável está marcada. A lista de variáveis é aberta, a busca mostra wired_club e essa variável é escolhida. O campo Gerar com valor contém 1.
+
+00:00:09.500 --> 00:00:13.500
+As configurações avançadas são abertas para escolher o token azul em Mobi a ser colocado. A configuração do efeito é confirmada.
+
+00:00:13.500 --> 00:00:17.500
+A janela do Ativador Habbo Clica no Mobi é aberta e configurada. Depois do acionamento, outro Token Banzai Azul aparece no quarto.
+
+00:00:17.500 --> 00:00:21.226
+Nas Ferramentas do Criador, a aba Inspeção mostra o mobi gerado com a variável wired_club no valor 1. A variável interna @type aparece como 2, indicando que o mobi é temporário.
