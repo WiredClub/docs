@@ -1,0 +1,25 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:01.500
+No quarto, uma pilha Wired fica à esquerda e uma composição com árvore, bancos e paredes fica à direita.
+
+00:00:01.500 --> 00:00:06.000
+A janela do Efeito Mover Móbis em Grupo mostra X igual a 9, Y igual a 0, Usar mobis do seletor em Os móveis em movimento e Escolha de mobis secundários em Local de destino.
+
+00:00:06.000 --> 00:00:12.500
+Um Bloco invisível no chão é escolhido como referência de destino. O contador de mobis secundários passa de 0/20 para 1/20 e a configuração do efeito é salva.
+
+00:00:12.500 --> 00:00:14.500
+A janela da Condição pode realizar movimentos é aberta e confirmada.
+
+00:00:14.500 --> 00:00:18.500
+No Ativador Habbo Clica no Mobi, o próprio Wired é selecionado como mobi clicável. A janela mostra Selecionar Mobi 1/20 antes da confirmação.
+
+00:00:18.500 --> 00:00:22.000
+No Extra Física do Movimento, as opções Manter a altura do mobi e Mover através dos mobis aparecem marcadas. A configuração é confirmada.
+
+00:00:22.000 --> 00:00:30.500
+No Seletor Mobi por Tipo, os mobis da composição são destacados enquanto são escolhidos. A janela mostra Selecionar Mobi 7/20.
+
+00:00:30.500 --> 00:00:33.152
+Após o acionamento da pilha, toda a composição se desloca da direita para mais perto dos Wireds, mantendo a posição de seus mobis uns em relação aos outros.

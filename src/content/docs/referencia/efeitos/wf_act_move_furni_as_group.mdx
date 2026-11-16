@@ -1,10 +1,10 @@
 ---
 title: "Efeito WIRED: Mover Móbis em Grupo"
-description: Este efeito move um grupo de mobis para um local de destino; a distância entre os mobis permanecerá consistente.
+description: Mova vários mobis para um destino sem alterar a distância entre eles.
 sidebar:
   label: Mover Móbis em Grupo
   badge:
-    text: RASCUNHO
+    text: NOVO
     variant: note
 infobox:
   # == Infobox ==
@@ -16,13 +16,13 @@ infobox:
   revision: 75129
   classname: wf_act_move_furni_as_group
   name: "Efeito WIRED: Mover Móbis em Grupo"
-  description: Este efeito move um grupo de mobis para um local de destino; a distância entre os mobis permanecerá consistente.
+  description: Este efeito move vários mobis para um destino sem alterar a distância entre eles.
   # product_name: # caso o nome na loja seja diferente do nome do Mobi
   # image_direction: 0 # valor padrão
   # image_animated_state: 100 # valor padrão
   # icon: # url preenchida automaticamente
   availability: No catálogo e CA
-  # price: # preço em créditos no catálogo
+  price: 8
   release_date: 2026-05-12
 
   # == Dados do Wired ==
@@ -39,6 +39,150 @@ infobox:
   additional_sources: []
 ---
 
-import Infobox from "@components/Infobox.astro"
+import Infobox from "@components/Infobox.astro";
+import AccessibleVideo from "@components/AccessibleVideo.astro";
+import PseudoWiredCodeBlock from "@components/PseudoWiredCodeBlock.astro";
+import { Aside, Steps, Tabs, TabItem } from "@astrojs/starlight/components";
+import Atraso from "@assets/wf_act/02-atraso.gif";
+import MobisEmMovimento from "@assets/wf_act_move_furni_as_group/02-opcao-os-mobis-em-movimento.gif";
+import LocalDeDestino from "@assets/wf_act_move_furni_as_group/03-opcao-local-de-destino.gif";
+import MoverMobisSelecionadosPeloTipo from "@assets/wf_act_move_furni_as_group/04-exemplo-mover-mobis-selecionados-pelo-tipo.mp4";
+import MoverMobisSelecionadosPeloTipoDescriptionsUrl from "@assets/wf_act_move_furni_as_group/04-exemplo-mover-mobis-selecionados-pelo-tipo-descriptions.vtt?url";
+import MoverMobisSelecionadosPeloTipoDescriptionsRaw from "@assets/wf_act_move_furni_as_group/04-exemplo-mover-mobis-selecionados-pelo-tipo-descriptions.vtt?raw";
+
+O **Efeito: Mover Mobis em Grupo** leva vários mobis para outro lugar do quarto, mantendo a distância entre eles. Você escolhe quais mobis serão movidos e qual mobi ou usuário servirá de referência para o destino.
 
 <Infobox />
+
+## Como esse Wired funciona?
+
+Quando a pilha executa o efeito, os mobis definidos em **Os móveis em movimento** são deslocados juntos até o **Local de destino**. Se eles formam uma figura no chão, por exemplo, essa disposição é mantida após o movimento. Você também pode ajustar a posição final com **Deslocamentos**.
+
+![Janela do Efeito Mover Móbis em Grupo com Informações de uso, Deslocamentos X e Y, Atraso, Os móveis em movimento e Local de destino.](@assets/wf_act_move_furni_as_group/01-janela-do-wired.png)
+
+### Informações de uso
+
+A [Condição WIRED: Pode Realizar Movimentos](/referencia/condicoes/wf_cnd_valid_moves/) pode ser adicionada à pilha para verificar se o deslocamento é possível antes da execução do efeito.
+
+### Deslocamentos
+
+Os campos **X** e **Y** ajustam a posição em que o grupo será colocado. Digite o deslocamento desejado em cada campo:
+
+- **X:** altera a posição horizontal dos mobis, representada pela variável `@position.x`.
+- **Y:** altera a posição vertical dos mobis, representada pela variável `@position.y`.
+
+Deixe os dois campos em **0** se não precisar acrescentar um deslocamento ao destino escolhido. Os mobis continuam mantendo a mesma distância entre si.
+
+No [exemplo abaixo](#exemplo-de-uso-mover-mobis-selecionados-pelo-tipo), **X = 9** e **Y = 0** deslocam o grupo **9 quadrados na horizontal** em relação ao **Bloco invisível** escolhido como referência, sem deslocamento adicional no eixo Y.
+
+### Atraso (segundos)
+
+Este campo define quanto tempo o efeito espera após a execução da pilha antes de mover os mobis. Ele aceita valores de **0 a 60 segundos**; mantenha **0** para executar sem espera.
+
+Você pode digitar o valor ou usar as setas. O ícone de temporização alterna o intervalo de cada clique entre **Padrão (a cada 0.5s)** e **Preciso (a cada 0.05s)**. No modo preciso, é possível ajustar atrasos menores pelas setas.
+
+<img
+  src={Atraso.src}
+  alt="Animação do campo Atraso (segundos): as setas ajustam o valor e o ícone de temporização altera o intervalo de cada clique."
+  style={{ width: "400px", maxWidth: "100%" }}
+/>
+
+### Os móveis em movimento
+
+Use as setas desta seção para escolher de onde virão os mobis que serão movidos:
+
+- **Use mobis escolhidos:** usa os mobis que você seleciona ao clicar neles enquanto a janela de configuração está aberta.
+- **Escolha de mobis secundários:** permite selecionar separadamente outro conjunto de mobis, clicando neles enquanto a janela está aberta.
+- **Usar mobis do seletor:** usa os mobis encontrados por um [Seletor de mobis](/referencia/seletores/visao-geral/) da pilha.
+- **Usar mobis do sinal:** usa os mobis incluídos em um sinal enviado por [Mandar Sinal](/referencia/efeitos/wf_act_send_signal/) e recebido por [Recebe Sinal](/referencia/ativadores/wf_trg_recv_signal/).
+- **Use o item de ativação:** usa o mobi que ativou a pilha. Com [Habbo Clica no Mobi](/referencia/ativadores/wf_trg_click_furni/), por exemplo, pode ser o mobi clicado.
+
+<img
+  src={MobisEmMovimento.src}
+  alt="Animação da seção Os móveis em movimento: as setas alternam entre mobis escolhidos, mobis secundários, mobis do seletor, mobis do sinal e item de ativação."
+  style={{ width: "400px", maxWidth: "100%" }}
+/>
+
+### Local de destino
+
+Escolha o ícone de **mobi** ou **usuário** para definir o tipo de referência do destino. Depois, use as setas para escolher de onde virá essa referência.
+
+Com o ícone de **mobi**, as opções são:
+
+- **Use o item de ativação:** usa o mobi que ativou a pilha.
+- **Use mobis escolhidos:** usa os mobis selecionados por você enquanto a janela de configuração está aberta.
+- **Escolha de mobis secundários:** permite selecionar separadamente outro conjunto de mobis enquanto a janela está aberta. Você pode usar esta opção para indicar um mobi de destino sem incluí-lo em **Os móveis em movimento**.
+- **Usar mobis do seletor:** usa os mobis encontrados por um Seletor de mobis da pilha.
+- **Usar mobis do sinal:** usa os mobis incluídos em um sinal recebido pela pilha.
+
+Com o ícone de **usuário**, você pode escolher:
+
+- **Use o usuário acionador:** usa o usuário que ativou a pilha.
+- **Usar usuários do seletor:** usa os usuários encontrados por um [Seletor de usuários](/referencia/seletores/visao-geral/) da pilha.
+- **Usar usuários do sinal:** usa os usuários incluídos em um sinal recebido pela pilha.
+
+<img
+  src={LocalDeDestino.src}
+  alt="Animação da seção Local de destino: o ícone de mobi alterna as fontes de mobis e o ícone de usuário mostra as fontes de usuários disponíveis."
+  style={{ width: "400px", maxWidth: "100%" }}
+/>
+
+Para entender essas fontes em outros Wireds, consulte [Fonte de Usuário ou Mobi](/referencia/configurando-wireds/#fonte-de-usuário-ou-mobi).
+
+<Aside type="caution" title="Quando o grupo não se move">
+O movimento pode não acontecer se o destino estiver ocupado por usuários ou por mobis que não permitem empilhamento. Para contornar o bloqueio, adicione o [Extra: Física do Movimento](/referencia/extras/wf_xtra_mov_physics/) à pilha e marque **Mover através dos mobis** ou **Mover através dos Habbos**, conforme o que estiver ocupando o destino.
+</Aside>
+
+## Exemplo de uso: mover mobis selecionados pelo tipo
+
+Imagine alguns mobis dispostos em uma área de **5 × 5 quadrados**. Vamos selecioná-los pelo tipo e mover o grupo usando um **Bloco invisível** como referência de destino. Com **X = 9** e **Y = 0**, o grupo ficará deslocado **9 quadrados na horizontal** em relação ao bloco, sem alterar a distância entre os mobis.
+
+O **Mobi por Tipo** seleciona os mobis dos tipos configurados, mesmo que estejam fora dessa área. Por isso, escolha tipos que identifiquem apenas os mobis que você deseja mover neste exemplo.
+
+<AccessibleVideo
+  id="mover-mobis-em-grupo-selecionados-pelo-tipo"
+  src={MoverMobisSelecionadosPeloTipo}
+  title="Mover uma composição de mobis selecionados pelo tipo sem alterar sua disposição"
+  descriptionsSrc={MoverMobisSelecionadosPeloTipoDescriptionsUrl}
+  descriptionsContent={MoverMobisSelecionadosPeloTipoDescriptionsRaw}
+/>
+
+<Tabs>
+  <TabItem label="Configuração">
+    <Steps>
+1. Adicione o [Seletor: Mobi por Tipo](/referencia/seletores/wf_slc_furni_bytype/) à pilha e escolha mobis dos tipos que deseja mover. Neste exemplo, eles estão dispostos em parte de uma área de **5 × 5 quadrados**.
+2. Configure o [Ativador: Habbo Clica no Mobi](/referencia/ativadores/wf_trg_click_furni/) para acionar a pilha ao clicar no próprio Wired.
+3. Adicione a [Condição WIRED: Pode Realizar Movimentos](/referencia/condicoes/wf_cnd_valid_moves/) e o [Extra: Física do Movimento](/referencia/extras/wf_xtra_mov_physics/). No Extra, marque **Manter a altura do mobi** e **Mover através dos mobis**.
+4. No **Mover Móbis em Grupo**, escolha **Usar mobis do seletor** em **Os móveis em movimento**. Em **Local de destino**, escolha o ícone de mobi e **Escolha de mobis secundários**; selecione o **Bloco invisível (empilhável e caminhável)**. Em **Deslocamentos**, informe **X = 9** e **Y = 0**.
+</Steps>
+  </TabItem>
+  <TabItem label="PseudoWired">
+    <PseudoWiredCodeBlock code={`
+ALVOS
+  - Mobi por Tipo: tipos dos mobis dispostos na área de 5 × 5 quadrados
+
+QUANDO
+  - Habbo Clica no Mobi: Habbo Clica no Mobi
+
+SE
+  - Pode Realizar Movimentos
+
+COMO
+  - Física do Movimento:
+    Manter a altura do mobi
+    Mover através dos mobis
+
+ENTÃO
+  - Mover Móbis em Grupo:
+    Deslocamentos:
+      X: 9
+      Y: 0
+    Os móveis em movimento: Usar mobis do seletor
+    Local de destino:
+      Escolha de mobis secundários
+      Bloco invisível (empilhável e caminhável)
+`} />
+  </TabItem>
+</Tabs>
+
+Ao clicar no ativador, os mobis dos tipos configurados são movidos como um grupo. Eles ficam deslocados na horizontal em relação ao **Bloco invisível** e mantêm a mesma distância entre si, mesmo com apenas um mobi escolhido como referência de destino.
