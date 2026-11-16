@@ -210,6 +210,21 @@ Clique em **Mostrar configurações avançadas** para encontrar esta seção. Us
 
 ![Animação das opções de origem dos mobis em Mobi a ser colocado, alternando entre combinação capturada, seletores, sinais, item de ativação e mobis escolhidos.](@assets/wf_act_place_furni/06-opcao-mobi-a-ser-colocado.gif)
 
+#### Atualizar a combinação capturada
+
+Com **Usar combinação capturada (Use the snapshot)** selecionada, o texto **Selecionar Mobi para aplicar uma Condição**, no topo da janela, serve para aplicar as definições salvas. Ele também precisa ser usado quando você quiser atualizar a captura depois de mudar o mobi de origem.
+
+Considere esta configuração:
+
+- **Local de destino:** Local de origem.
+- **Altitude de destino:** Acima do local de destino.
+- **Deslocamentos:** X = 1.
+- **Mobi a ser colocado:** Usar combinação capturada (Use the snapshot).
+
+Ao salvar o Wired, a posição, a altura e o estado do mobi selecionado são capturados naquele momento. Se você mover o mobi de origem depois e acionar a pilha, o temporário aparecerá com base na posição capturada anteriormente. Mesmo com **X = 1**, o deslocamento não será calculado a partir da nova posição do mobi de origem.
+
+Para registrar a nova posição, abra o Wired novamente, clique em **Selecionar Mobi para aplicar uma Condição** e salve com **Pronto**. Assim, a combinação capturada passa a considerar a posição, a altura e o estado atuais do mobi.
+
 <Aside type="caution" title="Escolha mobis permitidos">
 Este efeito só permite selecionar mobis do **Clube do Arquiteto** que não tenham funcionalidades avançadas. Se você escolher um mobi de outro tipo e tentar salvar, aparecerá a janela **Falha ao atualizar** com o aviso **“Posicionamento não permitido para este tipo de mobi. Você só pode selecionar mobis do Clube do Arquiteto que não tenham funcionalidades avançadas.”**
 
