@@ -1,6 +1,6 @@
 ---
 title: "Efeito WIRED: Definir Configurações de Clique"
-description: Este efeito permite que os usuários cliquem através de mobis e de outros usuários.
+description: Defina como os usuários selecionados interagem ao clicar em usuários e mobis no quarto.
 sidebar:
   label: Definir Configurações de Clique
   badge:
@@ -16,7 +16,7 @@ infobox:
   revision: 74952
   classname: wf_act_click_conf
   name: "Efeito WIRED: Definir Configurações de Clique"
-  description: Este efeito permite que os usuários cliquem através de mobis e de outros usuários.
+  description: Este efeito altera o comportamento dos cliques em usuários e mobis para os usuários selecionados.
   # product_name: # caso o nome na loja seja diferente do nome do Mobi
   # image_direction: 0 # valor padrão
   # image_animated_state: 100 # valor padrão
@@ -39,6 +39,75 @@ infobox:
   additional_sources: []
 ---
 
-import Infobox from "@components/Infobox.astro"
+import Infobox from "@components/Infobox.astro";
+import Atraso from "@assets/wf_act/02-atraso.gif";
+import SelecionarUsuariosFonte from "@assets/wf_act_click_conf/05-topico-selecionar-usuarios-fonte.gif";
+
+O **Efeito: Definir Configurações de Clique** muda o que acontece quando os usuários escolhidos clicam em outro usuário ou em um mobi. Você pode manter o comportamento padrão em cada caso ou fazer o clique atravessar o alvo.
 
 <Infobox />
+
+## Como esse Wired funciona?
+
+Quando a pilha executa este efeito, as opções de **Ao clicar em um usuário** e **Ao clicar em um mobi** passam a valer para quem foi definido em **Selecionar usuários fonte**. As duas listas são configuradas separadamente: você pode alterar o clique em usuários e manter o clique em mobis no padrão, por exemplo.
+
+![Janela do Efeito Definir Configurações de Clique com Padrão selecionado nas listas Ao clicar em um usuário e Ao clicar em um mobi, atraso em zero segundo e configurações avançadas fechadas.](@assets/wf_act_click_conf/02-janela-do-wired.png)
+
+### Ao clicar em um usuário
+
+![Lista Ao clicar em um usuário aberta, com as opções Padrão, Clique no usuário, mas ande por trás dele e Clique atravessa o usuário.](@assets/wf_act_click_conf/03-topico-ao-clicar-em-um-usuario.png)
+
+Esta lista define o que acontece quando alguém afetado pelo efeito clica em um jogador, mascote ou bot:
+
+- **Padrão:** mantém o comportamento normal. O menu de contexto, aquela janela cinza acima do usuário clicado, mostra as ações disponíveis para ele, como **Respeitar** um jogador, **Pegar** um bot ou **Escolher** um mascote. Se o avatar de quem clicou estiver parado, ele se vira para o usuário clicado.
+- **Clique no usuário, mas ande por trás dele:** o menu de contexto não abre. O avatar de quem clicou anda um quadrado na diagonal atrás do usuário clicado; se estava parado, também se vira para ele.
+- **Clique atravessa o usuário:** o menu de contexto não abre e o avatar de quem clicou não se vira para o usuário clicado.
+
+### Ao clicar em um mobi
+
+![Lista Ao clicar em um mobi aberta, com as opções Padrão e Clique atravessa o mobi.](@assets/wf_act_click_conf/04-topico-ao-clicar-em-um-mobi.png)
+
+Escolha como o clique em um mobi deve funcionar:
+
+- **Padrão:** mantém o menu de contexto à direita, com as ações disponíveis para o mobi, como **Mover**, **Girar**, **Usar** e **Escolher**.
+- **Clique atravessa o mobi:** o menu de contexto não abre. O clique duplo também deixa de usar o mobi; por exemplo, ele não abre a janela de configuração de uma caixa Wired.
+
+### Aviso de comportamento do clique
+
+Depois que o efeito é executado, os usuários afetados veem o aviso **“O comportamento do clique foi alterado nesse quarto”** à direita da tela:
+
+![Aviso Wired informando que o comportamento do clique foi alterado nesse quarto, sem botão de controle.](@assets/wf_act_click_conf/01-aviso-comportamento-do-clique.png)
+
+Quem pode [modificar os Wireds do quarto](/referencia/ferramentas-do-criador/configuracoes/#quem-pode-modificar-os-wireds) vê o botão **Parar** nesse aviso. Ao clicar nele, o comportamento padrão dos cliques volta e o botão muda para **Continuar**. Clique em **Continuar** para aplicar novamente as configurações definidas pelo efeito.
+
+![Aviso Wired com o botão Parar, disponível para quem pode modificar os Wireds do quarto.](@assets/wf_act_click_conf/01-aviso-comportamento-do-clique-parar.png)
+
+![Aviso Wired com o botão Continuar após a pausa das configurações de clique.](@assets/wf_act_click_conf/01-aviso-comportamento-do-clique-continuar.png)
+
+Se **Clique atravessa o mobi** estiver ativo, você não conseguirá abrir as caixas Wired com um clique duplo. Nesse caso, use **Parar** para voltar a configurá-las e **Continuar** quando quiser retomar o comportamento escolhido.
+
+### Atraso (segundos)
+
+Este campo define quanto tempo o efeito espera após a execução da pilha antes de mudar o comportamento dos cliques. Ele aceita valores de **0 a 60 segundos**; mantenha **0** para executar sem espera.
+
+Você pode digitar o valor ou usar as setas. O ícone de temporização alterna o intervalo de cada clique entre **Padrão (a cada 0.5s)** e **Preciso (a cada 0.05s)**. No modo preciso, é possível ajustar atrasos menores pelas setas.
+
+<img
+  src={Atraso.src}
+  alt="Animação do campo Atraso (segundos): o valor é ajustado com as setas e o ícone de temporização muda o intervalo de cada clique."
+  style={{ width: "400px", maxWidth: "100%" }}
+/>
+
+### Selecionar usuários fonte
+
+Clique em **Mostrar configurações avançadas** para escolher quem terá o comportamento dos cliques alterado. Use as setas em **Selecionar usuários fonte** para alternar entre:
+
+- **Use o usuário acionador:** usa o usuário que ativou a pilha.
+- **Usar usuários do seletor:** usa os usuários encontrados por um [Seletor de usuários](/referencia/seletores/visao-geral/) da pilha.
+- **Usar usuários do sinal:** usa os usuários incluídos em um sinal enviado por [Mandar Sinal](/referencia/efeitos/wf_act_send_signal/) e recebido por [Recebe Sinal](/referencia/ativadores/wf_trg_recv_signal/).
+
+<img
+  src={SelecionarUsuariosFonte.src}
+  alt="Animação das opções de Selecionar usuários fonte, alternando entre Use o usuário acionador, Usar usuários do seletor e Usar usuários do sinal."
+  style={{ width: "35%", maxWidth: "100%" }}
+/>
