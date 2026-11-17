@@ -44,6 +44,7 @@ import AccessibleVideo from "@components/AccessibleVideo.astro";
 import PseudoWiredCodeBlock from "@components/PseudoWiredCodeBlock.astro";
 import { Aside, Steps, Tabs, TabItem } from "@astrojs/starlight/components";
 import Atraso from "@assets/wf_act/02-atraso.gif";
+import FonteDoMobi from "@assets/wf_act_remove_furni/02-opcao-selecione-a-fonte-do-mobi.gif";
 import CriarMobisTemporarios from "@assets/wf_act_remove_furni/03-criar-os-mobis-temporarios.mp4";
 import CriarMobisTemporariosDescriptionsUrl from "@assets/wf_act_remove_furni/03-criar-os-mobis-temporarios-descriptions.vtt?url";
 import CriarMobisTemporariosDescriptionsRaw from "@assets/wf_act_remove_furni/03-criar-os-mobis-temporarios-descriptions.vtt?raw";
@@ -86,6 +87,12 @@ Use as setas desta seção para escolher de onde virão os mobis temporários a 
 - **Usar mobis do seletor:** usa os mobis encontrados por um [Seletor de mobis](/referencia/seletores/visao-geral/) da pilha.
 - **Usar mobis do sinal:** usa os mobis incluídos em um sinal enviado por [Mandar Sinal](/referencia/efeitos/wf_act_send_signal/) e recebido por [Recebe Sinal](/referencia/ativadores/wf_trg_recv_signal/).
 - **Use o item de ativação:** usa o mobi que ativou a pilha. Com [Habbo Clica no Mobi](/referencia/ativadores/wf_trg_click_furni/), por exemplo, pode ser o mobi clicado.
+
+<img
+  src={FonteDoMobi.src}
+  alt="Animação das setas em Selecione a fonte do Mobi, alternando entre Usar mobis do seletor, Usar mobis do sinal e Use o item de ativação."
+  style={{ width: "35%" }}
+/>
 
 Se escolher **Usar mobis do seletor**, você pode combinar este efeito com diferentes Seletores de mobis:
 
