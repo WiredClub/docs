@@ -1,0 +1,13 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.500
+No quarto, um Token de Jogo Azul está perto de uma pilha Wired. A janela do Efeito Colocar Móbi Temporário mostra Local de origem, Acima do local de destino e deslocamento X igual a 1. O token é selecionado como mobi de origem.
+
+00:00:04.500 --> 00:00:10.500
+Depois que a pilha é acionada, tokens temporários aparecem empilhados perto da posição capturada. O token de origem é movido para outro ponto do quarto, mas os novos temporários continuam aparecendo na posição anterior.
+
+00:00:10.500 --> 00:00:18.500
+A janela do efeito é aberta novamente. O cursor clica em Selecionar Mobi para aplicar uma Condição, escolhe o token de origem na nova posição e salva a configuração.
+
+00:00:18.500 --> 00:00:22.208
+Ao acionar a pilha outra vez, tokens temporários passam a aparecer perto da nova posição do token de origem. Os que foram criados antes continuam na posição antiga.

@@ -1,10 +1,10 @@
 ---
 title: "Efeito WIRED: Remover Móbi Temporário"
-description: Este efeito remove dinamicamente mobis temporários que foram colocados no seu quarto.
+description: Remova mobis temporários do quarto por meio de seletores, sinais ou do mobi que acionou a pilha.
 sidebar:
   label: Remover Móbi Temporário
   badge:
-    text: RASCUNHO
+    text: NOVO
     variant: note
 infobox:
   # == Infobox ==
@@ -16,13 +16,13 @@ infobox:
   revision: 75129
   classname: wf_act_remove_furni
   name: "Efeito WIRED: Remover Móbi Temporário"
-  description: Este efeito remove dinamicamente mobis temporários que foram colocados no seu quarto.
+  description: Remove mobis temporários do quarto conforme a fonte de mobis escolhida na configuração.
   # product_name: # caso o nome na loja seja diferente do nome do Mobi
   # image_direction: 0 # valor padrão
   # image_animated_state: 100 # valor padrão
   # icon: # url preenchida automaticamente
   availability: No catálogo e CA
-  # price: # preço em créditos no catálogo
+  price: 8
   release_date: 2026-05-12
 
   # == Dados do Wired ==
@@ -39,6 +39,232 @@ infobox:
   additional_sources: []
 ---
 
-import Infobox from "@components/Infobox.astro"
+import Infobox from "@components/Infobox.astro";
+import AccessibleVideo from "@components/AccessibleVideo.astro";
+import PseudoWiredCodeBlock from "@components/PseudoWiredCodeBlock.astro";
+import { Aside, Steps, Tabs, TabItem } from "@astrojs/starlight/components";
+import Atraso from "@assets/wf_act/02-atraso.gif";
+import FonteDoMobi from "@assets/wf_act_remove_furni/02-opcao-selecione-a-fonte-do-mobi.gif";
+import CriarMobisTemporarios from "@assets/wf_act_remove_furni/03-criar-os-mobis-temporarios.mp4";
+import CriarMobisTemporariosDescriptionsUrl from "@assets/wf_act_remove_furni/03-criar-os-mobis-temporarios-descriptions.vtt?url";
+import CriarMobisTemporariosDescriptionsRaw from "@assets/wf_act_remove_furni/03-criar-os-mobis-temporarios-descriptions.vtt?raw";
+import RemoverTodosComSeletor from "@assets/wf_act_remove_furni/04-remover-todos-com-um-seletor.mp4";
+import RemoverTodosComSeletorDescriptionsUrl from "@assets/wf_act_remove_furni/04-remover-todos-com-um-seletor-descriptions.vtt?url";
+import RemoverTodosComSeletorDescriptionsRaw from "@assets/wf_act_remove_furni/04-remover-todos-com-um-seletor-descriptions.vtt?raw";
+import RemoverTodosComSinal from "@assets/wf_act_remove_furni/05-remover-todos-com-um-sinal.mp4";
+import RemoverTodosComSinalDescriptionsUrl from "@assets/wf_act_remove_furni/05-remover-todos-com-um-sinal-descriptions.vtt?url";
+import RemoverTodosComSinalDescriptionsRaw from "@assets/wf_act_remove_furni/05-remover-todos-com-um-sinal-descriptions.vtt?raw";
+import RemoverApenasMobiClicado from "@assets/wf_act_remove_furni/06-remover-apenas-o-mobi-clicado.mp4";
+import RemoverApenasMobiClicadoDescriptionsUrl from "@assets/wf_act_remove_furni/06-remover-apenas-o-mobi-clicado-descriptions.vtt?url";
+import RemoverApenasMobiClicadoDescriptionsRaw from "@assets/wf_act_remove_furni/06-remover-apenas-o-mobi-clicado-descriptions.vtt?raw";
+
+O **Efeito: Remover Mobi Temporário** retira do quarto os mobis temporários criados pelo [Efeito: Colocar Móbi Temporário](/referencia/efeitos/wf_act_place_furni/). Você pode remover todos os mobis encontrados por um Seletor, usar os mobis recebidos por sinal ou retirar apenas o mobi que acionou a pilha.
 
 <Infobox />
+
+## Como esse Wired funciona?
+
+Quando a pilha executa este efeito, ele consulta a fonte escolhida em **Selecione a fonte do Mobi** e remove os mobis temporários que ela fornecer. Se a seleção também incluir um mobi permanente do mesmo tipo, ele permanece no quarto. O efeito não remove mobis comuns.
+
+![Janela do Efeito Remover Móbi Temporário com Atraso em zero segundo e Usar mobis do seletor selecionado em Selecione a fonte do Mobi.](@assets/wf_act_remove_furni/01-janela-do-wired.png)
+
+### Atraso (segundos)
+
+Este campo define quanto tempo o efeito espera após a execução da pilha antes de remover os mobis temporários. Ele aceita valores de **0 a 60 segundos**; mantenha **0** para remover sem espera.
+
+Você pode digitar o valor ou usar as setas. O ícone de temporização alterna o intervalo de cada clique entre **Padrão (a cada 0.5s)** e **Preciso (a cada 0.05s)**. No modo preciso, é possível ajustar atrasos menores pelas setas.
+
+<img
+  src={Atraso.src}
+  alt="Animação do campo Atraso (segundos): o valor é ajustado com as setas e o ícone de temporização muda o intervalo de cada clique."
+  style={{ width: "400px", maxWidth: "100%" }}
+/>
+
+### Selecione a fonte do Mobi
+
+Use as setas desta seção para escolher de onde virão os mobis temporários a remover:
+
+- **Usar mobis do seletor:** usa os mobis encontrados por um [Seletor de mobis](/referencia/seletores/visao-geral/) da pilha.
+- **Usar mobis do sinal:** usa os mobis incluídos em um sinal enviado por [Mandar Sinal](/referencia/efeitos/wf_act_send_signal/) e recebido por [Recebe Sinal](/referencia/ativadores/wf_trg_recv_signal/).
+- **Use o item de ativação:** usa o mobi que ativou a pilha. Com [Habbo Clica no Mobi](/referencia/ativadores/wf_trg_click_furni/), por exemplo, pode ser o mobi clicado.
+
+<img
+  src={FonteDoMobi.src}
+  alt="Animação das setas em Selecione a fonte do Mobi, alternando entre Usar mobis do seletor, Usar mobis do sinal e Use o item de ativação."
+  style={{ width: "35%" }}
+/>
+
+Se escolher **Usar mobis do seletor**, você pode combinar este efeito com diferentes Seletores de mobis:
+
+- [Mobi com Altitude](/referencia/seletores/wf_slc_furni_altitude/): encontra mobis na altitude configurada.
+- [Mobi na Área](/referencia/seletores/wf_slc_furni_area/): encontra mobis dentro da área configurada.
+- [Mobi por Tipo](/referencia/seletores/wf_slc_furni_bytype/): encontra mobis do tipo configurado.
+- [Mobis na Vizinhança](/referencia/seletores/wf_slc_furni_neighborhood/): encontra mobis próximos dos mobis configurados.
+- [Mobi em Mobi](/referencia/seletores/wf_slc_furni_onfurni/): encontra mobis sobre os mobis configurados.
+- [Escolha de Mobis](/referencia/seletores/wf_slc_furni_picks/): usa os mobis escolhidos na configuração do Seletor.
+- [Mobi do Sinal](/referencia/seletores/wf_slc_furni_signal/): encontra os mobis associados ao sinal recebido pela pilha.
+- [Mobi com Variável](/referencia/seletores/wf_slc_furni_with_var/): encontra mobis com a variável configurada.
+
+Escolha o Seletor de acordo com o critério que identifica os temporários no seu sistema.
+
+## Exemplo de uso: retirar Tokens de Jogo Azul
+
+Vamos criar dois **Tokens de Jogo Azul** temporários e removê-los de três maneiras. A pilha de criação será a mesma em todos os testes. Cada forma de remoção usa uma pilha diferente; você pode montar uma de cada vez para comparar os resultados.
+
+### Criar os mobis temporários
+
+<AccessibleVideo
+  id="remover-mobi-temporario-criar-mobis"
+  src={CriarMobisTemporarios}
+  title="Criar dois Tokens de Jogo Azul temporários com a pilha Wired"
+  descriptionsSrc={CriarMobisTemporariosDescriptionsUrl}
+  descriptionsContent={CriarMobisTemporariosDescriptionsRaw}
+/>
+
+<Tabs>
+  <TabItem label="Configuração">
+    <Steps>
+1. Coloque um **Token de Jogo Azul** no quarto. Ele será o mobi de origem e permanecerá depois que os temporários forem removidos.
+2. Monte uma pilha com [Habbo Clica no Mobi](/referencia/ativadores/wf_trg_click_furni/), [Física do Movimento](/referencia/extras/wf_xtra_mov_physics/) e [Colocar Móbi Temporário](/referencia/efeitos/wf_act_place_furni/). No ativador, selecione o próprio Wired para clicar nele durante o teste.
+3. No Extra, marque **Mover através dos mobis**. No efeito de colocação, escolha **Local de origem** em **Local de destino**, **Acima do local de destino** em **Altitude de destino** e marque **X = 1** em **Deslocamentos**. Em **Mobi a ser colocado**, escolha **Usar combinação capturada (Use the snapshot)** e selecione o Token de Jogo Azul de origem.
+4. Salve e acione a pilha duas vezes. Dois tokens temporários aparecerão à frente do token de origem, um acima do outro.
+</Steps>
+  </TabItem>
+  <TabItem label="PseudoWired">
+    <PseudoWiredCodeBlock code={`
+QUANDO
+  - Habbo Clica no Mobi: Habbo Clica no Mobi
+
+COMO
+  - Física do Movimento: Mover através dos mobis
+
+ENTÃO
+  - Colocar Móbi Temporário:
+    Local de destino: Local de origem
+    Altitude de destino: Acima do local de destino
+    Deslocamentos: X = 1
+    Mobi a ser colocado: Usar combinação capturada — Token de Jogo Azul
+`} />
+  </TabItem>
+</Tabs>
+
+### Remover todos com um Seletor
+
+O **Mobi por Tipo** encontra os Tokens de Jogo Azul do quarto. A seleção inclui o token de origem, mas o efeito remove apenas os dois temporários.
+
+<AccessibleVideo
+  id="remover-mobi-temporario-com-seletor"
+  src={RemoverTodosComSeletor}
+  title="Remover os Tokens de Jogo Azul temporários com um Seletor Mobi por Tipo"
+  descriptionsSrc={RemoverTodosComSeletorDescriptionsUrl}
+  descriptionsContent={RemoverTodosComSeletorDescriptionsRaw}
+/>
+
+<Tabs>
+  <TabItem label="Configuração">
+    <Steps>
+1. Monte outra pilha com [Mobi por Tipo](/referencia/seletores/wf_slc_furni_bytype/), **Habbo Clica no Mobi** e **Remover Móbi Temporário**.
+2. No Seletor, escolha **Token de Jogo Azul**. No ativador, selecione o próprio Wired para acionar esta pilha ao clicar nele.
+3. No efeito de remoção, deixe **Atraso (segundos)** em **0** e escolha **Usar mobis do seletor** em **Selecione a fonte do Mobi**.
+4. Clique no ativador uma vez. Os dois tokens temporários serão retirados; o token de origem continuará no quarto.
+</Steps>
+  </TabItem>
+  <TabItem label="PseudoWired">
+    <PseudoWiredCodeBlock code={`
+ALVOS
+  - Mobi por Tipo: Token de Jogo Azul
+
+QUANDO
+  - Habbo Clica no Mobi: Habbo Clica no Mobi
+
+ENTÃO
+  - Remover Móbi Temporário: Usar mobis do seletor
+`} />
+  </TabItem>
+</Tabs>
+
+### Remover todos com um sinal
+
+Esta alternativa passa a seleção de mobis para outra pilha. O Seletor encontra os tokens, **Mandar Sinal** envia os mobis selecionados pela **Antena Wired Pequena** e **Recebe Sinal** aciona a pilha de remoção.
+
+<AccessibleVideo
+  id="remover-mobi-temporario-com-sinal"
+  src={RemoverTodosComSinal}
+  title="Remover os Tokens de Jogo Azul temporários com Mandar Sinal e Recebe Sinal"
+  descriptionsSrc={RemoverTodosComSinalDescriptionsUrl}
+  descriptionsContent={RemoverTodosComSinalDescriptionsRaw}
+/>
+
+<Tabs>
+  <TabItem label="Configuração">
+    <Steps>
+1. Depois de gerar os dois tokens temporários com a pilha de criação, coloque uma **Antena Wired Pequena** no quarto.
+2. Monte uma pilha com **Mobi por Tipo**, **Habbo Clica no Mobi** e [Mandar Sinal](/referencia/efeitos/wf_act_send_signal/). Selecione **Token de Jogo Azul** no Seletor, o próprio Wired no ativador e a **Antena Wired Pequena** no efeito de envio.
+3. Monte outra pilha com [Recebe Sinal](/referencia/ativadores/wf_trg_recv_signal/) e **Remover Móbi Temporário**. Escolha a mesma antena no ativador e **Usar mobis do sinal** no efeito de remoção.
+4. Clique no ativador da pilha que manda o sinal. A pilha que o recebe remove os dois tokens temporários; o token de origem permanece.
+</Steps>
+  </TabItem>
+  <TabItem label="PseudoWired">
+    <PseudoWiredCodeBlock title="Pilha que manda o sinal" code={`
+ALVOS
+  - Mobi por Tipo: Token de Jogo Azul
+
+QUANDO
+  - Habbo Clica no Mobi: Habbo Clica no Mobi
+
+ENTÃO
+  - Mandar Sinal: Antena Wired Pequena
+`} />
+
+    <PseudoWiredCodeBlock title="Pilha que recebe o sinal" code={`
+QUANDO
+  - Recebe Sinal: Antena Wired Pequena
+
+ENTÃO
+  - Remover Móbi Temporário: Usar mobis do sinal
+`} />
+  </TabItem>
+</Tabs>
+
+### Remover apenas o mobi clicado
+
+Com **Use o item de ativação**, o efeito usa o token em que você clicou, em vez de remover todos os mobis encontrados pelo Seletor. Para que cada token temporário possa acionar a pilha, configure **Habbo Clica no Mobi** com **Usar mobis do seletor**.
+
+<AccessibleVideo
+  id="remover-apenas-mobi-temporario-clicado"
+  src={RemoverApenasMobiClicado}
+  title="Remover separadamente cada Token de Jogo Azul temporário ao clicar nele"
+  descriptionsSrc={RemoverApenasMobiClicadoDescriptionsUrl}
+  descriptionsContent={RemoverApenasMobiClicadoDescriptionsRaw}
+/>
+
+<Aside type="caution" title="Por que usar o Seletor?">
+Imagine que o quarto tenha um **Token de Jogo Azul** do Clube do Arquiteto e outro temporário. Se você escolher **Use o item de ativação** no efeito, o token temporário precisa acionar a pilha para ser removido. Mas não é possível selecioná-lo diretamente em **Habbo Clica no Mobi**. Ao tentar escolhê-lo no ativador e salvar, aparece a janela **Falha ao atualizar** com o aviso **“Não é possível selecionar mobis temporários no WIRED.”**
+
+![Janela Falha ao atualizar com o aviso Não é possível selecionar mobis temporários no WIRED.](@assets/wf_act/06-janela-falha-ao-selecionar-mobi-temporario.png)
+
+Escolher **Use mobis escolhidos** no ativador e selecionar apenas o token do Clube do Arquiteto também não funciona: clicar nele aciona a pilha, mas o efeito não o remove porque ele não é temporário. Clicar no token temporário não aciona a pilha, pois ele não foi escolhido no ativador. Com o Seletor, os dois tokens podem ativar a pilha, e o efeito remove somente o temporário que foi clicado.
+</Aside>
+
+<Tabs>
+  <TabItem label="Configuração">
+    <Steps>
+1. Gere novamente os dois tokens temporários com a pilha de criação. Monte outra pilha com **Mobi por Tipo**, **Habbo Clica no Mobi** e **Remover Móbi Temporário**.
+2. No Seletor, escolha **Token de Jogo Azul**. No ativador, selecione **Usar mobis do seletor** para que os tokens encontrados possam acionar a pilha ao serem clicados.
+3. No efeito de remoção, escolha **Use o item de ativação** em **Selecione a fonte do Mobi**.
+4. Clique em um dos tokens temporários: só ele será removido. Clique no outro para retirá-lo também.
+</Steps>
+  </TabItem>
+  <TabItem label="PseudoWired">
+    <PseudoWiredCodeBlock code={`
+ALVOS
+  - Mobi por Tipo: Token de Jogo Azul
+
+QUANDO
+  - Habbo Clica no Mobi: Usar mobis do seletor
+
+ENTÃO
+  - Remover Móbi Temporário: Use o item de ativação
+`} />
+  </TabItem>
+</Tabs>

@@ -1,0 +1,16 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:03.500
+Na janela do Efeito Remover Móbi Temporário, a fonte do mobi é definida como Use o item de ativação.
+
+00:00:03.500 --> 00:00:08.000
+No Ativador Habbo Clica no Mobi, a fonte do mobi é definida como Usar mobis do seletor.
+
+00:00:08.000 --> 00:00:12.500
+O Seletor Mobi por Tipo é configurado com o Token de Jogo Azul que já estava no quarto, para identificar os mobis do mesmo tipo.
+
+00:00:12.500 --> 00:00:16.500
+A pilha de criação é acionada duas vezes. Dois Tokens de Jogo Azul temporários aparecem empilhados ao lado do token original.
+
+00:00:16.500 --> 00:00:18.837
+Cada token temporário é clicado e removido separadamente. Ao final, apenas o token original permanece no quarto.

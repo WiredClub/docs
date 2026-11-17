@@ -64,6 +64,9 @@ import GerarComVariavelDescriptionsRaw from "@assets/wf_act_place_furni/12-gerar
 import FalhaAoColocarUmMobi from "@assets/wf_act_place_furni/13-falha-ao-colocar-um-mobi.mp4";
 import FalhaAoColocarUmMobiDescriptionsUrl from "@assets/wf_act_place_furni/13-falha-ao-colocar-um-mobi-descriptions.vtt?url";
 import FalhaAoColocarUmMobiDescriptionsRaw from "@assets/wf_act_place_furni/13-falha-ao-colocar-um-mobi-descriptions.vtt?raw";
+import AtualizarCombinacaoCapturada from "@assets/wf_act_place_furni/14-selecionar-mobi-para-aplicar-uma-condicao.mp4";
+import AtualizarCombinacaoCapturadaDescriptionsUrl from "@assets/wf_act_place_furni/14-selecionar-mobi-para-aplicar-uma-condicao-descriptions.vtt?url";
+import AtualizarCombinacaoCapturadaDescriptionsRaw from "@assets/wf_act_place_furni/14-selecionar-mobi-para-aplicar-uma-condicao-descriptions.vtt?raw";
 
 O **Efeito: Colocar Mobi Temporário** cria um ou mais mobis temporários no quarto a partir dos mobis escolhidos em sua configuração. Você define onde eles aparecerão, em que altitude ficarão e, se precisar, qual variável receberão ao serem gerados.
 
@@ -74,6 +77,8 @@ O **Efeito: Colocar Mobi Temporário** cria um ou mais mobis temporários no qua
 Quando a pilha executa este efeito, **Mobi a ser colocado** determina quais mobis serão usados para gerar os temporários. **Local de destino** e **Altitude de destino** definem onde os novos mobis aparecerão. Você também pode ajustar a posição com **Deslocamentos** e adicionar uma variável em **Gerar com variável**.
 
 Os mobis gerados permanecem no quarto enquanto ele está ativo. Eles não substituem os mobis usados como origem e deixam de existir quando o quarto fica inativo.
+
+Se quiser retirá-los antes, use **Escolher** para remover um mobi temporário manualmente. Para fazer a remoção por uma pilha Wired, configure o [Efeito: Remover Móbi Temporário](/referencia/efeitos/wf_act_remove_furni/).
 
 ![Janela do Efeito Colocar Mobi Temporário com Informações de uso, Local de origem, Acima do local de destino, Deslocamentos, Gerar com variável e Atraso visíveis.](@assets/wf_act_place_furni/03-janela-do-wired.png)
 
@@ -210,6 +215,29 @@ Clique em **Mostrar configurações avançadas** para encontrar esta seção. Us
 
 ![Animação das opções de origem dos mobis em Mobi a ser colocado, alternando entre combinação capturada, seletores, sinais, item de ativação e mobis escolhidos.](@assets/wf_act_place_furni/06-opcao-mobi-a-ser-colocado.gif)
 
+#### Atualizar a combinação capturada
+
+Com **Usar combinação capturada (Use the snapshot)** selecionada, o texto **Selecionar Mobi para aplicar uma Condição**, no topo da janela, serve para aplicar as definições salvas. Ele também precisa ser usado quando você quiser atualizar a captura depois de mudar o mobi de origem.
+
+Considere esta configuração:
+
+- **Local de destino:** Local de origem.
+- **Altitude de destino:** Acima do local de destino.
+- **Deslocamentos:** X = 1.
+- **Mobi a ser colocado:** Usar combinação capturada (Use the snapshot).
+
+Ao salvar o Wired, a posição, a altura e o estado do mobi selecionado são capturados naquele momento. Se você mover o mobi de origem depois e acionar a pilha, o temporário aparecerá com base na posição capturada anteriormente. Mesmo com **X = 1**, o deslocamento não será calculado a partir da nova posição do mobi de origem.
+
+Para registrar a nova posição, abra o Wired novamente, clique em **Selecionar Mobi para aplicar uma Condição** e salve com **Pronto**. Assim, a combinação capturada passa a considerar a posição, a altura e o estado atuais do mobi.
+
+<AccessibleVideo
+  id="colocar-mobi-temporario-atualizar-combinacao-capturada"
+  src={AtualizarCombinacaoCapturada}
+  title="Atualizar a combinação capturada depois de mover o mobi de origem"
+  descriptionsSrc={AtualizarCombinacaoCapturadaDescriptionsUrl}
+  descriptionsContent={AtualizarCombinacaoCapturadaDescriptionsRaw}
+/>
+
 <Aside type="caution" title="Escolha mobis permitidos">
 Este efeito só permite selecionar mobis do **Clube do Arquiteto** que não tenham funcionalidades avançadas. Se você escolher um mobi de outro tipo e tentar salvar, aparecerá a janela **Falha ao atualizar** com o aviso **“Posicionamento não permitido para este tipo de mobi. Você só pode selecionar mobis do Clube do Arquiteto que não tenham funcionalidades avançadas.”**
 
@@ -239,7 +267,7 @@ Com o ícone de **usuário**, você pode escolher:
 <Aside type="caution" title="Mobis temporários não podem ser selecionados">
 Você não pode escolher um mobi temporário em **Mobi a ser colocado** nem em **Destino personalizado**. Se selecionar um nessas seções e tentar salvar a configuração, aparecerá a janela **Falha ao atualizar** com o aviso **“Não é possível selecionar mobis temporários no WIRED.”**
 
-![Janela Falha ao atualizar com o aviso Não é possível selecionar mobis temporários no WIRED.](@assets/wf_act_place_furni/10-janela-falha-ao-selecionar-mobi-temporario.png)
+![Janela Falha ao atualizar com o aviso Não é possível selecionar mobis temporários no WIRED.](@assets/wf_act/06-janela-falha-ao-selecionar-mobi-temporario.png)
 </Aside>
 
 Para conhecer outras fontes disponíveis em diferentes Wireds, veja [Fonte de Usuário ou Mobi](/referencia/configurando-wireds/#fonte-de-usuário-ou-mobi).
