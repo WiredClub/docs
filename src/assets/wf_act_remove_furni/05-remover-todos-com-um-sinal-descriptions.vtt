@@ -1,0 +1,16 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:06.500
+O Seletor Mobi por Tipo é configurado com um Token de Jogo Azul. Na pilha de envio, Mandar Sinal usa uma Antena Wired Pequena.
+
+00:00:06.500 --> 00:00:15.500
+O Ativador Habbo Clica no Mobi é configurado para a pilha de envio. Na outra pilha, Recebe Sinal é associado à mesma antena.
+
+00:00:15.500 --> 00:00:22.500
+No Efeito Remover Móbi Temporário da pilha que recebe o sinal, a fonte é definida como Usar mobis do sinal.
+
+00:00:22.500 --> 00:00:26.500
+A pilha de criação é acionada duas vezes. Dois Tokens de Jogo Azul temporários aparecem empilhados ao lado do token de origem.
+
+00:00:26.500 --> 00:00:27.840
+A antena emite um sinal. Os dois tokens temporários desaparecem, e o token de origem permanece no quarto.
