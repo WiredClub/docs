@@ -51,6 +51,8 @@ O **Efeito: Definir Configurações de Clique** muda o que acontece quando os us
 
 Quando a pilha executa este efeito, as opções de **Ao clicar em um usuário** e **Ao clicar em um mobi** passam a valer para quem foi definido em **Selecionar usuários fonte**. As duas listas são configuradas separadamente: você pode alterar o clique em usuários e manter o clique em mobis no padrão, por exemplo.
 
+Se um usuário fonte sair e reentrar no quarto, o comportamento dos cliques volta para **Padrão** para ele.
+
 ![Janela do Efeito Definir Configurações de Clique com Padrão selecionado nas listas Ao clicar em um usuário e Ao clicar em um mobi, atraso em zero segundo e configurações avançadas fechadas.](@assets/wf_act_click_conf/02-janela-do-wired.png)
 
 ### Ao clicar em um usuário
@@ -60,7 +62,7 @@ Quando a pilha executa este efeito, as opções de **Ao clicar em um usuário** 
 Esta lista define o que acontece quando alguém afetado pelo efeito clica em um jogador, mascote ou bot:
 
 - **Padrão:** mantém o comportamento normal. O menu de contexto, aquela janela cinza acima do usuário clicado, mostra as ações disponíveis para ele, como **Respeitar** um jogador, **Pegar** um bot ou **Escolher** um mascote. Se o avatar de quem clicou estiver parado, ele se vira para o usuário clicado.
-- **Clique no usuário, mas ande por trás dele:** o menu de contexto não abre. O avatar de quem clicou anda um quadrado na diagonal atrás do usuário clicado; se estava parado, também se vira para ele.
+- **Clique no usuário, mas ande por trás dele:** o menu de contexto não abre. O avatar de quem clicou anda até um quadrado na diagonal atrás do usuário clicado; se estava parado, também se vira para ele.
 - **Clique atravessa o usuário:** o menu de contexto não abre e o avatar de quem clicou não se vira para o usuário clicado.
 
 ### Ao clicar em um mobi
@@ -74,7 +76,7 @@ Escolha como o clique em um mobi deve funcionar:
 
 ### Aviso de comportamento do clique
 
-Depois que o efeito é executado, os usuários afetados veem o aviso **“O comportamento do clique foi alterado nesse quarto”** à direita da tela:
+Se você executar o efeito com outra opção diferente de **Padrão**, o aviso **“O comportamento do clique foi alterado nesse quarto”** aparece à direita da tela nas duas mudanças.
 
 ![Aviso Wired informando que o comportamento do clique foi alterado nesse quarto, sem botão de controle.](@assets/wf_act_click_conf/01-aviso-comportamento-do-clique.png)
 
