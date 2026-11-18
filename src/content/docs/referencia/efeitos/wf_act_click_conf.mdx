@@ -40,8 +40,24 @@ infobox:
 ---
 
 import Infobox from "@components/Infobox.astro";
+import AccessibleVideo from "@components/AccessibleVideo.astro";
 import Atraso from "@assets/wf_act/02-atraso.gif";
 import SelecionarUsuariosFonte from "@assets/wf_act_click_conf/05-topico-selecionar-usuarios-fonte.gif";
+import CliqueUsuarioPadrao from "@assets/wf_act_click_conf/06-ao-clicar-em-um-usuario-padrao.mp4";
+import CliqueUsuarioPadraoDescriptionsUrl from "@assets/wf_act_click_conf/06-ao-clicar-em-um-usuario-padrao-descriptions.vtt?url";
+import CliqueUsuarioPadraoDescriptionsRaw from "@assets/wf_act_click_conf/06-ao-clicar-em-um-usuario-padrao-descriptions.vtt?raw";
+import CliqueNoUsuario from "@assets/wf_act_click_conf/06-ao-clicar-em-um-usuario-clique-no-usuario.mp4";
+import CliqueNoUsuarioDescriptionsUrl from "@assets/wf_act_click_conf/06-ao-clicar-em-um-usuario-clique-no-usuario-descriptions.vtt?url";
+import CliqueNoUsuarioDescriptionsRaw from "@assets/wf_act_click_conf/06-ao-clicar-em-um-usuario-clique-no-usuario-descriptions.vtt?raw";
+import CliqueAtravessaUsuario from "@assets/wf_act_click_conf/06-ao-clicar-em-um-usuario-clique-atravessa.mp4";
+import CliqueAtravessaUsuarioDescriptionsUrl from "@assets/wf_act_click_conf/06-ao-clicar-em-um-usuario-clique-atravessa-descriptions.vtt?url";
+import CliqueAtravessaUsuarioDescriptionsRaw from "@assets/wf_act_click_conf/06-ao-clicar-em-um-usuario-clique-atravessa-descriptions.vtt?raw";
+import CliqueMobiPadrao from "@assets/wf_act_click_conf/07-ao-clicar-em-um-mobi-padrao.mp4";
+import CliqueMobiPadraoDescriptionsUrl from "@assets/wf_act_click_conf/07-ao-clicar-em-um-mobi-padrao-descriptions.vtt?url";
+import CliqueMobiPadraoDescriptionsRaw from "@assets/wf_act_click_conf/07-ao-clicar-em-um-mobi-padrao-descriptions.vtt?raw";
+import CliqueAtravessaMobi from "@assets/wf_act_click_conf/07-ao-clicar-em-um-mobi-clique-atravessa.mp4";
+import CliqueAtravessaMobiDescriptionsUrl from "@assets/wf_act_click_conf/07-ao-clicar-em-um-mobi-clique-atravessa-descriptions.vtt?url";
+import CliqueAtravessaMobiDescriptionsRaw from "@assets/wf_act_click_conf/07-ao-clicar-em-um-mobi-clique-atravessa-descriptions.vtt?raw";
 
 O **Efeito: Definir Configurações de Clique** muda o que acontece quando os usuários escolhidos clicam em outro usuário ou em um mobi. Você pode manter o comportamento padrão em cada caso ou fazer o clique atravessar o alvo.
 
@@ -61,9 +77,35 @@ Se um usuário fonte sair e reentrar no quarto, o comportamento dos cliques volt
 
 Esta lista define o que acontece quando alguém afetado pelo efeito clica em um jogador, mascote ou bot:
 
-- **Padrão:** mantém o comportamento normal. O menu de contexto, aquela janela cinza acima do usuário clicado, mostra as ações disponíveis para ele, como **Respeitar** um jogador, **Pegar** um bot ou **Escolher** um mascote. Se o avatar de quem clicou estiver parado, ele se vira para o usuário clicado.
-- **Clique no usuário, mas ande por trás dele:** o menu de contexto não abre. O avatar de quem clicou anda até um quadrado na diagonal atrás do usuário clicado; se estava parado, também se vira para ele.
-- **Clique atravessa o usuário:** o menu de contexto não abre e o avatar de quem clicou não se vira para o usuário clicado.
+- **Padrão:** mantém o comportamento normal. O menu de contexto, aquela janela cinza acima do usuário clicado, mostra as ações disponíveis para ele, como **Respeitar** um jogador, **Pegar** um bot ou **Escolher** um mascote. Além disso, a janela com informações sobre o usuário continua aparecendo na direita. Se o avatar de quem clicou estiver parado, ele se vira para o usuário clicado.
+
+<AccessibleVideo
+  id="definir-configuracoes-de-clique-usuario-padrao"
+  src={CliqueUsuarioPadrao}
+  title="Clique em um usuário com a opção Padrão"
+  descriptionsSrc={CliqueUsuarioPadraoDescriptionsUrl}
+  descriptionsContent={CliqueUsuarioPadraoDescriptionsRaw}
+/>
+
+- **Clique no usuário, mas ande por trás dele:** o menu de contexto não abre, mas a janela com informações sobre o usuário continua aparecendo na direita. O avatar de quem clicou anda até um quadrado na diagonal atrás do usuário clicado; se estava parado, também se vira para ele.
+
+<AccessibleVideo
+  id="definir-configuracoes-de-clique-andar-por-tras-do-usuario"
+  src={CliqueNoUsuario}
+  title="Clique no usuário, mas ande por trás dele"
+  descriptionsSrc={CliqueNoUsuarioDescriptionsUrl}
+  descriptionsContent={CliqueNoUsuarioDescriptionsRaw}
+/>
+
+- **Clique atravessa o usuário:** o menu de contexto e a janela com informações não são mostrados, e o avatar de quem clicou não se vira para o usuário clicado.
+
+<AccessibleVideo
+  id="definir-configuracoes-de-clique-atravessar-usuario"
+  src={CliqueAtravessaUsuario}
+  title="Clique atravessa o usuário sem abrir o menu de ações"
+  descriptionsSrc={CliqueAtravessaUsuarioDescriptionsUrl}
+  descriptionsContent={CliqueAtravessaUsuarioDescriptionsRaw}
+/>
 
 ### Ao clicar em um mobi
 
@@ -72,7 +114,24 @@ Esta lista define o que acontece quando alguém afetado pelo efeito clica em um 
 Escolha como o clique em um mobi deve funcionar:
 
 - **Padrão:** mantém o menu de contexto à direita, com as ações disponíveis para o mobi, como **Mover**, **Girar**, **Usar** e **Escolher**.
+
+<AccessibleVideo
+  id="definir-configuracoes-de-clique-mobi-padrao"
+  src={CliqueMobiPadrao}
+  title="Clique em um mobi com a opção Padrão"
+  descriptionsSrc={CliqueMobiPadraoDescriptionsUrl}
+  descriptionsContent={CliqueMobiPadraoDescriptionsRaw}
+/>
+
 - **Clique atravessa o mobi:** o menu de contexto não abre. O clique duplo também deixa de usar o mobi; por exemplo, ele não abre a janela de configuração de uma caixa Wired.
+
+<AccessibleVideo
+  id="definir-configuracoes-de-clique-atravessar-mobi"
+  src={CliqueAtravessaMobi}
+  title="Clique atravessa um mobi sem ativá-lo"
+  descriptionsSrc={CliqueAtravessaMobiDescriptionsUrl}
+  descriptionsContent={CliqueAtravessaMobiDescriptionsRaw}
+/>
 
 ### Aviso de comportamento do clique
 
