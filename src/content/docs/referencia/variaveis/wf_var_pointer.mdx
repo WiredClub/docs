@@ -67,7 +67,7 @@ import ConferindoResultado from "@assets/wf_var_pointer/06-conferindo-o-resultad
 import ConferindoResultadoDescriptionsUrl from "@assets/wf_var_pointer/06-conferindo-o-resultado-e-acrescentando-novos-itens-descriptions.vtt?url";
 import ConferindoResultadoDescriptionsRaw from "@assets/wf_var_pointer/06-conferindo-o-resultado-e-acrescentando-novos-itens-descriptions.vtt?raw";
 
-O **Wired Variável: Ponteiro de Variável** permite escolher, durante uma execução, qual variável será consultada ou modificada. Com ele, você pode reutilizar uma sequência de pilhas para adicionar diferentes itens ao inventário de um jogador, por exemplo.
+O **Wired Variável: Ponteiro** permite escolher, durante uma execução, qual variável será consultada ou modificada. Com ele, você pode reutilizar uma sequência de pilhas para adicionar diferentes itens ao inventário de um jogador, por exemplo.
 
 <Infobox />
 
@@ -122,7 +122,7 @@ O nome precisa ser **único no quarto**, mesmo entre variáveis de tipos diferen
 
 ### Variável de contexto identificadora
 
-Informe o nome da variável de contexto que armazenará o **ID do mobi da caixa Wired da variável de destino**. Crie essa variável com o [Wired Variável: Contexto Variável](/referencia/variaveis/wf_var_context/) e marque **Tem valor**, pois ela precisa guardar um número.
+Informe o nome da variável de contexto que armazenará o **ID do mobi da caixa Wired da variável de destino**. Crie essa variável com o [Wired Variável: Contexto](/referencia/variaveis/wf_var_context/) e marque **Tem valor**, pois ela precisa guardar um número.
 
 Antes de utilizar o ponteiro em uma execução, disponibilize essa variável de contexto e atribua a ela o ID da caixa desejada. No [exemplo de inventário](#exemplo-prático-um-sistema-de-inventário), utilizaremos `contexto_item_do_inventario` para guardar o `@id` da caixa de `pedra`, `ouro` ou `peixe`.
 
@@ -158,7 +158,7 @@ As ações disponíveis dependem das permissões da variável de destino. Você 
 
 ## Renomear a variável
 
-Para alterar o nome do ponteiro, clique duas vezes no **Wired Variável: Ponteiro de Variável**, edite o campo **Nome da variável** e confirme a alteração.
+Para alterar o nome do ponteiro, clique duas vezes no **Wired Variável: Ponteiro**, edite o campo **Nome da variável** e confirme a alteração.
 
 Depois de confirmar, o novo nome passa a aparecer nos locais das **Ferramentas do Criador** que fazem referência a ele. Para mudar qual variável será acessada durante uma execução, altere o ID armazenado na variável de contexto identificadora.
 
