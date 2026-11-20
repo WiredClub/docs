@@ -214,7 +214,18 @@ export default defineConfig({
       lastUpdated: true,
       plugins: [
         starlightThemeWiredClub(),
-        starlightSidebarLabelSort(),
+        starlightSidebarLabelSort({
+          pinned: [
+            "visao-geral",
+            "visão geral",
+            "overview",
+            "index",
+            "introducao",
+            "introdução",
+            "internas",
+            "inteligentes",
+          ],
+        }),
         starlightLlmsTxt(),
         starlightPageReader({ pages: true }),
         starlightSeo({
