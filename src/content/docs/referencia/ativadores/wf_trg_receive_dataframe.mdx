@@ -155,7 +155,7 @@ No ativador, as chaves enviadas e seus destinos ficam assim:
   <TabItem label="Configuração">
     <Steps>
 1. Coloque uma **Torre da Rede Wired** na sala de espera e conecte-a à mesma rede da torre do quarto de controle.
-2. Crie um [Wired Variável: Contexto Variável](/referencia/variaveis/wf_var_context/) chamado `rodada_atual`, com **Tem valor** marcada, para receber o número enviado.
+2. Crie um [Wired Variável: Contexto](/referencia/variaveis/wf_var_context/) chamado `rodada_atual`, com **Tem valor** marcada, para receber o número enviado.
 3. Monte uma pilha com o **Receber Dataframe da Rede**. Escolha **2** em **Número de linhas**. Na **Linha 1**, escreva `aviso` em **Chave**, selecione **Espaço de texto** e digite `mensagem_da_rodada` em **Espaço**.
 4. Na **Linha 2**, escreva `rodada` em **Chave**, selecione **Variável de contexto** e escolha `rodada_atual` na lista **Variável**.
 5. Em **Configurações avançadas**, escolha **Use mobis escolhidos** e selecione a torre da sala de espera.

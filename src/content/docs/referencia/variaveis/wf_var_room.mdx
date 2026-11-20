@@ -49,7 +49,7 @@ import RenomearVariavelDescriptionsRaw from "@assets/wf_var_room/05-renomear-a-v
 import ConsultarValor from "@assets/wf_var_room/03-consultar-o-valor-da-variavel.gif";
 import AlterarValorPelaInspecao from "@assets/wf_var_room/04-alterar-valor-variavel-pelo-inspecionar.gif";
 
-O **Wired Variável: Variável Global** permite guardar informações relacionadas ao quarto inteiro. Quer contar quantas partidas já aconteceram, guardar a pontuação coletiva de uma equipe ou indicar a fase atual de uma atividade? Você pode utilizar uma variável global para isso.
+O **Wired Variável: Global** permite guardar informações relacionadas ao quarto inteiro. Quer contar quantas partidas já aconteceram, guardar a pontuação coletiva de uma equipe ou indicar a fase atual de uma atividade? Você pode utilizar uma variável global para isso.
 
 <Infobox />
 
@@ -93,13 +93,13 @@ Esta seção define por quanto tempo o valor é mantido e se a variável pode se
 | :--- | :--- |
 | **Enquanto o quarto está ativo** | O valor é mantido enquanto o quarto está ativo. Quando ele é descarregado, esse valor é perdido. |
 | **Permanente** | O valor é mantido mesmo depois que o quarto é descarregado. |
-| **Permanente, compartilhado entre quartos** | Além de manter o valor, permite acessar a variável em outros quartos por meio do [Wired Variável: De Outro Quarto](/referencia/variaveis/wf_var_reference/). |
+| **Permanente, compartilhado entre quartos** | Além de manter o valor, permite acessar a variável em outros quartos por meio do [Wired Variável: De outro quarto](/referencia/variaveis/wf_var_reference/). |
 
 Um quarto com jogadores dentro é considerado **ativo**. Quando ele é descarregado, passa a estar **inativo**. A opção **Enquanto o quarto está ativo** acompanha esse funcionamento do quarto, e não a permanência de um jogador específico nele.
 
 Por exemplo, uma contagem de partidas que só precisa existir enquanto o quarto está ativo pode utilizar a primeira opção. Já um total de partidas que você quer conservar para as próximas visitas pode utilizar **Permanente**.
 
-Se uma atividade ocupa vários quartos e todos precisam consultar a mesma pontuação coletiva, você pode utilizar **Permanente, compartilhado entre quartos**. Os demais quartos acessam essa informação pelo **[Wired Variável: De Outro Quarto](/referencia/variaveis/wf_var_reference/)**.
+Se uma atividade ocupa vários quartos e todos precisam consultar a mesma pontuação coletiva, você pode utilizar **Permanente, compartilhado entre quartos**. Os demais quartos acessam essa informação pelo **[Wired Variável: De outro quarto](/referencia/variaveis/wf_var_reference/)**.
 
 <Aside type="note" title="Compartilhamento apenas no próprio quarto">
 A opção **Permanente, compartilhado entre quartos** só pode ser configurada em um quarto do qual você é dono. Se você colocar este Wired no quarto de grupo de um amigo e tentar salvar com essa opção selecionada, aparecerá a mensagem **“Você só pode definir variáveis como compartilhadas em seu próprio quarto.”**, e a configuração não será salva.
@@ -153,7 +153,7 @@ Nesse caso, o número digitado substitui o valor armazenado. Por exemplo, se o c
 
 ## Renomear a variável
 
-Para alterar o nome de uma variável já criada, clique duas vezes no **Wired Variável: Variável Global**, edite o campo **Nome da variável** e confirme a alteração.
+Para alterar o nome de uma variável já criada, clique duas vezes no **Wired Variável: Global**, edite o campo **Nome da variável** e confirme a alteração.
 
 Depois de confirmar, o novo nome passa a aparecer nos locais das **Ferramentas do Criador** que fazem referência a essa variável, como a lista da aba **Variáveis** e a tabela da aba **Inspeção**.
 
