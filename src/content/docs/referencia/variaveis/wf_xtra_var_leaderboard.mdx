@@ -58,7 +58,7 @@ O **Extra Variável: Placar** permite mostrar os registros de uma variável perm
 
 ## Requisitos
 
-Coloque este Extra acima de um [Wired Variável: Usuário Variável](/referencia/variaveis/wf_var_user/) configurado com disponibilidade **permanente**. O placar utiliza os registros associados a essa variável.
+Coloque este Extra acima de um [Wired Variável: Usuário](/referencia/variaveis/wf_var_user/) configurado com disponibilidade **permanente**. O placar utiliza os registros associados a essa variável.
 
 Por exemplo, você pode criar uma variável de usuário chamada `pontuacao`, configurá-la como **Permanente** e utilizá-la para guardar os pontos de cada jogador. O Extra permite apresentar esses dados para quem está no quarto.
 
@@ -253,11 +253,11 @@ Nas condições e nos efeitos dessas pilhas, utilize como alvo o **usuário acio
 
 **Terceira pilha: guardar o dia da pontuação**
 
-* **Wired Variável: Usuário Variável**, com o nome `dia`, **Tem valor** marcada e disponibilidade **Permanente**.
+* **Wired Variável: Usuário**, com o nome `dia`, **Tem valor** marcada e disponibilidade **Permanente**.
 
 **Quarta pilha: guardar e exibir os pontos**
 
-* **Wired Variável: Usuário Variável**, com o nome `pontos`, **Tem valor** marcada e disponibilidade **Permanente**.
+* **Wired Variável: Usuário**, com o nome `pontos`, **Tem valor** marcada e disponibilidade **Permanente**.
 * **Extra Variável: Placar**, com a filtragem ativada pela variável `dia` e a comparação de valor com `tempo_atual.value.day` marcada.
 
 **Quinta pilha: consultar o dia atual**
