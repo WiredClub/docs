@@ -61,13 +61,13 @@ Ele funciona junto ao [Extra Variável: Compartilhar](/referencia/variaveis/wf_x
 
 ## Requisitos
 
-Coloque este Extra acima do [Wired Variável: De Outro Quarto](/referencia/variaveis/wf_var_reference/). Na referência, selecione o quarto de origem e a variável cuja lógica você quer utilizar.
+Coloque este Extra acima do [Wired Variável: De outro quarto](/referencia/variaveis/wf_var_reference/). Na referência, selecione o quarto de origem e a variável cuja lógica você quer utilizar.
 
 No quarto de origem, a variável deve ser de [Usuário](/referencia/variaveis/wf_var_user/) ou [Global](/referencia/variaveis/wf_var_room/), com a disponibilidade **Permanente, compartilhado entre quartos**. Acima dela devem estar os Extras que fornecem a lógica e o **Extra Variável: Compartilhar**, com as categorias desejadas marcadas e sincronizadas.
 
 ## Como esse Wired funciona?
 
-Ao abrir a janela de configuração, você encontra as seções **Informações de uso** e **Categorias**. O quarto e a variável de origem são definidos no **Wired Variável: De Outro Quarto**; neste Extra, você escolhe quais categorias deseja importar.
+Ao abrir a janela de configuração, você encontra as seções **Informações de uso** e **Categorias**. O quarto e a variável de origem são definidos no **Wired Variável: De outro quarto**; neste Extra, você escolhe quais categorias deseja importar.
 
 ![Janela do Extra Variável Importar com as categorias Conectores de texto, Criadores de subvariáveis e FX de Variável marcadas.](@assets/wf_xtra_var_import/01-janela-do-wired.png)
 
@@ -112,7 +112,7 @@ No quarto da fase 1, a pilha com **Ativador Wired: Habbo Entra no Quarto** e **E
 
 <Steps>
 
-1. Coloque o **Extra Variável: Importar** acima do **Wired Variável: De Outro Quarto** que referencia `checkpoint_user` e marque **Conectores de texto**.
+1. Coloque o **Extra Variável: Importar** acima do **Wired Variável: De outro quarto** que referencia `checkpoint_user` e marque **Conectores de texto**.
 2. Na pilha de entrada, adicione o [Efeito Wired: Mostrar Mensagem](/referencia/efeitos/wf_act_show_message/) e o [Wired Texto Extra: Campo Variável](/referencia/extras/wf_xtra_text_output_variable/).
 3. No **Campo Variável**, selecione a variável de usuário `checkpoint` e, em **Tipo de Exibição da Variável**, escolha **Textual**.
 4. No campo **Mensagem** do **Mostrar Mensagem**, escreva `$(checkpoint)`.
@@ -136,7 +136,7 @@ Este exemplo dá continuidade à [configuração do FX no quarto principal](/ref
 
 <Steps>
 
-1. No quarto de uma fase, confira se o **Wired Variável: De Outro Quarto** referencia `checkpoint_user` com o nome `checkpoint`.
+1. No quarto de uma fase, confira se o **Wired Variável: De outro quarto** referencia `checkpoint_user` com o nome `checkpoint`.
 2. Coloque o **Extra Variável: Importar** acima desse Wired de referência e marque **FX de variável**.
 3. Entre no quarto com um jogador que possua o checkpoint **3** e confira o número acima do avatar.
 
@@ -158,7 +158,7 @@ Este exemplo dá continuidade à [configuração do Sistema de Aumento de Nível
 
 <Steps>
 
-1. No quarto de uma fase, confira se o **Wired Variável: De Outro Quarto** referencia `checkpoint_user` com o nome `checkpoint`.
+1. No quarto de uma fase, confira se o **Wired Variável: De outro quarto** referencia `checkpoint_user` com o nome `checkpoint`.
 2. Coloque o **Extra Variável: Importar** acima desse Wired de referência e marque **Criadores de subvariáveis**.
 
 </Steps>

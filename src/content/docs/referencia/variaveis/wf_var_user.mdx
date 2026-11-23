@@ -59,7 +59,7 @@ import ExibirValor from "@assets/wf_var_user/10-exibir-o-valor-da-variavel-no-qu
 import ExibirValorDescriptionsUrl from "@assets/wf_var_user/10-exibir-o-valor-da-variavel-no-quarto-descriptions.vtt?url";
 import ExibirValorDescriptionsRaw from "@assets/wf_var_user/10-exibir-o-valor-da-variavel-no-quarto-descriptions.vtt?raw";
 
-O **Wired Variável: Usuário Variável** permite criar informações e associá-las aos usuários do quarto. Quer guardar a pontuação de um jogador, identificar quem participa de uma partida ou marcar um bot como vendedor? Você pode utilizar uma variável de usuário para isso.
+O **Wired Variável: Usuário** permite criar informações e associá-las aos usuários do quarto. Quer guardar a pontuação de um jogador, identificar quem participa de uma partida ou marcar um bot como vendedor? Você pode utilizar uma variável de usuário para isso.
 
 <Infobox />
 
@@ -108,11 +108,11 @@ Esta seção define por quanto tempo a variável fica associada ao usuário e se
 | :--- | :--- |
 | **Enquanto o usuário está no quarto** | A associação é mantida enquanto o usuário permanece no quarto. Ao sair, ele perde essa variável. |
 | **Permanente** | A associação é mantida mesmo depois que o usuário sai do quarto, até que seja removida ou a variável seja excluída. |
-| **Permanente, compartilhado entre quartos** | Além de permanecer associada ao usuário, a variável pode ser acessada em outros quartos por meio do [Wired Variável: De Outro Quarto](/referencia/variaveis/wf_var_reference/). |
+| **Permanente, compartilhado entre quartos** | Além de permanecer associada ao usuário, a variável pode ser acessada em outros quartos por meio do [Wired Variável: De outro quarto](/referencia/variaveis/wf_var_reference/). |
 
 Por exemplo, uma marcação de participação em uma atividade pode existir apenas durante a visita ao quarto. Já uma pontuação que o jogador deve conservar para a próxima visita pode utilizar a opção **Permanente**.
 
-Em um labirinto com fases distribuídas entre vários quartos, a opção **Permanente, compartilhado entre quartos** pode guardar o último **checkpoint** alcançado pelo jogador. Os outros quartos podem consultar essa variável por meio do **[Wired Variável: De Outro Quarto](/referencia/variaveis/wf_var_reference/)**, permitindo que o sistema reconheça seu progresso e o encaminhe à fase correspondente quando ele voltar a jogar.
+Em um labirinto com fases distribuídas entre vários quartos, a opção **Permanente, compartilhado entre quartos** pode guardar o último **checkpoint** alcançado pelo jogador. Os outros quartos podem consultar essa variável por meio do **[Wired Variável: De outro quarto](/referencia/variaveis/wf_var_reference/)**, permitindo que o sistema reconheça seu progresso e o encaminhe à fase correspondente quando ele voltar a jogar.
 
 <Aside type="note" title="Compartilhamento apenas no próprio quarto">
 A opção **Permanente, compartilhado entre quartos** só pode ser configurada em um quarto do qual você é dono. Se você colocar este Wired no quarto de grupo de um amigo e tentar salvar com essa opção selecionada, aparecerá a mensagem **“Você só pode definir variáveis como compartilhadas em seu próprio quarto.”**, e a configuração não será salva.
@@ -218,7 +218,7 @@ Nesse caso, o número digitado substitui o valor armazenado para o usuário sele
 
 Até aqui, utilizamos as **Ferramentas do Criador** para consultar e conferir os valores. Como nem todos os participantes têm acesso a essas ferramentas, você pode exibir a informação diretamente no quarto para que ela faça parte da experiência do jogo.
 
-Uma forma simples é utilizar a [Variável FX: Exibição de Números](/referencia/variaveis/wf_xtra_varfx_number/). Coloque esse Wired acima do **Wired Variável: Usuário Variável** que define `rating_wired_club`. O efeito visual mostrará o valor acima dos usuários que possuem a variável.
+Uma forma simples é utilizar a [Variável FX: Exibição de Números](/referencia/variaveis/wf_xtra_varfx_number/). Coloque esse Wired acima do **Wired Variável: Usuário** que define `rating_wired_club`. O efeito visual mostrará o valor acima dos usuários que possuem a variável.
 
 Depois, configure o estilo e a visibilidade do número. Se quiser que todos no quarto possam acompanhá-lo, escolha a audiência **Todos**; para que o próprio jogador veja seu valor, escolha **Somente o usuário**. A opção **Sempre visível** pode ajudar a acompanhar as mudanças durante o exemplo.
 
@@ -234,7 +234,7 @@ Assim, quando o Efeito **Mudar Valor Variável** somar **1**, o número exibido 
 
 ## Renomear a variável
 
-Para alterar o nome de uma variável já criada, clique duas vezes no **Wired Variável: Usuário Variável**, edite o campo **Nome da variável** e confirme a alteração.
+Para alterar o nome de uma variável já criada, clique duas vezes no **Wired Variável: Usuário**, edite o campo **Nome da variável** e confirme a alteração.
 
 Depois de confirmar, o novo nome passa a aparecer em todos os locais das **Ferramentas do Criador** que fazem referência a essa variável, como a lista da aba **Variáveis** e a tabela da aba **Inspeção**.
 
