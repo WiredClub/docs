@@ -45,5 +45,38 @@ infobox:
 ---
 
 import Infobox from "@components/Infobox.astro"
+import { Aside } from '@astrojs/starlight/components';
+
+O **Efeito: Dar Pontos** adiciona ou remove uma quantidade específica de pontos aos usuários selecionados (via configurações avançadas) que pertençam a uma equipe. 
 
 <Infobox />
+
+## Regras e funcionamento
+- **Requisitos:** O usuário só recebe ou perde pontos se **estiver vinculado a uma equipe** e houver **um cronômetro ativo no quarto**.
+- **Interação com placares:** Enquanto o cronômetro estiver rodando, este wired atualiza automaticamente os mobis do tipo placar **correspondentes às equipes** e suas pontuações.
+- **Fim de jogo:** Quando a partida termina ou o cronômetro é zerado, a pontuação acumulada é enviada para a [tabela de classificação](/referencia/outros/tabelas-de-classificacao/visao-geral/) (caso exista uma no quarto) e, em seguida, os pontos dos usuários são zerados.
+
+<Aside type="note" title="Saiba mais">
+- **Cronômetros:** Leia [Cronômetros](/referencia/variaveis/wf_var_furni/#cronômetros) para identificar quando estão em funcionamento para que esse wired consiga dar pontos.
+- **Pontuação e equipes:** Este wired altera o valor da pontuação na variável interna de usuário `@team.score` de todos os jogadores da equipe. Para se aprofundar no tema, consulte [Equipes](/referencia/variaveis/wf_var_user/#equipe).
+</Aside>
+
+
+## Configurações
+**Configurar pontuação:**
+Define a quantidade de pontos que será aplicada (valores de 1 a 1000).
+
+**Tipo de efeito:**
+- **Adicionar pontos:** Soma o valor configurado à pontuação atual da equipe
+- **Remover pontos:** Subtrai o valor configurado da pontuação atual da equipe
+
+## Configurações avançadas
+- Use o usuário acionador
+- Usar usuários do seletor
+- Usar usuários do sinal
+
+
+
+
+
+
