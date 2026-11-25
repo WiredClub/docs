@@ -1,0 +1,77 @@
+---
+title: "Variáveis internas globais"
+description: Consulte as variáveis internas do quarto, dos times e do tempo atual.
+sidebar:
+  label: Global
+---
+
+O Habbo disponibiliza automaticamente informações sobre o quarto, como a quantidade de jogadores, seu identificador e o tempo atual. Essas são as **variáveis internas**, que você pode consultar selecionando o alvo **Global** nas Ferramentas do Criador.
+
+| Variável | O que representa |
+| :--- | :--- |
+| `@furni_count` | A quantidade de mobis no quarto. |
+| `@user_count` | A quantidade de jogadores no quarto. |
+| `@wired_timer` | A quantidade de pulsos desde a inicialização do quarto ou a reinicialização do temporizador. Cada pulso corresponde a **0,5 segundo**. Confira o tópico [Temporizador do quarto](#temporizador-do-quarto) para mais detalhes |
+| `@room_id` | O identificador numérico único do quarto. Confira o tópico [Identificador do quarto](#identificador-do-quarto) para mais detalhes |
+| `@group_id` | O identificador numérico único do grupo do quarto. Se o quarto não possui grupo, o valor é **0**. |
+| `@current_time` | O tempo atual em milissegundos, contado a partir de **1970**, com precisão de **1 milissegundo**. Confira o tópico [Tempo atual](#tempo-atual) para mais detalhes |
+
+## Temporizador do quarto
+
+A variável `@wired_timer` conta os pulsos do temporizador: a cada **0,5 segundo**, seu valor aumenta em **1**. Por exemplo, **10 pulsos** correspondem a **5 segundos**.
+
+O **Efeito Wired: Reiniciar Tempo** permite reiniciar esse contador. Você pode conferir um exemplo de consulta e uso dessa variável na página do [Ativador Wired: No Tempo Escolhido](/referencia/ativadores/wf_trg_at_given_time/).
+
+## Identificador do quarto
+
+A variável `@room_id` guarda o número que identifica o quarto. Esse mesmo número aparece no endereço copiado pela opção **Link para este quarto**.
+
+No Habbo BR/PT, o endereço segue o formato `https://www.habbo.com.br/room/NUMERO_DO_QUARTO`. A parte `NUMERO_DO_QUARTO` corresponde ao valor de `@room_id`.
+
+## Informações dos times
+
+O quarto também possui **subvariáveis internas**, que organizam informações mais específicas em nomes separados por pontos. As subvariáveis de times permitem consultar a pontuação e a quantidade de participantes de cada equipe de **Battle Ball** ou **Freeze**.
+
+| Time | Pontuação atual | Quantidade de usuários |
+| :--- | :--- | :--- |
+| **Vermelho** | `@teams.red.score` | `@teams.red.size` |
+| **Verde** | `@teams.green.score` | `@teams.green.size` |
+| **Azul** | `@teams.blue.score` | `@teams.blue.size` |
+| **Amarelo** | `@teams.yellow.score` | `@teams.yellow.size` |
+
+Por exemplo, `@teams.red.score` informa os pontos do time vermelho, enquanto `@teams.red.size` informa quantos usuários fazem parte dele.
+
+## Tempo atual
+
+A variável `@current_time` representa o tempo atual como uma quantidade de milissegundos contada a partir de **1970**. Sua precisão é de **1 milissegundo**.
+
+Esse número é grande demais para ser exibido na inspeção do cliente **Clássico (Flash)**. Por isso, aparece como **Oculto**, embora o valor continue disponível para o sistema Wired. Confira a explicação em [Valores que a variável pode armazenar](/referencia/variaveis/visao-geral/#valores-que-a-variável-pode-armazenar).
+
+Para consultar partes específicas da data ou do horário, utilize as subvariáveis:
+
+| Subvariável | O que representa |
+| :--- | :--- |
+| `@current_time.milliseconds_of_seconds` | A parte dos milissegundos dentro do segundo atual. |
+| `@current_time.seconds_of_minute` | Os segundos dentro do minuto atual. |
+| `@current_time.minute_of_hour` | Os minutos dentro da hora atual. |
+| `@current_time.hour_of_day` | A hora do dia. |
+| `@current_time.day_of_week` | O dia da semana, de **1** a **7**. |
+| `@current_time.day_of_month` | O dia do mês. |
+| `@current_time.day_of_year` | O dia do ano. |
+| `@current_time.week_of_year` | A semana do ano. |
+| `@current_time.month_of_year` | O mês do ano. |
+| `@current_time.year` | O ano. |
+
+### Dia da semana
+
+A subvariável `@current_time.day_of_week` possui textos associados aos seus valores numéricos:
+
+| Valor | Dia da semana |
+| :--- | :--- |
+| **1** | Segunda-feira. |
+| **2** | Terça-feira. |
+| **3** | Quarta-feira. |
+| **4** | Quinta-feira. |
+| **5** | Sexta-feira. |
+| **6** | Sábado. |
+| **7** | Domingo. |
