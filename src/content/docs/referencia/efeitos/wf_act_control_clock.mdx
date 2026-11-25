@@ -45,5 +45,28 @@ infobox:
 ---
 
 import Infobox from "@components/Infobox.astro"
+import { Aside } from '@astrojs/starlight/components';
 
+O Efeito: Controlar Cronômetro gerencia o funcionamento de mobis do **tipo cronômetro**.
 <Infobox />
+
+**Exemplo de uso**: Quando um usuário pisa em um mobi específico, a contagem de tempo no cronômetro é iniciada.
+
+<Aside type="note" title="Leitura recomendada (Opcional)">
+Os controles deste Wired operam por meio da variável inteligente `~clock.state`. Para aproveitar melhor este guia e entender todas as variantes envolvidas, recomendamos ler a documentação sobre [Cronômetros](/referencia/variaveis/wf_var_furni/#cronômetros).
+</Aside>
+
+## Configurações
+| Opção | Valor em `~clock.state` |
+| --- | --- |
+| Começar | 1 |
+| Parar | 2 |
+| Reset | 0 |
+| Pausa | 2 |
+| Reiniciar | 0 |
+
+## Configurações avançadas:
+- Use mobis escolhidos
+- Usar mobis do seletor
+- Usar mobis do sinal
+- Use o item de ativação

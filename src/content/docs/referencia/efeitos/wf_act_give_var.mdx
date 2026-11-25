@@ -45,5 +45,55 @@ infobox:
 ---
 
 import Infobox from "@components/Infobox.astro"
+import { Aside } from '@astrojs/starlight/components';
+
+O **Efeito: Dar Variável** atribui uma variável a um usuário, mobi ou contexto. 
 
 <Infobox />
+
+## Configurações
+
+**Selecione uma variável**
+
+Escolha entre:
+- [Mobi;](/referencia/variaveis/wf_var_furni/)
+- [Usuário;](/referencia/variaveis/wf_var_user/)
+- [Contexto.](/referencia/variaveis/wf_var_context/)
+
+Em seguida, busque a variável pelo nome. **A variável precisa estar presente no quarto.**
+
+**Opção:** Substituir variável existente
+
+Se o alvo já possuir a variável selecionada, ela é removida e atribuída novamente. 
+
+<Aside type="note" title="Nota importante">
+Como a opção **Substituir variável existente** remove e recria a variável, ela dispara qualquer [Ativador: Variável Mudou](/referencia/ativadores/wf_trg_var_changed/) configurado para reagir à criação da variável. 
+</Aside>
+
+**Valor inicial:** (Disponível quando a variável aceita valores)
+
+Define um valor fixo junto à variável ou copia o valor de outra variável (de mobi, usuário, [global](/referencia/variaveis/wf_var_room/) ou contexto). 
+
+## Configurações avançadas
+
+**Variável de destino** (define quem recebe a variável conforme o tipo escolhido):
+
+| Mobi | Usuário |
+| --- | --- | 
+| Use o item de ativação | Use o usuário acionador
+| Use os mobis escolhidos | Usar usuários do seletor
+| Escolha de mobis secundários | Usar usuários do sinal
+| Usar mobis do seletor | 
+| Usar mobis do sinal | 
+
+**Contexto:** Variáveis de contexto são únicas no escopo e não possuem opções de destino.
+	
+
+
+
+
+
+
+
+	
+
